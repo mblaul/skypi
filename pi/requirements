@@ -6,6 +6,7 @@
   c. Hygrometer (humidity)
   d. Anemometer (wind speed)
 <<<<<<< HEAD
+<<<<<<< HEAD
 -Control configs of multiple Pi
   a. Use ansible to control configs
 -Get approval to place Raspberry Pi somewhere on campus
@@ -16,3 +17,6 @@
 =======
 - Collection times for the weather data?
 >>>>>>> 18dce73b01533d57e3f35dfdf2b0566f65ead4bc
+=======
+- Collection times for the weather data?
+>>>>>>> refs/remotes/origin/master
