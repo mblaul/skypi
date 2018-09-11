@@ -7,6 +7,7 @@
   d. Anemometer (wind speed)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 -Control configs of multiple Pi
   a. Use ansible to control configs
 -Get approval to place Raspberry Pi somewhere on campus
@@ -20,3 +21,6 @@
 =======
 - Collection times for the weather data?
 >>>>>>> refs/remotes/origin/master
+=======
+- Collection times for the weather data?
+>>>>>>> 0f4e6e8143333baa944b2dda32415dae45fb7fe9
