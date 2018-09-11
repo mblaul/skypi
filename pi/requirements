@@ -5,22 +5,14 @@
   b. Barometer (atmospheric pressure)
   c. Hygrometer (humidity)
   d. Anemometer (wind speed)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
--Control configs of multiple Pi
+- Control configs of multiple Pi
   a. Use ansible to control configs
--Get approval to place Raspberry Pi somewhere on campus
--Explore possibility of solar panel for self-contained power
--Security for physical devices
--Network security
--Configure Pi Image
-=======
+- Get approval to place Raspberry Pi somewhere on campus
+- Explore possibility of solar panel for self-contained power
+- Security for physical devices
+- Weatherproofing of device/sensors
+- Network security
+- Configure Pi Image
+  a. Determine which distribution we will use 
 - Collection times for the weather data?
->>>>>>> 18dce73b01533d57e3f35dfdf2b0566f65ead4bc
-=======
-- Collection times for the weather data?
->>>>>>> refs/remotes/origin/master
-=======
-- Collection times for the weather data?
->>>>>>> 0f4e6e8143333baa944b2dda32415dae45fb7fe9
+
