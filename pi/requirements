@@ -1,0 +1,7 @@
+- SSH or Remote into each Raspi
+- How to handle changing IP address 
+- Information to collect from the Raspi:
+  a. Thermometer (temperature)
+  b. Barometer (atmospheric pressure)
+  c. Hygrometer (humidity)
+  d. Anemometer (wind speed)
