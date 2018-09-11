@@ -5,3 +5,10 @@
   b. Barometer (atmospheric pressure)
   c. Hygrometer (humidity)
   d. Anemometer (wind speed)
+-Control configs of multiple Pi
+  a. Use ansible to control configs
+-Get approval to place Raspberry Pi somewhere on campus
+-Explore possibility of solar panel for self-contained power
+-Security for physical devices
+-Network security
+-Configure Pi Image
