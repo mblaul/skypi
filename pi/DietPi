@@ -1,0 +1,19 @@
+DietPi - dietpi.com
+
+
+Steps to install the DietPi image for the Raspberry Pi:
+
+  1. Download the image from dietpi.com
+     initial username: root
+     initial password: dietpi
+
+  2. Using Etcher (https://etcher.io/), write to the SD card
+  
+  3. Plug the micro SD card into the Raspberry Pi. Turn on the Raspberry Pi
+  
+  4. Obtain the device's public IP address through the router for SSH (Secure Socket Shell)
+     *Ensure port forwarding is turned on through the router
+     
+  5. Using Terminal:
+     'SSH root@IP ADDRESS'
+     
