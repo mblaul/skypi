@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: push ssh server config to node
+      copy:
+         src: /etc/ssh/sshd_config
+         dest: /etc/ssh/sshd_config
+         owner: root
+         group: root
+         
+    - name: restart ssh server
+      systemd:
+        name: ssh
+        state: reloaded
+
