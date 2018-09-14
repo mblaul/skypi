@@ -10,6 +10,10 @@ const DeviceSchema = new Schema({
 		type: String,
 		required: true
 	},
+	ipaddress: {
+		type: String,
+		required: true
+	},
 	manufacturer: {
 		type: String,
 		required: true
