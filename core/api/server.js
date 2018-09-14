@@ -43,6 +43,12 @@ app.use((err, req, res, next) => {
 	res.send(`there was an error: ${err.message}\n code: ${err.status}`);
 });
 
-app.listen(5000, () => {
-	console.log("Express app listening on port 5000");
-});
+if (process.env.NODE_ENV === "production") {
+	app.listen(80, () => {
+		console.log("Express app listening on port 80");
+	});
+} else {
+	app.listen(5000, () => {
+		console.log("Express app listening on port 5000");
+	});
+}
