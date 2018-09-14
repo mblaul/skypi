@@ -1,5 +1,5 @@
 var User = require("../models/User");
-var config = require("../config/config");
+var config = require("../config/keys");
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
@@ -82,7 +82,7 @@ module.exports.login_post = (req, res) => {
 					};
 					jwt.sign(
 						payload,
-						config.secret,
+						config.secretOrKey,
 						{ expiresIn: 3600 },
 						(err, token) => {
 							if (err) {
