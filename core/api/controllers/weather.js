@@ -19,7 +19,8 @@ module.exports.log_post = (req, res) => {
 		latitude: req.body.latitude,
 		longitude: req.body.longitude,
 		pressure: req.body.pressure,
-		wind: req.body.wind
+		wind: req.body.wind,
+		winddirection: req.body.winddirection
 	});
 
 	newWeather
