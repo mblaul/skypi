@@ -1,0 +1,19 @@
+---
+- hosts: all
+  vars:
+    http_port: 80
+    max_clients: 200
+    remote_user: dietpi 
+  tasks:
+
+     - name: push php files
+       copy:
+         src: /home/dietpi/skypi/pi/ansible/php
+         dest: /home/dietpi/php/
+         owner: dietpi
+
+         # - name: register device 
+         #php: device.php
+
+        
+
