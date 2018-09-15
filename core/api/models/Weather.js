@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const WeatherLogSchema = new Schema({
+const WeatherSchema = new Schema({
+	source: {
+		type: String,
+		required: true
+	},
 	device: {
 		type: Schema.Types.ObjectId,
-		ref: "devices",
-		required: true
+		ref: "devices"
 	},
 	temperature: {
 		type: Number,
@@ -27,10 +30,16 @@ const WeatherLogSchema = new Schema({
 		type: Number,
 		required: true
 	},
+	wind: {
+		type: Number
+	},
+	winddirection: {
+		type: String
+	},
 	date: {
 		type: Date,
 		default: Date.now
 	}
 });
 
-module.exports = WeatherLog = mongoose.model("weatherlogs", WeatherLogSchema);
+module.exports = Weather = mongoose.model("weather", WeatherSchema);

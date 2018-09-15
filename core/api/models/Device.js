@@ -38,7 +38,7 @@ const DeviceSchema = new Schema({
 			},
 			relation: {
 				type: String,
-				default: "Patient"
+				default: "Creator"
 			}
 		}
 	],
