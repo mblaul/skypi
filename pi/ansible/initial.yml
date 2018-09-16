@@ -1,21 +1,30 @@
 ---
-- name: install test
+- name: initial set up
   hosts: all
-  become: true
-  
-  tasks:
-  
-          #  - name: push package list
-          #shell: scp dietpi@192.168.50.236:pkg.list pkg.list
+  become: yes
 
+  tasks:
+  - name: push package list
+    copy:
+      src: /home/dietpi/skypi/pi/ansible/library/pkg.list
+      dest: /home/dietpi/pkg.list
+      owner: dietpi
+      group: dietpi
+      mode: 0644
+
+      #- name: install aptitude
+      #shell: sudo apt-get install aptitude
+      
 
   - name: upgrade system
-    apt: 
-      upgrade: yes
-      update_cache: yes
-      cache_valid_time: 86400 
-  
+    apt:
+     upgrade: yes
+     update_cache: yes
+     cache_valid_time: 86400 
+   
+
   - name: install default packages from list 
-    shell: apt install $(pkg.list)
+    shell: apt install $(< pkg.list)
+   
     
 
