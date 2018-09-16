@@ -23,9 +23,9 @@ router.post("/register", userController.register_post);
 // @access  Public
 router.post("/login", userController.login_post);
 
-// @route   POST api/user/resetpassword
-// @desc   Send token to user's email to reset password
-// @access  private
+// @route   	POST api/user/resetpassword
+// @desc   		Send token to user's email to reset password
+// @access	Public
 router.post(
 	"/resetpassword",
 	// passport.authenticate("jwt", { session: false }),
