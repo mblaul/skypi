@@ -21,9 +21,8 @@ module.exports.register_post = (req, res) => {
 			const newDevice = new Device({
 				name: req.body.name,
 				macaddress: req.body.macaddress,
-				manufacturer: req.body.manufacturer,
+				ipaddress: req.body.ipaddress,
 				model: req.body.model,
-				category: req.body.category,
 				owner: req.user.id,
 				authorizedUsers: { user: req.user.id }
 			});

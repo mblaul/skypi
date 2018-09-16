@@ -14,16 +14,9 @@ const DeviceSchema = new Schema({
 		type: String,
 		required: true
 	},
-	manufacturer: {
-		type: String,
-		required: true
-	},
 	model: {
 		type: String,
 		required: true
-	},
-	category: {
-		type: [String]
 	},
 	owner: {
 		type: Schema.Types.ObjectId,
