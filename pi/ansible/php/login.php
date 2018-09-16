@@ -24,6 +24,12 @@ curl_close($curl);
 if ($err) {
 	  echo "cURL Error #:" . $err;
 } else {
-	  echo $response;
+	$decoded = json_decode($response,true);
+	
+	$token = $decoded["token"];
+	
+
+
+
 }
 ?>
