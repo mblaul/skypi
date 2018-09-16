@@ -2,6 +2,7 @@ var User = require("../models/User");
 var config = require("../config/keys");
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
+var nodemailer = require("nodemailer");
 
 //Load input validation
 const validateRegisterInput = require("../validation/user/register");
@@ -105,4 +106,48 @@ module.exports.login_post = (req, res) => {
 			errors.email = "Incorrect username/password combination";
 			return res.status(404).json(errors);
 		});
+};
+
+module.exports.resetpassword_post = (req, res) => {
+	let errors = {};
+	// Generate test SMTP service account from ethereal.email
+	// Only needed if you don't have a real mail account for testing
+	nodemailer.createTestAccount((err, account) => {
+		// create reusable transporter object using the default SMTP transport
+		let transporter = nodemailer.createTransport({
+			host: "smtp.ethereal.email",
+			port: 465,
+			secure: true, // true for 465, false for other ports
+			auth: {
+				user: "skypi_noreply@gmail.com", // generated ethereal user
+				pass: config.secretEmailKey // generated ethereal password
+			}
+		});
+
+		// setup email data with unicode symbols
+		let mailOptions = {
+			from: '"Fred Foo 👻" <foo@example.com>', // sender address
+			to: "mblaul@oakland.edu", // list of receivers
+			subject: "Hello ✔", // Subject line
+			text: "Hello world?", // plain text body
+			html: "<b>Hello world?</b>" // html body
+		};
+
+		// send mail with defined transport object
+		transporter.sendMail(mailOptions, (err, info) => {
+			if (err) {
+				console.log(err);
+				errors.server = "An error occured, please try again";
+				return res.status(500).json(errors);
+			}
+			console.log("Message sent: %s", info.messageId);
+			// Preview only available when sending through an Ethereal account
+			console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+			return res.json({
+				success: true
+			});
+			// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+			// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+		});
+	});
 };
