@@ -115,18 +115,19 @@ module.exports.resetpassword_post = (req, res) => {
 	nodemailer.createTestAccount((err, account) => {
 		// create reusable transporter object using the default SMTP transport
 		let transporter = nodemailer.createTransport({
-			host: "smtp.ethereal.email",
-			port: 465,
-			secure: true, // true for 465, false for other ports
+			// host: "smtp.gmail.com",
+			// port: 465,
+			// secure: true, // true for 465, false for other ports
+			service: "gmail",
 			auth: {
-				user: "skypi_noreply@gmail.com", // generated ethereal user
+				user: "skypi.noreply@gmail.com", // generated ethereal user
 				pass: config.secretEmailKey // generated ethereal password
 			}
 		});
 
 		// setup email data with unicode symbols
 		let mailOptions = {
-			from: '"Fred Foo 👻" <foo@example.com>', // sender address
+			from: "skypi.noreply@gmail.com", // sender address
 			to: "mblaul@oakland.edu", // list of receivers
 			subject: "Hello ✔", // Subject line
 			text: "Hello world?", // plain text body
