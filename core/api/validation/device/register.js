@@ -17,10 +17,6 @@ module.exports = function validateDeviceInput(data) {
 		errors.macaddress = "MAC address is required";
 	}
 
-	if (Validator.isEmpty(data.manufacturer)) {
-		errors.manufacturer = "Manufacturer field is required";
-	}
-
 	if (Validator.isEmpty(data.model)) {
 		errors.Model = "Model field is required";
 	}
