@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+     - name: push php files
+       copy:
+         src: /home/dietpi/skypi/pi/ansible/php
+         dest: /home/dietpi/
+         owner: dietpi
+
+     - name: register device 
+       shell: php php/device.php
+       
+
+      
+
+        
+

@@ -6,7 +6,7 @@ echo $host . "\n";
 $text = `ifconfig`;
 preg_match('/([0-9a-f]{2}:){5}\w\w/i', $text, $mac);
 $mac = str_replace(":","%3A",$mac[0]);
-
+$postfields = "name=".$host."&ipaddress=127.0.0.1&macaddress=".$mac."&manufacturer=MATSUX&model=Flyboi5000";
 $header = "Authorization: " . $token;
 echo $header ."\n";
 echo $mac . "\n";
@@ -18,7 +18,7 @@ curl_setopt_array($curl, array(
 		  CURLOPT_TIMEOUT => 30,
 		    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 		      CURLOPT_CUSTOMREQUEST => "POST",
-		        CURLOPT_POSTFIELDS => "name=".$host."&macaddress=".$mac."&manufacturer=Toyota&model=Flyboi5000&category=Entertainment",
+		        CURLOPT_POSTFIELDS => $postfields,
 			  CURLOPT_HTTPHEADER => array(
 				      $header,
 				          "Content-Type: application/x-www-form-urlencoded"

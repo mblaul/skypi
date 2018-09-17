@@ -307,8 +307,10 @@ python-numpy
 python-pil:armhf
 python-pip
 python-pip-whl
+python-pkg-resources
 python-rtimulib
 python-sense-hat
+python-setuptools
 python-tk
 python2.7
 python2.7-minimal
