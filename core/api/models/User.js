@@ -15,11 +15,20 @@ const UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	isAdmin: {
+	active: {
 		type: Boolean,
-		required: true,
-		default: false
+		default: true,
+		required: true
 	},
+	roles: [
+		{
+			isAdmin: {
+				type: Boolean,
+				required: true,
+				default: false
+			}
+		}
+	],
 	passworResetToken: {
 		type: Object
 	},
