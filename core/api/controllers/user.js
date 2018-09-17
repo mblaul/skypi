@@ -111,88 +111,73 @@ module.exports.login_post = (req, res) => {
 module.exports.resetpassword_post = (req, res) => {
 	let errors = {};
 
-	const { email } = req.body;
+	const email = req.body.email;
 
 	User.findOne({ email: email })
 		.then(user => {
 			// Check to see if the user exists
 			if (!user) {
-				errors.email = "Incorrect username/password combination";
-				return res.status(404).json(errors);
+				return res.json({
+					message:
+						"A temporary password reset token will be sent to your email address shortly."
+				});
 			}
 
-			bcrypt.compare(password, user.password).then(isMatch => {
-				if (isMatch) {
-					// User matched, create JWT payload
-					const payload = {
-						id: user.id,
-						name: user.name
-					};
-					jwt.sign(
-						payload,
-						config.secretOrKey,
-						{ expiresIn: 3600 },
-						(err, token) => {
-							if (err) {
-								console.log(err);
-								errors.server = "An error occured, please try again";
-								return res.status(500).json(errors);
-							}
-							// User has successfully authenticated, give 'em a token
-							res.json({
-								success: true,
-								token: "Bearer " + token
-							});
+			// User matched, create JWT payload
+			const passwordResetToken = Math.random()
+				.toString(36)
+				.replace("0.", "");
+			//Add random password reset value to user
+			user.passwordResetToken = passwordResetToken;
+			user.save().then(user => {
+				// Generate test SMTP service account from ethereal.email
+				// Only needed if you don't have a real mail account for testing
+				nodemailer.createTestAccount((err, account) => {
+					// create reusable transporter object using the default SMTP transport
+					let transporter = nodemailer.createTransport({
+						service: "gmail",
+						auth: {
+							user: "skypi.noreply@gmail.com", // generated ethereal user
+							pass: config.secretEmailKey // generated ethereal password
 						}
-					);
-				}
+					});
+
+					// setup email data with unicode symbols
+					let mailOptions = {
+						from: "skypi.noreply@gmail.com", // sender address
+						to: user.email, // list of receivers
+						subject: "Password Reset Token", // Subject line
+						text: "Hello", // plain text body
+						html: passwordResetToken // html body
+					};
+
+					// send mail with defined transport object
+					transporter.sendMail(mailOptions, (err, info) => {
+						if (err) {
+							console.log(err);
+							errors.server = "An error occured, please try again";
+							return res.status(500).json(errors);
+						}
+						console.log("Message sent: %s", info.messageId);
+						// Preview only available when sending through an Ethereal account
+						console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+						return res.json({
+							message:
+								"A temporary password reset token will be sent to your email address shortly."
+						});
+						// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+						// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+					});
+				});
 			});
 		})
 		// If promise rejected then user doesn't exist
 		.catch(() => {
-			errors.email = "Incorrect username/password combination";
-			return res.status(404).json(errors);
-		});
-
-	// Generate test SMTP service account from ethereal.email
-	// Only needed if you don't have a real mail account for testing
-	nodemailer.createTestAccount((err, account) => {
-		// create reusable transporter object using the default SMTP transport
-		let transporter = nodemailer.createTransport({
-			// host: "smtp.gmail.com",
-			// port: 465,
-			// secure: true, // true for 465, false for other ports
-			service: "gmail",
-			auth: {
-				user: "skypi.noreply@gmail.com", // generated ethereal user
-				pass: config.secretEmailKey // generated ethereal password
-			}
-		});
-
-		// setup email data with unicode symbols
-		let mailOptions = {
-			from: "skypi.noreply@gmail.com", // sender address
-			to: "mblaul@oakland.edu", // list of receivers
-			subject: "Hello ✔", // Subject line
-			text: "Hello world?", // plain text body
-			html: "<b>Hello world?</b>" // html body
-		};
-
-		// send mail with defined transport object
-		transporter.sendMail(mailOptions, (err, info) => {
-			if (err) {
-				console.log(err);
-				errors.server = "An error occured, please try again";
-				return res.status(500).json(errors);
-			}
-			console.log("Message sent: %s", info.messageId);
-			// Preview only available when sending through an Ethereal account
-			console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 			return res.json({
-				success: true
+				message:
+					"A temporary password reset token will be sent to your email address shortly."
 			});
-			// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-			// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 		});
-	});
 };
+
+module.exports.changepassword_post = (req, res) => {};

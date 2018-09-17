@@ -26,10 +26,11 @@ router.post("/login", userController.login_post);
 // @route   	POST api/user/resetpassword
 // @desc   		Send token to user's email to reset password
 // @access	Public
-router.post(
-	"/resetpassword",
-	// passport.authenticate("jwt", { session: false }),
-	userController.resetpassword_post
-);
+router.post("/resetpassword", userController.resetpassword_post);
+
+// @route   	POST api/user/changepassword
+// @desc   		Send token to user's email to reset password
+// @access	Public
+router.post("/changepassword", userController.changepassword_post);
 
 module.exports = router;

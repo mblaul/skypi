@@ -20,6 +20,9 @@ const UserSchema = new Schema({
 		required: true,
 		default: false
 	},
+	passworResetToken: {
+		type: String
+	},
 	date: {
 		type: String,
 		default: Date.now
