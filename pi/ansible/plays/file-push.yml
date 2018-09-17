@@ -1,29 +1,23 @@
 ---
 - name: script push
   hosts: all
+  vars:
+    py:  /home/dietpi/skypi/pi/py
+    lib: /home/dietpi/skypi/pi/ansible/library
+    php: /home/dietpi/skypi/pi/ansible/php
   gather_facts: false
   become: true
 
   tasks:
-
-  - name: push py folder
+  - name: push script dirs
     copy: 
-      src: /home/dietpi/skypi/pi/py
-      dest: /home/dietpi/skypi/pi/
-      owner: dietpi
-      group: dietpi
-      mode: 0644
-  - name: push library
-    copy:
-      src: /home/dietpi/skypi/pi/ansible/library
+      src: "{{ item }}"
       dest: /home/dietpi/
       owner: dietpi
       group: dietpi
       mode: 0644
-  - name: push php
-    copy:
-      src: /home/dietpi/skypi/pi/ansible/php
-      dest: /home/dietpi
-      owner: dietpi
-      group: dietpi
-      mode: 0644
+    with_items: 
+        - "{{ py }}"
+        - "{{ lib }}"
+        - "{{ php }}"
+     

@@ -9,16 +9,7 @@
 
   - name: install setuptools 
     shell: pip install setup tools      
-    
 
-  - name: push package list
-    copy:
-      src: ~/skypi/pi/ansible/library/pip.list
-      dest: ~/pip.list
-      owner: dietpi
-      group: dietpi
-      mode: 0644
-     
   - name: install default pip packages from list 
     shell: pip install -r  ~/pip.list
      
