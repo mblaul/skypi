@@ -11,8 +11,7 @@ const DeviceSchema = new Schema({
 		required: true
 	},
 	ipaddress: {
-		type: String,
-		required: true
+		type: String
 	},
 	model: {
 		type: String,

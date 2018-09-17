@@ -21,7 +21,7 @@ const UserSchema = new Schema({
 		default: false
 	},
 	passworResetToken: {
-		type: String
+		type: Object
 	},
 	date: {
 		type: String,

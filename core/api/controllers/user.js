@@ -123,10 +123,14 @@ module.exports.resetpassword_post = (req, res) => {
 				});
 			}
 
-			// User matched, create JWT payload
-			const passwordResetToken = Math.random()
-				.toString(36)
-				.replace("0.", "");
+			// User matched, create password reset token
+			const passwordResetToken = {
+				token: Math.random()
+					.toString(36)
+					.replace("0.", ""),
+				created: Date.now(),
+				expiresIn: 600
+			};
 			//Add random password reset value to user
 			user.passwordResetToken = passwordResetToken;
 			user.save().then(user => {
