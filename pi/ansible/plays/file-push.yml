@@ -1,10 +1,9 @@
 ---
 - name: script push
   hosts: all
-  vars:
-    py:  /home/dietpi/skypi/pi/py
-    lib: /home/dietpi/skypi/pi/ansible/library
-    php: /home/dietpi/skypi/pi/ansible/php
+  vars_files:
+    - ../group_vars/all
+    
   gather_facts: false
   become: true
 

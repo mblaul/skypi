@@ -1,0 +1,5 @@
+---
+
+py: /home/dietpi/skypi/pi/py
+lib: /home/dietpi/skypi/pi/ansible/library
+php: /home/dietpi/skypi/pi/php
