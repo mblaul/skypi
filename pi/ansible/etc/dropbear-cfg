@@ -1,5 +1,5 @@
 # the TCP port that Dropbear listens on
-DROPBEAR_PORT=22
+DROPBEAR_PORT=4422
 
 # any additional arguments for Dropbear
 DROPBEAR_EXTRA_ARGS=
