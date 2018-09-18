@@ -125,7 +125,7 @@ module.exports.resetpassword_post = (req, res) => {
 
 			// User matched, create password reset token
 			const passwordResetToken = {
-				token: Math.random()
+				key: Math.random()
 					.toString(36)
 					.replace("0.", ""),
 				created: Date.now(),
@@ -184,4 +184,41 @@ module.exports.resetpassword_post = (req, res) => {
 		});
 };
 
-module.exports.changepassword_post = (req, res) => {};
+module.exports.changepassword_post = (req, res) => {
+	let errors = {};
+
+	const email = req.body.email;
+	const password = req.body.password;
+	const password2 = req.body.password2;
+	const passwordResetToken = req.body.passwordResetToken;
+
+	if (password !== password2) {
+		errors.password = "Your passwords do not match.";
+		return res.status(500).json(errors);
+	}
+	User.findOne({ email })
+		.then(user => {
+			if (user.passwordResetToken.key === passwordResetToken) {
+				bcrypt.genSalt(10, (err, salt) => {
+					if (err) {
+						console.log(err);
+						errors.server = "An error occured, please try again";
+						return res.status(500).json(errors);
+					}
+					bcrypt.hash(password, salt, (err, hashedpassword) => {
+						if (err) return err;
+						user.password = hashedpassword;
+						user
+							.save()
+							.then(() => {
+								return res.json({
+									message: "Your password has been reset"
+								});
+							})
+							.catch(err => console.log(err));
+					});
+				});
+			}
+		})
+		.catch();
+};
