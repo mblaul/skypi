@@ -1,0 +1,29 @@
+---
+
+- name: initial time set up
+  hosts: all
+  become: true
+  become_user: root
+
+  tasks:
+
+  - name: push locale.gen
+    copy:
+      src: /home/dietpi/skypi/pi/ansible/etc/locale.gen
+      dest: /etc/locale.gen
+         
+          
+  - name:  locale generation
+    shell: locale-gen
+
+  - name: update locale
+    shell: update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+
+  - name: remove old local time
+    shell: mv /etc/localtime /etc/localtime.old
+
+  - name: set new timezone
+    shell: ln -s /usr/share/zoneinfo/America/Detroit /etc/localtime
+  
+  - name: reboot system
+    shell: reboot
