@@ -7,7 +7,7 @@ lat = g.lat
 lng = g.lng
 
 
-api_latlng = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=5ec3e$
+api_latlng = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=5ec3e53023c8502e481742440f9595de' %(lat, lng)
 
 json_data = requests.get(api_latlng).json()
 
