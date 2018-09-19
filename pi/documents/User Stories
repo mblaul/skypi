@@ -1,3 +1,23 @@
 As an administrator, I want to utilize the raspberry pi sensors so that I can ensure the weather data for a particular area is being gathered and pushed to a database.
 
 As an administrator, I want to utilize sensor data and weather APIs so that I can provide accurate weather information to our end user
+
+As an administrator, I want to utilize Ansible so that I can configure new Raspberry Pi weather stations
+
+As an administrator, I want to utilize Ansible so that I can re-configure multiple systems
+
+As an administrator, I want to utilize Ansible so that I can update all systems, or individual systems
+
+As an administrator, I want to utilize Ansible to push/pull files to all systems, or individual systems
+
+As an administrator, I want to utilize Ansible to replace failed Raspberry Pi weather stations
+
+As an administrator, I want to utilize Raspberry Pi devices so that I can test new sensors for systems locally, and push code to all systems
+
+As an administrator, I want to utilize Ansible so that I can register devices with an API
+
+As an administrator, I want to utilize Ansible so that I can pull device logs from an API
+
+As an administrator, I want to utilize Ansible so that I can update individual/multiple pieces of software on Raspberry Pi devices
+
+As an administrator, I want to utilize Ansible so that I can group systems by common traits in order to better manage them 
