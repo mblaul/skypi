@@ -1,0 +1,3 @@
+As an administrator, I want to utilize the raspberry pi sensors so that I can ensure the weather data for a particular area is being gathered and pushed to a database.
+
+As an administrator, I want to utilize sensor data and weather APIs so that I can provide accurate weather information to our end user
