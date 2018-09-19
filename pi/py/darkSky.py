@@ -1,13 +1,20 @@
-import geocoder
 import requests
+#geocoder: Allows to source the latitude and longitude based on the device's IP address 
+import geocoder
+#pytemperature: allows for converting temperatures
 import pytemperature
 
+#Using geocoder to source the location of the device based on the IP address
 g = geocoder.ip('me')
 lat = g.lat
 lng = g.lng
-
+#Using % (String Formatting Operator) to input the latitude and longitude of the device to utilize the DarkSky API
 darksky_api = 'https://api.darksky.net/forecast/36845a09793a4c98d39a8392d66fecc8/%s,%s' % (lat, lng)
+
+#using requests.get to source the API information
 json_darksky = requests.get(darksky_api).json()
+
+#Variables based on the required informataion sourced from the API
 location = json_darksky['timezone']
 wind = json_darksky['currently']['windSpeed']
 temperature = json_darksky['currently']['temperature']
@@ -17,7 +24,6 @@ summary = json_darksky['currently']['summary']
 if location != '' and wind != '' and temperature != '':
 
     #printing the OpenWeatherMap information to ensure that the information was pulled
-    print
     print("DarkSky")
     print('Location: ' + location)
     print('Currently: ' + summary)
