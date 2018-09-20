@@ -2,6 +2,7 @@ var express = require("express");
 var bodyparser = require("body-parser");
 const passport = require("passport");
 var mongoose = require("mongoose");
+var helmet = require("helmet");
 
 var db = require("./config/keys").mongoURI;
 
@@ -14,6 +15,9 @@ mongoose
 	)
 	.then(() => console.log("MongoDB connected!"))
 	.catch(err => console.log(err));
+
+//Security module
+app.use(helmet());
 
 // Passport middleware
 app.use(passport.initialize());

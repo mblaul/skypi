@@ -27,6 +27,13 @@ const UserSchema = new Schema({
 				required: true,
 				default: false
 			}
+		},
+		{
+			isVerified: {
+				type: Boolean,
+				required: true,
+				default: false
+			}
 		}
 	],
 	passworResetToken: {

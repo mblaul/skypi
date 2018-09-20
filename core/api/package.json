@@ -21,6 +21,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "express-validator": "^5.2.0",
+    "helmet": "^3.13.0",
     "jsonwebtoken": "^8.2.1",
     "mongoose": "^5.2.9",
     "nodemailer": "^4.6.8",
