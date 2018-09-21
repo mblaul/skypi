@@ -108,6 +108,111 @@ module.exports.login_post = (req, res) => {
 		});
 };
 
+module.exports.verify_get = (req, res) => {
+	let errors = {};
+
+	const email = req.user.email;
+
+	User.findOne({ email: email })
+		.then(user => {
+			// Check to see if the user exists
+			if (!user) {
+				return res.json({
+					message: "A verification link will be sent to your email shortly."
+				});
+			}
+			// User matched, create password reset token
+			const verifyUserToken = {
+				key: Math.random()
+					.toString(36)
+					.replace("0.", ""),
+				created: Date.now(),
+				expiresIn: 6000
+			};
+			//Add random verify token to user
+			user.tempObjects.verifyUserToken = verifyUserToken;
+			user.save().then(user => {
+				// Generate test SMTP service account from ethereal.email
+				// Only needed if you don't have a real mail account for testing
+				nodemailer.createTestAccount((err, account) => {
+					// create reusable transporter object using the default SMTP transport
+					let transporter = nodemailer.createTransport({
+						service: "gmail",
+						auth: {
+							user: "skypi.noreply@gmail.com", // generated ethereal user
+							pass: config.secretEmailKey // generated ethereal password
+						}
+					});
+
+					// setup email data with unicode symbols
+					let mailOptions = {
+						from: "skypi.noreply@gmail.com",
+						to: user.email,
+						subject: "Verify your account and rule the skies.",
+						text: "Hello",
+						html: `${verifyUserToken.key}`
+					}; // sender address // list of receivers // Subject line // plain text body // html body
+
+					// send mail with defined transport object
+					transporter.sendMail(mailOptions, (err, info) => {
+						if (err) {
+							console.log(err);
+							errors.server = "An error occured, please try again";
+							return res.status(500).json(errors);
+						}
+						console.log("Message sent: %s", info.messageId);
+						// Preview only available when sending through an Ethereal account
+						console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+						return res.json({
+							message: "A verification link will be sent to your email shortly."
+						});
+						// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+						// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+					});
+				});
+			});
+		})
+		// If promise rejected then user doesn't exist
+		.catch(() => {
+			return res.json({
+				message: "A verification link will be sent to your email shortly."
+			});
+		});
+};
+
+module.exports.verify_post = (req, res) => {
+	let errors = {};
+
+	const email = req.body.email;
+	const verifyUserToken = req.body.verifyusertoken;
+
+	User.findOne({ email: email })
+		.then(user => {
+			// If token is not valid clear it and deny request
+			existingToken = user.tempObjects.verifyUserToken;
+
+			if (
+				existingToken.created + existingToken.expiresIn < Date.now() &&
+				existingToken.key !== verifyUserToken
+			) {
+				return res.json({ message: "Authorization token not valid" });
+			}
+
+			user.roles.isVerified = true;
+			user.tempObjects.verifyUserToken = {};
+
+			user.save().then(user => {
+				return res.json({ message: "Verification complete, thanks!" });
+			});
+		})
+		// If promise rejected then user doesn't exist
+		.catch(err => {
+			console.log(err);
+			errors.server = "An error occured, please try again";
+			return res.status(500).json(errors);
+		});
+};
+
 module.exports.resetpassword_post = (req, res) => {
 	let errors = {};
 

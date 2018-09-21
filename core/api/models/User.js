@@ -20,27 +20,28 @@ const UserSchema = new Schema({
 		default: true,
 		required: true
 	},
-	roles: [
-		{
-			isAdmin: {
-				type: Boolean,
-				required: true,
-				default: false
-			}
+	roles: {
+		isAdmin: {
+			type: Boolean,
+			required: true,
+			default: false
 		},
-		{
-			isVerified: {
-				type: Boolean,
-				required: true,
-				default: false
-			}
+		isVerified: {
+			type: Boolean,
+			required: true,
+			default: false
 		}
-	],
-	passworResetToken: {
-		type: Object
+	},
+	tempObjects: {
+		verifyUserToken: {
+			type: Object
+		},
+		passworResetToken: {
+			type: Object
+		}
 	},
 	date: {
-		type: String,
+		type: Date,
 		default: Date.now
 	}
 });
