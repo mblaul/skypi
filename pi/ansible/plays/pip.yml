@@ -11,7 +11,7 @@
     shell: pip install setup tools      
 
   - name: install default pip packages from list 
-    shell: pip install -r  ~/pip.list
+    shell: pip install -r  /home/ansible/pip.list
      
     
 

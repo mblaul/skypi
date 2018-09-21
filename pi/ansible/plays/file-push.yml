@@ -12,8 +12,8 @@
     copy: 
       src: "{{ item }}"
       dest: /home/dietpi/
-      owner: dietpi
-      group: dietpi
+      owner: ansible
+      
       mode: 0644
     with_items: 
         - "{{ py }}"

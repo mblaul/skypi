@@ -1,0 +1,11 @@
+- name: Add the ansible user 
+  hosts: all
+  become: true 
+  tasks:
+  
+  
+
+  - name: add
+    user:
+      name: ansible
+      group: sudo
