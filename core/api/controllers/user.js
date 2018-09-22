@@ -200,7 +200,7 @@ module.exports.verify_post = (req, res) => {
       }
 
       user.roles.isVerified = true;
-      delete user.tempObjects.verifyUserToken;
+      user.tempObjects.verifyUserToken = undefined;
 
       user.save().then(user => {
         return res.json({ message: 'Verification complete, thanks!' });
