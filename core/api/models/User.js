@@ -34,10 +34,26 @@ const UserSchema = new Schema({
   },
   tempObjects: {
     verifyUserToken: {
-      type: Object
+      key: {
+        type: String
+      },
+      created: {
+        type: Date
+      },
+      expireTime: {
+        type: Date
+      }
     },
     passworResetToken: {
-      type: Object
+      key: {
+        type: Number
+      },
+      created: {
+        type: Date
+      },
+      expireTime: {
+        type: Date
+      }
     }
   },
   date: {
