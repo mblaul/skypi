@@ -3,6 +3,7 @@ var config = require('../config/keys');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var nodemailer = require('nodemailer');
+var moment = require('moment');
 
 //Load input validation
 const validateRegisterInput = require('../validation/user/register');
@@ -126,8 +127,10 @@ module.exports.verify_get = (req, res) => {
         key: Math.random()
           .toString(36)
           .replace('0.', ''),
-        created: Date.now(),
-        expiresIn: 6000
+        created: moment().format(),
+        expiresTime: moment(this.created)
+          .add(10, 'm')
+          .format()
       };
       //Add random verify token to user
       user.tempObjects.verifyUserToken = verifyUserToken;
@@ -192,14 +195,14 @@ module.exports.verify_post = (req, res) => {
       existingToken = user.tempObjects.verifyUserToken;
 
       if (
-        existingToken.created + existingToken.expiresIn < Date.now() &&
+        existingToken.expireTime < moment().format() ||
         existingToken.key !== verifyUserToken
       ) {
         return res.json({ message: 'Authorization token not valid' });
       }
 
       user.roles.isVerified = true;
-      user.tempObjects.verifyUserToken = {};
+      delete user.tempObjects.verifyUserToken;
 
       user.save().then(user => {
         return res.json({ message: 'Verification complete, thanks!' });
