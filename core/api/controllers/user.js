@@ -5,9 +5,13 @@ var jwt = require('jsonwebtoken');
 var nodemailer = require('nodemailer');
 var moment = require('moment');
 
-//Load input validation
+// Load input validation
 const validateRegisterInput = require('../validation/user/register');
 const validateLoginInput = require('../validation/user/login');
+
+// Load email templates
+const verificationEmail = require('../common/emailTemplates/verificationEmail');
+const resetPasswordEmail = require('../common/emailTemplates/resetPasswordEmail');
 
 module.exports.current_get = (req, res) => {
   // Route to get who you are using JWTs
@@ -147,13 +151,19 @@ module.exports.verify_get = (req, res) => {
             }
           });
 
+          // Create email body
+          const verificationEmailBody = verificationEmail(
+            user.email,
+            verifyUserToken.key
+          );
+
           // setup email data with unicode symbols
           let mailOptions = {
             from: 'skypi.noreply@gmail.com',
             to: user.email,
             subject: 'Verify your account and rule the skies.',
             text: 'Hello',
-            html: `${verifyUserToken.key}`
+            html: verificationEmailBody
           }; // sender address // list of receivers // Subject line // plain text body // html body
 
           // send mail with defined transport object
@@ -241,7 +251,7 @@ module.exports.resetpassword_post = (req, res) => {
       };
 
       //Add random password reset value to user
-      user.passwordResetToken = passwordResetToken;
+      user.tempObjects.passwordResetToken = passwordResetToken;
       user.save().then(user => {
         // Generate test SMTP service account from ethereal.email
         // Only needed if you don't have a real mail account for testing
@@ -255,14 +265,22 @@ module.exports.resetpassword_post = (req, res) => {
             }
           });
 
+          // Create email body
+          const resetPasswordEmailBody = resetPasswordEmail(
+            user.email,
+            passwordResetToken.key
+          );
+
           // setup email data with unicode symbols
           let mailOptions = {
-            from: 'skypi.noreply@gmail.com', // sender address
-            to: user.email, // list of receivers
-            subject: 'Password reset token', // Subject line
-            text: 'Hello', // plain text body
-            html: `${passwordResetToken}` // html body
-          };
+            from: 'skypi.noreply@gmail.com',
+            to: user.email,
+            subject: 'Password reset token',
+            text: 'Hello',
+            html: `${
+              passwordResetToken // sender address // list of receivers // Subject line // plain text body
+            }`
+          }; // html body
 
           // send mail with defined transport object
           transporter.sendMail(mailOptions, (err, info) => {
@@ -299,7 +317,7 @@ module.exports.changepassword_post = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const password2 = req.body.password2;
-  const passwordResetToken = req.body.passwordResetToken;
+  const passwordResetToken = req.body.passwordresettoken;
 
   if (password !== password2) {
     errors.password = 'Your passwords do not match';
