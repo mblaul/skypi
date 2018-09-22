@@ -5,7 +5,7 @@ const router = express.Router();
 var homeController = require('../controllers/hello');
 router.get('/api/hello', homeController.helloworld_get);
 
-//API routes i.e. smarthomehelp.com/api/{route}
+//API routes i.e. skypi.com/api/{route}
 router.use('/api/user', require('./user'));
 router.use('/api/device', require('./device'));
 router.use('/api/weather', require('./weather'));

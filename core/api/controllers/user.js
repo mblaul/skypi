@@ -128,7 +128,7 @@ module.exports.verify_get = (req, res) => {
           .toString(36)
           .replace('0.', ''),
         created: moment().format(),
-        expiresTime: moment(this.created)
+        expireTime: moment(this.created)
           .add(10, 'm')
           .format()
       };
@@ -191,9 +191,7 @@ module.exports.verify_post = (req, res) => {
 
   User.findOne({ email: email })
     .then(user => {
-      // If token is not valid clear it and deny request
       existingToken = user.tempObjects.verifyUserToken;
-
       if (
         existingToken.expireTime < moment().format() ||
         existingToken.key !== verifyUserToken
@@ -236,9 +234,12 @@ module.exports.resetpassword_post = (req, res) => {
         key: Math.random()
           .toString(36)
           .replace('0.', ''),
-        created: Date.now(),
-        expiresIn: 600
+        created: moment().format(),
+        expireTime: moment(this.created)
+          .add(10, 'm')
+          .format()
       };
+
       //Add random password reset value to user
       user.passwordResetToken = passwordResetToken;
       user.save().then(user => {
@@ -258,9 +259,9 @@ module.exports.resetpassword_post = (req, res) => {
           let mailOptions = {
             from: 'skypi.noreply@gmail.com', // sender address
             to: user.email, // list of receivers
-            subject: 'Password Reset Token', // Subject line
+            subject: 'Password reset token', // Subject line
             text: 'Hello', // plain text body
-            html: passwordResetToken // html body
+            html: `${passwordResetToken}` // html body
           };
 
           // send mail with defined transport object
@@ -301,32 +302,43 @@ module.exports.changepassword_post = (req, res) => {
   const passwordResetToken = req.body.passwordResetToken;
 
   if (password !== password2) {
-    errors.password = 'Your passwords do not match.';
+    errors.password = 'Your passwords do not match';
     return res.status(500).json(errors);
   }
+
   User.findOne({ email })
     .then(user => {
-      if (user.passwordResetToken.key === passwordResetToken) {
-        bcrypt.genSalt(10, (err, salt) => {
-          if (err) {
-            console.log(err);
-            errors.server = 'An error occured, please try again';
-            return res.status(500).json(errors);
-          }
-          bcrypt.hash(password, salt, (err, hashedpassword) => {
-            if (err) return err;
-            user.password = hashedpassword;
-            user
-              .save()
-              .then(() => {
-                return res.json({
-                  message: 'Your password has been reset'
-                });
-              })
-              .catch(err => console.log(err));
-          });
-        });
+      existingToken = user.tempObjects.passwordResetToken;
+      if (
+        existingToken.expireTime < moment().format() ||
+        existingToken.key !== passwordResetToken
+      ) {
+        return res.json({ message: 'Authorization token not valid' });
       }
+
+      bcrypt.genSalt(10, (err, salt) => {
+        if (err) {
+          console.log(err);
+          errors.server = 'An error occured, please try again';
+          return res.status(500).json(errors);
+        }
+        bcrypt.hash(password, salt, (err, hashedpassword) => {
+          if (err) return err;
+          user.password = hashedpassword;
+          user
+            .save()
+            .then(() => {
+              return res.json({
+                message: 'Your password has been reset'
+              });
+            })
+            .catch(err => console.log(err));
+        });
+      });
     })
-    .catch();
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
 };

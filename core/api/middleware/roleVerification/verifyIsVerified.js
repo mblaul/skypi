@@ -1,9 +1,9 @@
 User = require('../models/User');
 
-module.exports = verifyRoleIsAdmin = (req, res, next) => {
+module.exports = verifyIsVerify = (req, res, next) => {
   User.findById(req.user.id)
     .then(user => {
-      if (user.roles.isAdmin) {
+      if (user.roles.isVerified) {
         return next();
       }
     })
