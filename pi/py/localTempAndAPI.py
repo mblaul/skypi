@@ -51,6 +51,7 @@ humidity = json_data['main']['humidity']
 pressure = json_data['main']['pressure']
 #k2f = (pytemperature.k2f(float(kelvin)))
 k2f = read_temp()
+direction = json_data['wind']['deg']
 
 #If statement to determine if data was pulled from the API
 if location != '' and wind != '' and kelvin != '' and humidity != '' and pressure != '':
@@ -63,12 +64,13 @@ if location != '' and wind != '' and kelvin != '' and humidity != '' and pressur
 # print('Temperature: ' + str(pytemperature.k2f(float(kelvin))))
     print('Humidity: ' + str(humidity))
     print('Pressure: ' + str(pressure))
+    print('Wind Direction: ' + str(direction))
 
     #URL for the weather API to MongoDB
     url = "http://18.235.27.33/api/weather/log"
 
     #Payload to push to MongoDB using % (String Formatting Operator)
-    payload = "source=%s&device=5b778422c1381d18a8bd003e&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&wind=%f&winddirection=%s" % ('OpenWe$
+    payload = "source=%s&device=5b778422c1381d18a8bd003e&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&wind=%f&winddirection=%s" % ('DS18B20 & OpenWeatherMap',k2f,humidity,lat,lng,pressure,wind,direction)
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
     response = requests.request("POST", url, data=payload, headers=headers)
     print(response.text)
