@@ -1,0 +1,20 @@
+sudo nano /boot/config.txt
+
+#at the bottom of the file, enter the text below:
+
+dtoverlay=w1-gpio
+
+#save and exit the document (control + x - then y - then enter)
+
+sudo reboot
+
+sudo modprobe w1-gpio
+
+sudo modprobe w1-therm
+
+cd /sys/bus/w1/devices
+
+cd 28-00000XXXXXXX (similar format to the output of above)
+
+cat w1_slave
+
