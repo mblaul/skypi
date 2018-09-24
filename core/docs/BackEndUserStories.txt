@@ -1,0 +1,6 @@
+As an Administrator, I want to be able to view and modify the data in the database
+As an Administrator, I want to be able to view the API
+As an Administrator, I want to be able to modify the requests the API handles
+As an Administrator, I want to be able to pull specific sets of data
+As an Administrator, I want to be able to aggregate data pulled from database
+As an Administrator, I want to be able to add the aggregated data to the database
