@@ -34,3 +34,16 @@ module.exports.log_post = (req, res) => {
       return res.status(500).json(errors);
     });
 };
+
+module.exports.log_get = (req, res) => {
+  //Need to add some logic to check the user and their devices
+  Weather.find()
+    .then(logs => {
+      return res.json(logs);
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};

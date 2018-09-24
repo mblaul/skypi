@@ -6,8 +6,8 @@ module.exports = (email, passwordresettoken) => {
           <tr>
             <td class="content-cell">
               <h1>Hi,</h1>
-              <p>You recently requested to verify your email for your SkyPi account. Use the button below to
-                verify it. <strong>This verification link is only valid for 10 minutes.</strong></p>
+              <p>You recently requested to reset you password for your SkyPi account. Use the button below to
+                verify it. <strong>This password reset link is only valid for 10 minutes.</strong></p>
               <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
