@@ -10,3 +10,5 @@ As a user, I want to be able to log in to my personal account.
 As a user, I want to see past data compared with current and/or future data.
 As an admin, I want to be able to lock or unlock user accounts.
 As an admin, I want to be able to reset a user's password.
+As a user, I want a site for viewing weather data.
+As an admin, I want a prototype site to test compatibility.
