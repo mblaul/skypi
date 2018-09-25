@@ -7,46 +7,63 @@ ol, ul {
   padding-left: 30px;
 }
 
+.btn:not(:disabled):not(.disabled){
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  padding: .375px;
+  font-size: 15px;
+  line-height: 25px;
+  border-radius: 30px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #000000;
+  clear: both;
+  color: #fff;
+  content: "";
+  display: table;
+  margin-top: 5px;
+  table-layout: fixed;
+  width: 175px;
+}
+
 .buttonColomn {
 	
+}
+
+.logo {
+  height: 10rem;
+  width: auto;
+  margin-bottom: 2rem;
+}
+
+.overlay {
+  position: absolute;
+  background-color: #26ADC1;
+  height: 200px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .ribbon {
   display: flex;
 }
 
-.buttonRow:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
 .title {
-  font: 40px "Century Gothic", Futura, sans-serif;
+  font: 75px "Century Gothic", Futura, sans-serif;
   font-weight: 900;
-  line-height: 60px;
+  line-height: 80px;
   margin-bottom: 10px;
   margin-right: 50px;
-}
-
-.AccountButtons {
-  background: #eee;
-  border: 1px solid #999;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 17px;
-  margin-right: -1px;
-  margin-top: 5px;
-  padding: 0;
-  text-align: center;
-  width: 55px;
-}
-
-.AccountButtons:focus {
-  outline: none;
-}
-
-.kbd-navigation .AccountButtons:focus {
-  background: #ddd;
 }
