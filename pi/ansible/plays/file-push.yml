@@ -11,7 +11,7 @@
   - name: push script dirs
     copy: 
       src: "{{ item }}"
-      dest: /home/dietpi/
+      dest: /home/ansible/
       owner: ansible
       
       mode: 0644
