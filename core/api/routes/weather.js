@@ -18,4 +18,9 @@ router.get(
   weatherController.log_get
 );
 
+// @route   GET api/weather/data
+// @desc    Get all weather data
+// @access  Public
+router.get('/data', weatherController.data_get);
+
 module.exports = router;
