@@ -8,8 +8,8 @@
     copy:
       src: /home/dietpi/skypi/pi/ansible/library/pkg.list
       dest: /home/dietpi/pkg.list
-      owner: dietpi
-      group: dietpi
+      owner: ansible
+      group: sudo
       mode: 0644
 
       #- name: install aptitude
