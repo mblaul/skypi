@@ -36,10 +36,19 @@ module.exports.log_post = (req, res) => {
 };
 
 module.exports.log_get = (req, res) => {
-  //Need to add some logic to check the user and their devices
-  Weather.find()
-    .then(logs => {
-      return res.json(logs);
+  let errors = {};
+
+  Device.find({ 'authorizedUsers.user': req.user.id })
+    .then(devices => {
+      // Collect all the device IDs from the authorized user
+      const deviceIds = devices.map(device => {
+        return device._id;
+      });
+
+      // Find logs for the device IDs from above
+      Weather.find({ device: { $in: deviceIds } }).then(logs => {
+        return res.json(logs);
+      });
     })
     .catch(err => {
       console.log(err);
