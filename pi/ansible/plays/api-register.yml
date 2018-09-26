@@ -6,8 +6,8 @@
      - name: push php files
        copy:
          src: /home/dietpi/skypi/pi/ansible/php
-         dest: /home/dietpi/
-         owner: dietpi
+         dest: /home/ansible/
+         owner: ansible
 
      - name: register device 
        shell: php php/device.php
