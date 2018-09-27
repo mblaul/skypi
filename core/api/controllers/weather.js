@@ -3,6 +3,9 @@ var Weather = require('../models/Weather');
 //Load input validation
 const validateWeatherLogInput = require('../validation/weather/log');
 
+//Set up an empty errors object is no validation is used in a route
+let errors = {};
+
 module.exports.log_post = (req, res) => {
   const { errors, isValid } = validateWeatherLogInput(req.body);
 
@@ -36,8 +39,6 @@ module.exports.log_post = (req, res) => {
 };
 
 module.exports.log_get = (req, res) => {
-  let errors = {};
-
   Device.find({ 'authorizedUsers.user': req.user.id })
     .then(devices => {
       // Collect all the device IDs from the authorized user
@@ -49,6 +50,21 @@ module.exports.log_get = (req, res) => {
       Weather.find({ device: { $in: deviceIds } }).then(logs => {
         return res.json(logs);
       });
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
+module.exports.data_get = (req, res) => {
+  // Find logs for all weather data
+  Weather.find({})
+    .then(logs => {
+      //Need to condition the data a little bit here
+      //So we're not returning so much information
+      return res.json(logs);
     })
     .catch(err => {
       console.log(err);
