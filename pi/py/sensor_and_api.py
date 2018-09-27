@@ -6,6 +6,11 @@ import pytemperature
 import os
 import glob
 import time
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+import socket
+import datetime
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -46,7 +51,7 @@ json_data = requests.get(api_latlng).json()
 #Variables based on the required informataion sourced from the API
 location = json_data['name']
 wind = json_data['wind']['speed']
-#kelvin = json_data['main']['temp']
+kelvin = json_data['main']['temp']
 humidity = json_data['main']['humidity']
 pressure = json_data['main']['pressure']
 temp_api = (pytemperature.k2f(float(kelvin)))
@@ -82,4 +87,23 @@ if location != '' and wind != '' and kelvin != '' and humidity != '' and pressur
 else:
     print("Error")
     #exit the python script if the variables are empty
+    hostName = socket.gethostname()
+    dateTime = datetime.datetime.now()
+
+    fromaddr = "XXXXXXXXXXX@gmail.com"
+    toaddr = "XXXXXXXXXXX@yahoo.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "SkyPi: POST data ERROR on: " + hostName
+    
+    body = "Please check the following weather station: " +  "\n" + hostName + "\n" + str(dateTime) 
+    msg.attach(MIMEText(body, 'plain'))
+    
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "XXXXXXXXXX")
+    text = msg.as_string()
+    server.sendmail(fromaddr, toaddr, text)
+    server.quit()
     exit()
