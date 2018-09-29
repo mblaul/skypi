@@ -2,6 +2,7 @@ var Weather = require('../models/Weather');
 
 //Load input validation
 const validateWeatherLogInput = require('../validation/weather/log');
+//Need to add validation for other routes
 
 //Set up an empty errors object is no validation is used in a route
 let errors = {};
