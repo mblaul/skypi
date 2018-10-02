@@ -11,6 +11,13 @@ import socket
 import datetime
 from Adafruit_BME280 import *
 
+def degrees_to_cardinal(d):
+
+    dirs = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"]
+    ix = int((d + 11.25)/22.5)
+    return dirs[ix % 16]
+
 host_name = socket.gethostname()
 
 sensor = BME280(t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8, h_mode=BME280_OSAMPLE_8)
@@ -55,7 +62,7 @@ print('Wind Direction: ' + str(api_wind_direction))
 url = "http://18.235.27.33/api/weather/log"
 
 #Payload to push to MongoDB using % (String Formatting Operator)
-payload = "source=%s&device=5b778422c1381d18a8bd003e&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&wind=%f&winddirection=%s" % (host_name + ' BME280',sensor_temp_convert,sensor_humidity,lat,lng,sensor_pressure,api_wind,api_wind_direction)
+payload = "source=%s&device=5b778422c1381d18a8bd003e&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&wind=%f&winddirection=%s" % (host_name + ' BME280',sensor_temp_convert,sensor_humidity,lat,lng,sensor_pressure,api_wind,degrees_to_cardinal(api_wind_direction))
 headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 response = requests.request("POST", url, data=payload, headers=headers)
 print(response.text)
