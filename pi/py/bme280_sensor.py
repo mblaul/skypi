@@ -11,6 +11,8 @@ import socket
 import datetime
 from Adafruit_BME280 import *
 
+host_name = socket.gethostname()
+
 sensor = BME280(t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8, h_mode=BME280_OSAMPLE_8)
 
 sensor_temperature = sensor.read_temperature()
@@ -37,7 +39,7 @@ api_humidity = json_data['main']['humidity']
 api_pressure = json_data['main']['pressure']
 api_temp = (pytemperature.k2f(float(api_kelvin)))
 api_wind_direction = json_data['wind']['deg']
-
+sensor_temp_convert = pytemperature.c2f(sensor_temperature)
 
 
 #printing the OpenWeatherMap information to ensure that the information was pulled
@@ -46,14 +48,14 @@ print('Location: ' + location)
 print('Wind speed: ' + str(api_wind))
 print('Humidity: ' + str(sensor_humidity))
 print('Pressure: ' + str(sensor_pressure))
-print('Temperature: ' + str(sensor_temperature))
-print('Wind Direction: ' + str(api_direction))
+print('Temperature: ' + str(sensor_temp_convert))
+print('Wind Direction: ' + str(api_wind_direction))
 
 #URL for the weather API to MongoDB
 url = "http://18.235.27.33/api/weather/log"
 
 #Payload to push to MongoDB using % (String Formatting Operator)
-payload = "source=%s&device=5b778422c1381d18a8bd003e&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&wind=%f&winddirection=%s" % ('BME280',sensor_temperature,sensor_humidity,lat,lng,sensor_pressure,api_wind,api_direction)
+payload = "source=%s&device=5b778422c1381d18a8bd003e&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&wind=%f&winddirection=%s" % (host_name + ' BME280',sensor_temp_convert,sensor_humidity,lat,lng,sensor_pressure,api_wind,api_wind_direction)
 headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 response = requests.request("POST", url, data=payload, headers=headers)
 print(response.text)
