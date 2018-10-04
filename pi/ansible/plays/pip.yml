@@ -4,11 +4,15 @@
   become: yes
   
   tasks:
+  - name: push package list
+    copy: 
+       src: /home/ansible/pip.list
+       dest: /home/ansible   
   - name: install wheel
     shell: pip install wheel
 
   - name: install setuptools 
-    shell: pip install setup tools      
+    shell: pip install setuptools      
 
   - name: install default pip packages from list 
     shell: pip install -r  /home/ansible/pip.list
