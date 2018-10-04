@@ -74,13 +74,28 @@ module.exports.data_get = (req, res) => {
     });
 };
 
-module.exports.dataonedevice_get = (req, res) => {
+module.exports.onedevice_alllogs_get = (req, res) => {
   // Find logs for all weather data
   Device.find(device)
     .then(device => {
       Weather.find({ device }).then(logs => {
         //Need to condition the data a little bit here
         //So we're not returning so much information
+        return res.json(logs);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
+module.exports.alldevices_lastlog_get = (req, res) => {
+  // Find logs for all weather data
+  Device.find(device)
+    .then(device => {
+      Weather.find({ device }, {}, { sort: { date: -1 } }).then(logs => {
         return res.json(logs);
       });
     })
