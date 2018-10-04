@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class iconhell extends Component {
+export default class icons extends Component {
   render() {
     return (
       <div>
