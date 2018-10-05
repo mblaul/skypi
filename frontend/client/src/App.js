@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+//Import components that are a part of the layout
+import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
+import Footer from './components/layout/Footer';
+
+//Import components that have functionality
+import Login from './components/Login';
+import Register from './components/Register';
+
+//Component to test styling
+import Test from './components/Test';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div className="wrapper">
+          <Sidebar />
+          <div className="main-panel">
+            <Navbar />
+            {/* <Login /> */}
+            <Register />
+            <Footer />
+          </div>
+        </div>
       </div>
     );
   }
