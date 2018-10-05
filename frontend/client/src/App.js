@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //Import components that are a part of the layout
-import Navbar from './components/layout/Navbar';
-import Sidebar from './components/layout/Sidebar';
-import Footer from './components/layout/Footer';
+import Navbar from './components/dashboard/Navbar';
+import Sidebar from './components/dashboard/Sidebar';
+import Footer from './components/dashboard/Footer';
 import Landing from './components/Landing';
 
 //Import components that have functionality
