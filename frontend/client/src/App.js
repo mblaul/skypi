@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 //Import components that are a part of the layout
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import Footer from './components/layout/Footer';
+import Landing from './components/Landing';
 
 //Import components that have functionality
 import Login from './components/Login';
@@ -15,17 +17,20 @@ import Test from './components/Test';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="wrapper">
-          <Sidebar />
-          <div className="main-panel">
-            <Navbar />
-            {/* <Login /> */}
-            <Register />
-            <Footer />
+      <Router>
+        <div className="App">
+          <div className="wrapper">
+            <Sidebar />
+            <div className="main-panel">
+              <Navbar />
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Footer />
+            </div>
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }

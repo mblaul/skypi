@@ -5,7 +5,7 @@ export default class Sidebar extends Component {
     return (
       <div
         class="sidebar"
-        data-color="purple"
+        data-color="blue"
         data-image="assets/img/sidebar-5.jpg"
       >
         {/* <!--

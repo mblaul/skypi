@@ -16,22 +16,17 @@ class Navbar extends Component {
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <a className="navbar-brand" href="#">
-              Dashboard
-            </a>
           </div>
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-left">
               <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i className="fa fa-dashboard" />
-                </a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" />
               </li>
             </ul>
 
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a href="">Account</a>
+                <a href="#">Account</a>
               </li>
             </ul>
           </div>
