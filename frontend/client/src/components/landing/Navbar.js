@@ -3,14 +3,19 @@ import React, { Component } from 'react';
 export default class Navbar extends Component {
   render() {
     return (
-      <nav class="navbar navbar-light bg-light static-top">
-        <div class="container">
-          <a class="navbar-brand" href="#">
+      <nav className="navbar navbar-light bg-light static-top">
+        <div className="container">
+          <a className="navbar-brand" href="#">
             SkyPi
           </a>
-          <a class="btn btn-primary" href="#">
-            Sign In
-          </a>
+          <div className="button-container">
+            <button className="btn btn-primary" href="#">
+              Sign In
+            </button>
+            <button className="btn btn-primary" href="#">
+              Register
+            </button>
+          </div>
         </div>
       </nav>
     );
