@@ -5,11 +5,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/dashboard/Navbar';
 import Sidebar from './components/dashboard/Sidebar';
 import Footer from './components/dashboard/Footer';
-import Landing from './components/Landing';
 
-//Import components that have functionality
-import Login from './components/Login';
-import Register from './components/Register';
+// import landing
+import Landing from './components/landing/Main';
+import Login from './components/landing//Login';
+import Register from './components/landing/Register';
 
 //Component to test styling
 import Test from './components/Test';
@@ -19,7 +19,10 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <div className="wrapper">
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+          {/* <div className="wrapper">
             <Sidebar />
             <div className="main-panel">
               <Navbar />
@@ -28,7 +31,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Footer />
             </div>
-          </div>
+          </div> */}
         </div>
       </Router>
     );
