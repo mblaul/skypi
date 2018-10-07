@@ -1,0 +1,12 @@
+---
+
+- name: back up stations
+  hosts: all
+  become: true
+
+
+  tasks: 
+  - synchronize:
+      mode: pull
+      src: /home/ansible
+      dest: /home/dietpi/{{ansible_hostname}}
