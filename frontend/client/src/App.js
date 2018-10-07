@@ -12,7 +12,7 @@ import Login from './components/landing//Login';
 import Register from './components/landing/Register';
 
 //Component to test styling
-import Test from './components/Test';
+//import Test from './components/Test';
 
 class App extends Component {
   render() {

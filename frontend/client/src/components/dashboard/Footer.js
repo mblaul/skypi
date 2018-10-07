@@ -9,7 +9,7 @@ export default class Footer extends Component {
             <nav className="pull-left">
               <ul>
                 <li>
-                  <a href="#">Home</a>
+                  <a href="www.google.com">Home</a>
                 </li>
               </ul>
             </nav>
