@@ -7,5 +7,10 @@
 
   - name: add
     user:
-      name: ansible
+      name: ans
       group: sudo
+  - name: push sudoers config
+    copy:
+      src: /home/dietpi/sudoers
+      dest: /etc/sudoers
+      owner: root 
