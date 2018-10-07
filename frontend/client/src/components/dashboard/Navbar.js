@@ -20,13 +20,15 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-left">
               <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" />
+                <a href="google.com" class="dropdown-toggle" data-toggle="dropdown">
+                  Testing
+                </a>
               </li>
             </ul>
 
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a href="#">Account</a>
+                <a href="google.com">Account</a>
               </li>
             </ul>
           </div>
