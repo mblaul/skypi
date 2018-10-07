@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 export default class Navbar extends Component {
+  //Changed the Login and register buttons to anchors, because the redirect functionality works for them
   render() {
     return (
       <nav className="navbar navbar-light bg-light static-top">
