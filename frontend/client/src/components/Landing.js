@@ -3,20 +3,20 @@ import React, { Component } from 'react';
 export default class Landing extends Component {
   render() {
     return (
-      <div class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card ">
-                <div class="card-header ">
-                  <h4 class="card-title">SkyPi</h4>
-                  <p class="card-category">All products including Taxes</p>
+      <div className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card ">
+                <div className="card-header ">
+                  <h4 className="card-title">SkyPi</h4>
+                  <p className="card-category">All products including Taxes</p>
                 </div>
-                <div class="card-body ">"Hello"</div>
-                <div class="card-footer ">
+                <div className="card-body ">"Hello"</div>
+                <div className="card-footer ">
                   <hr />
-                  <div class="stats">
-                    <i class="fa fa-check" /> Data information certified
+                  <div className="stats">
+                    <i className="fa fa-check" /> Data information certified
                   </div>
                 </div>
               </div>
