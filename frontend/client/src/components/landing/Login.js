@@ -13,13 +13,13 @@ class Login extends Component {
               <div className="UserInput">
                 <label htmlFor="username">
                   Username
-                  <input type="text" name="username" value="" />
+                  <input type="text" name="username" defaultValue="" />
                 </label>
               </div>
               <div className="PassInput">
                 <label htmlFor="password">
                   Password
-                  <input type="password" name="password" value="" />
+                  <input type="password" name="password" defaultValue="" />
                 </label>
               </div>
               <div className="btn">
