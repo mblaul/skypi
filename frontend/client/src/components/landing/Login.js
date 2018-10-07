@@ -26,7 +26,7 @@ class Login extends Component {
                 <button className="btn btn-primary">Login</button>
                 <a
                   className="btn btn-link"
-                  href="/MyCreatedFiles/RegisterPage.js"
+                  href="/register"
                 >
                   Register
                 </a>
