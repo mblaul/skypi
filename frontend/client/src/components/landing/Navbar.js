@@ -5,14 +5,14 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar-light bg-light static-top">
         <div className="container">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href="./login">
             SkyPi
           </a>
           <div className="button-container">
-            <button className="btn btn-primary" href="/login">
+            <button className="btn btn-primary" href="./login">
               Sign In
             </button>
-            <button className="btn btn-primary" href="/register">
+            <button className="btn btn-primary" href="./register">
               Register
             </button>
           </div>
