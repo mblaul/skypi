@@ -10,3 +10,4 @@
       mode: pull
       src: /home/ansible
       dest: /home/dietpi/{{ansible_hostname}}
+      archive: yes
