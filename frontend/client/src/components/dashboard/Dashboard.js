@@ -9,15 +9,13 @@ export default class Dashboard extends Component {
   render() {
     return (
       <Router>
-        <div>
           <div className="wrapper">
-            <Sidebar />
-            <div className="main-panel">
               <Navbar />
+            <div className="main-panel">
+            <Sidebar />
               <Footer />
             </div>
           </div>
-        </div>
       </Router>
     );
   }

@@ -4,7 +4,7 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div
-        class="sidebar"
+        className="sidebar"
         data-color="blue"
         data-image="assets/img/sidebar-5.jpg"
       >
@@ -17,15 +17,15 @@ export default class Sidebar extends Component {
 
         <div className="sidebar-wrapper">
           <div className="logo">
-            <a href="http://www.creative-tim.com" className="simple-text">
+            <a href="/" className="simple-text">
               SkyPi
             </a>
           </div>
 
           <ul className="nav">
             <li className="active">
-              <a href="dashboard.html">
-                <i class="pe-7s-graph" />
+              <a href="/Dashboard">
+                <i className="pe-7s-graph" />
                 <p>Dashboard</p>
               </a>
             </li>

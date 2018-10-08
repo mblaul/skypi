@@ -6,7 +6,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar-light bg-light static-top">
         <div className="container">
-          <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/Dashboard">
             SkyPi
           </a>
           <div className="button-container">
