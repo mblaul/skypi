@@ -10,7 +10,7 @@ export default class Navbar extends Component {
             SkyPi
           </a>
           <div className="button-container">
-            <a className="btn btn-primary" href="./login">
+            <a className="btn btn-primary mr-2" href="./login">
               Sign In
             </a>
             <a className="btn btn-primary" href="./register">

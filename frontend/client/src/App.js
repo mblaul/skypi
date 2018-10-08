@@ -14,6 +14,8 @@ import Register from './components/landing/Register';
 //Component to test styling
 //import Test from './components/Test';
 
+import Dashboard from './components/dashboard/Dashboard';
+
 class App extends Component {
   render() {
     return (
@@ -22,6 +24,7 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/Dashboard" component={Dashboard} />
           {/* <div className="wrapper">
             <Sidebar />
             <div className="main-panel">
