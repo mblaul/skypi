@@ -6,7 +6,7 @@ class Login extends Component {
     return (
       <div>
         <Navbar />
-        <div className="ContentContainer">
+        <div className="ContentContainer" style={{textAlign:"center"}}>
           <div className="FormControl">
             <h2>Login</h2>
             <form name="LoginForm" action="DataBasePost">

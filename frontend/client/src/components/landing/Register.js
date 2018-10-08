@@ -6,6 +6,7 @@ class Register extends Component {
     return (
       <div>
         <Navbar />
+        <div className="ContentContainer" style={{textAlign:"center"}}>
         <div className="FormControl">
           <h2>Register Account</h2>
           <br />
@@ -42,6 +43,7 @@ class Register extends Component {
             <br />
             <button className="btn btn-primary"> Register </button>
           </form>
+        </div>
         </div>
       </div>
     );
