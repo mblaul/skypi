@@ -14,7 +14,10 @@ import Register from './components/landing/Register';
 //Component to test styling
 //import Test from './components/Test';
 
+// import Dashboard and tables
 import Dashboard from './components/dashboard/Dashboard';
+import Plaintable from './components/dashboard/Plaintable';
+import Stripetable from './components/dashboard/Stripetable';
 
 class App extends Component {
   render() {
