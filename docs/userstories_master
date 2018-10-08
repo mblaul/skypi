@@ -33,3 +33,5 @@ As an admin, I want to be able to lock or unlock user accounts.
 As an admin, I want to be able to reset a user's password.
 As a user, I want a site for viewing weather data.
 As an admin, I want a prototype site to test compatibility.
+As a user, I want a dashboard for easy viewing of weather data.
+As an admin, I want a landing page for new users to see when first seeing the site.
