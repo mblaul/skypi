@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar';
 
-export default class LandingMain extends Component {
+export default class Landing extends Component {
   render() {
     return (
       <div>

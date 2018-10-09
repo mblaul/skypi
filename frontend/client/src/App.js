@@ -7,17 +7,15 @@ import Sidebar from './components/dashboard/Sidebar';
 import Footer from './components/dashboard/Footer';
 
 // import landing
-import Landing from './components/landing/Main';
+import Landing from './components/landing/Landing';
 import Login from './components/landing//Login';
 import Register from './components/landing/Register';
 
 //Component to test styling
 //import Test from './components/Test';
 
-// import Dashboard and tables
+// import Dashboard
 import Dashboard from './components/dashboard/Dashboard';
-import Plaintable from './components/dashboard/Plaintable';
-import Stripetable from './components/dashboard/Stripetable';
 
 class App extends Component {
   render() {
@@ -27,7 +25,7 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/Dashboard" component={Dashboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
           {/* <div className="wrapper">
             <Sidebar />
             <div className="main-panel">
