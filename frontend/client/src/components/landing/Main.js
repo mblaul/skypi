@@ -11,30 +11,22 @@ export default class LandingMain extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-9 mx-auto">
-                <h1 className="mb-5">
+                <div className="display-1 mb-3">
+                  <strong>SkyPi</strong>
+                </div>
+                <h2 className="mb-4">
                   Your source for reliable weather information.
-                </h1>
+                </h2>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <form>
-                  <div className="form-row">
-                    <div className="col-12 col-md-9 mb-2 mb-md-0">
-                      <input
-                        type="email"
-                        className="form-control form-control-lg"
-                        placeholder="Enter your email..."
-                      />
-                    </div>
-                    <div className="col-12 col-md-3">
-                      <button
-                        type="submit"
-                        className="btn btn-block btn-lg btn-primary"
-                      >
-                        Sign up!
-                      </button>
-                    </div>
-                  </div>
-                </form>
+                <div className="form-row">
+                  <a
+                    className="btn btn-lg btn-primary mx-auto"
+                    href="./register"
+                  >
+                    Sign up!
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -49,7 +41,8 @@ export default class LandingMain extends Component {
                   </div>
                   <h3>View on any device, at home or on the go</h3>
                   <p className="lead mb-0">
-                    This site will look great on any device, be it tablet, phone, or supercomputer!
+                    This site will look great on any device, be it tablet,
+                    phone, or supercomputer!
                   </p>
                 </div>
               </div>
@@ -71,8 +64,8 @@ export default class LandingMain extends Component {
                   </div>
                   <h3>Weather Data in Real-time</h3>
                   <p className="lead mb-0">
-                    We use only the most up-to-date information, providing you with
-                    the latest in weather data!
+                    We use only the most up-to-date information, providing you
+                    with the latest in weather data!
                   </p>
                 </div>
               </div>

@@ -6,33 +6,31 @@ class Login extends Component {
     return (
       <div>
         <Navbar />
-        <div className="ContentContainer" style={{textAlign:"center"}}>
-          <div className="FormControl">
-            <h2>Login</h2>
-            <form name="LoginForm" action="DataBasePost">
-              <div className="UserInput">
-                <label htmlFor="username">
-                  Username
-                  <input type="text" name="username" defaultValue="" />
-                </label>
-              </div>
-              <div className="PassInput">
-                <label htmlFor="password">
-                  Password
-                  <input type="password" name="password" defaultValue="" />
-                </label>
-              </div>
-              <div className="btn">
-                <button className="btn btn-primary">Login</button>
-                <a
-                  className="btn btn-link"
-                  href="/register"
-                >
-                  Register
-                </a>
-              </div>
-            </form>
-          </div>
+        <div className="container mt-5 w-25">
+          <h2 className="mb-3">Login</h2>
+          <form>
+            <div className="form-group">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Email"
+              />
+            </div>
+            <div className="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Password"
+              />
+            </div>
+            <button type="submit" className="btn btn-default">
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     );
