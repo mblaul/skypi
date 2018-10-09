@@ -3,14 +3,8 @@
   become: true
   tasks:
 
-     - name: push php files
-       copy:
-         src: /home/dietpi/skypi/pi/php
-         dest: /home/ansible/
-         owner: ansible
-
      - name: register device 
-       shell: php php/device.php
+       shell: python py/register.py
        
 
       
