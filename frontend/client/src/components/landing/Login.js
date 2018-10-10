@@ -58,7 +58,7 @@ class Login extends Component {
     return (
       <div>
         <Navbar />
-        <div className="container mt-5 w-25">
+        <div className="container col-lg-4 mt-5">
           <h2 className="mb-3">Login</h2>
           <form onSubmit={this.onSubmit}>
             <TextFieldGroup

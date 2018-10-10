@@ -57,7 +57,7 @@ class Register extends Component {
     return (
       <div>
         <Navbar />
-        <div className="container mt-5 w-25">
+        <div className="container col-lg-4 mt-5 mx-auto">
           <h2 className="mb-3">Register</h2>
           <form noValidate onSubmit={this.onSubmit}>
             <TextFieldGroup
@@ -74,7 +74,6 @@ class Register extends Component {
               value={this.state.email}
               onChange={this.onChange}
               error={errors.email}
-              info="This site uses Gravatar, if you want a profile image please use a gravatar email."
             />
             <TextFieldGroup
               placeholder="Password"
