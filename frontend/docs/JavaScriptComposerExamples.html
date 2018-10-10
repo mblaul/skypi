@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hello, world</title>
+</head>
+
+<script type="text/JavaScript">
+//Declare global JavaScript Variables here
+var htmlToWrite = "";
+//The window.onload function executes code inside the curly braces as the webpage loads
+window.onload = function()
+{
+  //window.alert(string); displays a popup style alert in the browser with the inserted string
+	window.alert("Test");
+	CreateHeader();
+};
+//function to draw a table of weather readings provided in an Array
+var weatherReadings = [
+    ["Time", "Temp", "Wind Speed", "Wind Direction", "Humidity"],
+    ["9:15", "59", "8", "N", "60"],
+    ["9:30", "61", "7", "N", "61"],
+    ["9:45", "64", "2", "NE", "61"],
+    ["10:00", "66", "11", "NNE", "63"]
+];
+function drawTable(weatherReading)``
+{
+	var rowType = "";
+	var Output = "<div id='weatherContainer'>";
+	var weatherReadingHeader = 5;
+	Output +="<table id = 'Records'>";
+	for (i=0; i < weatherReadingHeader; i++)
+	{
+		if (i == 0)
+		{
+			rowType = "h>";
+		} else {
+			rowType = "h>";
+		}
+		for (j=0; j < weatherReadings.length(); j++)
+		{
+			Output += "<t" + rowType + weatherReading + "</t" + rowType;
+			Output += "</tr>";
+
+		}
+		
+	}
+	Output += "</table>";
+	Output += "</div>";
+};
+//Funtion to create a form dynamically based on an Array of Fields
+var inputsArray = ["Name", "Email", "Email", "Password", "Password"];
+function createForm(inputArray)
+{
+	var createForm = "<form id='userForm' action='./";
+	var inputTag= "";
+	for (i = 1; i <= inputsArray.length(); 
+	{
+        createForm = createForm + inputArray[i] + ">";
+		createForm = createForm "<label>" + inputArray[i] + ": </label";
+		if (inputsArray[i].equalsIgnoreCase("Password")
+		{
+			inputTag = "<input type='password'";
+		} else {
+			inputTag = "<input type='text'";
+		if ( inputsArray[i].equalsIgnoreCase(inputsArray[i-1]) )
+		{
+			inputsArray[i] = "Confirm" + inputsArray[i];
+		}
+		createForm += inputTag + " id='" + inputsArray[i] + "' defaultValue='" + inputsArrray[i] + "' />";
+	}
+		createForm += "<button id='submit'> Submit </button>";
+		createForm += "</form>";
+};
+function CreateHeader()
+{
+	htmlToWrite += "<div id='ComposerTest'>";
+	htmlToWrite+= "<h2> Turns out it actually works </h2>";
+	htmlToWrite+= "<p> this portion of the webpage was created automatically using one of my favorite JavaScript functions ever </p>";
+	htmlToWrite+= "<p align='Center'> Technically this uses the document.getElementByID(idName) method to overwrite the HTML in the page </p>";
+	htmlToWrite+= "<p> but I don't like the official name, it's really hard to say in conversation... so instead I call it </p> <h2 align'center'> THE COMPOSER!! </h2>";
+	htmlToWrite+= "</div>";
+	WriteToPage();
+};
+
+function WriteToPage()
+{
+	document.getElementById('Target').innerHTML = htmlToWrite;
+};
+
+</script>
+
+<body>
+  <div class="MenuAndHeader">
+    <h1>hello, world</h1>
+    <hr>
+  </div>
+  
+  <div id='Target'>
+  </div>
+  <div id='Weather'>
+  </div>
+  <div id='Form'>
+  </div>
+  
+  
+</body>
+<!-- No code allowed below this line-->
+</html>
+<!-- end of document -->
