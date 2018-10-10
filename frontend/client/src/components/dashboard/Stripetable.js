@@ -3,11 +3,11 @@ import React, { Component } from 'react'
 export default class Stripetable extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <div className="content">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-lg-8">
                         <div className="card">
                             <div className="header">
                                 <h4 className="title">Striped Table with Hover</h4>

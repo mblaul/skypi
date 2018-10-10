@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import Textdata from './Textdata';
 //import Plaintable from './Plaintable';
-//import Stripetable from './Stripetable';
+import Stripetable from './Stripetable';
 
 export default class Dashboard extends Component {
   render() {
@@ -19,6 +19,7 @@ export default class Dashboard extends Component {
               <Sidebar />
           </div>
             <div className="main-panel">
+              <Stripetable />
               <Textdata />
               <Footer />
             </div>
