@@ -1,47 +1,88 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
-  render() {
-    return (
-      <nav className="navbar navbar-light bg-light static-top">
-        <div className="container">
-          <a className="navbar-brand" href="/">
-            SkyPi
-          </a>
-          <nav className="navbar navbar-inverse">
-            <div className="container-fluid">
-              <ul className="nav navbar-nav">
-                <li className="active"><a href="#">Home</a></li>
-                <li className="dropdown"><a className="dropdown-toggle" data-toggle="dropdown" hreft="#">Page 1<span className="caret"></span></a>
-                  <ul className="dropdown-menu">
-                    <li><a href="#">Page 1-1</a></li>
-                    <li><a href="#">Page 1-2</a></li>
-                    <li><a href="#">Page 1-3</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
-              </ul>
-            </div>
-          </nav>
-          <div className="collapse navbar-collapse">
-            <ul className="nav navbar-nav navbar-left">
-              <li>
-                <a href="google.com" className="dropdown-toggle" data-toggle="dropdown">
-                  Testing
-                </a>
-              </li>
-            </ul>
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+    alert('You have been logged out!');
+  }
 
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a href="google.com">Account</a>
-              </li>
-            </ul>
+  render() {
+    const { isAuthenticated, user } = this.props.auth;
+
+    const authLinks = (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link className="btn btn-primary mr-2" to="/dashboard">
+            Dashboard
+          </Link>
+        </li>
+        <li className="nav-item">
+          <a
+            href="#"
+            onClick={this.onLogoutClick.bind(this)}
+            className="btn btn-primary mr-2"
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    );
+
+    const guestLinks = (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link className="btn btn-primary mr-2" to="/register">
+            Register
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="btn btn-primary" to="/login">
+            Log In
+          </Link>
+        </li>
+      </ul>
+    );
+
+    return (
+      <nav className="navbar  navbar-expand-sm navbar-light bg-light static-top">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            SkyPi
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#mobile-nav"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+
+          <div className="collapse navbar-collapse" id="mobile-nav">
+            {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>
       </nav>
     );
   }
 }
-export default Navbar;
+
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+// Bring in auth state
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navbar);

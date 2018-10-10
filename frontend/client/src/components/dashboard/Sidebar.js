@@ -3,35 +3,54 @@ import React, { Component } from 'react';
 export default class Sidebar extends Component {
   render() {
     return (
-      <div
-        className="sidebar"
-        data-color="blue"
-        data-image="assets/img/sidebar-5.jpg"
-      >
-        {/* <!--
+      <div className="Sidebar">
+      <div id="wrapper">
+        <div className="overlay">
     
-            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-            Tip 2: you can also add an image using data-image tag
-    
-        --> */}
-
-        <div className="sidebar-wrapper">
-          <div className="logo">
-            <a href="/" className="simple-text">
-              SkyPi
-            </a>
-          </div>
-
-          <ul className="nav">
-            <li className="active">
-              <a href="/Dashboard">
-                <i className="pe-7s-graph" />
-                <p>Dashboard</p>
-              </a>
-            </li>
-          </ul>
+        <nav className="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul className="nav sidebar-nav">
+                <li className="sidebar-brand">
+                    <a href="#">
+                       Brand
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">Team</a>
+                </li>
+                <li className="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
+                  <ul className="dropdown-menu" role="menu">
+                    <li className="dropdown-header">Dropdown heading</li>
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/maridlcrmn">Follow me</a>
+                </li>
+            </ul>
+        </nav>
         </div>
       </div>
-    );
+    </div>
+    )
   }
 }
