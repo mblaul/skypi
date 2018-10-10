@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/authActions';
+import { registerUser } from '../../actions/authActions';
 
 import TextFieldGroup from '../common/TextFieldGroup';
 
-import Navbar from './Navbar';
-
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
-
     this.state = {
+      name: '',
       email: '',
       password: '',
+      password2: '',
       errors: {}
     };
 
@@ -28,10 +28,6 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
-
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -44,23 +40,30 @@ class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const userData = {
+    const newUser = {
+      name: this.state.name,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      password2: this.state.password2
     };
-
-    //Call the action to login a user
-    this.props.loginUser(userData);
+    //Second parameter allows us to redirect within the registerUser action
+    this.props.registerUser(newUser, this.props.history);
   }
+
   render() {
     const { errors } = this.state;
-
     return (
       <div>
-        <Navbar />
-        <div className="container col-lg-4 mt-5">
-          <h2 className="mb-3">Login</h2>
-          <form onSubmit={this.onSubmit}>
+        <div className="container col-lg-4 mt-5 mx-auto">
+          <h2 className="mb-3">Register</h2>
+          <form noValidate onSubmit={this.onSubmit}>
+            <TextFieldGroup
+              placeholder="Name"
+              name="name"
+              value={this.state.name}
+              onChange={this.onChange}
+              error={errors.name}
+            />
             <TextFieldGroup
               placeholder="Email Address"
               name="email"
@@ -77,6 +80,14 @@ class Login extends Component {
               onChange={this.onChange}
               error={errors.password}
             />
+            <TextFieldGroup
+              placeholder="Confirm Password"
+              name="password2"
+              type="password"
+              value={this.state.password2}
+              onChange={this.onChange}
+              error={errors.password2}
+            />
             <input type="submit" className="btn btn-primary btn-block mt-4" />
           </form>
         </div>
@@ -85,8 +96,8 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -98,5 +109,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
-)(Login);
+  { registerUser }
+)(withRouter(Register));

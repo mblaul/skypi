@@ -6,21 +6,20 @@ import jwtDecode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 
-//Import components that are a part of the layout
-import Navbar from './components/dashboard/Navbar';
-import Sidebar from './components/dashboard/Sidebar';
-import Footer from './components/dashboard/Footer';
+// Import private routing for protected pages
+import PrivateRoute from './components/common/PrivateRoute';
 
-// import landing
-import Landing from './components/landing/Landing';
-import Login from './components/landing//Login';
-import Register from './components/landing/Register';
+// Import components that are a part of the layout
+import Navbar from './components/layout/Navbar';
+import Sidebar from './components/layout/Sidebar';
 
-//Component to test styling
-//import Test from './components/Test';
+// Import components that are used for authentication
+import Login from './components/authentication/Login';
+import Register from './components/authentication/Register';
 
-// import Dashboard
-import Dashboard from './components/dashboard/Dashboard';
+// Import components that are used to display content
+import Landing from './components/content/Landing';
+import Dashboard from './components/content/dashboard/Dashboard';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -47,20 +46,14 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
+            <Navbar />
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            {/* <div className="wrapper">
-            <Sidebar />
-            <div className="main-panel">
-              <Navbar />
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Footer />
-            </div>
-          </div> */}
+            {/* Switch allows redirects on private routes */}
+            <Switch>
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            </Switch>
           </div>
         </Router>
       </Provider>

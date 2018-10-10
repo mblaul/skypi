@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar';
 
 export default class Landing extends Component {
   render() {
     return (
       <div>
-        <Navbar />
         <header className="masthead text-white text-center">
           <div className="overlay" />
           <div className="container">
