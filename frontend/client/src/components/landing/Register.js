@@ -1,48 +1,117 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authActions';
+
+import TextFieldGroup from '../common/TextFieldGroup';
+
 import Navbar from './Navbar';
 
 class Register extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      password2: '',
+      errors: {}
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const newUser = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2
+    };
+    //Second parameter allows us to redirect within the registerUser action
+    this.props.registerUser(newUser, this.props.history);
+  }
+
   render() {
+    const { errors } = this.state;
     return (
       <div>
         <Navbar />
         <div className="container mt-5 w-25">
           <h2 className="mb-3">Register</h2>
-          <form>
-            <div className="form-group">
-              <label for="email">Email address</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                placeholder="Email"
-              />
-            </div>
-            <div className="form-group">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Password"
-              />
-            </div>
-            <div className="form-group">
-              <label for="password">Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password2"
-                placeholder="Confirm Password"
-              />
-            </div>
-            <button type="submit" className="btn btn-default">
-              Submit
-            </button>
+          <form noValidate onSubmit={this.onSubmit}>
+            <TextFieldGroup
+              placeholder="Name"
+              name="name"
+              value={this.state.name}
+              onChange={this.onChange}
+              error={errors.name}
+            />
+            <TextFieldGroup
+              placeholder="Email Address"
+              name="email"
+              type="email"
+              value={this.state.email}
+              onChange={this.onChange}
+              error={errors.email}
+              info="This site uses Gravatar, if you want a profile image please use a gravatar email."
+            />
+            <TextFieldGroup
+              placeholder="Password"
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.onChange}
+              error={errors.password}
+            />
+            <TextFieldGroup
+              placeholder="Confirm Password"
+              name="password2"
+              type="password"
+              value={this.state.password2}
+              onChange={this.onChange}
+              error={errors.password2}
+            />
+            <input type="submit" className="btn btn-primary btn-block mt-4" />
           </form>
         </div>
       </div>
     );
   }
 }
-export default Register;
+
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(withRouter(Register));
