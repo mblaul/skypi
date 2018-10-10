@@ -27,7 +27,7 @@ export default class Sidebar extends Component {
                     <a href="#">Team</a>
                 </li>
                 <li className="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span>
+                  <a href="#" className="dropdown-toggle" data-toggle="dropdown">Works <span className="caret"></span>
                   <ul className="dropdown-menu" role="menu">
                     <li className="dropdown-header">Dropdown heading</li>
                     <li><a href="#">Action</a></li>
