@@ -22,6 +22,11 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
+          <Link className="btn btn-primary mr-2" to="/status">
+            Account
+          </Link>
+        </li>
+        <li className="nav-item">
           <a
             href="#"
             onClick={this.onLogoutClick.bind(this)}

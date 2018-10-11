@@ -20,6 +20,7 @@ import Register from './components/authentication/Register';
 // Import components that are used to display content
 import Landing from './components/content/Landing';
 import Dashboard from './components/content/dashboard/Dashboard';
+import Status from './components/content/status/Status';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -53,6 +54,7 @@ class App extends Component {
             {/* Switch allows redirects on private routes */}
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/status" component={Status} />
             </Switch>
           </div>
         </Router>
