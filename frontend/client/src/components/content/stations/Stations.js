@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-//import pieces of Status
+//import pieces of Stations
 //import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
 
-export default class Status extends Component {
+export default class Stations extends Component {
   render() {
     return (
       <Router>

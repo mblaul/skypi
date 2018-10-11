@@ -22,7 +22,7 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="btn btn-primary mr-2" to="/status">
+          <Link className="btn btn-primary mr-2" to="/stations">
             Stations
           </Link>
         </li>
