@@ -12,10 +12,17 @@ class Navbar extends Component {
   }
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated, isAdmin, user } = this.props.auth;
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
+        if (isAdmin) {
+          <li clasName="nav-item">
+            <Link className="btn btn-danger mr-2" to="#">
+              Admin
+            </Link>
+          </li>
+        }
         <li className="nav-item">
           <Link className="btn btn-primary mr-2" to="/dashboard">
             Dashboard
