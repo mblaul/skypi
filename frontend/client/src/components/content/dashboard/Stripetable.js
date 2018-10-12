@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TableRow from '../dashboard/TableRow'
-
+import TableHeader from '../dashboard/TableHeader'
 export default class Stripetable extends Component {
   render() {
     return (
@@ -17,19 +17,16 @@ export default class Stripetable extends Component {
                             <div className="content table-responsive table-full-width">
                                 <table className="table table-hover table-striped">
                                     <thead>
-                                        <th>ID</th>
-                                    	<th>Name</th>
-                                    	<th>Salary</th>
-                                    	<th>Country</th>
-                                    	<th>City</th>
+                                        <TableHeader />
                                     </thead>
                                     <tbody>
-                                    <TableRow />
-                                    <TableRow />
-                                    <TableRow />
+                                            <TableRow ID={"1"} Name={"Station1"} Salary={"$81,000"} Country={"United States"} City={"Rochester"}/>
+                                            <TableRow ID={"2"} Name={"Station2"} Salary={"$82,000"} Country={"Canada"} City={"Hamilton"}/>
+                                            <TableRow ID={"3"} Name={"Station3"} Salary={"$83,000"} Country={"United States"} City={"New York"}/>
+                                            <TableRow ID={"4"} Name={"Station4"} Salary={"$84,000"} Country={"Canada"} City={"Blind River"}/>
+                                            <TableRow ID={"5"} Name={"Station5"} Salary={"$85,000"} Country={"United States"} City={"Austin"}/>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
