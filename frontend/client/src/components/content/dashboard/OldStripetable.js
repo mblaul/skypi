@@ -67,7 +67,6 @@ export default class Stripetable extends Component {
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
