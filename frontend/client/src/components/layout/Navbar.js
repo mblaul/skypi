@@ -19,7 +19,7 @@ class Navbar extends Component {
       if (user.roles.isAdmin) {
         adminButton = (
           <li className="nav-item">
-            <Link className="btn btn-danger mr-2" to="#">
+            <Link className="btn btn-danger mr-2" to="/admin">
               Admin
             </Link>
           </li>
