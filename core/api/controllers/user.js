@@ -84,7 +84,8 @@ module.exports.login_post = (req, res) => {
           // User matched, create JWT payload
           const payload = {
             id: user.id,
-            name: user.name
+            name: user.name,
+            roles: user.roles
           };
           jwt.sign(
             payload,
