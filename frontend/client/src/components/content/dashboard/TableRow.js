@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
-import TableRow from '../dashboard/TableRow'
 
 export default class Stripetable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        ID: "1",
+        Name: "TableRowTest",
+        Salary: "$65,000",
+        Country: "Canada",
+        City: "Hamilton"
+    };
+  }
   render() {
     return (
       <div className="container">
@@ -24,9 +33,13 @@ export default class Stripetable extends Component {
                                     	<th>City</th>
                                     </thead>
                                     <tbody>
-                                    <TableRow />
-                                    <TableRow />
-                                    <TableRow />
+                                        <tr>
+                                        	<td>this.state.ID</td>
+                                        	<td>this.state.Name</td>
+                                        	<td>this.state.Salary</td>
+                                        	<td>this.state.Country</td>
+                                        	<td>this.state.City</td>
+                                        </tr>
                                     </tbody>
                                 </table>
 
