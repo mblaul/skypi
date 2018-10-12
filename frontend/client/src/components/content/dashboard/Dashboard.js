@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Textdata from '../dashboard/Textdata';
 //import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
+//import Timegraph from '../dashboard/Timegraph'; Issues to be resolved!
 
 export default class Dashboard extends Component {
   render() {
