@@ -11,7 +11,6 @@ import PrivateRoute from './components/common/PrivateRoute';
 
 // Import components that are a part of the layout
 import Navbar from './components/layout/Navbar';
-import Sidebar from './components/layout/Sidebar';
 
 // Import components that are used for authentication
 import Login from './components/authentication/Login';
