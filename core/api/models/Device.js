@@ -38,6 +38,10 @@ const DeviceSchema = new Schema({
     isPublic: {
       type: Boolean,
       default: true
+    },
+    isOfficial: {
+      type: Boolean,
+      default: false
     }
   },
   status: {
