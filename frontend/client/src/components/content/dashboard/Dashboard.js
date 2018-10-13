@@ -4,14 +4,14 @@ import React, { Component } from 'react';
 import Textdata from '../dashboard/Textdata';
 //import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
-//import Timegraph from '../dashboard/Timegraph'; Issues to be resolved!
+import Timegraph from '../dashboard/Timegraph';
 
 export default class Dashboard extends Component {
   render() {
     return (
       <div className="wrapper">
         <div className="main-panel">
-          <Stripetable />
+          <Stripetable /> <Timegraph />
           <Textdata />
         </div>
       </div>
