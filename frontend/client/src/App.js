@@ -8,6 +8,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 
 // Import private routing for protected pages
 import PrivateRoute from './components/common/PrivateRoute';
+import AdminRoute from './components/common/AdminRoute';
 
 // Import components that are a part of the layout
 import Navbar from './components/layout/Navbar';
@@ -54,6 +55,9 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/stations" component={Stations} />
+            </Switch>
+            <Switch>
+              <AdminRoute exact path="/admin" />
             </Switch>
           </div>
         </Router>
