@@ -21,7 +21,7 @@ export default class Timegraph extends Component {
   render() {
     return (
       <div> 
-          <Line data={data} />
+          <Line data={data} options={options} />
       </div>
     )
   }
