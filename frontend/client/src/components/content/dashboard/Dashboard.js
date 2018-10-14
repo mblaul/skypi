@@ -9,12 +9,16 @@ import Timegraph from '../dashboard/Timegraph';
 export default class Dashboard extends Component {
   render() {
     return (
-      <div className="wrapper">
-        <div className="main-panel">
-          <Stripetable /> 
-          <Timegraph />
-          <Textdata />
+      <div className="container mt-2">
+        <div className="row mb-2">
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Stripetable />
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Timegraph />
+          </div>
         </div>
+        <Textdata />
       </div>
     );
   }
