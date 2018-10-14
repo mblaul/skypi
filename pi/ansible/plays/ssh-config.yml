@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Enabling ssh-key only access
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication no'
+         
+         
+    - name: restart ssh server
+      systemd:
+        name: ssh
+        state: reloaded
+
