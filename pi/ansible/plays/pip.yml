@@ -6,7 +6,7 @@
   tasks:
   - name: push package list
     copy: 
-       src: /home/ansible/pip.list
+       src: ~/skypi/pi/py/requirements.txt
        dest: /home/ansible   
   - name: install wheel
     shell: pip install wheel
@@ -15,7 +15,7 @@
     shell: pip install setuptools      
 
   - name: install default pip packages from list 
-    shell: pip install -r  /home/ansible/pip.list
+    shell: pip install -r  /home/ansible/requirements.txt
      
     
 
