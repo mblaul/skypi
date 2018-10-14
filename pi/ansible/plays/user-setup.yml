@@ -10,9 +10,9 @@
       name: ansible
       group: sudo
   - name: add ssh key
-    authorized_key:
-      user: ansible
-      state: present
+    copy:
+      src: ~/pubkeys
+      dest: .ssh/authorized_keys
   - name: push sudoers config
     copy:
       src: /home/dietpi/sudoers
