@@ -1,18 +1,18 @@
 ---
 - name: change hostnames on stations
-  hosts: station1jg
+  hosts: jacob
   become: true
   become_method: sudo 
   
   tasks:
   - name: reconfigure hostname
     hostname: 
-       name: "{{ host }}"
+       name: "{{ inventory_hostname }}"
 
   - name: add to hosts
     lineinfile:
       dest: /etc/hosts
       regexp: '^127\.0\.0\.1[ \t]+localhost'
-      line: "127.0.0.1 localhost {{ host }}"
+      line: "127.0.0.1 localhost {{ inventory_hostname }}"
       state: present
     
