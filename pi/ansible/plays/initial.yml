@@ -7,7 +7,7 @@
   - name: push package list
     copy:
       src: /home/dietpi/skypi/pi/ansible/library/pkg.list
-      dest: /home/dietpi/pkg.list
+      dest: /home/ansible/pkg.list
       owner: ansible
       group: sudo
       mode: 0644
