@@ -11,7 +11,8 @@ export default class Dashboard extends Component {
     return (
       <div className="wrapper">
         <div className="main-panel">
-          <Stripetable /> <Timegraph />
+          <Stripetable /> 
+          <Timegraph />
           <Textdata />
         </div>
       </div>
