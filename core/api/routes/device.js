@@ -4,6 +4,10 @@ const passport = require('passport');
 
 var deviceController = require('../controllers/device');
 
+// Verify user has a verified email
+const verifyIsVerified = require('../middleware/roleVerification/verifyIsVerified');
+
+// Verify user is an authorized user of the device
 const verifyDeviceUser = require('../middleware/verifyDeviceUser');
 
 // @route   POST api/device/register
@@ -12,6 +16,7 @@ const verifyDeviceUser = require('../middleware/verifyDeviceUser');
 router.post(
   '/register',
   passport.authenticate('jwt', { session: false }),
+  verifyIsVerified,
   deviceController.register_post
 );
 
@@ -21,6 +26,7 @@ router.post(
 router.get(
   '/log',
   passport.authenticate('jwt', { session: false }),
+  verifyIsVerified,
   deviceController.log_get
 );
 
@@ -30,6 +36,7 @@ router.get(
 router.get(
   '/log/:deviceId',
   passport.authenticate('jwt', { session: false }),
+  verifyIsVerified,
   verifyDeviceUser,
   deviceController.onedevice_log_get
 );
