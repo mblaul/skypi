@@ -34,6 +34,12 @@ g = geocoder.ip('me')
 lat = g.lat
 lng = g.lng
 
+api_location = "http://ipinfo.io/json"
+json_location = requests.get(api_location).json()
+city = json_location['city']
+state = json_location['region']
+country = json_location['country']
+
 #Using % (String Formatting Operator) to input the latitude and longitude of the device to utilize the OpenWeatherMap API
 api_latlng = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid=5ec3e53023c8502e481742440f9595de' % (lat, lng)
 
@@ -57,5 +63,6 @@ print('Pressure: ' + "{:.2f}".format(sensor_pressure))
 print('Temperature: ' + "{:.2f}".format(sensor_temperature))
 print('Wind Direction: ' + str(degrees_to_cardinal(api_wind_direction)))
 
-mongo_api.pushdata(host_name, sensor_temperature, sensor_humidity, lat, lng, sensor_pressure, api_wind, wind_direction)
+mongo_api.pushdata(host_name, sensor_temperature, sensor_humidity, lat, lng, sensor_pressure,
+city, state, country, api_wind, wind_direction)
 
