@@ -19,8 +19,10 @@ export default class Stations extends Component {
             </div>
           </div>
         </header>
-        <div className="main-panel">
-          <Stripetable />
+        <div className="container mt-2">
+          <div className="col-sm-12 col-md-12 col-lg-12">
+            <Stripetable />
+          </div>
         </div>
       </div>
     );
