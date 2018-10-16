@@ -8,10 +8,12 @@ export default class Stations extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name: "Daniel"
-      //The code below is to generate it based on a passed prop  
-      //Name: this.props.Name
-    };
+      UserID: this.props.ID,
+      Name: this.props.Name,
+      Email: this.props.Salary,
+      Admin: this.props.Country,
+      Delete: this.props.City
+  };
   }
   render() {
     return (
