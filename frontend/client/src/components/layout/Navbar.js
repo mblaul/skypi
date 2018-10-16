@@ -42,7 +42,7 @@ class Navbar extends Component {
         </li>
         <li className="nav-item">
           <a
-            href="../Landing"
+            href="../"
             onClick={this.onLogoutClick.bind(this)}
             className="btn btn-primary mr-2"
           >
