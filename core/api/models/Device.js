@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const DeviceSchema = new Schema({
@@ -19,18 +19,18 @@ const DeviceSchema = new Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: 'users',
     required: true
   },
   authorizedUsers: [
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: 'users'
       },
       relation: {
         type: String,
-        default: "Creator"
+        default: 'Creator'
       }
     }
   ],
@@ -46,7 +46,7 @@ const DeviceSchema = new Schema({
   },
   status: {
     type: String,
-    default: "Created"
+    default: 'Created'
   },
   startDate: {
     type: Date,
@@ -58,4 +58,4 @@ const DeviceSchema = new Schema({
   }
 });
 
-module.exports = Device = mongoose.model("devices", DeviceSchema);
+module.exports = Device = mongoose.model('devices', DeviceSchema);
