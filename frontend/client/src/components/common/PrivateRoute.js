@@ -8,11 +8,7 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
     {...rest}
     render={props =>
       auth.isAuthenticated === true ? (
-        auth.user.roles.isVerified === true ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/verify" />
-        )
+        <Component {...props} />
       ) : (
         <Redirect to="/login" />
       )

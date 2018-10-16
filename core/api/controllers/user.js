@@ -137,7 +137,7 @@ module.exports.verify_get = (req, res) => {
           .add(10, 'm')
           .format()
       };
-      //Add random verify token to user
+      // Add random verify token to user
       user.tempObjects.verifyUserToken = verifyUserToken;
       user.save().then(user => {
         // Generate test SMTP service account from ethereal.email
@@ -207,7 +207,9 @@ module.exports.verify_post = (req, res) => {
         existingToken.expireTime < moment().format() ||
         existingToken.key !== verifyUserToken
       ) {
-        return res.json({ message: 'Authorization token not valid' });
+        console.log(err);
+        errors.verifyusertoken = 'Authorization token not valid';
+        return res.status(404).json(errors);
       }
 
       user.roles.isVerified = true;
@@ -220,7 +222,7 @@ module.exports.verify_post = (req, res) => {
     // If promise rejected then user doesn't exist
     .catch(err => {
       console.log(err);
-      errors.server = 'An error occured, please try again';
+      errors.verifyusertoken = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
