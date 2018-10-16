@@ -1,6 +1,6 @@
 import requests
 
-def pushdata(host,temperature,humidity,lat,lng,pressure,wind,wind_direction):
+def pushdata(host,temperature,humidity,lat,lng,pressure,city, state, country, wind,wind_direction):
 
     url = "http://18.235.27.33/api/weather/log"
 
