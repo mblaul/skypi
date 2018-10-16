@@ -12,7 +12,9 @@ export default class Stripetable extends Component {
         <div className="content table-responsive table-full-width">
           <table className="table table-hover table-striped">
             <thead>
-              <TableHeader />
+              <tr>
+                <TableHeader />
+              </tr>
             </thead>
             <tbody>
               <TableRow
