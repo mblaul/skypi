@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 //import pieces of Admin
-//import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
 
 export default class Admin extends Component {
@@ -22,7 +21,7 @@ export default class Admin extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-6 mx-auto">
-                <div className="display-3 mb-3">
+                <div className="display-3 mb-3 my-2">
                   <h1>Hello {this.state.Name}</h1>
                 </div>
               </div>
