@@ -39,7 +39,7 @@ json_location = requests.get(api_location).json()
 city = json_location['city']
 state = json_location['region']
 country = json_location['country']
-zip_code =json_location['postal']
+zip_code = json_location['postal']
 
 #Using % (String Formatting Operator) to input the latitude and longitude of the device to utilize the OpenWeatherMap API
 api_latlng = 'http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid=5ec3e53023c8502e481742440f9595de' % (lat, lng)
@@ -67,7 +67,7 @@ print('Wind Direction: ' + str(degrees_to_cardinal(api_wind_direction)))
 print('City: ' + city)
 print('State: ' + state)
 print('Country: ' + country)
-print('Zip Code: ' + zip_code)
+print('Zip Code: ' + str(zip_code))
 
 mongo_api.pushdata(host_name, sensor_temperature, sensor_humidity, lat, lng, sensor_pressure,
-city, state, zip_code, country, api_wind, wind_direction)
+city, state, float(zip_code), country, api_wind, wind_direction)
