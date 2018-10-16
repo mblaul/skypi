@@ -86,8 +86,6 @@ module.exports.data_mine_get = (req, res) => {
 
 module.exports.data_public_get = (req, res) => {
   // Find all device logs for public devices
-
-  // Find logs for the device IDs from above
   Weather.find({ "roles.isPublic": true })
     .then(logs => {
       return res.json(logs);
