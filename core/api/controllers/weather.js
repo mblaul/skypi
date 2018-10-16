@@ -63,6 +63,7 @@ module.exports.log_get = (req, res) => {
     });
 };
 
+<<<<<<< HEAD
 module.exports.data_get = (req, res) => {
   // Find logs for all weather data
   Weather.find({})
@@ -77,14 +78,19 @@ module.exports.data_get = (req, res) => {
       return res.status(500).json(errors);
     });
 };
+=======
+module.exports.data_mine_get = (req, res) => {
+  // Find all devices where you're an authorized user
+  Device.find({ "authorizedUsers.user": req.user.id })
+    .then(devices => {
+      // Collect all the device IDs from the authorized user field
+      const deviceIds = devices.map(device => {
+        return device._id;
+      });
+>>>>>>> Added routes to get weather data for public and private devices
 
-module.exports.onedevice_alllogs_get = (req, res) => {
-  // Find logs for all weather data
-  Device.find(device)
-    .then(device => {
-      Weather.find({ device }).then(logs => {
-        //Need to condition the data a little bit here
-        //So we're not returning so much information
+      // Find logs for the device IDs from above
+      Weather.find({ device: { $in: deviceIds } }).then(logs => {
         return res.json(logs);
       });
     })
@@ -95,13 +101,13 @@ module.exports.onedevice_alllogs_get = (req, res) => {
     });
 };
 
-module.exports.alldevices_lastlog_get = (req, res) => {
-  // Find logs for all weather data
-  Device.find(device)
-    .then(device => {
-      Weather.find({ device }, {}, { sort: { date: -1 } }).then(logs => {
-        return res.json(logs);
-      });
+module.exports.data_public_get = (req, res) => {
+  // Find all device logs for public devices
+
+  // Find logs for the device IDs from above
+  Weather.find({ "roles.isPublic": true })
+    .then(logs => {
+      return res.json(logs);
     })
     .catch(err => {
       console.log(err);
