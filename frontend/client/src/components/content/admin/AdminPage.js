@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
-//import pieces of Stations
-//import Plaintable from './Plaintable';
+//import pieces of Admin
 import Stripetable from '../dashboard/Stripetable';
 
-export default class Stations extends Component {
+export default class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +21,7 @@ export default class Stations extends Component {
           <div className="container">
             <div className="row">
               <div className="col-xl-6 mx-auto">
-                <div className="display-3 mb-3">
+                <div className="display-3 mb-3 my-2">
                   <h1>Hello {this.state.Name}</h1>
                 </div>
               </div>
