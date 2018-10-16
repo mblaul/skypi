@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const WeatherSchema = new Schema({
@@ -8,7 +8,7 @@ const WeatherSchema = new Schema({
   },
   device: {
     type: Schema.Types.ObjectId,
-    ref: "devices"
+    ref: 'devices'
   },
   temperature: {
     type: Number,
@@ -30,12 +30,6 @@ const WeatherSchema = new Schema({
     type: Number,
     required: true
   },
-  wind: {
-    type: Number
-  },
-  winddirection: {
-    type: String
-  },
   city: {
     type: String,
     required: true
@@ -44,9 +38,19 @@ const WeatherSchema = new Schema({
     type: String,
     required: true
   },
+  zipcode: {
+    type: String,
+    required: true
+  },
   country: {
     type: String,
     required: true
+  },
+  wind: {
+    type: Number
+  },
+  winddirection: {
+    type: String
   },
   date: {
     type: Date,
@@ -54,4 +58,4 @@ const WeatherSchema = new Schema({
   }
 });
 
-module.exports = Weather = mongoose.model("weather", WeatherSchema);
+module.exports = Weather = mongoose.model('weather', WeatherSchema);

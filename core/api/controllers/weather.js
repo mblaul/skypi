@@ -1,7 +1,7 @@
-var Weather = require("../models/Weather");
+var Weather = require('../models/Weather');
 
 //Load input validation
-const validateWeatherLogInput = require("../validation/weather/log");
+const validateWeatherLogInput = require('../validation/weather/log');
 //Need to add validation for other routes
 
 //Set up an empty errors object is no validation is used in a route
@@ -25,6 +25,7 @@ module.exports.log_post = (req, res) => {
     pressure: req.body.pressure,
     city: req.body.city,
     state: req.body.state,
+    zipcode: req.body.zipcode,
     country: req.body.country,
     wind: req.body.wind,
     winddirection: req.body.winddirection
@@ -37,13 +38,13 @@ module.exports.log_post = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
 
 module.exports.log_get = (req, res) => {
-  Device.find({ "authorizedUsers.user": req.user.id })
+  Device.find({ 'authorizedUsers.user': req.user.id })
     .then(devices => {
       // Collect all the device IDs from the authorized user
       const deviceIds = devices.map(device => {
@@ -57,7 +58,7 @@ module.exports.log_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
@@ -72,7 +73,7 @@ module.exports.data_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
@@ -89,7 +90,7 @@ module.exports.onedevice_alllogs_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
@@ -104,7 +105,7 @@ module.exports.alldevices_lastlog_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
