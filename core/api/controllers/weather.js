@@ -1,7 +1,7 @@
-var Weather = require('../models/Weather');
+var Weather = require("../models/Weather");
 
 //Load input validation
-const validateWeatherLogInput = require('../validation/weather/log');
+const validateWeatherLogInput = require("../validation/weather/log");
 //Need to add validation for other routes
 
 //Set up an empty errors object is no validation is used in a route
@@ -38,13 +38,13 @@ module.exports.log_post = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = 'An error occured, please try again';
+      errors.server = "An error occured, please try again";
       return res.status(500).json(errors);
     });
 };
 
 module.exports.log_get = (req, res) => {
-  Device.find({ 'authorizedUsers.user': req.user.id })
+  Device.find({ "authorizedUsers.user": req.user.id })
     .then(devices => {
       // Collect all the device IDs from the authorized user
       const deviceIds = devices.map(device => {
@@ -58,27 +58,11 @@ module.exports.log_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = 'An error occured, please try again';
+      errors.server = "An error occured, please try again";
       return res.status(500).json(errors);
     });
 };
 
-<<<<<<< HEAD
-module.exports.data_get = (req, res) => {
-  // Find logs for all weather data
-  Weather.find({})
-    .then(logs => {
-      //Need to condition the data a little bit here
-      //So we're not returning so much information
-      return res.json(logs);
-    })
-    .catch(err => {
-      console.log(err);
-      errors.server = 'An error occured, please try again';
-      return res.status(500).json(errors);
-    });
-};
-=======
 module.exports.data_mine_get = (req, res) => {
   // Find all devices where you're an authorized user
   Device.find({ "authorizedUsers.user": req.user.id })
@@ -87,7 +71,6 @@ module.exports.data_mine_get = (req, res) => {
       const deviceIds = devices.map(device => {
         return device._id;
       });
->>>>>>> Added routes to get weather data for public and private devices
 
       // Find logs for the device IDs from above
       Weather.find({ device: { $in: deviceIds } }).then(logs => {
@@ -96,7 +79,7 @@ module.exports.data_mine_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = 'An error occured, please try again';
+      errors.server = "An error occured, please try again";
       return res.status(500).json(errors);
     });
 };
@@ -111,7 +94,7 @@ module.exports.data_public_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = 'An error occured, please try again';
+      errors.server = "An error occured, please try again";
       return res.status(500).json(errors);
     });
 };
