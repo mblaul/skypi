@@ -62,7 +62,8 @@ print('Humidity: ' + "{:.2f}".format(sensor_humidity))
 print('Pressure: ' + "{:.2f}".format(sensor_pressure))
 print('Temperature: ' + "{:.2f}".format(sensor_temperature))
 print('Wind Direction: ' + str(degrees_to_cardinal(api_wind_direction)))
-
+print('City: ' + city)
+print('State: ' + state)
+print('Country: ' + country)
 mongo_api.pushdata(host_name, sensor_temperature, sensor_humidity, lat, lng, sensor_pressure,
 city, state, country, api_wind, wind_direction)
-
