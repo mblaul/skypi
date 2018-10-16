@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-//import pieces of Stations
+//import pieces of Admin
 //import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
 
-export default class Stations extends Component {
+export default class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {

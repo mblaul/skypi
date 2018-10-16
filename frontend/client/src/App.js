@@ -19,8 +19,9 @@ import Register from './components/authentication/Register';
 import Verify from './components/authentication/Verify';
 
 // Import components that are used to display content
-import Landing from './components/content/Landing';
+import Admin from './components/content/admin/AdminPage';
 import Dashboard from './components/content/dashboard/Dashboard';
+import Landing from './components/content/Landing';
 import Stations from './components/content/stations/Stations';
 
 // Check for token
@@ -59,7 +60,7 @@ class App extends Component {
               <PrivateRoute exact path="/stations" component={Stations} />
             </Switch>
             <Switch>
-              <AdminRoute exact path="/admin" />
+              <AdminRoute exact path="/admin" component={Admin} />
             </Switch>
           </div>
         </Router>
