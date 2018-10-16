@@ -17,9 +17,11 @@ export default class Stripetable extends Component {
         <React.Fragment>
             <tr>
                 <td>{this.state.ID}</td>
-            <Link to="/stations">
-                <td>{this.state.Name}</td>
-            </Link>
+                <td>
+                    <Link to="/stations">
+                    {this.state.Name}
+                    </Link>
+                </td>
                 <td>{this.state.Salary}</td>
                 <td>{this.state.Country}</td>
                 <td>{this.state.City}</td>

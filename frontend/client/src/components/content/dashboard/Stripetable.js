@@ -11,7 +11,11 @@ export default class Stripetable extends Component {
         </div>
         <div className="content table-responsive table-full-width">
           <table className="table table-hover table-striped">
-            <TableHeader />
+            <thead>
+              <tr>
+                <TableHeader />
+              </tr>
+            </thead>
             <tbody>
               <TableRow
                 ID={'1'}

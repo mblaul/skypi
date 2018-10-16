@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Textdata extends Component {
   render() {
     return (
-      <div class="col-lg-8 col-lg-offset-2">
+      <div className="col-lg-8 col-lg-offset-2">
         <h1>Fancy Toggle Sidebar Navigation</h1>
         <p>
           Bacon ipsum dolor sit amet tri-tip shoulder tenderloin shankle.
