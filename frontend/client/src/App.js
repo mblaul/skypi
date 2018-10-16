@@ -16,6 +16,7 @@ import Navbar from './components/layout/Navbar';
 // Import components that are used for authentication
 import Login from './components/authentication/Login';
 import Register from './components/authentication/Register';
+import Verify from './components/authentication/Verify';
 
 // Import components that are used to display content
 import Landing from './components/content/Landing';
@@ -53,6 +54,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             {/* Switch allows redirects on private routes */}
             <Switch>
+              <PrivateRoute exact path="/verify" component={Verify} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/stations" component={Stations} />
             </Switch>
