@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getPublicWeatherData } from '../../../actions/weatherActions';
 
 //import pieces of Dashboard
 import Textdata from '../dashboard/Textdata';
@@ -6,15 +9,11 @@ import Textdata from '../dashboard/Textdata';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 
-export default class Dashboard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      Name: "Daniel"
-      //The code below is to generate it based on a passed prop  
-      //Name: this.props.Name
-    };
+class Dashboard extends Component {
+  componentDidMount() {
+    this.props.getPublicWeatherData();
   }
+
   render() {
     return (
       <div className="container mt-2">
@@ -23,7 +22,7 @@ export default class Dashboard extends Component {
             <div className="row">
               <div className="col-xl-6 mx-auto">
                 <div className="display-3 mb-3 my-2">
-                  <h1>Hello {this.state.Name}</h1>
+                  <h1>Hello {`<get name from user state>`}</h1>
                 </div>
               </div>
             </div>
@@ -42,3 +41,19 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+Dashboard.propTypes = {
+  getPublicWeatherData: PropTypes.func.isRequired,
+  weatherLogs: PropTypes.array.isRequired,
+  weatherLog: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  weatherLogs: state.weatherLogs,
+  weatherLog: state.weatherLog
+});
+
+export default connect(
+  mapStateToProps,
+  { getPublicWeatherData }
+)(Dashboard);
