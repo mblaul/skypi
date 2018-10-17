@@ -10,6 +10,9 @@ module.exports = function validateWeatherLogInput(data) {
   data.latitude = !isEmpty(data.latitude) ? data.latitude : '';
   data.longitude = !isEmpty(data.longitude) ? data.longitude : '';
   data.pressure = !isEmpty(data.pressure) ? data.pressure : '';
+  data.city = !isEmpty(data.city) ? data.city : '';
+  data.state = !isEmpty(data.state) ? data.state : '';
+  data.zipcode = !isEmpty(data.zipcode) ? data.zipcode : '';
 
   if (Validator.isEmpty(data.source)) {
     errors.source = 'Source field is required';
@@ -28,6 +31,18 @@ module.exports = function validateWeatherLogInput(data) {
   }
   if (Validator.isEmpty(String(data.pressure))) {
     errors.pressure = 'Pressure field is required';
+  }
+  if (Validator.isEmpty(String(data.city))) {
+    errors.city = 'City field is required';
+  }
+  if (Validator.isEmpty(String(data.state))) {
+    errors.state = 'State field is required';
+  }
+  if (Validator.isEmpty(String(data.zipcode))) {
+    errors.zipcode = 'ZIP code field is required';
+  }
+  if (Validator.isEmpty(String(data.country))) {
+    errors.country = 'Country field is required';
   }
 
   return {

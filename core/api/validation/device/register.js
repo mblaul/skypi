@@ -6,8 +6,8 @@ module.exports = function validateDeviceInput(data) {
 
   data.name = !isEmpty(data.name) ? data.name : '';
   data.macaddress = !isEmpty(data.macaddress) ? data.macaddress : '';
-  data.manufacturer = !isEmpty(data.manufacturer) ? data.manufacturer : '';
   data.model = !isEmpty(data.model) ? data.model : '';
+  data.ispublic = !isEmpty(data.ispublic) ? data.ispublic : '';
 
   if (Validator.isEmpty(data.name)) {
     errors.name = 'Name field is required';
@@ -18,7 +18,11 @@ module.exports = function validateDeviceInput(data) {
   }
 
   if (Validator.isEmpty(data.model)) {
-    errors.Model = 'Model field is required';
+    errors.model = 'Model field is required';
+  }
+
+  if (Validator.isEmpty(data.ispublic)) {
+    errors.ispublic = 'Public visibility field is required';
   }
 
   return {
