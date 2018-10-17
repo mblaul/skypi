@@ -15,7 +15,7 @@ host = socket.gethostname()
 
 url = "http://18.235.27.33/api/device/register"
 
-payload = "name=" + host + "&macaddress="+ mac + "&model=Flyboi5000&ipaddress=192.168.1.100"
+payload = "name=" + host + "&macaddress="+ mac + "&model=Flyboi5000&ipaddress=192.168.1.100&ispublic=true"
 headers = {
             'Authorization': token,
                 'Content-Type': "application/x-www-form-urlencoded"
