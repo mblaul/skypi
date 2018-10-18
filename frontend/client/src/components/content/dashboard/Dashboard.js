@@ -5,13 +5,13 @@ import { getPublicWeatherData } from '../../../actions/weatherActions';
 
 //import pieces of Dashboard
 import Textdata from '../dashboard/Textdata';
-//import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getPublicWeatherData();
+    console.log(this.props.weatherLogs);
   }
 
   render() {

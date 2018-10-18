@@ -13,7 +13,13 @@ export default class Stripetable extends Component {
           <table className="table table-hover table-striped">
             <thead>
               <tr>
-                <TableHeader />
+                <TableHeader 
+                  ID={'ID'}
+                  Name={'Name'}
+                  Salary={'Salary'}
+                  Country={'Country'}
+                  City={'City'}
+                />
               </tr>
             </thead>
             <tbody>
