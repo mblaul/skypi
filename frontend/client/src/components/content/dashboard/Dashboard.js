@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { getPublicWeatherData } from '../../../actions/weatherActions';
 
 //import pieces of Dashboard
-import Textdata from '../dashboard/Textdata';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
@@ -62,7 +61,6 @@ class Dashboard extends Component {
             <Timegraph />
           </div>
         </div>
-        <Textdata />
       </div>
     );
   }
