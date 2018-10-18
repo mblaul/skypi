@@ -364,7 +364,7 @@ module.exports.changepassword_post = (req, res) => {
     });
 };
 
-module.exports.setfavoritedevice_post = (req, res) => {
+module.exports.favoritedevice_post = (req, res) => {
   let errors = {};
 
   const device = req.body.device;
