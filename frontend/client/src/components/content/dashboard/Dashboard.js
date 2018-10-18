@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { getPublicWeatherData } from '../../../actions/weatherActions';
 
 //import pieces of Dashboard
-import Textdata from '../dashboard/Textdata';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
@@ -33,13 +32,13 @@ class Dashboard extends Component {
         <h2>Weather Station Quick View</h2>
         <div className="row mb-2">
           <div className="col-sm-12 col-md-12 col-lg-6">
-            <Quickview Type={'Temp'} Reading={'77°'} />
-          </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Quickview Type={'Humidity'} Reading={'68°'}/>
+            <Quickview Type={'Temperature'} Reading={'77°F'} />
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6">
             <Quickview Type={'Wind Speed'} Reading={'17 mph'}/>
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Humidity'} Reading={'73%'}/>
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6">
             <Quickview Type={'Wind Direction'} Reading={'NorthEast'}/>
@@ -62,7 +61,6 @@ class Dashboard extends Component {
             <Timegraph />
           </div>
         </div>
-        <Textdata />
       </div>
     );
   }
