@@ -48,13 +48,13 @@ class Dashboard extends Component {
         <div className="row mb-2">
           <div className="col-sm-12 col-md-12 col-lg-6">
             <Stripetable  
-              TableHeader={'Striped Table Header'}
-              TableSubtitle={'Here is a Subtitle for this table'}
-              Column1={'ID'}
-              Column2={'Name'}
-              Column3={'Salary'}
-              Column4={'Country'}
-              Column5={'City'}
+              TableHeader={'Recent readings'}
+              TableSubtitle={'Your home station'}
+              Column1={'Time'}
+              Column2={'Temp'}
+              Column3={'Humidity'}
+              Column4={'Wind Speed'}
+              Column5={'Wind Direction'}
             />
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6">
