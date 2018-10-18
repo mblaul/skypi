@@ -6,14 +6,20 @@ export default class Stripetable extends Component {
     return (
       <div className="card">
         <div className="header">
-          <h4 className="title">Striped Table with Hover</h4>
-          <p className="category">Here is a subtitle for this table</p>
+          <h4 className="title">{this.props.TableHeader}</h4>
+          <p className="category">{this.props.TableSubtitle}</p>
         </div>
         <div className="content table-responsive table-full-width">
           <table className="table table-hover table-striped">
             <thead>
               <tr>
-                <TableHeader />
+                <TableHeader 
+                  Header1={this.props.Column1}
+                  Header2={this.props.Column2}
+                  Header3={this.props.Column3}
+                  Header4={this.props.Column4}
+                  Header5={this.props.Column5}
+                />
               </tr>
             </thead>
             <tbody>

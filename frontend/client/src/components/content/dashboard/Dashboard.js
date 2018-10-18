@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { getPublicWeatherData } from '../../../actions/weatherActions';
 
 //import pieces of Dashboard
-import Textdata from '../dashboard/Textdata';
-//import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
+import Quickview from '../dashboard/Quickview';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getPublicWeatherData();
+    console.log(this.props.weatherLogs);
   }
 
   render() {
@@ -28,15 +28,39 @@ class Dashboard extends Component {
             </div>
           </div>
         </header>
+
+        <h2>Weather Station Quick View</h2>
         <div className="row mb-2">
           <div className="col-sm-12 col-md-12 col-lg-6">
-            <Stripetable />
+            <Quickview Type={'Temperature'} Reading={'77°F'} />
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Wind Speed'} Reading={'17 mph'}/>
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Humidity'} Reading={'73%'}/>
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Wind Direction'} Reading={'NorthEast'}/>
+          </div>
+
+        </div>
+        <div className="row mb-2">
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Stripetable  
+              TableHeader={'Striped Table Header'}
+              TableSubtitle={'Here is a Subtitle for this table'}
+              Column1={'ID'}
+              Column2={'Name'}
+              Column3={'Salary'}
+              Column4={'Country'}
+              Column5={'City'}
+            />
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6">
             <Timegraph />
           </div>
         </div>
-        <Textdata />
       </div>
     );
   }

@@ -39,12 +39,21 @@ router.post('/verify', userController.verify_post);
 
 // @route   	POST api/user/resetpassword
 // @desc   		Send token to user's email to reset password
-// @access	Public
+// @access	  Public
 router.post('/resetpassword', userController.resetpassword_post);
 
 // @route   	POST api/user/changepassword
 // @desc   		Send token to user's email to reset password
-// @access	Public
+// @access	  Public
 router.post('/changepassword', userController.changepassword_post);
+
+// @route   	POST api/user/favoritedevice
+// @desc   		Let user set their favorite device
+// @access	  Private
+router.post(
+  '/favoritedevice',
+  passport.authenticate('jwt', { session: false }),
+  userController.favoritedevice_post
+);
 
 module.exports = router;
