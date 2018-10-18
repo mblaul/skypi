@@ -24,7 +24,7 @@ class Dashboard extends Component {
         </div>
 
         <h2>Weather Station Quick View</h2>
-        <div className="row text-center mb-3">
+        <div className="row mb-3">
           <Quickview Type={'Temperature'} Reading={'26°C'} />
           <Quickview Type={'Wind Speed'} Reading={'17 mph'} />
           <Quickview Type={'Humidity'} Reading={'73%'} />
