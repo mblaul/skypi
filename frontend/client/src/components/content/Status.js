@@ -43,7 +43,15 @@ export default class Status extends Component {
               </div>
             </div>
           </div>
-          <Stripetable />
+          <Stripetable   
+                TableHeader={'Weather Station\'s Readings'}
+                TableSubtitle={'Recent Readings for the selected Station'} 
+                Column1={'Time'}
+                Column2={'Temp'}
+                Column3={'Humidity'}
+                Column4={'Wind Speed'}
+                Column5={'Wind Direction'}
+            />
         </div>
       </div>
 

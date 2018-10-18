@@ -1,24 +1,15 @@
 import React, { Component} from 'react';
 
 export default class Stripetable extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        ID: "ID",
-        Name: "Name",
-        Salary: "Salary",
-        Country: "Country",
-        City: "City"
-    };
-  }
+
   render() {
     return (
         <React.Fragment>
-                <th>{this.state.ID}</th>
-                <th>{this.state.Name}</th>
-                <th>{this.state.Salary}</th>
-                <th>{this.state.Country}</th>
-                <th>{this.state.City}</th>
+                <th>{this.props.Header1}</th>
+                <th>{this.props.Header2}</th>
+                <th>{this.props.Header3}</th>
+                <th>{this.props.Header4}</th>
+                <th>{this.props.Header5}</th>
         </React.Fragment>
     )
   }
