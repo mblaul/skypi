@@ -20,6 +20,10 @@ const UserSchema = new Schema({
     default: true,
     required: true
   },
+  favoriteDevice: {
+    type: Schema.Types.ObjectId,
+    ref: 'devices'
+  },
   roles: {
     isAdmin: {
       type: Boolean,
