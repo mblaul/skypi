@@ -7,6 +7,7 @@ import { getPublicWeatherData } from '../../../actions/weatherActions';
 import Textdata from '../dashboard/Textdata';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
+import Quickview from '../dashboard/Quickview';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -28,6 +29,23 @@ class Dashboard extends Component {
             </div>
           </div>
         </header>
+
+        <h2>Weather Station Quick View</h2>
+        <div className="row mb-2">
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Temp'} Reading={'77°'} />
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Humidity'} Reading={'68°'}/>
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Wind Speed'} Reading={'17 mph'}/>
+          </div>
+          <div className="col-sm-12 col-md-12 col-lg-6">
+            <Quickview Type={'Wind Direction'} Reading={'NorthEast'}/>
+          </div>
+
+        </div>
         <div className="row mb-2">
           <div className="col-sm-12 col-md-12 col-lg-6">
             <Stripetable />
@@ -41,13 +59,13 @@ class Dashboard extends Component {
     );
   }
 }
-
+/*
 Dashboard.propTypes = {
   getPublicWeatherData: PropTypes.func.isRequired,
   weatherLogs: PropTypes.array.isRequired,
   weatherLog: PropTypes.object.isRequired
 };
-
+*/
 const mapStateToProps = state => ({
   weatherLogs: state.weatherLogs,
   weatherLog: state.weatherLog

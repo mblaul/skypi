@@ -41,7 +41,7 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="btn btn-info mr-2" to="#">
+          <Link className="btn btn-info mr-2" to="/status">
             Status
           </Link>
         </li>
