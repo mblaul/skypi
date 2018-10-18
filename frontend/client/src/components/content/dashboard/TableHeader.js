@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom';
+import React, { Component} from 'react';
 
 export default class Stripetable extends Component {
   constructor(props) {
