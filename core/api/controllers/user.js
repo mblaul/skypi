@@ -363,3 +363,20 @@ module.exports.changepassword_post = (req, res) => {
       return res.status(500).json(errors);
     });
 };
+
+module.exports.setfavoritedevice_post = (req, res) => {
+  let errors = {};
+
+  const device = req.body.device;
+
+  User.findById(req.user.id)
+    .then(user => {
+      user.favoriteDevice = device;
+      user.save().then(user => res.json(user));
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
