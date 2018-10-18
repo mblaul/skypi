@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 
 import Quickview from './dashboard/Quickview';
 import Stripetable from './dashboard/Stripetable';
-import Timegraph from './dashboard/Timegraph';
+//import Timegraph from './dashboard/Timegraph';
 
 
 export default class Status extends Component {
