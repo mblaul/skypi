@@ -48,7 +48,15 @@ class Dashboard extends Component {
         </div>
         <div className="row mb-2">
           <div className="col-sm-12 col-md-12 col-lg-6">
-            <Stripetable />
+            <Stripetable  
+              TableHeader={'Striped Table Header'}
+              TableSubtitle={'Here is a Subtitle for this table'}
+              Column1={'ID'}
+              Column2={'Name'}
+              Column3={'Salary'}
+              Column4={'Country'}
+              Column5={'City'}
+            />
           </div>
           <div className="col-sm-12 col-md-12 col-lg-6">
             <Timegraph />
@@ -59,13 +67,13 @@ class Dashboard extends Component {
     );
   }
 }
-/*
+
 Dashboard.propTypes = {
   getPublicWeatherData: PropTypes.func.isRequired,
   weatherLogs: PropTypes.array.isRequired,
   weatherLog: PropTypes.object.isRequired
 };
-*/
+
 const mapStateToProps = state => ({
   weatherLogs: state.weatherLogs,
   weatherLog: state.weatherLog
