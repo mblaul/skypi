@@ -1,19 +1,20 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react';
 
 export default class Quickview extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
   render() {
     return (
-        <div className="card mx-1 my-1">
-            <h3>{this.props.Type}</h3>
-            <div className="card">
-                <h2>{this.props.Reading}</h2>
-            </div>
+      <div className="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+        <div className="card text-center">
+          <h6 className="card-header">{this.props.Type}</h6>
+          <div className="card-body">
+            <h2>{this.props.Reading}</h2>
+          </div>
         </div>
-    )
+      </div>
+    );
   }
 }

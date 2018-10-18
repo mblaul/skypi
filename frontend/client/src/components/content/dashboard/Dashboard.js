@@ -11,43 +11,28 @@ import Quickview from '../dashboard/Quickview';
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getPublicWeatherData();
-    console.log(this.props.weatherLogs);
   }
 
   render() {
     return (
       <div className="container mt-2">
-        <header className="text-center">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-6 mx-auto">
-                <div className="display-3 mb-3 my-2">
-                  <h1>Hello {`<get name from user state>`}</h1>
-                </div>
-              </div>
-            </div>
+        <div className="row mb-3">
+          <div className="display-3 my-4">
+            Hello, {this.props.auth.user.name}
           </div>
-        </header>
+          <hr />
+        </div>
 
         <h2>Weather Station Quick View</h2>
-        <div className="row mb-2">
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Quickview Type={'Temperature'} Reading={'77°F'} />
-          </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Quickview Type={'Wind Speed'} Reading={'17 mph'}/>
-          </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Quickview Type={'Humidity'} Reading={'73%'}/>
-          </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Quickview Type={'Wind Direction'} Reading={'NorthEast'}/>
-          </div>
-
+        <div className="row text-center mb-3">
+          <Quickview Type={'Temperature'} Reading={'26°C'} />
+          <Quickview Type={'Wind Speed'} Reading={'17 mph'} />
+          <Quickview Type={'Humidity'} Reading={'73%'} />
+          <Quickview Type={'Wind Direction'} Reading={'NE'} />
         </div>
         <div className="row mb-2">
           <div className="col-sm-12 col-md-12 col-lg-6">
-            <Stripetable  
+            <Stripetable
               TableHeader={'Recent readings'}
               TableSubtitle={'Your home station'}
               Column1={'Time'}
@@ -74,7 +59,8 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => ({
   weatherLogs: state.weatherLogs,
-  weatherLog: state.weatherLog
+  weatherLog: state.weatherLog,
+  auth: state.auth
 });
 
 export default connect(
