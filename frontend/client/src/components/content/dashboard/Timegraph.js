@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 
 const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ['0200', '0400', '0600', '0800', '1000', '1200', '1400'],
   datasets: [
     {
       label: 'Humidity',
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: [65, 68, 73, 75, 71, 67, 72],
       backgroundColor: ['rgba(0, 0, 0, 0)'],
       borderColor: ['rgba(0, 102, 255, .7)'],
       borderWidth: 2,
@@ -14,7 +14,7 @@ const data = {
     },
     {
       label: 'Temperature (F)',
-      data: [10, 150, 50, 10, 90, 85, 43],
+      data: [33, 54, 50, 40, 67, 63, 43],
       backgroundColor: ['rgba(0, 0, 0, 0)'],
       borderColor: ['rgba(200, 20, 20, .7)'],
       borderWidth: 2,
@@ -22,7 +22,7 @@ const data = {
     },
     {
       label: 'Wind Speed (mph)',
-      data: [100, 90, 80, 70, 60, 50, 40],
+      data: [13, 18, 26, 19, 22, 19, 18],
       backgroundColor: ['rgba(0, 0, 0, 0)'],
       borderColor: ['rgba(41, 163, 41, .7)'],
       borderWidth: 2,
