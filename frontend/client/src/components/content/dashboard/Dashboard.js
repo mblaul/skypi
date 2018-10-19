@@ -10,7 +10,7 @@ import Quickview from '../dashboard/Quickview';
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.getPublicWeatherData();
+    this.props.getPublicWeatherData(console.log(this.props));
   }
 
   render() {
@@ -24,9 +24,17 @@ class Dashboard extends Component {
         </div>
 
         <h2>Weather Station Quick View</h2>
+        <div className="radio">
+          <label className="col-xs-auto col-sm-auto col-md-auto col-lg-auto col-xl-auto">
+            <input type="radio" name="units" value="english" /> english
+          </label>
+          <label className="col-xs-auto col-sm-auto col-md-auto col-lg-auto col-xl-auto">
+            <input type="radio" name="units" value="metric" /> metric
+          </label>
+        </div>
         <div className="row mb-3">
           <Quickview Type={'Temperature'} Reading={'26°C'} />
-          <Quickview Type={'Wind Speed'} Reading={'17 mph'} />
+          <Quickview Type={'Wind Speed'} Reading={'17 kph'} />
           <Quickview Type={'Humidity'} Reading={'73%'} />
           <Quickview Type={'Wind Direction'} Reading={'NE'} />
         </div>
