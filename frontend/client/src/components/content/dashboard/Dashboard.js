@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getPublicWeatherData } from '../../../actions/weatherActions';
 
 //import pieces of Dashboard
+import Radiobutton from '../dashboard/Radiobutton';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
@@ -24,13 +25,9 @@ class Dashboard extends Component {
         </div>
 
         <h2>Weather Station Quick View</h2>
-        <div className="radio">
-          <label className="col-xs-auto col-sm-auto col-md-auto col-lg-auto col-xl-auto">
-            <input type="radio" name="units" value="english" /> english
-          </label>
-          <label className="col-xs-auto col-sm-auto col-md-auto col-lg-auto col-xl-auto">
-            <input type="radio" name="units" value="metric" /> metric
-          </label>
+        <div className="row">
+          <Radiobutton Type={'radio'} Name={'units'} Value={'English'} />
+          <Radiobutton Type={'radio'} Name={'units'} Value={'Metric'} />
         </div>
         <div className="row mb-3">
           <Quickview Type={'Temperature'} Reading={'26°C'} />
