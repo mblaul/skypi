@@ -26,8 +26,8 @@ class Dashboard extends Component {
 
         <h2>Weather Station Quick View</h2>
         <div className="row">
-          <Radiobutton Type={'radio'} Name={'units'} Value={'English'} />
-          <Radiobutton Type={'radio'} Name={'units'} Value={'Metric'} />
+          <Radiobutton Type={'radio'} Name={'units'} Checked={'false'} Value={'English'} />
+          <Radiobutton Type={'radio'} Name={'units'} Checked={'true'} Value={'Metric'} />
         </div>
         <div className="row mb-3">
           <Quickview Type={'Temperature'} Reading={'26°C'} />
@@ -59,12 +59,14 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   getPublicWeatherData: PropTypes.func.isRequired,
   weatherLogs: PropTypes.array.isRequired,
-  weatherLog: PropTypes.object.isRequired
+  weatherLog: PropTypes.object.isRequired,
+  weatherUnit: PropTypes.object.isRequred
 };
 
 const mapStateToProps = state => ({
   weatherLogs: state.weatherLogs,
   weatherLog: state.weatherLog,
+  weatherUnit: state.weatherUnit,
   auth: state.auth
 });
 
