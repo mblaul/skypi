@@ -113,7 +113,7 @@ module.exports.data_favorite_get = (req, res) => {
         Weather.find(device._id)
           .sort({ date: -1 })
           .limit(10)
-          .then(favroiteweatherdata => res.json(favroiteweatherdata));
+          .then(favoritedata => res.json(favoritedata));
       });
     })
     .catch(err => {

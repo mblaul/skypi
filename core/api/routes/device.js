@@ -46,4 +46,14 @@ router.get(
 // @access  Public
 router.post('/log', deviceController.log_post);
 
+// @route   POST api/device/public
+// @desc    Add device log to the database
+// @access  Private
+router.post(
+  '/public',
+  passport.authenticate('jwt', { session: false }),
+  verifyIsVerified,
+  deviceController.public_devices_get
+);
+
 module.exports = router;

@@ -1,9 +1,9 @@
-var Device = require("../models/Device");
-var Log = require("../models/Log");
+var Device = require('../models/Device');
+var Log = require('../models/Log');
 
 //Load input validation
-const validateDeviceInput = require("../validation/device/register");
-const validateDeviceLogInput = require("../validation/device/log");
+const validateDeviceInput = require('../validation/device/register');
+const validateDeviceLogInput = require('../validation/device/log');
 
 module.exports.register_post = (req, res) => {
   const { errors, isValid } = validateDeviceInput(req.body);
@@ -15,7 +15,7 @@ module.exports.register_post = (req, res) => {
 
   Device.findOne({ macaddress: req.body.macaddress }).then(device => {
     if (device) {
-      errors.macaddress = "A device with that MAC address already exists";
+      errors.macaddress = 'A device with that MAC address already exists';
       return res.status(400).json(errors);
     } else {
       const newDevice = new Device({
@@ -35,7 +35,7 @@ module.exports.register_post = (req, res) => {
         })
         .catch(err => {
           console.log(err);
-          errors.server = "An error occured, please try again";
+          errors.server = 'An error occured, please try again';
           return res.status(500).json(errors);
         });
     }
@@ -48,7 +48,7 @@ module.exports.log_get = (req, res) => {
   User.findById(req.user.id)
     .then(user => {
       if (!user.isAdmin) {
-        return res.status(401).send("Unauthorized");
+        return res.status(401).send('Unauthorized');
       } else {
         Log.find().then(logs => {
           return res.json(logs);
@@ -57,7 +57,7 @@ module.exports.log_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
@@ -73,7 +73,7 @@ module.exports.onedevice_log_get = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
@@ -105,7 +105,18 @@ module.exports.log_post = (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      errors.server = "An error occured, please try again";
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
+module.exports.public_devices_get = (req, res) => {
+  Device.find({ 'roles.isPublic': true })
+    .sort({ name: -1 })
+    .then(devices => res.json(devices))
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
       return res.status(500).json(errors);
     });
 };
