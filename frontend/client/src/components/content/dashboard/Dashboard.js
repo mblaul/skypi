@@ -42,10 +42,10 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <div className="row mb-3">
-              <Quickview Type={'Temperature'} Reading={'26°C'} />
-              <Quickview Type={'Wind Speed'} Reading={'17 kph'} />
-              <Quickview Type={'Humidity'} Reading={'73%'} />
-              <Quickview Type={'Wind Direction'} Reading={'NE'} />
+              <Quickview Type={'Temperature'} Reading={quickInfo.temperature + '°C'} />
+              <Quickview Type={'Wind Speed'} Reading={quickInfo.wind + ' kph'} />
+              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
+              <Quickview Type={'Wind Direction'} Reading={quickInfo.winddirection} />
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
