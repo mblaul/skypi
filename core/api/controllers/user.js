@@ -372,10 +372,17 @@ module.exports.favoritedevice_post = (req, res) => {
 
   User.findById(req.user.id)
     .then(user => {
-      Device.findById(device => {
-        user.favoriteDevice = device._id;
-        user.save().then(user => res.json(user));
-      });
+      Device.findById(device)
+        .then(device => {
+          user.favoriteDevice = device._id;
+          user.save().then(user => {
+            return res.json(user);
+          });
+        })
+        .catch(() => {
+          errors.device = 'Device not found, please try again';
+          return res.status(500).json(errors);
+        });
     })
     .catch(err => {
       console.log(err);
