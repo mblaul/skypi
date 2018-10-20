@@ -107,16 +107,13 @@ module.exports.data_public_get = (req, res) => {
 
 module.exports.data_favorite_get = (req, res) => {
   // Find all device logs for public devices
-  Device.find({ 'roles.isPublic': true })
-    .then(devices => {
-      // Collect all the device IDs from the isPublic field
-      const deviceIds = devices.map(device => {
-        return device._id;
-      });
-
-      // Find logs for the device IDs from above
-      Weather.find({ device: { $in: deviceIds } }).then(logs => {
-        return res.json(logs);
+  User.find(req.user.id)
+    .then(user => {
+      Device.find(user.favoriteDevice).then(device => {
+        Weather.find(device._id)
+          .sort({ date: -1 })
+          .limit(10)
+          .then(favroiteweatherdata => res.json(favroiteweatherdata));
       });
     })
     .catch(err => {

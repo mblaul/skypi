@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPublicWeatherData } from '../../../actions/weatherActions';
 
+// Import common components
+import Spinner from '../../common/Spinner';
+
 //import pieces of Dashboard
 import Radiobutton from '../dashboard/Radiobutton';
 import Stripetable from '../dashboard/Stripetable';
@@ -15,6 +18,42 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { weatherLogs, loading } = this.props.weather;
+    let dashboardContent;
+
+    if (weatherLogs === undefined || loading) {
+      dashboardContent = <Spinner />;
+    } else {
+      const quickInfo = weatherLogs[0];
+      console.log(quickInfo);
+      dashboardContent = (
+        <div>
+          <div className="row mb-3">
+            <Quickview Type={'Temperature'} Reading={'26°C'} />
+            <Quickview Type={'Wind Speed'} Reading={'17 kph'} />
+            <Quickview Type={'Humidity'} Reading={'73%'} />
+            <Quickview Type={'Wind Direction'} Reading={'NE'} />
+          </div>
+          <div className="row mb-2">
+            <div className="col-sm-12 col-md-12 col-lg-6">
+              <Stripetable
+                TableHeader={'Recent readings'}
+                TableSubtitle={'Your home station'}
+                Column1={'Time'}
+                Column2={'Temp'}
+                Column3={'Humidity'}
+                Column4={'Wind Speed'}
+                Column5={'Wind Direction'}
+              />
+            </div>
+            <div className="col-sm-12 col-md-12 col-lg-6">
+              <Timegraph />
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="container mt-2">
         <div className="row mb-3">
@@ -39,28 +78,7 @@ class Dashboard extends Component {
             Value={'Metric'}
           />
         </div>
-        <div className="row mb-3">
-          <Quickview Type={'Temperature'} Reading={'26°C'} />
-          <Quickview Type={'Wind Speed'} Reading={'17 kph'} />
-          <Quickview Type={'Humidity'} Reading={'73%'} />
-          <Quickview Type={'Wind Direction'} Reading={'NE'} />
-        </div>
-        <div className="row mb-2">
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Stripetable
-              TableHeader={'Recent readings'}
-              TableSubtitle={'Your home station'}
-              Column1={'Time'}
-              Column2={'Temp'}
-              Column3={'Humidity'}
-              Column4={'Wind Speed'}
-              Column5={'Wind Direction'}
-            />
-          </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Timegraph />
-          </div>
-        </div>
+        {dashboardContent}
       </div>
     );
   }
