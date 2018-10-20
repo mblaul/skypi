@@ -63,7 +63,7 @@ module.exports.log_get = (req, res) => {
     });
 };
 
-module.exports.data_get = (req, res) => {
+module.exports.data_device_get = (req, res) => {
   const device = req.params.deviceId;
 
   Weather.find({ device: device })
