@@ -1,7 +1,8 @@
 import {
   WEATHER_LOGS_LOADING,
   GET_PRIVATE_WEATHER_LOGS,
-  GET_PUBLIC_WEATHER_LOGS
+  GET_PUBLIC_WEATHER_LOGS,
+  GET_FAVORITE_WEATHER_LOGS
 } from '../actions/types';
 
 const initialState = {
@@ -22,6 +23,9 @@ export default (state = initialState, action) => {
       return { ...state, weatherLogs: action.payload, loading: false };
 
     case GET_PUBLIC_WEATHER_LOGS:
+      return { ...state, weatherLogs: action.payload, loading: false };
+
+    case GET_FAVORITE_WEATHER_LOGS:
       return { ...state, weatherLogs: action.payload, loading: false };
 
     default:

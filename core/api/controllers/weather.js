@@ -123,8 +123,8 @@ module.exports.data_favorite_get = (req, res) => {
   // Find all device logs for public devices
   User.find(req.user.id)
     .then(user => {
-      Device.find(user.favoriteDevice).then(device => {
-        Weather.find(device._id)
+      Device.findById(user.favoriteDevice).then(device => {
+        Weather.find({ device: device._id })
           .sort({ date: -1 })
           .limit(10)
           .then(favoritedata => res.json(favoritedata));

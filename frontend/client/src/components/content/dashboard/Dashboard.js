@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPublicWeatherData } from '../../../actions/weatherActions';
+import {
+  getPublicWeatherData,
+  getFavoriteWeatherData
+} from '../../../actions/weatherActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -14,7 +17,7 @@ import Quickview from '../dashboard/Quickview';
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.getPublicWeatherData();
+    this.props.getFavoriteWeatherData();
   }
 
   render() {
@@ -27,7 +30,6 @@ class Dashboard extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        console.log(quickInfo.temperature);
         dashboardContent = (
           <div>
             <div className="row mb-3">
@@ -89,6 +91,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getPublicWeatherData: PropTypes.func.isRequired,
+  getFavoriteWeatherData: PropTypes.func.isRequired,
   weatherLogs: PropTypes.array.isRequired,
   weatherLog: PropTypes.object.isRequired,
   weatherUnit: PropTypes.object.isRequred
@@ -102,5 +105,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPublicWeatherData }
+  { getPublicWeatherData, getFavoriteWeatherData }
 )(Dashboard);
