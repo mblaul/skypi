@@ -371,8 +371,10 @@ module.exports.favoritedevice_post = (req, res) => {
 
   User.findById(req.user.id)
     .then(user => {
-      user.favoriteDevice = device;
-      user.save().then(user => res.json(user));
+      Device.findById(device => {
+        user.favoriteDevice = device._id;
+        user.save().then(user => res.json(user));
+      });
     })
     .catch(err => {
       console.log(err);

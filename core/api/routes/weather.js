@@ -18,13 +18,13 @@ router.get(
   weatherController.log_get
 );
 
-// @route   GET api/weather/data/mine
+// @route   GET api/weather/data/private
 // @desc    Get all weather data where you're an authorized user
 // @access  Private
 router.get(
-  '/data/mine',
+  '/data/private',
   passport.authenticate('jwt', { session: false }),
-  weatherController.data_mine_get
+  weatherController.data_private_get
 );
 
 // @route   GET api/weather/data/public
@@ -36,9 +36,13 @@ router.get(
   weatherController.data_public_get
 );
 
-// @route   GET api/weather/data
-// @desc    Get all weather data
-// @access  Public
-// router.get("/lastlogs", weatherController.alldevices_lastlog_get);
+// @route   GET api/weather/data/favorite
+// @desc    Get weather data for the user's favorite device
+// @access  Private
+router.get(
+  '/data/favorite',
+  passport.authenticate('jwt', { session: false }),
+  weatherController.data_favorite_get
+);
 
 module.exports = router;

@@ -63,7 +63,7 @@ module.exports.log_get = (req, res) => {
     });
 };
 
-module.exports.data_mine_get = (req, res) => {
+module.exports.data_private_get = (req, res) => {
   // Find all devices where you're an authorized user
   Device.find({ 'authorizedUsers.user': req.user.id })
     .then(devices => {
@@ -85,6 +85,27 @@ module.exports.data_mine_get = (req, res) => {
 };
 
 module.exports.data_public_get = (req, res) => {
+  // Find all device logs for public devices
+  Device.find({ 'roles.isPublic': true })
+    .then(devices => {
+      // Collect all the device IDs from the isPublic field
+      const deviceIds = devices.map(device => {
+        return device._id;
+      });
+
+      // Find logs for the device IDs from above
+      Weather.find({ device: { $in: deviceIds } }).then(logs => {
+        return res.json(logs);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
+module.exports.data_favorite_get = (req, res) => {
   // Find all device logs for public devices
   Device.find({ 'roles.isPublic': true })
     .then(devices => {

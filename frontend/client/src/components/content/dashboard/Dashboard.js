@@ -11,7 +11,7 @@ import Quickview from '../dashboard/Quickview';
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.props.getPublicWeatherData(console.log(this.props));
+    this.props.getPublicWeatherData();
   }
 
   render() {
@@ -26,8 +26,18 @@ class Dashboard extends Component {
 
         <h2>Weather Station Quick View</h2>
         <div className="row">
-          <Radiobutton Type={'radio'} Name={'units'} Checked={'false'} Value={'English'} />
-          <Radiobutton Type={'radio'} Name={'units'} Checked={'true'} Value={'Metric'} />
+          <Radiobutton
+            Type={'radio'}
+            Name={'units'}
+            Checked={'false'}
+            Value={'English'}
+          />
+          <Radiobutton
+            Type={'radio'}
+            Name={'units'}
+            Checked={'true'}
+            Value={'Metric'}
+          />
         </div>
         <div className="row mb-3">
           <Quickview Type={'Temperature'} Reading={'26°C'} />
@@ -64,8 +74,7 @@ Dashboard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  weatherLogs: state.weatherLogs,
-  weatherLog: state.weatherLog,
+  weather: state.weather,
   weatherUnit: state.weatherUnit,
   auth: state.auth
 });
