@@ -24,34 +24,37 @@ class Dashboard extends Component {
     if (weatherLogs === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
-      const quickInfo = weatherLogs[0];
-      console.log(quickInfo);
-      dashboardContent = (
-        <div>
-          <div className="row mb-3">
-            <Quickview Type={'Temperature'} Reading={'26°C'} />
-            <Quickview Type={'Wind Speed'} Reading={'17 kph'} />
-            <Quickview Type={'Humidity'} Reading={'73%'} />
-            <Quickview Type={'Wind Direction'} Reading={'NE'} />
-          </div>
-          <div className="row mb-2">
-            <div className="col-sm-12 col-md-12 col-lg-6">
-              <Stripetable
-                TableHeader={'Recent readings'}
-                TableSubtitle={'Your home station'}
-                Column1={'Time'}
-                Column2={'Temp'}
-                Column3={'Humidity'}
-                Column4={'Wind Speed'}
-                Column5={'Wind Direction'}
-              />
+      // Check to see if values have fully loaded for weather data
+      if (weatherLogs.length > 0) {
+        const quickInfo = weatherLogs[0];
+        console.log(quickInfo.temperature);
+        dashboardContent = (
+          <div>
+            <div className="row mb-3">
+              <Quickview Type={'Temperature'} Reading={'26°C'} />
+              <Quickview Type={'Wind Speed'} Reading={'17 kph'} />
+              <Quickview Type={'Humidity'} Reading={'73%'} />
+              <Quickview Type={'Wind Direction'} Reading={'NE'} />
             </div>
-            <div className="col-sm-12 col-md-12 col-lg-6">
-              <Timegraph />
+            <div className="row mb-2">
+              <div className="col-sm-12 col-md-12 col-lg-6">
+                <Stripetable
+                  TableHeader={'Recent readings'}
+                  TableSubtitle={'Your home station'}
+                  Column1={'Time'}
+                  Column2={'Temp'}
+                  Column3={'Humidity'}
+                  Column4={'Wind Speed'}
+                  Column5={'Wind Direction'}
+                />
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-6">
+                <Timegraph />
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
     }
 
     return (
