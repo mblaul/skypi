@@ -118,9 +118,7 @@ module.exports.login_post = (req, res) => {
 module.exports.verify_get = (req, res) => {
   let errors = {};
 
-  const email = req.user.email;
-
-  User.findOne({ email: email })
+  User.findById(req.user.id)
     .then(user => {
       // Check to see if the user exists
       if (!user) {
@@ -198,10 +196,9 @@ module.exports.verify_get = (req, res) => {
 module.exports.verify_post = (req, res) => {
   let errors = {};
 
-  const email = req.body.email;
   const verifyUserToken = req.body.verifyusertoken;
 
-  User.findOne({ email: email })
+  User.findById(req.user.id)
     .then(user => {
       existingToken = user.tempObjects.verifyUserToken;
       if (

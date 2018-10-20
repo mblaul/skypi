@@ -9,6 +9,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 // Import private routing for protected pages
 import PrivateRoute from './components/common/PrivateRoute';
 import AdminRoute from './components/common/AdminRoute';
+import VerifiedRoute from './components/common/VerifiedRoute';
 
 // Import components that are a part of the layout
 import Navbar from './components/layout/Navbar';
@@ -57,9 +58,9 @@ class App extends Component {
             {/* Switch allows redirects on private routes */}
             <Switch>
               <PrivateRoute exact path="/verify" component={Verify} />
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <PrivateRoute exact path="/stations" component={Stations} />
-              <PrivateRoute exact path="/status" component={Status} />
+              <VerifiedRoute exact path="/dashboard" component={Dashboard} />
+              <VerifiedRoute exact path="/stations" component={Stations} />
+              <VerifiedRoute exact path="/status" component={Status} />
             </Switch>
             <Switch>
               <AdminRoute exact path="/admin" component={Admin} />
