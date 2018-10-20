@@ -64,29 +64,37 @@ class Verify extends Component {
       <div>
         <div className="container col-lg-4 mt-5">
           <h2 className="mb-1">Verify your account</h2>
-          <div className="mt-3 mb-4">
+          <div className="lead">
+            You need to verify your account before accessing our awesome,
+            open-source, homegrown weather data.
+          </div>
+          <div className="mt-4">
             <div className="text-muted">
               Click the button below to send an verification code to your email
             </div>
             <form onSubmit={this.onVerificationStartSubmit}>
+              <button type="submit" className="btn btn-info btn-block mt-3">
+                Send Code
+              </button>
+            </form>
+          </div>
+          <div className="my-5">
+            <div className="text-muted">
+              Use the verification code that was emailed to you to verify your
+              account
+            </div>
+            <form className="mt-3" onSubmit={this.onVerificationSubmit}>
+              <TextFieldGroup
+                placeholder="Verification Code"
+                name="verifyusertoken"
+                type="text"
+                value={this.state.verifyusertoken}
+                onChange={this.onChange}
+                error={errors.verifyusertoken}
+              />
               <input type="submit" className="btn btn-primary btn-block mt-3" />
             </form>
           </div>
-          <div className="text-muted">
-            Use the verification code that was emailed to you to verify your
-            account
-          </div>
-          <form className="mt-3" onSubmit={this.onVerificationSubmit}>
-            <TextFieldGroup
-              placeholder="Verification Code"
-              name="verifyusertoken"
-              type="text"
-              value={this.state.verifyusertoken}
-              onChange={this.onChange}
-              error={errors.verifyusertoken}
-            />
-            <input type="submit" className="btn btn-primary btn-block mt-4" />
-          </form>
         </div>
       </div>
     );

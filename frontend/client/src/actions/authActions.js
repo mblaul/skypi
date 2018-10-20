@@ -61,6 +61,6 @@ export const emailUserVerification = () => dispatch => {
 export const confirmUserVerification = verificationData => dispatch => {
   axios
     .post('/api/user/verify', verificationData)
-    .then(result => {})
+    .then(() => dispatch(logoutUser({})))
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };

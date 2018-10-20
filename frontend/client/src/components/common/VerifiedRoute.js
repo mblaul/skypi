@@ -7,10 +7,14 @@ const VerifiedRoute = ({ component: Component, auth, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      auth.user.roles.isVerified === true ? (
-        <Component {...props} />
+      auth.isAuthenticated === true ? (
+        auth.user.roles.isVerified === true ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/verify" />
+        )
       ) : (
-        <Redirect to="/verify" />
+        <Redirect to="/login" />
       )
     }
   />

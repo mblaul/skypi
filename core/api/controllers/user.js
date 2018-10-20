@@ -202,7 +202,6 @@ module.exports.verify_post = (req, res) => {
         existingToken.expireTime < moment().format() ||
         existingToken.key !== verifyUserToken
       ) {
-        console.log(err);
         errors.verifyusertoken = 'Authorization token not valid';
         return res.status(404).json(errors);
       }

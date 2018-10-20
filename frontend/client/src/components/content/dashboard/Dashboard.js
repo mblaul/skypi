@@ -17,7 +17,16 @@ import Quickview from '../dashboard/Quickview';
 
 class Dashboard extends Component {
   componentDidMount() {
+    if (!this.props.auth) {
+      this.props.history.push('/login');
+    }
     this.props.getFavoriteWeatherData();
+  }
+
+  componentWillReceieveProps(nextProps) {
+    if (!nextProps.auth) {
+      this.props.history.push('/login');
+    }
   }
 
   render() {
