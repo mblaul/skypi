@@ -121,7 +121,7 @@ module.exports.data_public_get = (req, res) => {
 
 module.exports.data_favorite_get = (req, res) => {
   // Find all device logs for public devices
-  User.find(req.user.id)
+  User.findById(req.user.id)
     .then(user => {
       Device.findById(user.favoriteDevice).then(device => {
         Weather.find({ device: device._id })
