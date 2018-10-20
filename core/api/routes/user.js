@@ -34,8 +34,12 @@ router.get(
 
 // @route   	POST api/user/verify
 // @desc   		User sends info to verify the account
-// @access		Public
-router.post('/verify', userController.verify_post);
+// @access		Private
+router.post(
+  '/verify',
+  passport.authenticate('jwt', { session: false }),
+  userController.verify_post
+);
 
 // @route   	POST api/user/resetpassword
 // @desc   		Send token to user's email to reset password

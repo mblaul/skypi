@@ -55,8 +55,7 @@ class Verify extends Component {
       verifyusertoken: this.state.verifyusertoken
     };
 
-    //Call the action to login a user
-    // TBD: this.props.verifyUser(verifyUserToken);
+    this.props.confirmUserVerification(verificationData);
   }
   render() {
     const { errors } = this.state;

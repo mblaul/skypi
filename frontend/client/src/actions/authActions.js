@@ -53,7 +53,7 @@ export const logoutUser = () => dispatch => {
 export const emailUserVerification = () => dispatch => {
   axios
     .get('/api/user/verify')
-    .then(result => {})
+    .then(() => {})
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
