@@ -63,6 +63,20 @@ module.exports.log_get = (req, res) => {
     });
 };
 
+module.exports.data_get = (req, res) => {
+  const device = req.params.deviceId;
+
+  Weather.find({ device: device })
+    .then(logs => {
+      return res.json(logs);
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
 module.exports.data_private_get = (req, res) => {
   // Find all devices where you're an authorized user
   Device.find({ 'authorizedUsers.user': req.user.id })

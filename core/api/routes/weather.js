@@ -45,4 +45,13 @@ router.get(
   weatherController.data_favorite_get
 );
 
+// @route   GET api/weather/data/:deviceId
+// @desc    Get weather data for one device
+// @access  Private
+router.get(
+  '/data/:deviceId',
+  passport.authenticate('jwt', { session: false }),
+  weatherController.data_get
+);
+
 module.exports = router;
