@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+  emailUserVerification,
+  confirmUserVerification
+} from '../../actions/authActions';
 
 import TextFieldGroup from '../common/TextFieldGroup';
 
@@ -14,7 +18,8 @@ class Verify extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onVerificationStartSubmit = this.onVerificationStartSubmit.bind(this);
+    this.onVerificationSubmit = this.onVerificationSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -37,10 +42,18 @@ class Verify extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e) {
+  onVerificationStartSubmit(e) {
+    e.preventDefault();
+    console.log('Button clicked');
+    this.props.emailUserVerification();
+  }
+
+  onVerificationSubmit(e) {
     e.preventDefault();
 
-    const verifyUserToken = this.state.verifyusertoken;
+    const verificationData = {
+      verifyusertoken: this.state.verifyusertoken
+    };
 
     //Call the action to login a user
     // TBD: this.props.verifyUser(verifyUserToken);
@@ -52,11 +65,19 @@ class Verify extends Component {
       <div>
         <div className="container col-lg-4 mt-5">
           <h2 className="mb-1">Verify your account</h2>
-          <lead className="text-muted">
+          <div className="mt-3 mb-4">
+            <div className="text-muted">
+              Click the button below to send an verification code to your email
+            </div>
+            <form onSubmit={this.onVerificationStartSubmit}>
+              <input type="submit" className="btn btn-primary btn-block mt-3" />
+            </form>
+          </div>
+          <div className="text-muted">
             Use the verification code that was emailed to you to verify your
             account
-          </lead>
-          <form className="mt-3" onSubmit={this.onSubmit}>
+          </div>
+          <form className="mt-3" onSubmit={this.onVerificationSubmit}>
             <TextFieldGroup
               placeholder="Verification Code"
               name="verifyusertoken"
@@ -85,5 +106,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  {}
+  { emailUserVerification, confirmUserVerification }
 )(Verify);

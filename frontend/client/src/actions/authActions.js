@@ -48,3 +48,19 @@ export const logoutUser = () => dispatch => {
   // Set current user to empty object which will set isAuthenticated to false also
   dispatch(setCurrentUser({}));
 };
+
+// Send user verification email
+export const emailUserVerification = () => dispatch => {
+  axios
+    .get('/api/user/verify')
+    .then(result => {})
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+// Confirm user verification code
+export const confirmUserVerification = verificationData => dispatch => {
+  axios
+    .post('/api/user/verify', verificationData)
+    .then(result => {})
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};

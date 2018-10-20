@@ -152,10 +152,7 @@ module.exports.verify_get = (req, res) => {
           });
 
           // Create email body
-          const verificationEmailBody = verificationEmail(
-            user.email,
-            verifyUserToken.key
-          );
+          const verificationEmailBody = verificationEmail(verifyUserToken.key);
 
           // setup email data with unicode symbols
           let mailOptions = {

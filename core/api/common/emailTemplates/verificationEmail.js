@@ -1,4 +1,4 @@
-module.exports = (email, verifyusertoken) => {
+module.exports = verifyusertoken => {
   const verificationEmail = `
     <tr>
       <td class="email-body" width="100%" cellpadding="0" cellspacing="0">
@@ -17,11 +17,7 @@ module.exports = (email, verifyusertoken) => {
                           <table border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td>
-                                <form method="POST" action="http://localhost:5000/api/user/verify">
-                                  <input type="hidden" id="email" name="email" value="${email}">
-                                  <input type="hidden" id="verifyusertoken" name="verifyusertoken" value="${verifyusertoken}">
-                                  <input type="submit" value="Verify Account">
-                                </form>
+                                <h1>${verifyusertoken}</h1>
                               </td>
                             </tr>
                           </table>
