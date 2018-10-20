@@ -1,4 +1,5 @@
 var User = require('../models/User');
+var Device = require('../models/Device');
 var config = require('../config/keys');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
