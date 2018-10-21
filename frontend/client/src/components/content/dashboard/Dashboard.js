@@ -86,12 +86,6 @@ class Dashboard extends Component {
               <br />
               Please follow the link below to find a favorite.
             </p>
-            <p className="lead alert alert-danger">
-              To devs: the next page is still a work in progess.
-              <br />
-              Please msg Matt or Alex or someone else with DB access to manually
-              add a favorite device.
-            </p>
             <Link to="/stations" className="btn btn-lg btn-info">
               Device List
             </Link>
