@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
@@ -7,7 +8,6 @@ import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 import Spinner from '../../common/Spinner';
 
 //import pieces of Dashboard
-import Radiobutton from '../dashboard/Radiobutton';
 import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
@@ -38,6 +38,11 @@ class Dashboard extends Component {
         const quickInfo = weatherLogs[0];
         dashboardContent = (
           <div>
+            <div className="display-4">{quickInfo.source}</div>
+            <div className="text-muted mb-3">
+              Last Updated:{' '}
+              <Moment format="YYYY/MM/DD H:MM">{quickInfo.date}</Moment>
+            </div>
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
@@ -77,26 +82,10 @@ class Dashboard extends Component {
     return (
       <div className="container mt-2">
         <div className="row mb-3">
-          <div className="display-3 my-4">
+          <div className="display-3 my-3">
             Hello, {this.props.auth.user.name}
           </div>
           <hr />
-        </div>
-
-        <h2>Weather Station Quick View</h2>
-        <div className="row">
-          <Radiobutton
-            Type={'radio'}
-            Name={'units'}
-            Checked={'false'}
-            Value={'English'}
-          />
-          <Radiobutton
-            Type={'radio'}
-            Name={'units'}
-            Checked={'true'}
-            Value={'Metric'}
-          />
         </div>
         {dashboardContent}
       </div>
@@ -106,7 +95,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
-  weatherLogs: PropTypes.array.isRequired
+  weather: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
