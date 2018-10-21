@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPublicDevices } from '../../../actions/deviceActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
-
-//import pieces of Stations
-//import Plaintable from './Plaintable';
-import Stripetable from '../dashboard/Stripetable';
 
 class Stations extends Component {
   componentDidMount() {
@@ -33,18 +30,54 @@ class Stations extends Component {
     } else {
       // Check to see if values have fully loaded for weather data
       if (devices.length > 0) {
+        const tableHeaders = [
+          'Station',
+          'Location',
+          'Last Update',
+          'Status',
+          'Favorite'
+        ];
         stationsContent = (
-          <Stripetable
-            TableHeader={'Stations'}
-            TableSubtitle={
-              'Stations which successfully reported at last request'
-            }
-            Column1={'ID'}
-            Column2={'Name'}
-            Column3={'Location'}
-            Column4={'Last Reported'}
-            Column5={'More Information'}
-          />
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                {tableHeaders.map(header => (
+                  <th scope="col" key={header}>
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {devices.map(device => (
+                <tr key={device._id}>
+                  <th scope="row" key={device._id}>
+                    {device.name}
+                  </th>
+                  {'city' in device.lastWeatherLog === true ? (
+                    <td>{device.lastWeatherLog.city}</td>
+                  ) : (
+                    <td>N/A</td>
+                  )}
+                  {'city' in device.lastWeatherLog === true ? (
+                    <td>
+                      <Moment format="YYYY/MM/DD h:mm A">
+                        {device.lastWeatherLog.date}
+                      </Moment>
+                    </td>
+                  ) : (
+                    <td>N/A</td>
+                  )}
+                  <td>{device.status}</td>
+                  <td>
+                    <button type="button" className="btn">
+                      <i className="fas fa-star text-alert" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         );
       }
     }
@@ -52,34 +85,35 @@ class Stations extends Component {
     return (
       <div className="container mt-4">
         <div className="row mb-2">
-          <div className="col-sm-12 col-md-12 col-lg-6">
+          <div className="col-sm-12 col-md-12 col-lg-12">
+            <div className="display-3 mb-3 text-center">Stations</div>
             <div className="my-2">
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active">
+              <div className="btn-group btn-group-toggle" data-toggle="buttons">
+                <label className="btn btn-secondary active">
                   <input
                     type="radio"
                     name="options"
                     id="option1"
-                    autocomplete="off"
+                    autoComplete="off"
                     checked
                   />{' '}
                   Public
                 </label>
-                <label class="btn btn-secondary">
+                <label className="btn btn-secondary">
                   <input
                     type="radio"
                     name="options"
                     id="option2"
-                    autocomplete="off"
+                    autoComplete="off"
                   />{' '}
                   Mine
                 </label>
-                <label class="btn btn-secondary">
+                <label className="btn btn-secondary">
                   <input
                     type="radio"
                     name="options"
                     id="option3"
-                    autocomplete="off"
+                    autoComplete="off"
                   />{' '}
                   Official
                 </label>

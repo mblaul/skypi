@@ -42,7 +42,7 @@ class Dashboard extends Component {
             <div className="display-4">{quickInfo.source}</div>
             <div className="text-muted mb-3">
               Last Updated:{' '}
-              <Moment format="YYYY/MM/DD H:MM">{quickInfo.date}</Moment>
+              <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
             </div>
             <div className="row mb-3">
               <Quickview
