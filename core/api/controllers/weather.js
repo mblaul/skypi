@@ -35,14 +35,11 @@ module.exports.log_post = (req, res) => {
   newWeather
     .save()
     .then(log => {
-      // Add this log as the last log to the device
-      if (device) {
-        Device.findById(device)
-          .then(device => {
-            device.lastWeatherLog = log;
-          })
-          .save()
-          .then(next());
+      if (log.device) {
+        Device.findById(log.device).then(device => {
+          device.lastWeatherLog = log;
+          device.save();
+        });
       }
       return res.json(log);
     })
