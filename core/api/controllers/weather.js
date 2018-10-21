@@ -130,12 +130,19 @@ module.exports.data_favorite_get = (req, res) => {
   // Find all device logs for public devices
   User.findById(req.user.id)
     .then(user => {
-      Device.findById(user.favoriteDevice).then(device => {
-        Weather.find({ device: device._id })
-          .sort({ date: -1 })
-          .limit(10)
-          .then(favoritedata => res.json(favoritedata));
-      });
+      Device.findById(user.favoriteDevice)
+        .then(device => {
+          Weather.find({ device: device._id })
+            .sort({ date: -1 })
+            .limit(10)
+            .then(favoritedata => res.json(favoritedata));
+        })
+        .catch(err => {
+          console.log(err);
+          errors.favoriteDevice =
+            'The user has not favorited a device or the device no longer exists';
+          return res.status(500).json(errors);
+        });
     })
     .catch(err => {
       console.log(err);
