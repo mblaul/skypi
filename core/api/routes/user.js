@@ -51,13 +51,13 @@ router.post('/resetpassword', userController.resetpassword_post);
 // @access	  Public
 router.post('/changepassword', userController.changepassword_post);
 
-// @route   	POST api/user/favoritedevice
+// @route   	GET api/user/favoritedevice
 // @desc   		Let user set their favorite device
 // @access	  Private
-router.post(
-  '/favoritedevice',
+router.get(
+  '/favoritedevice/:deviceId',
   passport.authenticate('jwt', { session: false }),
-  userController.favoritedevice_post
+  userController.favoritedevice_get
 );
 
 module.exports = router;

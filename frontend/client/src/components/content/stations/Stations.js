@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPublicDevices } from '../../../actions/deviceActions';
+import { setFavoriteDevice } from '../../../actions/authActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -19,6 +20,10 @@ class Stations extends Component {
     if (!nextProps.auth) {
       this.props.history.push('/login');
     }
+  }
+
+  onFavoriteClick(deviceId) {
+    setFavoriteDevice(deviceId);
   }
 
   render() {
@@ -70,7 +75,11 @@ class Stations extends Component {
                   )}
                   <td>{device.status}</td>
                   <td>
-                    <button type="button" className="btn">
+                    <button
+                      onClick={this.onFavoriteClick.bind(this, device._id)}
+                      type="button"
+                      className="btn"
+                    >
                       <i className="fas fa-star text-alert" />
                     </button>
                   </td>
@@ -139,5 +148,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPublicDevices }
+  { getPublicDevices, setFavoriteDevice }
 )(Stations);

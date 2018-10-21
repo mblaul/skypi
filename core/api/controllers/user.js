@@ -358,10 +358,10 @@ module.exports.changepassword_post = (req, res) => {
     });
 };
 
-module.exports.favoritedevice_post = (req, res) => {
+module.exports.favoritedevice_get = (req, res) => {
   let errors = {};
 
-  const device = req.body.device;
+  const device = req.params.deviceId;
 
   User.findById(req.user.id)
     .then(user => {

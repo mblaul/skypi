@@ -64,3 +64,10 @@ export const confirmUserVerification = verificationData => dispatch => {
     .then(() => dispatch(logoutUser({})))
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
+
+export const setFavoriteDevice = deviceId => dispatch => {
+  axios
+    .get(`/api/user/favoritedevice/${deviceId}`)
+    .then()
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
