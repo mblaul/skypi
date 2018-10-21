@@ -4,7 +4,7 @@
   become: yes
 
   tasks:
-  - cron: 
+  - cron:
       name: "Push Data"
       user: "dev"
       minute: "5"
