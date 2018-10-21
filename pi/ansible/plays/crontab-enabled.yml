@@ -7,5 +7,5 @@
   - cron:
       name: "Push Data"
       user: "dev"
-      minute: "5"
+      minute: "*/5"
       job: "sudo python /home/dev/skypi/pi/py/sensor_info.py"
