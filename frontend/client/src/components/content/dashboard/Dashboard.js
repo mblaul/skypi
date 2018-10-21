@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -74,6 +75,26 @@ class Dashboard extends Component {
                 <Timegraph />
               </div>
             </div>
+          </div>
+        );
+      } else {
+        // User is logged in but has not favorited a device yet
+        dashboardContent = (
+          <div className="mx-auto">
+            <p className="lead alert alert-warning">
+              You need to favorite a device!
+              <br />
+              Please follow the link below to find a favorite.
+            </p>
+            <p className="lead alert alert-danger">
+              To devs: the next page is still a work in progess.
+              <br />
+              Please msg Matt or Alex or someone else with DB access to manually
+              add a favorite device.
+            </p>
+            <Link to="/stations" className="btn btn-lg btn-info">
+              Device List
+            </Link>
           </div>
         );
       }
