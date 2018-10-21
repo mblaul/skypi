@@ -1,5 +1,6 @@
 ---
-- hosts: all
+- name: ssh setup on new devices
+  hosts: all
   become: yes
   become_method: sudo
   tasks:

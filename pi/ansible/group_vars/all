@@ -1,5 +1,6 @@
----
+
 ansible_user: ansible
+
 
 py: /home/dietpi/skypi/pi/py
 lib: /home/dietpi/skypi/pi/ansible/library

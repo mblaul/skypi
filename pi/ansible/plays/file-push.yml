@@ -3,18 +3,21 @@
   hosts: all
   vars_files:
     - ../group_vars/all
-    
-  gather_facts: false
-  become: true
+  
+
 
   tasks:
+  - name: update local directories
+    shell: git -C skypi && git pull 
+    when: inventory_hostname in groups['control']
+
   - name: push script dirs
     copy: 
       src: "{{ item }}"
       dest: /home/ansible/
       owner: ansible
-      
       mode: 0644
+    when: inventory_hostname in groups['stations']
     with_items: 
         - "{{ py }}"
         - "{{ lib }}"

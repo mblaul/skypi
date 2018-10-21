@@ -22,5 +22,11 @@ headers = {
                     }
 
 response = requests.request("POST", url, data=payload, headers=headers)
-
+regReturn = response.json()
+print(regReturn)
+id = regReturn['_id']
+file = open('id.key', 'w')
+file.write(id)
+file.close
 print(response.text)
+
