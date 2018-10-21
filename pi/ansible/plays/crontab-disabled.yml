@@ -1,0 +1,11 @@
+---
+- name: Push Data
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: disable Push Data
+    cron:
+      name: "Push Data"
+      user: "dev"
+      disabled: yes
