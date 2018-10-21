@@ -44,10 +44,13 @@ class Stations extends Component {
   }
 }
 
-Stations.propTypes = {};
+Stations.propTypes = {
+  getPublicDevices: PropTypes.func.isRequired,
+  devices: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => ({
-  devices: state.devices,
+  devices: state.devices.devices,
   auth: state.auth
 });
 

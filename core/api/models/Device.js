@@ -55,6 +55,9 @@ const DeviceSchema = new Schema({
   lastUpdate: {
     type: Date,
     default: Date.now
+  },
+  lastWeatherLog: {
+    type: Object
   }
 });
 
