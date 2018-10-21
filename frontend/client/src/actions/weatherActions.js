@@ -7,7 +7,7 @@ import {
   GET_FAVORITE_WEATHER_LOGS
 } from './types';
 
-// Wearher data loading
+// Weather data loading
 export const setWeatherLogLoading = () => {
   return { type: WEATHER_LOGS_LOADING };
 };

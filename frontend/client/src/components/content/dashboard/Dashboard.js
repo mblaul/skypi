@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  getPublicWeatherData,
-  getFavoriteWeatherData
-} from '../../../actions/weatherActions';
+import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -42,10 +39,19 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <div className="row mb-3">
-              <Quickview Type={'Temperature'} Reading={quickInfo.temperature + '°C'} />
-              <Quickview Type={'Wind Speed'} Reading={quickInfo.wind + ' kph'} />
+              <Quickview
+                Type={'Temperature'}
+                Reading={quickInfo.temperature + '°C'}
+              />
+              <Quickview
+                Type={'Wind Speed'}
+                Reading={quickInfo.wind + ' kph'}
+              />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
-              <Quickview Type={'Wind Direction'} Reading={quickInfo.winddirection} />
+              <Quickview
+                Type={'Wind Direction'}
+                Reading={quickInfo.winddirection}
+              />
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -99,7 +105,6 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  getPublicWeatherData: PropTypes.func.isRequired,
   getFavoriteWeatherData: PropTypes.func.isRequired,
   weatherLogs: PropTypes.array.isRequired
 };
@@ -111,5 +116,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPublicWeatherData, getFavoriteWeatherData }
+  { getFavoriteWeatherData }
 )(Dashboard);

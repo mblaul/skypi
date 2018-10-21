@@ -44,7 +44,6 @@ class Verify extends Component {
 
   onVerificationStartSubmit(e) {
     e.preventDefault();
-    console.log('Button clicked');
     this.props.emailUserVerification();
   }
 

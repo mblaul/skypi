@@ -202,7 +202,7 @@ module.exports.verify_post = (req, res) => {
         existingToken.expireTime < moment().format() ||
         existingToken.key !== verifyUserToken
       ) {
-        errors.verifyusertoken = 'Authorization token not valid';
+        errors.verifyusertoken = 'Verification code not valid';
         return res.status(404).json(errors);
       }
 

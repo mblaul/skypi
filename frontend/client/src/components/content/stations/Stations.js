@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getPublicDevices } from '../../../actions/deviceActions';
 
 //import pieces of Stations
 //import Plaintable from './Plaintable';
 import Stripetable from '../dashboard/Stripetable';
 
-export default class Stations extends Component {
+class Stations extends Component {
+  componentDidMount() {
+    if (!this.props.auth) {
+      this.props.history.push('/login');
+    }
+    this.props.getPublicDevices();
+  }
+
+  componentWillReceieveProps(nextProps) {
+    if (!nextProps.auth) {
+      this.props.history.push('/login');
+    }
+  }
+
   render() {
     return (
       <div className="container mt-4">
@@ -22,19 +38,20 @@ export default class Stations extends Component {
               Column5={'More Information'}
             />
           </div>
-          <div className="col-sm-12 col-md-12 col-lg-6">
-            <Stripetable
-              TableHeader={'Inactive Stations'}
-              TableSubtitle={'Stations which Failed to report at last request'}
-              Column1={'ID'}
-              Column2={'Name'}
-              Column3={'Location'}
-              Column4={'Last Reported'}
-              Column5={'More Information'}
-            />
-          </div>
         </div>
       </div>
     );
   }
 }
+
+Stations.propTypes = {};
+
+const mapStateToProps = state => ({
+  devices: state.devices,
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { getPublicDevices }
+)(Stations);
