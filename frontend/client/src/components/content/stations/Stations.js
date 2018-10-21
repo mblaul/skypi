@@ -23,7 +23,7 @@ class Stations extends Component {
   }
 
   onFavoriteClick(deviceId) {
-    setFavoriteDevice(deviceId);
+    this.props.setFavoriteDevice(deviceId);
   }
 
   render() {
@@ -138,6 +138,7 @@ class Stations extends Component {
 
 Stations.propTypes = {
   getPublicDevices: PropTypes.func.isRequired,
+  setFavoriteDevice: PropTypes.func.isRequired,
   devices: PropTypes.object.isRequired
 };
 

@@ -65,6 +65,7 @@ export const confirmUserVerification = verificationData => dispatch => {
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
+// Let user favorite a device
 export const setFavoriteDevice = deviceId => dispatch => {
   axios
     .get(`/api/user/favoritedevice/${deviceId}`)
