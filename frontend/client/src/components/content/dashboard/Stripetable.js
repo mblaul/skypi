@@ -24,39 +24,39 @@ export default class Stripetable extends Component {
             </thead>
             <tbody>
               <TableRow
-                ID={'1'}
-                Name={'Station1'}
-                Salary={'$81,000'}
-                Country={'United States'}
-                City={'Rochester'}
+                ID={this.props.weatherLogs[0].date}
+                Name={this.props.weatherLogs[0].temperature}
+                Salary={this.props.weatherLogs[0].humidity}
+                Country={this.props.weatherLogs[0].wind}
+                City={this.props.weatherLogs[0].winddirection}
               />
               <TableRow
-                ID={'2'}
-                Name={'Station2'}
-                Salary={'$82,000'}
-                Country={'Canada'}
-                City={'Hamilton'}
+                ID={this.props.weatherLogs[1].date}
+                Name={this.props.weatherLogs[1].temperature}
+                Salary={this.props.weatherLogs[1].humidity}
+                Country={this.props.weatherLogs[1].wind}
+                City={this.props.weatherLogs[1].winddirection}
               />
               <TableRow
-                ID={'3'}
-                Name={'Station3'}
-                Salary={'$83,000'}
-                Country={'United States'}
-                City={'New York'}
+                ID={this.props.weatherLogs[2].date}
+                Name={this.props.weatherLogs[2].temperature}
+                Salary={this.props.weatherLogs[2].humidity}
+                Country={this.props.weatherLogs[2].wind}
+                City={this.props.weatherLogs[2].winddirection}
               />
               <TableRow
-                ID={'4'}
-                Name={'Station4'}
-                Salary={'$84,000'}
-                Country={'Canada'}
-                City={'Blind River'}
+                ID={this.props.weatherLogs[3].date}
+                Name={this.props.weatherLogs[3].temperature}
+                Salary={this.props.weatherLogs[3].humidity}
+                Country={this.props.weatherLogs[3].wind}
+                City={this.props.weatherLogs[3].winddirection}
               />
               <TableRow
-                ID={'5'}
-                Name={'Station5'}
-                Salary={'$85,000'}
-                Country={'United States'}
-                City={'Austin'}
+                ID={this.props.weatherLogs[4].date}
+                Name={this.props.weatherLogs[4].temperature}
+                Salary={this.props.weatherLogs[4].humidity}
+                Country={this.props.weatherLogs[4].wind}
+                City={this.props.weatherLogs[4].winddirection}
               />
             </tbody>
           </table>

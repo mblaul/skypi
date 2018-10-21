@@ -64,11 +64,12 @@ class Dashboard extends Component {
                 <Stripetable
                   TableHeader={'Recent readings'}
                   TableSubtitle={'Your home station'}
-                  Column1={'Time'}
+                  Column1={'Date/Time'}
                   Column2={'Temp'}
                   Column3={'Humidity'}
                   Column4={'Wind Speed'}
                   Column5={'Wind Direction'}
+                  weatherLogs = {weatherLogs}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -110,12 +111,14 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
-  weather: PropTypes.object.isRequired
+  weather: PropTypes.object.isRequired,
+  weatherLogs: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
   weather: state.weather,
-  auth: state.auth
+  auth: state.auth,
+  weatherLogs: state.weatherLogs
 });
 
 export default connect(
