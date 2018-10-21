@@ -7,7 +7,7 @@ def pushdata(host,temperature,humidity,lat,lng,pressure,city, state, zip_code, c
     
     url = "http://18.235.27.33/api/weather/log"
 
-    payload = ("""source=%s&device=%s&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&city=%s&state=%s&zipcode=%f&country=%s&wind=%f&winddirection=%s"""
+    payload = ("""source=%s&device=%s&temperature=%f&humidity=%f&latitude=%f&longitude=%f&pressure=%f&city=%s&state=%s&zipcode=%s&country=%s&wind=%f&winddirection=%s"""
     % (host, device_key, temperature, humidity, lat, lng, pressure, city, state, zip_code, country, wind, wind_direction))
 
     headers = {'Content-Type': 'application/x-www-form-urlencoded'}
