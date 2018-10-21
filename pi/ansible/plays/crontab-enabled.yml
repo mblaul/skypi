@@ -1,0 +1,11 @@
+---
+- name: Push Data
+  hosts: all
+  become: yes
+
+  tasks:
+  - cron:
+      name: "Push Data"
+      user: "dev"
+      minute: "*/15"
+      job: "sudo python /home/dev/skypi/pi/py/sensor_info.py"

@@ -1,0 +1,12 @@
+---
+- name: disable cronjob
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: disable cronjob
+    cron:
+      name: "Push Data"
+      user: "dev"
+      disabled: yes
+      job: "sudo python /home/dev/skypi/pi/py/sensor_info.py"
