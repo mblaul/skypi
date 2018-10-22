@@ -63,7 +63,7 @@ class Dashboard extends Component {
               />
               <Quickview
                 Type={'Pressure'}
-                Reading={quickInfo.pressure + 'hPa'}
+                Reading={quickInfo.pressure + ' hPa'}
               />
             </div>
             <div className="row mb-2">
