@@ -13,7 +13,7 @@ export default class Stripetable extends Component {
           <table className="table table-hover table-striped">
             <thead>
               <tr>
-                <TableHeader 
+                <TableHeader
                   Header1={this.props.Column1}
                   Header2={this.props.Column2}
                   Header3={this.props.Column3}
@@ -23,9 +23,6 @@ export default class Stripetable extends Component {
               </tr>
             </thead>
             <tbody>
-              {weatherData.ForEach(function(weatherData){
-            
-              })}
               <TableRow
                 ID={this.props.weatherLogs[0].date}
                 Name={this.props.weatherLogs[0].temperature}
