@@ -9,11 +9,11 @@ export default class Timegraph extends Component {
         {
           label: 'Humidity',
           data: [
-            this.props.weatherLogs[0].humidity,
-            this.props.weatherLogs[1].humidity,
-            this.props.weatherLogs[2].humidity,
+            this.props.weatherLogs[4].humidity,
             this.props.weatherLogs[3].humidity,
-            this.props.weatherLogs[4].humidity
+            this.props.weatherLogs[2].humidity,
+            this.props.weatherLogs[1].humidity,
+            this.props.weatherLogs[0].humidity
           ],
           backgroundColor: ['rgba(0, 0, 0, 0)'],
           borderColor: ['rgba(0, 102, 255, .7)'],
@@ -23,11 +23,11 @@ export default class Timegraph extends Component {
         {
           label: 'Temperature (F)',
           data: [
-            this.props.weatherLogs[0].temperature,
-            this.props.weatherLogs[1].temperature,
-            this.props.weatherLogs[2].temperature,
+            this.props.weatherLogs[4].temperature,
             this.props.weatherLogs[3].temperature,
-            this.props.weatherLogs[4].temperature
+            this.props.weatherLogs[2].temperature,
+            this.props.weatherLogs[1].temperature,
+            this.props.weatherLogs[0].temperature
           ],
           backgroundColor: ['rgba(0, 0, 0, 0)'],
           borderColor: ['rgba(200, 20, 20, .7)'],
@@ -37,11 +37,11 @@ export default class Timegraph extends Component {
         {
           label: 'Wind Speed (mph)',
           data: [
-            this.props.weatherLogs[0].wind,
-            this.props.weatherLogs[1].wind,
-            this.props.weatherLogs[2].wind,
+            this.props.weatherLogs[4].wind,
             this.props.weatherLogs[3].wind,
-            this.props.weatherLogs[4].wind
+            this.props.weatherLogs[2].wind,
+            this.props.weatherLogs[1].wind,
+            this.props.weatherLogs[0].wind
           ],
           backgroundColor: ['rgba(0, 0, 0, 0)'],
           borderColor: ['rgba(41, 163, 41, .7)'],
