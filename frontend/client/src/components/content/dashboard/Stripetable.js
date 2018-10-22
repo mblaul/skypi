@@ -5,6 +5,9 @@ import Moment from 'react-moment';
 
 export default class Stripetable extends Component {
   render() {
+    //
+    const WeatherLogData = this.props.weatherLogs
+    const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
     return (
       <div className="card">
         <div className="header">
@@ -15,71 +18,35 @@ export default class Stripetable extends Component {
           <table className="table table-hover table-striped">
             <thead>
               <tr>
-                <TableHeader
-                  Header1={this.props.Column1}
-                  Header2={this.props.Column2}
-                  Header3={this.props.Column3}
-                  Header4={this.props.Column4}
-                  Header5={this.props.Column5}
-                />
+              {tableHeaders.map(header => (
+                  <th scope="col" key={header}>
+                    {header}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <TableRow
-                ID={ 
-                  <Moment format="YYYY/MM/DD h:mm A">
-                    {this.props.weatherLogs[0].date}
-                  </Moment>
-                }
-                Name={this.props.weatherLogs[0].temperature}
-                Salary={this.props.weatherLogs[0].humidity}
-                Country={this.props.weatherLogs[0].wind}
-                City={this.props.weatherLogs[0].winddirection}
-              />
-              <TableRow
-                ID={ 
-                  <Moment format="YYYY/MM/DD h:mm A">
-                    {this.props.weatherLogs[1].date}
-                  </Moment>
-                }
-                Name={this.props.weatherLogs[1].temperature}
-                Salary={this.props.weatherLogs[1].humidity}
-                Country={this.props.weatherLogs[1].wind}
-                City={this.props.weatherLogs[1].winddirection}
-              />
-              <TableRow
-                ID={ 
-                  <Moment format="YYYY/MM/DD h:mm A">
-                    {this.props.weatherLogs[2].date}
-                  </Moment>
-                }
-                Name={this.props.weatherLogs[2].temperature}
-                Salary={this.props.weatherLogs[2].humidity}
-                Country={this.props.weatherLogs[2].wind}
-                City={this.props.weatherLogs[2].winddirection}
-              />
-              <TableRow
-                ID={ 
-                  <Moment format="YYYY/MM/DD h:mm A">
-                    {this.props.weatherLogs[3].date}
-                  </Moment>
-                }
-                Name={this.props.weatherLogs[3].temperature}
-                Salary={this.props.weatherLogs[3].humidity}
-                Country={this.props.weatherLogs[3].wind}
-                City={this.props.weatherLogs[3].winddirection}
-              />
-              <TableRow
-                ID={ 
-                  <Moment format="YYYY/MM/DD h:mm A">
-                    {this.props.weatherLogs[4].date}
-                  </Moment>
-                }
-                Name={this.props.weatherLogs[4].temperature}
-                Salary={this.props.weatherLogs[4].humidity}
-                Country={this.props.weatherLogs[4].wind}
-                City={this.props.weatherLogs[4].winddirection}
-              />
+            {WeatherLogData.map(DataLog => (
+                <tr key={DataLog._id}>
+                  <td>                         
+                    <Moment format="YYYY/MM/DD h:mm A">
+                      {DataLog.date}
+                    </Moment>
+                  </td>
+                  <td> 
+                    {DataLog.temperature} °C
+                  </td>
+                  <td> 
+                    {DataLog.humidity} %
+                  </td>
+                  <td> 
+                    {DataLog.wind} KPH
+                  </td>
+                  <td> 
+                    {DataLog.winddirection}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
