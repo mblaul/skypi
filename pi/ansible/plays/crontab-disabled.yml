@@ -2,11 +2,12 @@
 - name: disable cronjob
   hosts: all
   become: yes
+  become_method: sudo
 
   tasks:
   - name: disable cronjob
     cron:
-      name: "Push Data"
-      user: "dev"
-      disabled: yes
-      job: "sudo python /home/dev/skypi/pi/py/sensor_info.py"
+      name: Push Data
+      user: root
+      disabled: yes 
+      job: "python /home/dev/skypi/pi/py/sensor_info.py"
