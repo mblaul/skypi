@@ -3,8 +3,15 @@ import { Line } from 'react-chartjs-2';
 
 export default class Timegraph extends Component {
   render() {
+    const moment = require('moment');
     const data = {
-      labels: ['0200', '0400', '0600', '0800', '1000', '1200', '1400'],
+      labels: [
+        moment(this.props.weatherLogs[4].date).format("h:mm A"), 
+        moment(this.props.weatherLogs[3].date).format("h:mm A"), 
+        moment(this.props.weatherLogs[2].date).format("h:mm A"), 
+        moment(this.props.weatherLogs[1].date).format("h:mm A"), 
+        moment(this.props.weatherLogs[0].date).format("h:mm A")
+      ],
       datasets: [
         {
           label: 'Humidity',
@@ -48,10 +55,11 @@ export default class Timegraph extends Component {
           borderWidth: 2,
           pointRadius: 2
         }
-      ]
+      ],
+      xAxisID: 'x-axis'
     };
     const options = {
-      responsive: true
+      responsive: true,
     };
 
     return (

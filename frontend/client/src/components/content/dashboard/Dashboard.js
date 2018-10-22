@@ -113,13 +113,11 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
   weather: PropTypes.object.isRequired,
-  weatherLogs: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
   weather: state.weather,
   auth: state.auth,
-  weatherLogs: state.weatherLogs
 });
 
 export default connect(

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TableRow from '../dashboard/TableRow';
 import TableHeader from '../dashboard/TableHeader';
+import Moment from 'react-moment';
+
 export default class Stripetable extends Component {
   render() {
     return (
@@ -24,35 +26,55 @@ export default class Stripetable extends Component {
             </thead>
             <tbody>
               <TableRow
-                ID={this.props.weatherLogs[0].date}
+                ID={ 
+                  <Moment format="YYYY/MM/DD h:mm A">
+                    {this.props.weatherLogs[0].date}
+                  </Moment>
+                }
                 Name={this.props.weatherLogs[0].temperature}
                 Salary={this.props.weatherLogs[0].humidity}
                 Country={this.props.weatherLogs[0].wind}
                 City={this.props.weatherLogs[0].winddirection}
               />
               <TableRow
-                ID={this.props.weatherLogs[1].date}
+                ID={ 
+                  <Moment format="YYYY/MM/DD h:mm A">
+                    {this.props.weatherLogs[1].date}
+                  </Moment>
+                }
                 Name={this.props.weatherLogs[1].temperature}
                 Salary={this.props.weatherLogs[1].humidity}
                 Country={this.props.weatherLogs[1].wind}
                 City={this.props.weatherLogs[1].winddirection}
               />
               <TableRow
-                ID={this.props.weatherLogs[2].date}
+                ID={ 
+                  <Moment format="YYYY/MM/DD h:mm A">
+                    {this.props.weatherLogs[2].date}
+                  </Moment>
+                }
                 Name={this.props.weatherLogs[2].temperature}
                 Salary={this.props.weatherLogs[2].humidity}
                 Country={this.props.weatherLogs[2].wind}
                 City={this.props.weatherLogs[2].winddirection}
               />
               <TableRow
-                ID={this.props.weatherLogs[3].date}
+                ID={ 
+                  <Moment format="YYYY/MM/DD h:mm A">
+                    {this.props.weatherLogs[3].date}
+                  </Moment>
+                }
                 Name={this.props.weatherLogs[3].temperature}
                 Salary={this.props.weatherLogs[3].humidity}
                 Country={this.props.weatherLogs[3].wind}
                 City={this.props.weatherLogs[3].winddirection}
               />
               <TableRow
-                ID={this.props.weatherLogs[4].date}
+                ID={ 
+                  <Moment format="YYYY/MM/DD h:mm A">
+                    {this.props.weatherLogs[4].date}
+                  </Moment>
+                }
                 Name={this.props.weatherLogs[4].temperature}
                 Salary={this.props.weatherLogs[4].humidity}
                 Country={this.props.weatherLogs[4].wind}
