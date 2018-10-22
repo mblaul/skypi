@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import TableRow from '../dashboard/TableRow';
-import TableHeader from '../dashboard/TableHeader';
 import Moment from 'react-moment';
 
 export default class Stripetable extends Component {
   render() {
     //
-    const WeatherLogData = this.props.weatherLogs
+    const WeatherLogData = this.props.weatherLogs;
     const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
     return (
       <div className="card">

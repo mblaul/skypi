@@ -1,9 +1,5 @@
 import React, { Component} from 'react';
-
-import Quickview from './dashboard/Quickview';
 import Stripetable from './dashboard/Stripetable';
-//import Timegraph from './dashboard/Timegraph';
-
 
 export default class Status extends Component {
   constructor(props) {
@@ -26,22 +22,6 @@ export default class Status extends Component {
         </div>
       </header>
         <div>
-          <div>
-            <h2>Weather Station Quick View</h2>
-            <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <Quickview Type={'Temp'} Reading={'77°'} />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <Quickview Type={'Humidity'} Reading={'68°'}/>
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <Quickview Type={'Wind Speed'} Reading={'17 mph'}/>
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <Quickview Type={'Wind Direction'} Reading={'NorthEast'}/>
-              </div>
-            </div>
           </div>
           <Stripetable   
                 TableHeader={'Weather Station\'s Readings'}
@@ -53,8 +33,6 @@ export default class Status extends Component {
                 Column5={'Wind Direction'}
             />
         </div>
-      </div>
-
     );
   }
 }
