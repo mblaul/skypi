@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import TableRow from '../dashboard/TableRow';
 import TableHeader from '../dashboard/TableHeader';
+import Moment from 'react-moment';
+
 export default class Stripetable extends Component {
   render() {
+    //
+    const WeatherLogData = this.props.weatherLogs
+    const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
     return (
       <div className="card">
         <div className="header">
@@ -13,51 +18,35 @@ export default class Stripetable extends Component {
           <table className="table table-hover table-striped">
             <thead>
               <tr>
-                <TableHeader 
-                  Header1={this.props.Column1}
-                  Header2={this.props.Column2}
-                  Header3={this.props.Column3}
-                  Header4={this.props.Column4}
-                  Header5={this.props.Column5}
-                />
+              {tableHeaders.map(header => (
+                  <th scope="col" key={header}>
+                    {header}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              <TableRow
-                ID={'1'}
-                Name={'Station1'}
-                Salary={'$81,000'}
-                Country={'United States'}
-                City={'Rochester'}
-              />
-              <TableRow
-                ID={'2'}
-                Name={'Station2'}
-                Salary={'$82,000'}
-                Country={'Canada'}
-                City={'Hamilton'}
-              />
-              <TableRow
-                ID={'3'}
-                Name={'Station3'}
-                Salary={'$83,000'}
-                Country={'United States'}
-                City={'New York'}
-              />
-              <TableRow
-                ID={'4'}
-                Name={'Station4'}
-                Salary={'$84,000'}
-                Country={'Canada'}
-                City={'Blind River'}
-              />
-              <TableRow
-                ID={'5'}
-                Name={'Station5'}
-                Salary={'$85,000'}
-                Country={'United States'}
-                City={'Austin'}
-              />
+            {WeatherLogData.map(DataLog => (
+                <tr key={DataLog._id}>
+                  <td>                         
+                    <Moment format="YYYY/MM/DD h:mm A">
+                      {DataLog.date}
+                    </Moment>
+                  </td>
+                  <td> 
+                    {DataLog.temperature} °C
+                  </td>
+                  <td> 
+                    {DataLog.humidity} %
+                  </td>
+                  <td> 
+                    {DataLog.wind} KPH
+                  </td>
+                  <td> 
+                    {DataLog.winddirection}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

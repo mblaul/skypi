@@ -64,15 +64,17 @@ class Dashboard extends Component {
                 <Stripetable
                   TableHeader={'Recent readings'}
                   TableSubtitle={'Your home station'}
-                  Column1={'Time'}
+                  Column1={'Date/Time'}
                   Column2={'Temp'}
                   Column3={'Humidity'}
                   Column4={'Wind Speed'}
-                  Column5={'Wind Direction'}
+                  Column5={'Wind Direction'} 
+                  weatherLogs={weatherLogs}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <Timegraph />
+                <Timegraph 
+                  weatherLogs={weatherLogs} />
               </div>
             </div>
           </div>
@@ -85,12 +87,6 @@ class Dashboard extends Component {
               You need to favorite a device!
               <br />
               Please follow the link below to find a favorite.
-            </p>
-            <p className="lead alert alert-danger">
-              To devs: the next page is still a work in progess.
-              <br />
-              Please msg Matt or Alex or someone else with DB access to manually
-              add a favorite device.
             </p>
             <Link to="/stations" className="btn btn-lg btn-info">
               Device List
@@ -116,12 +112,12 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
-  weather: PropTypes.object.isRequired
+  weather: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   weather: state.weather,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(

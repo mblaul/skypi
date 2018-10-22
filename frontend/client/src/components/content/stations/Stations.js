@@ -59,19 +59,27 @@ class Stations extends Component {
                   <th scope="row" key={device._id}>
                     {device.name}
                   </th>
-                  {'city' in device.lastWeatherLog === true ? (
-                    <td>{device.lastWeatherLog.city}</td>
+                  {device.lastWeatherLog ? (
+                    Object.keys(device.lastWeatherLog).length > 0 ? (
+                      <td>{device.lastWeatherLog.city}</td>
+                    ) : (
+                      <td>Not logged yet</td>
+                    )
                   ) : (
-                    <td>N/A</td>
+                    <td>Not logged yet</td>
                   )}
-                  {'city' in device.lastWeatherLog === true ? (
-                    <td>
-                      <Moment format="YYYY/MM/DD h:mm A">
-                        {device.lastWeatherLog.date}
-                      </Moment>
-                    </td>
+                  {device.lastWeatherLog ? (
+                    Object.keys(device.lastWeatherLog).length > 0 ? (
+                      <td>
+                        <Moment format="YYYY/MM/DD h:mm A">
+                          {device.lastWeatherLog.date}
+                        </Moment>
+                      </td>
+                    ) : (
+                      <td>Not logged yet</td>
+                    )
                   ) : (
-                    <td>N/A</td>
+                    <td>Not logged yet</td>
                   )}
                   <td>{device.status}</td>
                   <td>
