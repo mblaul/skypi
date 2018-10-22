@@ -4,7 +4,13 @@ import Moment from 'react-moment';
 export default class Stripetable extends Component {
   render() {
     //
-    const WeatherLogData = this.props.weatherLogs;
+    const WeatherLogData = [
+      this.props.weatherLogs[0], 
+      this.props.weatherLogs[1],
+      this.props.weatherLogs[2],
+      this.props.weatherLogs[3],
+      this.props.weatherLogs[4]
+      ]
     const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
     return (
       <div className="card">
