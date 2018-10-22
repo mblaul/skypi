@@ -24,10 +24,10 @@ def degrees_to_cardinal(d):
 
 host_name = socket.gethostname()
 sensor = BME280(t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8, h_mode=BME280_OSAMPLE_8)
-sensor_temperature = sensor.read_temperature()
+sensor_temperature = "{:.2f}".format(sensor.read_temperature())
 sensor_pascals = sensor.read_pressure()
-sensor_pressure = sensor_pascals / 100
-sensor_humidity = sensor.read_humidity()
+sensor_pressure = "{:.2f}".format(sensor_pascals / 100)
+sensor_humidity = "{:.2f}".format(sensor.read_humidity())
 
 #Using geocoder to source the location of the device based on the IP address
 g = geocoder.ip('me')
@@ -50,9 +50,9 @@ json_data = requests.get(api_latlng).json()
 #Variables based on the required informataion sourced from the API
 location = json_data['name']
 api_wind = json_data['wind']['speed']
-api_temp = json_data['main']['temp']
-api_humidity = json_data['main']['humidity']
-api_pressure = json_data['main']['pressure']
+api_temp = '%.2f' % (json_data['main']['temp'])
+api_humidity = '%.2f' % (json_data['main']['humidity'])
+api_pressure = '%.2f' % (json_data['main']['pressure'])
 api_wind_direction = json_data['wind']['deg']
 wind_direction = degrees_to_cardinal(api_wind_direction)
 
@@ -60,14 +60,17 @@ wind_direction = degrees_to_cardinal(api_wind_direction)
 print('')
 print('Location: ' + location)
 print('Wind speed: ' + str(api_wind))
-print('Humidity: ' + "{:.2f}".format(sensor_humidity))
-print('Pressure: ' + "{:.2f}".format(sensor_pressure))
-print('Temperature: ' + "{:.2f}".format(sensor_temperature))
+print('Humidity: ' + sensor_humidity)
+print('Pressure: ' + sensor_pressure)
+print('Temperature: ' + sensor_temperature)
 print('Wind Direction: ' + str(degrees_to_cardinal(api_wind_direction)))
 print('City: ' + city)
 print('State: ' + state)
 print('Country: ' + country)
 print('Zip Code: ' + str(zip_code))
+print(api_humidity)
+print(api_temp)
+print(api_pressure)
 
 mongo_api.pushdata(host_name, sensor_temperature, sensor_humidity, lat, lng, sensor_pressure,
-city, state, float(zip_code), country, api_wind, wind_direction)
+city, state, zip_code, country, api_wind, wind_direction)
