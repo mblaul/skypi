@@ -6,7 +6,13 @@ const data = {
   datasets: [
     {
       label: 'Humidity',
-      data: [65, 68, 73, 75, 71, 67, 72],
+      data: [
+        this.props.weatherLogs[0].humidity,
+        this.props.weatherLogs[1].humidity,
+        this.props.weatherLogs[2].humidity,
+        this.props.weatherLogs[3].humidity,
+        this.props.weatherLogs[4].humidity
+      ],
       backgroundColor: ['rgba(0, 0, 0, 0)'],
       borderColor: ['rgba(0, 102, 255, .7)'],
       borderWidth: 2,
@@ -14,7 +20,13 @@ const data = {
     },
     {
       label: 'Temperature (F)',
-      data: [33, 54, 50, 40, 67, 63, 43],
+      data: [
+        this.props.weatherLogs[0].temperature,
+        this.props.weatherLogs[1].temperature,
+        this.props.weatherLogs[2].temperature,
+        this.props.weatherLogs[3].temperature,
+        this.props.weatherLogs[4].temperature
+      ],
       backgroundColor: ['rgba(0, 0, 0, 0)'],
       borderColor: ['rgba(200, 20, 20, .7)'],
       borderWidth: 2,
@@ -22,7 +34,13 @@ const data = {
     },
     {
       label: 'Wind Speed (mph)',
-      data: [13, 18, 26, 19, 22, 19, 18],
+      data: [
+        this.props.weatherLogs[0].wind,
+        this.props.weatherLogs[1].wind,
+        this.props.weatherLogs[2].wind,
+        this.props.weatherLogs[3].wind,
+        this.props.weatherLogs[4].wind
+      ],
       backgroundColor: ['rgba(0, 0, 0, 0)'],
       borderColor: ['rgba(41, 163, 41, .7)'],
       borderWidth: 2,

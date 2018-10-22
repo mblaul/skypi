@@ -68,12 +68,13 @@ class Dashboard extends Component {
                   Column2={'Temp'}
                   Column3={'Humidity'}
                   Column4={'Wind Speed'}
-                  Column5={'Wind Direction'}
-                  weatherLogs = {weatherLogs}
+                  Column5={'Wind Direction'} 
+                  weatherLogs={weatherLogs}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <Timegraph />
+                <Timegraph 
+                  weatherLogs={weatherLogs} />
               </div>
             </div>
           </div>
