@@ -12,11 +12,15 @@ export default class Stripetable extends Component {
       this.props.weatherLogs[4]
       ]
     // Array for Dashboard Headers
-    const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
-    return (
+    //const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
+    // Attempt to Pass in an array to further dynamic capabilities
+    const tableHeaders = this.props.TableHeaders
+      return (
       <div className="card">
         <div className="header">
+          {/* This takes the passed variable "TableHeader" and Puts it in the top of the table */}
           <h4 className="title">{this.props.TableHeader}</h4>
+          {/* This takes the passed variable "TableSubtitle" and Puts it inbelow the tableHeader specified above */}
           <p className="category">{this.props.TableSubtitle}</p>
         </div>
         <div className="content table-responsive table-full-width">
