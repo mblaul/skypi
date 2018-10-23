@@ -115,6 +115,26 @@ module.exports.login_post = (req, res) => {
     });
 };
 
+module.exports.delete_delete = (req, res) => {
+  let errors = {};
+
+  const user = req.user.id;
+  const userToDelete = req.params.userId;
+
+  User.findById(user)
+    .then(user => {
+      if (user.roles.isAdmin || user._id === userToDelete) {
+        user.remove();
+        return res.json({ message: 'User removed' });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
 module.exports.verify_get = (req, res) => {
   let errors = {};
 

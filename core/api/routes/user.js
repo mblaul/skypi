@@ -23,6 +23,15 @@ router.post('/register', userController.register_post);
 // @access  Public
 router.post('/login', userController.login_post);
 
+// @route   	DELETE api/user/:userId
+// @desc   		Allows a user or admin to delete a user's account
+// @access	  Private
+router.get(
+  '/delete/:userId',
+  passport.authenticate('jwt', { session: false }),
+  userController.delete_delete
+);
+
 // @route   	GET api/user/verify
 // @desc   		Send user an email to verify their account
 // @access		Private
