@@ -15,13 +15,13 @@ class Stations extends Component {
       this.props.history.push('/login');
     }
     this.props.getPublicDevices();
+    this.props.getFavoriteWeatherData();
   }
 
   componentWillReceieveProps(nextProps) {
     if (!nextProps.auth) {
       this.props.history.push('/login');
     }
-    this.props.getFaoriteWeatherData();
   }
 
   onFavoriteClick(deviceId) {
@@ -31,14 +31,18 @@ class Stations extends Component {
   render() {
     const { devices, loading } = this.props.devices;
     const { weatherLogs } = this.props.weather;
-    const currentFavorite = weatherLogs[0];
+    let currentFavorite;
     let stationsContent;
+
+    {/* If a favorite device is not found, default to first listed device */}
+    if (weatherLogs[0] !== undefined) { currentFavorite = weatherLogs[0] }
+    else { currentFavorite = devices[0] }
 
     if (devices === [] || loading) {
       stationsContent = <Spinner />;
     } else {
       if (currentFavorite !== undefined){
-        console.log(currentFavorite.source);
+        console.log(currentFavorite);
       }
       // Check to see if values have fully loaded for weather data
       if (devices.length > 0) {
@@ -95,8 +99,9 @@ class Stations extends Component {
                       type="button"
                       className="btn"
                     >
+                      {/* If this row is the favorite device, highlight the star */}
                       <i className={
-                        (currentFavorite !== undefined && device.name === currentFavorite.source) ?
+                        (device.name === currentFavorite.source || device.name === currentFavorite.name) ?
                         "fas fa-star fa-inverse text-alert" :
                         "fas fa-star text-alert"
                         }
