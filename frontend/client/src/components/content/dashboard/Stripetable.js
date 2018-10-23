@@ -11,7 +11,9 @@ export default class Stripetable extends Component {
       this.props.weatherLogs[3],
       this.props.weatherLogs[4]
       ]
-    const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
+    // Array for Dashboard Headers
+    //const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
+  const tableHeaders = this.props.TableHeaders
     return (
       <div className="card">
         <div className="header">

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
@@ -9,10 +8,8 @@ import { getPublicDevices } from '../../../actions/deviceActions';
 // Import common components
 import Spinner from '../../common/Spinner';
 
-//import pieces of Dashboard
+//import pieces of Admin
 import Stripetable from '../dashboard/Stripetable';
-import Timegraph from '../dashboard/Timegraph';
-import Quickview from '../dashboard/Quickview';
 
 class Admin extends Component {
   componentDidMount() {
@@ -31,59 +28,35 @@ class Admin extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
+    const devices = this.props.devices;
     let adminContent;
-
+    const AdminHeader = [
+      'User',
+      'E-Mail',
+      'Reset Password',
+      'Admin?',
+      'Delete Account'
+      ]
     if (weatherLogs === undefined || loading) {
       adminContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
-        const quickInfo = weatherLogs[0];
         adminContent = (
           <div>
-            <div className="display-4">{quickInfo.source}</div>
-            <div className="text-muted mb-3">
-              Last Updated:{' '}
-              <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
-            </div>
-            <div className="row mb-3">
-              <Quickview
-                Type={'Temperature'}
-                Reading={quickInfo.temperature + '°C'}
-              />
-              <Quickview
-                Type={'Wind Speed'}
-                Reading={quickInfo.wind + ' kph'}
-              />
-              <Quickview 
-                Type={'Humidity'} 
-                Reading={quickInfo.humidity + '%'} 
-                />
-              <Quickview
-                Type={'Wind Direction'}
-                Reading={quickInfo.winddirection}
-              />
-              <Quickview
-                Type={'Pressure'}
-                Reading={quickInfo.pressure + ' hPa'}
-              />
-            </div>
             <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-6">
+              <div className="col-sm-12 col-md-12 col-lg-12">
                 <Stripetable
-                  TableHeader={'Recent readings'}
-                  TableSubtitle={'Your home station'}
-                  Column1={'Date/Time'}
-                  Column2={'Temp'}
-                  Column3={'Humidity'}
-                  Column4={'Wind Speed'}
-                  Column5={'Wind Direction'} 
+                  TableHeader={'Users in the System'}
+                  TableSubtitle={'View all users and perform administrative actions as necessary'}
+                  Column1={'User'}
+                  Column2={'Email'}
+                  Column3={'Reset Password'}
+                  Column4={'Admin?'}
+                  Column5={'Delete Account'} 
+                  TableHeaders={AdminHeader}
                   weatherLogs={weatherLogs}
                 />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <Timegraph 
-                  weatherLogs={weatherLogs} />
               </div>
             </div>
           </div>
@@ -122,16 +95,17 @@ class Admin extends Component {
 Admin.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
   weather: PropTypes.object.isRequired,
-  getPublicDevices: PropTypes.func.isRequired
+  getPublicDevices: PropTypes.func.isRequired,
+  devices: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   weather: state.weather,
   auth: state.auth,
+  devices: state.devices
 });
 
 export default connect(
   mapStateToProps,
-  { getFavoriteWeatherData },
-  { getPublicDevices }
+  { getFavoriteWeatherData, getPublicDevices }
 )(Admin);
