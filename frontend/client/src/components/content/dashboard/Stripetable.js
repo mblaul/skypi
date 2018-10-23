@@ -3,7 +3,7 @@ import Moment from 'react-moment';
 
 export default class Stripetable extends Component {
   render() {
-    //
+    // Declare an Array for the headers to display in the table
     const WeatherLogData = [
       this.props.weatherLogs[0], 
       this.props.weatherLogs[1],
