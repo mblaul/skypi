@@ -69,4 +69,13 @@ router.get(
   userController.favoritedevice_get
 );
 
+// @route   	POST api/user/preferences
+// @desc   		Set a user's preferences
+// @access	  Private
+router.post(
+  '/preferences',
+  passport.authenticate('jwt', { session: false }),
+  userController.preferences_post
+);
+
 module.exports = router;

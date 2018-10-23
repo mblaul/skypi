@@ -403,3 +403,21 @@ module.exports.favoritedevice_get = (req, res) => {
       return res.status(500).json(errors);
     });
 };
+
+module.exports.preferences_post = (req, res) => {
+  let errors = {};
+
+  const preferences = req.body.preferences;
+
+  User.findById(req.user.id)
+    .then(user => {
+      user.preferences = preferences;
+      user.save();
+      return res.json(user);
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
