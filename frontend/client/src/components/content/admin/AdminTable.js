@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
 
-export default class Stripetable extends Component {
+export default class Admintable extends Component {
   render() {
     // Declare an Array for the headers to display in the table
     const WeatherLogData = [
@@ -12,7 +11,7 @@ export default class Stripetable extends Component {
       this.props.weatherLogs[4]
       ]
     // Array for Dashboard Headers
-    const tableHeaders = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction'];
+    const tableHeaders = ['User', 'Email', 'Reset Password', 'Admin?', 'Delete Account'];
     return (
       <div className="card">
         <div className="header">
@@ -34,21 +33,19 @@ export default class Stripetable extends Component {
             {WeatherLogData.map(DataLog => (
                 <tr key={DataLog._id}>
                   <td>                         
-                    <Moment format="YYYY/MM/DD h:mm A">
-                      {DataLog.date}
-                    </Moment>
+                    {'Username'}
                   </td>
                   <td> 
-                    {DataLog.temperature} °C
+                    {'mail@mail.com'}
                   </td>
                   <td> 
-                    {DataLog.humidity} %
+                    {'Yes/No'}
                   </td>
                   <td> 
-                    {DataLog.wind} KPH
+                    {'Checked/Unchecked'}
                   </td>
                   <td> 
-                    {DataLog.winddirection}
+                    {'Yes/No'}
                   </td>
                 </tr>
               ))}

@@ -9,7 +9,7 @@ import { getPublicDevices } from '../../../actions/deviceActions';
 import Spinner from '../../common/Spinner';
 
 //import pieces of Admin
-import Stripetable from '../dashboard/Stripetable';
+import Admintable from './AdminTable';
 
 class Admin extends Component {
   componentDidMount() {
@@ -30,13 +30,6 @@ class Admin extends Component {
     const { weatherLogs, loading } = this.props.weather;
     const devices = this.props.devices;
     let adminContent;
-    const AdminHeader = [
-      'User',
-      'E-Mail',
-      'Reset Password',
-      'Admin?',
-      'Delete Account'
-      ]
     if (weatherLogs === undefined || loading) {
       adminContent = <Spinner />;
     } else {
@@ -46,15 +39,14 @@ class Admin extends Component {
           <div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-12">
-                <Stripetable
+                <Admintable
                   TableHeader={'Users in the System'}
                   TableSubtitle={'View all users and perform administrative actions as necessary'}
                   Column1={'User'}
                   Column2={'Email'}
                   Column3={'Reset Password'}
                   Column4={'Admin?'}
-                  Column5={'Delete Account'} 
-                  TableHeaders={AdminHeader}
+                  Column5={'Delete Account'}
                   weatherLogs={weatherLogs}
                 />
               </div>
