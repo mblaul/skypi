@@ -36,14 +36,10 @@ class Stations extends Component {
 
     /* If a favorite device is not found, default to first listed device */
     if (weatherLogs[0] !== undefined) { currentFavorite = weatherLogs[0] }
-    else { currentFavorite = devices[0] }
 
     if (devices === [] || loading) {
       stationsContent = <Spinner />;
     } else {
-      if (currentFavorite !== undefined){
-        console.log(currentFavorite);
-      }
       // Check to see if values have fully loaded for weather data
       if (devices.length > 0) {
         const tableHeaders = [
@@ -101,9 +97,9 @@ class Stations extends Component {
                     >
                       {/* If this row is the favorite device, highlight the star */}
                       <i className={
-                        (device.name === currentFavorite.source || device.name === currentFavorite.name) ?
-                        "fas fa-star fa-inverse text-alert" :
-                        "fas fa-star text-alert"
+                          currentFavorite !== undefined && (device.name === currentFavorite.source || device.name === currentFavorite.name) ?
+                          "fas fa-star fa-inverse text-alert" :
+                          "fas fa-star text-alert"
                         }
                       />
                     </button>
