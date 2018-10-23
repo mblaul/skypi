@@ -27,8 +27,14 @@ class Admin extends Component {
   }
 
   render() {
+    const AdminDummyData = [
+      {_id:"abcdefg0",userName:"Daniel W", email:"NotDanW@SkiPi.com", Admin:true},
+      {_id:"abcdefg1",userName:"Daniel C", email:"NotDanC@SkiPi.com", Admin:false},
+      {_id:"abcdefg2",userName:"Troy B", email:"NotTroyB@SkiPi.com", Admin:false},
+      {_id:"abcdefg3",userName:"Matt B", email:"NotMattB@SkiPi.com", Admin:true},
+      {_id:"abcdefg4",userName:"Jacob B", email:"NotJacobB@SkiPi.com", Admin:true}
+    ];
     const { weatherLogs, loading } = this.props.weather;
-    const devices = this.props.devices;
     let adminContent;
     const AdminHeader = ['User','E-Mail','Reset Password','Admin?','Delete Account']
     if (weatherLogs === undefined || loading) {
@@ -43,13 +49,9 @@ class Admin extends Component {
                 <Stripetable
                   TableHeader={'All Users in the System'}
                   TableSubtitle={'View all users and perform administrative actions as necessary'}
-                  Column1={'User'}
-                  Column2={'Email'}
-                  Column3={'Reset Password'}
-                  Column4={'Admin?'}
-                  Column5={'Delete Account'} 
                   TableHeaders={AdminHeader}
-                  weatherLogs={weatherLogs}
+                  weatherLogs={AdminDummyData}
+                  SourcePage ={'AdminPage'}
                 />
               </div>
             </div>
