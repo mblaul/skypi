@@ -129,5 +129,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getFavoriteWeatherData }
+  { getFavoriteWeatherData },
 )(Dashboard);
