@@ -34,7 +34,7 @@ class Stations extends Component {
     let currentFavorite;
     let stationsContent;
 
-    {/* If a favorite device is not found, default to first listed device */}
+    /* If a favorite device is not found, default to first listed device */
     if (weatherLogs[0] !== undefined) { currentFavorite = weatherLogs[0] }
     else { currentFavorite = devices[0] }
 
