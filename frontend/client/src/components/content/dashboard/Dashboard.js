@@ -30,7 +30,7 @@ class Dashboard extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let dashboardContent;
-
+    const TableHeaderArray = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction']
     if (weatherLogs === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
@@ -71,12 +71,14 @@ class Dashboard extends Component {
                 <Stripetable
                   TableHeader={'Recent readings'}
                   TableSubtitle={'Your home station'}
+                  // ToDO: Remove the Colum1-5 options and test functionality
                   Column1={'Date/Time'}
                   Column2={'Temp'}
                   Column3={'Humidity'}
                   Column4={'Wind Speed'}
                   Column5={'Wind Direction'} 
                   weatherLogs={weatherLogs}
+                  TableHeaders = {TableHeaderArray}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
