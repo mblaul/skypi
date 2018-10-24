@@ -4,7 +4,8 @@ import {
   WEATHER_LOGS_LOADING,
   GET_PRIVATE_WEATHER_LOGS,
   GET_PUBLIC_WEATHER_LOGS,
-  GET_FAVORITE_WEATHER_LOGS
+  GET_FAVORITE_WEATHER_LOGS,
+  GET_DEVICE_WEATHER_LOGS
 } from './types';
 
 // Weather data loading
@@ -43,4 +44,15 @@ export const getFavoriteWeatherData = () => dispatch => {
       dispatch({ type: GET_FAVORITE_WEATHER_LOGS, payload: result.data });
     })
     .catch(err => dispatch({ type: GET_FAVORITE_WEATHER_LOGS, payload: [] }));
+};
+
+// Get weather logs for current users favorite device
+export const getDeviceWeatherData = deviceId => dispatch => {
+  dispatch(setWeatherLogLoading());
+  axios
+    .get(`/api/weather/data/${deviceId}`)
+    .then(result => {
+      dispatch({ type: GET_DEVICE_WEATHER_LOGS, payload: result.data });
+    })
+    .catch(err => dispatch({ type: GET_DEVICE_WEATHER_LOGS, payload: [] }));
 };

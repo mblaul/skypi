@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPublicDevices } from '../../../actions/deviceActions';
 import { setFavoriteDevice } from '../../../actions/authActions';
+import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -14,6 +15,7 @@ class Stations extends Component {
       this.props.history.push('/login');
     }
     this.props.getPublicDevices();
+    this.props.getFavoriteWeatherData();
   }
 
   componentWillReceieveProps(nextProps) {
@@ -28,11 +30,20 @@ class Stations extends Component {
 
   render() {
     const { devices, loading } = this.props.devices;
+    const { weatherLogs } = this.props.weather;
+    let currentFavorite;
     let stationsContent;
+
+    /* If a favorite device is not found, default to first listed device */
+    if (weatherLogs[0] !== undefined) { currentFavorite = weatherLogs[0] }
+    else { currentFavorite = devices[0] }
 
     if (devices === [] || loading) {
       stationsContent = <Spinner />;
     } else {
+      if (currentFavorite !== undefined){
+        console.log(currentFavorite);
+      }
       // Check to see if values have fully loaded for weather data
       if (devices.length > 0) {
         const tableHeaders = [
@@ -88,7 +99,13 @@ class Stations extends Component {
                       type="button"
                       className="btn"
                     >
-                      <i className="fas fa-star text-alert" />
+                      {/* If this row is the favorite device, highlight the star */}
+                      <i className={
+                        (device.name === currentFavorite.source || device.name === currentFavorite.name) ?
+                        "fas fa-star fa-inverse text-alert" :
+                        "fas fa-star text-alert"
+                        }
+                      />
                     </button>
                   </td>
                 </tr>
@@ -145,6 +162,7 @@ class Stations extends Component {
 }
 
 Stations.propTypes = {
+  getFavoriteWeatherData: PropTypes.func.isRequired,
   getPublicDevices: PropTypes.func.isRequired,
   setFavoriteDevice: PropTypes.func.isRequired,
   devices: PropTypes.object.isRequired
@@ -152,10 +170,11 @@ Stations.propTypes = {
 
 const mapStateToProps = state => ({
   devices: state.devices,
+  weather: state.weather,
   auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getPublicDevices, setFavoriteDevice }
+  { getFavoriteWeatherData, getPublicDevices, setFavoriteDevice }
 )(Stations);

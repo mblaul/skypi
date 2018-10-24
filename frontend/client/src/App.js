@@ -24,7 +24,6 @@ import Admin from './components/content/admin/AdminPage';
 import Dashboard from './components/content/dashboard/Dashboard';
 import Landing from './components/content/Landing';
 import Stations from './components/content/stations/Stations';
-import Status from './components/content/Status';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -60,7 +59,6 @@ class App extends Component {
               <PrivateRoute exact path="/verify" component={Verify} />
               <VerifiedRoute exact path="/dashboard" component={Dashboard} />
               <VerifiedRoute exact path="/stations" component={Stations} />
-              <VerifiedRoute exact path="/status" component={Status} />
             </Switch>
             <Switch>
               <AdminRoute exact path="/admin" component={Admin} />
