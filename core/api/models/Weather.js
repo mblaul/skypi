@@ -30,6 +30,21 @@ const WeatherSchema = new Schema({
     type: Number,
     required: true
   },
+  wind: {
+    type: Number
+  },
+  winddirection: {
+    type: String
+  },
+  precipitation: {
+    type: Number
+  },
+  description: {
+    type: String
+  },
+  detail: {
+    type: String
+  },
   city: {
     type: String,
     required: true
@@ -45,12 +60,6 @@ const WeatherSchema = new Schema({
   country: {
     type: String,
     required: true
-  },
-  wind: {
-    type: Number
-  },
-  winddirection: {
-    type: String
   },
   date: {
     type: Date,
