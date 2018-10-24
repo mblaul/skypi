@@ -159,46 +159,35 @@ module.exports.verify_get = (req, res) => {
       // Add random verify token to user
       user.tempObjects.verifyUserToken = verifyUserToken;
       user.save().then(user => {
-        // Generate test SMTP service account from ethereal.email
-        // Only needed if you don't have a real mail account for testing
-        nodemailer.createTestAccount((err, account) => {
-          // create reusable transporter object using the default SMTP transport
-          let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'skypi.noreply@gmail.com', // generated ethereal user
-              pass: config.secretEmailKey // generated ethereal password
-            }
-          });
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'skypi.noreply@gmail.com', // generated ethereal user
+            pass: config.secretEmailKey // generated ethereal password
+          }
+        });
 
-          // Create email body
-          const verificationEmailBody = verificationEmail(verifyUserToken.key);
+        // Create email body
+        const verificationEmailBody = verificationEmail(verifyUserToken.key);
 
-          // setup email data with unicode symbols
-          let mailOptions = {
-            from: 'skypi.noreply@gmail.com',
-            to: user.email,
-            subject: 'Verify your account and rule the skies.',
-            text: 'Hello',
-            html: verificationEmailBody
-          }; // sender address // list of receivers // Subject line // plain text body // html body
+        // setup email data with unicode symbols
+        let mailOptions = {
+          from: 'skypi.noreply@gmail.com',
+          to: user.email,
+          subject: 'Verify your account and rule the skies.',
+          text: 'Hello',
+          html: verificationEmailBody
+        };
 
-          // send mail with defined transport object
-          transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-              console.log(err);
-              errors.server = 'An error occured, please try again';
-              return res.status(500).json(errors);
-            }
-            console.log('Message sent: %s', info.messageId);
-            // Preview only available when sending through an Ethereal account
-            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-            return res.json({
-              message: 'A verification link will be sent to your email shortly.'
-            });
-            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-            // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-          });
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+            console.log(err);
+            errors.server = 'An error occured, please try again';
+            return res.status(500).json(errors);
+          }
+          console.log('Message sent: %s', info.messageId);
         });
       });
     })
@@ -241,7 +230,7 @@ module.exports.verify_post = (req, res) => {
     });
 };
 
-module.exports.resetpassword_post = (req, res) => {
+module.exports.changepassword_post = (req, res) => {
   let errors = {};
 
   const email = req.body.email;
@@ -270,51 +259,41 @@ module.exports.resetpassword_post = (req, res) => {
       //Add random password reset value to user
       user.tempObjects.passwordResetToken = passwordResetToken;
       user.save().then(user => {
-        // Generate test SMTP service account from ethereal.email
-        // Only needed if you don't have a real mail account for testing
-        nodemailer.createTestAccount((err, account) => {
-          // create reusable transporter object using the default SMTP transport
-          let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'skypi.noreply@gmail.com', // generated ethereal user
-              pass: config.secretEmailKey // generated ethereal password
-            }
-          });
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            user: 'skypi.noreply@gmail.com',
+            pass: config.secretEmailKey
+          }
+        });
 
-          // Create email body
-          const resetPasswordEmailBody = resetPasswordEmail(
-            user.email,
-            passwordResetToken.key
-          );
+        // Create email body
+        const resetPasswordEmailBody = resetPasswordEmail(
+          user.email,
+          passwordResetToken.key
+        );
 
-          // setup email data with unicode symbols
-          let mailOptions = {
-            from: 'skypi.noreply@gmail.com',
-            to: user.email,
-            subject: 'Password reset token',
-            text: 'Hello',
-            html: `${
-              passwordResetToken // sender address // list of receivers // Subject line // plain text body
-            }`
-          }; // html body
+        // setup email data with unicode symbols
+        let mailOptions = {
+          from: 'skypi.noreply@gmail.com',
+          to: user.email,
+          subject: 'Password reset token',
+          text: 'Hello',
+          html: `${resetPasswordEmailBody}`
+        };
 
-          // send mail with defined transport object
-          transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-              console.log(err);
-              errors.server = 'An error occured, please try again';
-              return res.status(500).json(errors);
-            }
-            console.log('Message sent: %s', info.messageId);
-            // Preview only available when sending through an Ethereal account
-            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-            return res.json({
-              message:
-                'A temporary password reset token will be sent to your email address shortly.'
-            });
-            // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-            // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (err, info) => {
+          if (err) {
+            console.log(err);
+            errors.server = 'An error occured, please try again';
+            return res.status(500).json(errors);
+          }
+          console.log('Message sent: %s', info.messageId);
+          return res.json({
+            message:
+              'A temporary password reset token will be sent to your email address shortly.'
           });
         });
       });
@@ -328,7 +307,7 @@ module.exports.resetpassword_post = (req, res) => {
     });
 };
 
-module.exports.changepassword_post = (req, res) => {
+module.exports.resetpassword_post = (req, res) => {
   let errors = {};
 
   const email = req.body.email;

@@ -7,7 +7,7 @@ module.exports = (email, passwordresettoken) => {
             <td class="content-cell">
               <h1>Hi,</h1>
               <p>You recently requested to reset you password for your SkyPi account. Use the button below to
-                verify it. <strong>This password reset link is only valid for 10 minutes.</strong></p>
+                change your password.<br><strong>This password reset link is only valid for 10 minutes.</strong></p>
               <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
@@ -17,11 +17,9 @@ module.exports = (email, passwordresettoken) => {
                           <table border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td>
-                                <form method="POST" action="http://localhost:5000/api/user/changepassword">
-                                  <input type="hidden" id="email" name="email" value="${email}">
-                                  <input type="hidden" id="passwordresettoken" name="passwordresettoken" value="${passwordresettoken}">
-                                  <input type="submit" value="Change Password">
-                                </form>
+                              <a href="http://localhost:3000/resetpassword/${passwordresettoken}">
+                                <button type="button">Change Password</button>
+                              </a>
                               </td>
                             </tr>
                           </table>
