@@ -56,6 +56,13 @@ api_pressure = '%.2f' % (json_data['main']['pressure'])
 api_wind_direction = json_data['wind']['deg']
 wind_direction = degrees_to_cardinal(api_wind_direction)
 
+dark_sky = "https://api.darksky.net/forecast/36845a09793a4c98d39a8392d66fecc8/%s,%s" % (lat, lng)
+
+dark_sky_json = requests.get(dark_sky).json()
+
+percipitation = dark_sky_json['currently']['precipProbability']
+description = dark_sky_json['minutely']['summary']
+
 #printing the OpenWeatherMap information to ensure that the information was pulled
 print('')
 print('Location: ' + location)
@@ -64,13 +71,13 @@ print('Humidity: ' + sensor_humidity)
 print('Pressure: ' + sensor_pressure)
 print('Temperature: ' + sensor_temperature)
 print('Wind Direction: ' + str(degrees_to_cardinal(api_wind_direction)))
+print('Percipitation Probability: ' + str(percipitation))
+print('Description: ' + description)
 print('City: ' + city)
 print('State: ' + state)
 print('Country: ' + country)
 print('Zip Code: ' + str(zip_code))
-print(api_humidity)
-print(api_temp)
-print(api_pressure)
+
 
 mongo_api.pushdata(host_name, sensor_temperature, sensor_humidity, lat, lng, sensor_pressure,
-city, state, zip_code, country, api_wind, wind_direction)
+city, state, zip_code, country, api_wind, wind_direction, percipitation, description)
