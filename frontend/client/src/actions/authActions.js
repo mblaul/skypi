@@ -49,11 +49,19 @@ export const logoutUser = () => dispatch => {
   dispatch(setCurrentUser({}));
 };
 
+// Let user delete their account
+export const deleteUser = userId => dispatch => {
+  axios
+    .delete(`/api/user/delete/${userId}`)
+    .then(() => dispatch(logoutUser(), alert('Your account has been deleted')))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
 // Send user verification email
 export const emailUserVerification = () => dispatch => {
   axios
     .get('/api/user/verify')
-    .then(() => {})
+    .then()
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
@@ -61,7 +69,7 @@ export const emailUserVerification = () => dispatch => {
 export const confirmUserVerification = verificationData => dispatch => {
   axios
     .post('/api/user/verify', verificationData)
-    .then(() => dispatch(logoutUser({})))
+    .then(() => dispatch(logoutUser()))
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 

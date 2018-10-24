@@ -24,12 +24,15 @@ module.exports.log_post = (req, res) => {
     latitude: req.body.latitude,
     longitude: req.body.longitude,
     pressure: req.body.pressure,
+    precipitation: req.body.precipitation,
+    description: req.body.description,
+    detail: req.body.detail,
+    wind: req.body.wind,
+    winddirection: req.body.winddirection,
     city: req.body.city,
     state: req.body.state,
     zipcode: req.body.zipcode,
-    country: req.body.country,
-    wind: req.body.wind,
-    winddirection: req.body.winddirection
+    country: req.body.country
   });
 
   newWeather

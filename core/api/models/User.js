@@ -36,6 +36,15 @@ const UserSchema = new Schema({
       default: false
     }
   },
+  preferences: {
+    units: {
+      type: String,
+      default: 'metric'
+    },
+    location: {
+      type: String
+    }
+  },
   tempObjects: {
     verifyUserToken: {
       key: {
