@@ -323,6 +323,7 @@ module.exports.resetpassword_post = (req, res) => {
   User.findOne({ email })
     .then(user => {
       existingToken = user.tempObjects.passwordResetToken;
+      console.log(existingToken);
       if (
         existingToken.expireTime < moment().format() ||
         existingToken.key !== passwordResetToken

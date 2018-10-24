@@ -25,6 +25,7 @@ import Settings from './components/content/user/Settings';
 import Dashboard from './components/content/dashboard/Dashboard';
 import Landing from './components/content/Landing';
 import Stations from './components/content/stations/Stations';
+import ResetPassword from './components/authentication/ResetPassword';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -55,6 +56,11 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route
+              exact
+              path="/resetpassword/:token"
+              component={ResetPassword}
+            />
             {/* Switch allows redirects on private routes */}
             <Switch>
               <PrivateRoute exact path="/verify" component={Verify} />
