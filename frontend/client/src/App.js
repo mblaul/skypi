@@ -21,6 +21,7 @@ import Verify from './components/authentication/Verify';
 
 // Import components that are used to display content
 import Admin from './components/content/admin/AdminPage';
+import Settings from './components/content/user/Settings';
 import Dashboard from './components/content/dashboard/Dashboard';
 import Landing from './components/content/Landing';
 import Stations from './components/content/stations/Stations';
@@ -57,6 +58,7 @@ class App extends Component {
             {/* Switch allows redirects on private routes */}
             <Switch>
               <PrivateRoute exact path="/verify" component={Verify} />
+              <VerifiedRoute exact path="/settings" component={Settings} />
               <VerifiedRoute exact path="/dashboard" component={Dashboard} />
               <VerifiedRoute exact path="/stations" component={Stations} />
             </Switch>
