@@ -316,7 +316,7 @@ module.exports.resetpassword_post = (req, res) => {
   const passwordResetToken = req.body.passwordresettoken;
 
   if (password !== password2) {
-    errors.password = 'Your passwords do not match';
+    errors.password2 = 'Your passwords do not match';
     return res.status(500).json(errors);
   }
 
