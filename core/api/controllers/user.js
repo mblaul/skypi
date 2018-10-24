@@ -256,31 +256,28 @@ module.exports.changepassword_post = (req, res) => {
           .format()
       };
 
-      //Add random password reset value to user
+      // Add random verify token to user
       user.tempObjects.passwordResetToken = passwordResetToken;
       user.save().then(user => {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
-            user: 'skypi.noreply@gmail.com',
-            pass: config.secretEmailKey
+            user: 'skypi.noreply@gmail.com', // generated ethereal user
+            pass: config.secretEmailKey // generated ethereal password
           }
         });
 
         // Create email body
-        const resetPasswordEmailBody = resetPasswordEmail(
-          user.email,
-          passwordResetToken.key
-        );
+        const resetPasswordEmail = resetPasswordEmail(passwordResetToken.key);
 
         // setup email data with unicode symbols
         let mailOptions = {
           from: 'skypi.noreply@gmail.com',
           to: user.email,
-          subject: 'Password reset token',
+          subject: 'Verify your account and rule the skies.',
           text: 'Hello',
-          html: `${resetPasswordEmailBody}`
+          html: verificationEmailBody
         };
 
         // send mail with defined transport object
@@ -291,10 +288,6 @@ module.exports.changepassword_post = (req, res) => {
             return res.status(500).json(errors);
           }
           console.log('Message sent: %s', info.messageId);
-          return res.json({
-            message:
-              'A temporary password reset token will be sent to your email address shortly.'
-          });
         });
       });
     })
@@ -323,7 +316,6 @@ module.exports.resetpassword_post = (req, res) => {
   User.findOne({ email })
     .then(user => {
       existingToken = user.tempObjects.passwordResetToken;
-      console.log(existingToken);
       if (
         existingToken.expireTime < moment().format() ||
         existingToken.key !== passwordResetToken

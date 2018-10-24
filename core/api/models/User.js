@@ -57,7 +57,7 @@ const UserSchema = new Schema({
         type: Date
       }
     },
-    passworResetToken: {
+    passwordResetToken: {
       key: {
         type: Number
       },
