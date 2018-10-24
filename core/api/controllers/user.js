@@ -235,30 +235,31 @@ module.exports.changepassword_post = (req, res) => {
 
   const email = req.body.email;
 
-  User.findOne({ email: email })
-    .then(user => {
-      // Check to see if the user exists
-      if (!user) {
-        return res.json({
-          message:
-            'A temporary password reset token will be sent to your email address shortly.'
-        });
-      }
+  User.findOne({ email: email }).then(user => {
+    // Check to see if the user exists
+    if (!user) {
+      return res.json({
+        message:
+          'A temporary password reset token will be sent to your email address shortly.'
+      });
+    }
 
-      // User matched, create password reset token
-      const passwordResetToken = {
-        key: Math.random()
-          .toString(36)
-          .replace('0.', ''),
-        created: moment().format(),
-        expireTime: moment(this.created)
-          .add(10, 'm')
-          .format()
-      };
+    // User matched, create password reset token
+    const passwordResetToken = {
+      key: Math.random()
+        .toString(36)
+        .replace('0.', ''),
+      created: moment().format(),
+      expireTime: moment(this.created)
+        .add(10, 'm')
+        .format()
+    };
 
-      // Add random verify token to user
-      user.tempObjects.passwordResetToken = passwordResetToken;
-      user.save().then(user => {
+    // Add random verify token to user
+    user.tempObjects.passwordResetToken = passwordResetToken;
+    user
+      .save()
+      .then(user => {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -289,15 +290,15 @@ module.exports.changepassword_post = (req, res) => {
           }
           console.log('Message sent: %s', info.messageId);
         });
+      })
+      // If promise rejected then user doesn't exist
+      .catch(() => {
+        return res.json({
+          message:
+            'A temporary password reset token will be sent to your email address shortly.'
+        });
       });
-    })
-    // If promise rejected then user doesn't exist
-    .catch(() => {
-      return res.json({
-        message:
-          'A temporary password reset token will be sent to your email address shortly.'
-      });
-    });
+  });
 };
 
 module.exports.resetpassword_post = (req, res) => {
