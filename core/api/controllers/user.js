@@ -143,9 +143,10 @@ module.exports.verify_get = (req, res) => {
       // Check to see if the user exists
       if (!user) {
         return res.json({
-          message: 'A verification link will be sent to your email shortly.'
+          message: 'A verification code will be sent to your email shortly.'
         });
       }
+
       // User matched, create password reset token
       const verifyUserToken = {
         key: Math.random()
@@ -156,6 +157,7 @@ module.exports.verify_get = (req, res) => {
           .add(10, 'm')
           .format()
       };
+
       // Add random verify token to user
       user.tempObjects.verifyUserToken = verifyUserToken;
       user.save().then(user => {
@@ -188,13 +190,16 @@ module.exports.verify_get = (req, res) => {
             return res.status(500).json(errors);
           }
           console.log('Message sent: %s', info.messageId);
+          return res.json({
+            message: 'A verification code will be sent to your email shortly.!'
+          });
         });
       });
     })
     // If promise rejected then user doesn't exist
     .catch(() => {
       return res.json({
-        message: 'A verification link will be sent to your email shortly.'
+        message: 'A verification code will be sent to your email shortly.'
       });
     });
 };
@@ -235,31 +240,29 @@ module.exports.changepassword_post = (req, res) => {
 
   const email = req.body.email;
 
-  User.findOne({ email: email }).then(user => {
-    // Check to see if the user exists
-    if (!user) {
-      return res.json({
-        message:
-          'A temporary password reset token will be sent to your email address shortly.'
-      });
-    }
+  User.findOne({ email: email })
+    .then(user => {
+      // Check to see if the user exists
+      if (!user) {
+        return res.json({
+          message: 'A temporary password reset email will be sent shortly'
+        });
+      }
 
-    // User matched, create password reset token
-    const passwordResetToken = {
-      key: Math.random()
-        .toString(36)
-        .replace('0.', ''),
-      created: moment().format(),
-      expireTime: moment(this.created)
-        .add(10, 'm')
-        .format()
-    };
+      // User matched, create password reset token
+      const passwordResetToken = {
+        key: Math.random()
+          .toString(36)
+          .replace('0.', ''),
+        created: moment().format(),
+        expireTime: moment(this.created)
+          .add(10, 'm')
+          .format()
+      };
 
-    // Add random verify token to user
-    user.tempObjects.passwordResetToken = passwordResetToken;
-    user
-      .save()
-      .then(user => {
+      // Add random password token to user
+      user.tempObjects.passwordResetToken = passwordResetToken;
+      user.save().then(user => {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -276,7 +279,7 @@ module.exports.changepassword_post = (req, res) => {
         let mailOptions = {
           from: 'skypi.noreply@gmail.com',
           to: user.email,
-          subject: 'Verify your account and rule the skies.',
+          subject: 'Request to reset your password',
           text: 'Hello',
           html: verificationEmailBody
         };
@@ -289,16 +292,18 @@ module.exports.changepassword_post = (req, res) => {
             return res.status(500).json(errors);
           }
           console.log('Message sent: %s', info.messageId);
-        });
-      })
-      // If promise rejected then user doesn't exist
-      .catch(() => {
-        return res.json({
-          message:
-            'A temporary password reset token will be sent to your email address shortly.'
+          return res.json({
+            message: 'A temporary password reset email will be sent shortly'
+          });
         });
       });
-  });
+    })
+    // If promise rejected then user doesn't exist
+    .catch(() => {
+      return res.json({
+        message: 'A temporary password reset email will be sent shortly'
+      });
+    });
 };
 
 module.exports.resetpassword_post = (req, res) => {
@@ -321,7 +326,8 @@ module.exports.resetpassword_post = (req, res) => {
         existingToken.expireTime < moment().format() ||
         existingToken.key !== passwordResetToken
       ) {
-        return res.json({ message: 'Authorization token not valid' });
+        errors.verifyusertoken = 'Verification code not valid';
+        return res.status(404).json(errors);
       }
 
       bcrypt.genSalt(10, (err, salt) => {
