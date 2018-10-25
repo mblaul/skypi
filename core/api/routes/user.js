@@ -26,7 +26,7 @@ router.post('/login', userController.login_post);
 // @route   	DELETE api/user/:userId
 // @desc   		Allows a user or admin to delete a user's account
 // @access	  Private
-router.get(
+router.delete(
   '/delete/:userId',
   passport.authenticate('jwt', { session: false }),
   userController.delete_delete

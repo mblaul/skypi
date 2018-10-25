@@ -126,9 +126,10 @@ module.exports.delete_delete = (req, res) => {
 
   User.findById(user)
     .then(user => {
-      if (user.roles.isAdmin || user._id === userToDelete) {
-        user.remove();
-        return res.json({ message: 'User removed' });
+      if (user.roles.isAdmin || user._id.toString() === userToDelete) {
+        user.remove().then(() => {
+          return res.json({ message: 'User removed' });
+        });
       }
     })
     .catch(err => {
