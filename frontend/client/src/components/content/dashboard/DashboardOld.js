@@ -8,15 +8,12 @@ import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 // Import common components
 import Spinner from '../../common/Spinner';
 
-//import pieces of Dashboard
-import Stripetable from '../dashboard/Stripetable';
-import TimegraphHumidity from '../dashboard/TimegraphHumidity';
-import TimegraphPressure from '../dashboard/TimegraphPressure';
-import TimegraphTemperature from '../dashboard/TimegraphTemperature';
-import TimegraphWind from '../dashboard/TimegraphWind';
-import Quickview from '../dashboard/Quickview';
+//import pieces of DashboardOld
+import Stripetable from './Stripetable';
+import Timegraph from './Timegraph';
+import Quickview from './Quickview';
 
-class Dashboard extends Component {
+class DashboardOld extends Component {
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -40,7 +37,6 @@ class Dashboard extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        console.log(weatherLogs);
         dashboardContent = (
           <div>
             <div className="display-4">{quickInfo.source}</div>
@@ -72,33 +68,17 @@ class Dashboard extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <TimegraphTemperature
-                  weatherLogs={weatherLogs} />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <TimegraphHumidity
-                  weatherLogs={weatherLogs} />
-              </div>
-            </div>
-            <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <TimegraphPressure
-                  weatherLogs={weatherLogs} />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-6">
-                <TimegraphWind
-                  weatherLogs={weatherLogs} />
-              </div>
-            </div>
-            <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-12">
                 <Stripetable
                   TableHeader={'Weather Readings'}
                   TableSubtitle={'Recent Data From Favorited Station'}
                   weatherLogs={weatherLogs}
                   TableHeaders = {TableHeaderArray}
-                  SourcePage = {"Dashboard"}
+                  SourcePage = {"DashboardOld"}
                 />
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-6">
+                <Timegraph 
+                  weatherLogs={weatherLogs} />
               </div>
             </div>
           </div>
@@ -134,7 +114,7 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.propTypes = {
+DashboardOld.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
   weather: PropTypes.object.isRequired,
 };
@@ -147,4 +127,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getFavoriteWeatherData },
-)(Dashboard);
+)(DashboardOld);
