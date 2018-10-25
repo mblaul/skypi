@@ -99,12 +99,15 @@ module.exports.login_post = (req, res) => {
                 return res.status(500).json(errors);
               }
               // User has successfully authenticated, give 'em a token
-              res.json({
+              return res.json({
                 success: true,
                 token: 'Bearer ' + token
               });
             }
           );
+        } else {
+          errors.email = 'Incorrect username/password combination';
+          return res.status(404).json(errors);
         }
       });
     })
@@ -123,9 +126,10 @@ module.exports.delete_delete = (req, res) => {
 
   User.findById(user)
     .then(user => {
-      if (user.roles.isAdmin || user._id === userToDelete) {
-        user.remove();
-        return res.json({ message: 'User removed' });
+      if (user.roles.isAdmin || user._id.toString() === userToDelete) {
+        user.remove().then(() => {
+          return res.json({ message: 'User removed' });
+        });
       }
     })
     .catch(err => {
@@ -245,10 +249,9 @@ module.exports.changepassword_post = (req, res) => {
       // Check to see if the user exists
       if (!user) {
         return res.json({
-          message: 'A temporary password reset email will be sent shortly'
+          message: 'An email to reset your password will be sent shortly.'
         });
       }
-
       // User matched, create password reset token
       const passwordResetToken = {
         key: Math.random()
@@ -273,15 +276,17 @@ module.exports.changepassword_post = (req, res) => {
         });
 
         // Create email body
-        const resetPasswordEmail = resetPasswordEmail(passwordResetToken.key);
+        const resetPasswordEmailBody = resetPasswordEmail(
+          passwordResetToken.key
+        );
 
         // setup email data with unicode symbols
         let mailOptions = {
           from: 'skypi.noreply@gmail.com',
           to: user.email,
-          subject: 'Request to reset your password',
+          subject: 'Password reset request',
           text: 'Hello',
-          html: verificationEmailBody
+          html: resetPasswordEmailBody
         };
 
         // send mail with defined transport object
@@ -293,15 +298,14 @@ module.exports.changepassword_post = (req, res) => {
           }
           console.log('Message sent: %s', info.messageId);
           return res.json({
-            message: 'A temporary password reset email will be sent shortly'
+            message: 'An email to reset your password will be sent shortly.'
           });
         });
       });
     })
-    // If promise rejected then user doesn't exist
     .catch(() => {
       return res.json({
-        message: 'A temporary password reset email will be sent shortly'
+        message: 'An email to reset your password will be sent shortly.'
       });
     });
 };
@@ -326,10 +330,9 @@ module.exports.resetpassword_post = (req, res) => {
         existingToken.expireTime < moment().format() ||
         existingToken.key !== passwordResetToken
       ) {
-        errors.verifyusertoken = 'Verification code not valid';
+        errors.verifyusertoken = 'Reset code not valid';
         return res.status(404).json(errors);
       }
-
       bcrypt.genSalt(10, (err, salt) => {
         if (err) {
           console.log(err);
