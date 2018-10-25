@@ -8,7 +8,7 @@ import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 // Import common components
 import Spinner from '../../common/Spinner';
 
-//import pieces of DashboardTest
+//import pieces of Dashboard
 import Stripetable from './Stripetable';
 import Timegraph from './Timegraph';
 import Quickview from './Quickview';
@@ -106,7 +106,7 @@ class Dashboard extends Component {
                   TableSubtitle={'Recent Data From Favorited Station'}
                   weatherLogs={weatherLogs}
                   TableHeaders = {TableHeaderArray}
-                  SourcePage = {"DashboardTest"}
+                  SourcePage = {"Dashboard"}
                 />
               </div>
             </div>
@@ -143,7 +143,7 @@ class Dashboard extends Component {
   }
 }
 
-DashboardTest.propTypes = {
+Dashboard.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
   weather: PropTypes.object.isRequired,
 };
@@ -156,4 +156,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getFavoriteWeatherData },
-)(DashboardTest);
+)(Dashboard);
