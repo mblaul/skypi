@@ -185,8 +185,5 @@ export default class Stripetable extends Component {
     );
 //End Render Bracket
   }
-  DummyFunction() {
-
-  }
 //End Class Bracket
 }
