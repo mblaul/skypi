@@ -1,4 +1,4 @@
-module.exports = (email, passwordresettoken) => {
+module.exports = passwordresettoken => {
   const resetPasswordEmail = `
     <tr>
       <td class="email-body" width="100%" cellpadding="0" cellspacing="0">
