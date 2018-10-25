@@ -11,9 +11,14 @@ export default class Stripetable extends Component {
     window.alert(alertMessage);
   }
   deleteUserAccount(UserID) {
-    var alertMessage = "User Sucessfully Deleted"
-    //Function to delete user in the Database
-    window.alert(alertMessage)
+    var alertMessage = "Are you sure you want to delete this Account? This action cannot be undone"
+    var confirmDelete = window.confirm(alertMessage)
+    if (confirmDelete === true)
+    {
+      window.alert("User Sucessfully Deleted") 
+    } else {
+      //Safely exit without deleting the account
+    }
   }
   changeAdminStatus(UserID, userName, AdminStatus) {
     var alertMessage = "The User's Admin Status has been updated"
@@ -179,9 +184,6 @@ export default class Stripetable extends Component {
       </div>
     );
 //End Render Bracket
-  }
-  DummyFunction() {
-
   }
 //End Class Bracket
 }

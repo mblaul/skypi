@@ -8,7 +8,7 @@
 
   tasks:
   - name: update local directories
-    shell: git -C skypi && git pull 
+    shell: cd ~/skypi && git pull 
     when: inventory_hostname in groups['control']
 
   - name: push script dirs
