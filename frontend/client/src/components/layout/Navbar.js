@@ -49,6 +49,11 @@ class Navbar extends Component {
             Logout
           </a>
         </li>
+        <li className="nav-item">
+          <Link className="btn btn-secondary mr-2" to="/settings">
+            <i className="fas fa-cog" />
+          </Link>
+        </li>
       </ul>
     );
 
