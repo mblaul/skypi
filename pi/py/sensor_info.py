@@ -61,7 +61,7 @@ dark_sky = "https://api.darksky.net/forecast/36845a09793a4c98d39a8392d66fecc8/%s
 dark_sky_json = requests.get(dark_sky).json()
 
 percipitation = dark_sky_json['currently']['precipProbability']
-description = dark_sky_json['minutely']['summary']
+description = dark_sky_json['minutely']['icon']
 
 #printing the OpenWeatherMap information to ensure that the information was pulled
 print('')
