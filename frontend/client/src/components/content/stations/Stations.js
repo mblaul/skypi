@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -67,7 +68,7 @@ class Stations extends Component {
               {devices.map(device => (
                 <tr key={device._id}>
                   <th scope="row" key={device._id}>
-                    {device.name}
+                    <Link to={`/station/${device._id}`}>{device.name}</Link>
                   </th>
                   {device.lastWeatherLog ? (
                     Object.keys(device.lastWeatherLog).length > 0 ? (

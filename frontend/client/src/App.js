@@ -25,6 +25,7 @@ import Settings from './components/content/user/Settings';
 import Dashboard from './components/content/dashboard/Dashboard';
 import Landing from './components/content/Landing';
 import Stations from './components/content/stations/Stations';
+import Station from './components/content/station/Station';
 import ResetPassword from './components/authentication/ResetPassword';
 import ForgotPassword from './components/authentication/ForgotPassword';
 
@@ -69,6 +70,11 @@ class App extends Component {
               <VerifiedRoute exact path="/settings" component={Settings} />
               <VerifiedRoute exact path="/dashboard" component={Dashboard} />
               <VerifiedRoute exact path="/stations" component={Stations} />
+              <VerifiedRoute
+                exact
+                path="/station/:deviceId"
+                component={Station}
+              />
             </Switch>
             <Switch>
               <AdminRoute exact path="/admin" component={Admin} />

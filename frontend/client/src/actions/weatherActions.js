@@ -50,7 +50,7 @@ export const getFavoriteWeatherData = () => dispatch => {
 export const getDeviceWeatherData = deviceId => dispatch => {
   dispatch(setWeatherLogLoading());
   axios
-    .get(`/api/weather/data/${deviceId}`)
+    .get(`/api/weather/data/device/${deviceId}`)
     .then(result => {
       dispatch({ type: GET_DEVICE_WEATHER_LOGS, payload: result.data });
     })
