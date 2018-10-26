@@ -74,6 +74,14 @@ export const confirmUserVerification = verificationData => dispatch => {
 };
 
 // Reset user password
+export const forgotPassword = forgotPasswordData => dispatch => {
+  axios
+    .post('/api/user/changepassword', forgotPasswordData)
+    .then(result => {})
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+// Reset user password
 export const resetPassword = (newPasswordData, history) => dispatch => {
   axios
     .post('/api/user/resetpassword', newPasswordData)

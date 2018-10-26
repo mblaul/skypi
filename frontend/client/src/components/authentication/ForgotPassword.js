@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { resetPassword } from '../../actions/authActions';
+import { forgotPassword } from '../../actions/authActions';
 
 import TextFieldGroup from '../common/TextFieldGroup';
 
@@ -31,11 +31,12 @@ class ResetPassword extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const passwordResetData = {
+    const forgotPasswordData = {
       email: this.state.email
     };
     //Second parameter allows us to redirect within the resetPassword action
-    this.props.resetPassword(passwordResetData, this.props.history);
+    this.props.forgotPassword(forgotPasswordData);
+    alert('Password reset email has been sent!');
   }
 
   render() {
@@ -45,7 +46,7 @@ class ResetPassword extends Component {
         <div className="container col-lg-4 mt-5 mx-auto">
           <h2 className="mb-3">Forgot Password</h2>
           <div className="lead">Don't worry, it happens to the best of us!</div>
-          <div className="lead">
+          <div className="lead mb-2">
             Enter your email below to receive a password reset link.
           </div>
           <form noValidate onSubmit={this.onSubmit}>
@@ -66,7 +67,7 @@ class ResetPassword extends Component {
 }
 
 ResetPassword.propTypes = {
-  resetPassword: PropTypes.func.isRequired,
+  forgotPassword: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -78,5 +79,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { resetPassword }
+  { forgotPassword }
 )(withRouter(ResetPassword));
