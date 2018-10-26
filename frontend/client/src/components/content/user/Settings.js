@@ -4,8 +4,8 @@ class Settings extends Component {
   render() {
     return (
       <div>
-        <div className="container mt-2">
-          <div className="row">
+        <div className="container mt-4">
+          <div className="row mb-3">
             <div className="display-3 mx-auto">
               <i className="fas fa-cog" /> User Settings
             </div>
