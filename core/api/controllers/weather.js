@@ -109,6 +109,9 @@ module.exports.data_private_get = (req, res) => {
 };
 
 module.exports.data_public_get = (req, res) => {
+  const startDate = req.params.startdate;
+  const endDate = req.params.enddate;
+
   // Find all device logs for public devices
   Device.find({ 'roles.isPublic': true })
     .then(devices => {
@@ -119,7 +122,9 @@ module.exports.data_public_get = (req, res) => {
 
       // Find logs for the device IDs from above
       Weather.find({ device: { $in: deviceIds } }).then(logs => {
-        return res.json(logs);
+        logs
+          .find({ date: { $gte: startDate }, date: { $lte: endDate } })
+          .then(datedLogs => {});
       });
     })
     .catch(err => {
