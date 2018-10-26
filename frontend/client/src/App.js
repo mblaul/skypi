@@ -26,6 +26,7 @@ import Dashboard from './components/content/dashboard/Dashboard';
 import Landing from './components/content/Landing';
 import Stations from './components/content/stations/Stations';
 import ResetPassword from './components/authentication/ResetPassword';
+import ForgotPassword from './components/authentication/ForgotPassword';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -56,6 +57,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/forgotpassword" component={ForgotPassword} />
             <Route
               exact
               path="/resetpassword/:token"

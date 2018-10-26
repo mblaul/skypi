@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/authActions';
+import { resetPassword } from '../../actions/authActions';
 
 import TextFieldGroup from '../common/TextFieldGroup';
 
-class Login extends Component {
+class ResetPassword extends Component {
   constructor() {
     super();
-
     this.state = {
       email: '',
-      password: '',
       errors: {}
     };
 
@@ -19,17 +18,7 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
-
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
@@ -42,22 +31,24 @@ class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const userData = {
-      email: this.state.email,
-      password: this.state.password
+    const passwordResetData = {
+      email: this.state.email
     };
-
-    //Call the action to login a user
-    this.props.loginUser(userData);
+    //Second parameter allows us to redirect within the resetPassword action
+    this.props.resetPassword(passwordResetData, this.props.history);
   }
+
   render() {
     const { errors } = this.state;
-
     return (
       <div>
-        <div className="container col-lg-4 mt-5">
-          <h2 className="mb-3">Login</h2>
-          <form onSubmit={this.onSubmit}>
+        <div className="container col-lg-4 mt-5 mx-auto">
+          <h2 className="mb-3">Forgot Password</h2>
+          <div className="lead">Don't worry, it happens to the best of us!</div>
+          <div className="lead">
+            Enter your email below to receive a password reset link.
+          </div>
+          <form noValidate onSubmit={this.onSubmit}>
             <TextFieldGroup
               placeholder="Email Address"
               name="email"
@@ -66,16 +57,7 @@ class Login extends Component {
               onChange={this.onChange}
               error={errors.email}
             />
-            <TextFieldGroup
-              placeholder="Password"
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.onChange}
-              error={errors.password}
-            />
             <input type="submit" className="btn btn-primary btn-block mt-4" />
-            <Link to="/forgotpassword">Forgot password</Link>
           </form>
         </div>
       </div>
@@ -83,8 +65,8 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
+ResetPassword.propTypes = {
+  resetPassword: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
@@ -96,5 +78,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loginUser }
-)(Login);
+  { resetPassword }
+)(withRouter(ResetPassword));
