@@ -26,6 +26,7 @@ class Stations extends Component {
 
   onFavoriteClick(deviceId) {
     this.props.setFavoriteDevice(deviceId);
+    this.props.getFavoriteWeatherData();
   }
 
   render() {
@@ -35,7 +36,9 @@ class Stations extends Component {
     let stationsContent;
 
     /* If a favorite device is not found, default to first listed device */
-    if (weatherLogs[0] !== undefined) { currentFavorite = weatherLogs[0] }
+    if (weatherLogs[0] !== undefined) {
+      currentFavorite = weatherLogs[0];
+    }
 
     if (devices === [] || loading) {
       stationsContent = <Spinner />;
@@ -93,15 +96,26 @@ class Stations extends Component {
                     <button
                       onClick={this.onFavoriteClick.bind(this, device._id)}
                       type="button"
-                      className="btn"
+                      className={
+                        currentFavorite !== undefined &&
+                        (device.name === currentFavorite.source ||
+                          device.name === currentFavorite.name)
+                          ? 'btn bg-warning'
+                          : 'btn'
+                      }
                     >
                       {/* If this row is the favorite device, highlight the star */}
-                      <i className={
-                          currentFavorite !== undefined && (device.name === currentFavorite.source || device.name === currentFavorite.name) ?
-                          "fas fa-star fa-inverse text-alert" :
-                          "fas fa-star text-alert"
-                        }
-                      />
+                      <div className="">
+                        <i
+                          className={
+                            currentFavorite !== undefined &&
+                            (device.name === currentFavorite.source ||
+                              device.name === currentFavorite.name)
+                              ? 'fas fa-star fa-inverse'
+                              : 'fas fa-star'
+                          }
+                        />
+                      </div>
                     </button>
                   </td>
                 </tr>
