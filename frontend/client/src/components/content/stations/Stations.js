@@ -106,17 +106,15 @@ class Stations extends Component {
                       }
                     >
                       {/* If this row is the favorite device, highlight the star */}
-                      <div className="">
-                        <i
-                          className={
-                            currentFavorite !== undefined &&
-                            (device.name === currentFavorite.source ||
-                              device.name === currentFavorite.name)
-                              ? 'fas fa-star fa-inverse'
-                              : 'fas fa-star'
-                          }
-                        />
-                      </div>
+                      <i
+                        className={
+                          currentFavorite !== undefined &&
+                          (device.name === currentFavorite.source ||
+                            device.name === currentFavorite.name)
+                            ? 'fas fa-star fa-inverse'
+                            : 'fas fa-star'
+                        }
+                      />
                     </button>
                   </td>
                 </tr>
