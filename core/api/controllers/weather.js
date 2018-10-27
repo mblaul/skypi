@@ -123,8 +123,10 @@ module.exports.data_public_get = (req, res) => {
       // Find logs for the device IDs from above
       Weather.find({ device: { $in: deviceIds } }).then(logs => {
         logs
-          .find({ date: { $gte: startDate }, date: { $lte: endDate } })
-          .then(datedLogs => {});
+          .find({
+            $and: [{ date: { $gte: startDate } }, { date: { $lte: endDate } }]
+          })
+          .then(datedLogs => res.json(datedLogs));
       });
     })
     .catch(err => {
