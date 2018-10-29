@@ -345,6 +345,7 @@ module.exports.resetpassword_post = (req, res) => {
           user
             .save()
             .then(() => {
+              user.tempObjects.passwordResetToken = undefined;
               return res.json({
                 message: 'Your password has been reset'
               });
