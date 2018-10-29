@@ -77,6 +77,7 @@ module.exports.data_device_get = (req, res) => {
   const device = req.params.deviceId;
 
   Weather.find({ device: device })
+    .sort({ date: -1 })
     .then(logs => {
       return res.json(logs);
     })
@@ -97,9 +98,11 @@ module.exports.data_private_get = (req, res) => {
       });
 
       // Find logs for the device IDs from above
-      Weather.find({ device: { $in: deviceIds } }).then(logs => {
-        return res.json(logs);
-      });
+      Weather.find({ device: { $in: deviceIds } })
+        .sort({ date: -1 })
+        .then(logs => {
+          return res.json(logs);
+        });
     })
     .catch(err => {
       console.log(err);
@@ -109,6 +112,27 @@ module.exports.data_private_get = (req, res) => {
 };
 
 module.exports.data_public_get = (req, res) => {
+  // Find all device logs for public devices
+  Device.find({ 'roles.isPublic': true })
+    .then(devices => {
+      // Collect all the device IDs from the isPublic field
+      const deviceIds = devices.map(device => {
+        return device._id;
+      });
+
+      // Find logs for the device IDs from above
+      Weather.find({ device: { $in: deviceIds } })
+        .sort({ date: -1 })
+        .then(logs => res.json(logs));
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
+module.exports.data_public_dates_get = (req, res) => {
   const startDate = req.params.startdate;
   const endDate = req.params.enddate;
 
