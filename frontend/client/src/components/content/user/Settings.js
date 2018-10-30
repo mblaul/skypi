@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { deleteUser } from '../../../actions/authActions';
 
 class Settings extends Component {
+  
+  onDeleteClick(e) {
+    e.preventDefault();
+    this.props.deleteUser(this.props.auth.user.id);
+  }
+
   render() {
     return (
       <div>
@@ -27,7 +36,10 @@ class Settings extends Component {
                   <th scope="row" />
                   <td className="align-middle">Delete Account</td>
                   <td>
-                    <button className="btn btn-danger float-right">
+                    <button
+                      className="btn btn-danger float-right"
+                      onClick={this.onDeleteClick.bind(this)}
+                    >
                       Delete
                     </button>
                   </td>
@@ -41,4 +53,17 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+Settings.propTypes = {
+  deleteUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+// Bring in auth state
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { deleteUser }
+)(Settings);
