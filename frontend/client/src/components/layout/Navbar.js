@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
-import Logout from '../layout/Logout';
+import LogoutModal from './LogoutModal';
 
 class Navbar extends Component {
   
@@ -36,7 +36,7 @@ class Navbar extends Component {
             Stations
           </Link>
         </li>
-        <Logout />
+        <LogoutModal />
         <li className="nav-item">
           <Link className="btn btn-secondary mr-2" to="/settings">
             <i className="fas fa-cog" />

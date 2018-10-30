@@ -1,10 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/authActions';
+import { deleteUser } from '../../../actions/authActions';
 import Modal from 'react-modal';
 
 const customStyles = {
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+  },
   content: {
     top: '50%',
     left: '50%',
@@ -15,7 +23,7 @@ const customStyles = {
   }
 };
 
-class Logout extends React.Component {
+class DeleteModal extends React.Component {
   constructor() {
     super();
 
@@ -28,9 +36,9 @@ class Logout extends React.Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  onLogoutClick(e) {
+  onDeleteClick(e) {
     e.preventDefault();
-    this.props.logoutUser();
+    this.props.deleteUser(this.props.auth.user.id);
   }
 
   openModal() {
@@ -47,8 +55,8 @@ class Logout extends React.Component {
     return (
       <div>
         <li className="nav-item">
-          <button onClick={this.openModal} className="btn btn-primary mr-2">
-            Logout
+          <button onClick={this.openModal} className="btn btn-danger float-right">
+            Delete
           </button>
         </li>
         <Modal
@@ -57,11 +65,26 @@ class Logout extends React.Component {
           onRequestClose={this.closeModal}
           style={customStyles}
         >
-          <h2 ref={subtitle => (this.subtitle = subtitle)}>Logging out</h2>
-          <div>You are about to log out. Do you want to proceed?</div>
-          <form>
-            <button onClick={this.onLogoutClick.bind(this)}>Logout</button>
-            <button onClick={this.closeModal}>Cancel</button>
+          <h2 ref={subtitle => (this.subtitle = subtitle)}>WARNING!</h2>
+          <div>
+            You are about to permanently delete your account.
+            <br />This action can not be undone.
+            <br /><br />Do you want to proceed?
+          </div>
+          <hr />
+          <form className="nav-item form-row mx-auto">
+            <button
+                onClick={this.onDeleteClick.bind(this)}
+                className="btn btn-danger mx-auto"
+            >
+              Delete
+            </button>
+            <button 
+                onClick={this.closeModal}
+                className="btn btn-primary mx-auto"
+            >
+              Cancel
+            </button>
           </form>
         </Modal>
       </div>
@@ -69,8 +92,8 @@ class Logout extends React.Component {
   }
 }
 
-Logout.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
+DeleteModal.propTypes = {
+  deleteUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
@@ -81,5 +104,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
-)(Logout);
+  { deleteUser }
+)(DeleteModal);

@@ -12,6 +12,7 @@ import Spinner from '../../common/Spinner';
 import Stripetable from './Stripetable';
 import Timegraph from './Timegraph';
 import Quickview from './Quickview';
+import weatherIcons from './weatherIcons';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -44,7 +45,11 @@ class Dashboard extends Component {
         const weatherWind = weatherLogs.map((logs) => logs.wind);
         dashboardContent = (
           <div>
-            <div className="display-4">{quickInfo.source}</div>
+            <div className="display-4">
+            {quickInfo.source}
+            <img className = "my-0 py-0 h-50" src = {weatherIcons(quickInfo.description)} 
+                alt = {quickInfo.description} />
+            </div>
             <div className="text-muted mb-3">
               Last Updated:{' '}
               <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
@@ -73,10 +78,6 @@ class Dashboard extends Component {
               <Quickview
                 Type={'Precipitation %'}
                 Reading={quickInfo.precipitation + '%'}
-              />
-              <Quickview
-                Type={'Description'}
-                Reading={quickInfo.description}
               />
             </div>
             <div className="row mb-2">
