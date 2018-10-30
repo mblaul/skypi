@@ -30,7 +30,7 @@ router.get(
 // @route   POST api/weather/data/public/dates
 // @desc    Get all weather data that's public
 // @access  Private
-router.get(
+router.post(
   '/data/public/dates',
   passport.authenticate('jwt', { session: false }),
   weatherController.data_public_dates_post
