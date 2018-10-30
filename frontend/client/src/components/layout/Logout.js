@@ -5,73 +5,68 @@ import { logoutUser } from '../../actions/authActions';
 import Modal from 'react-modal';
 
 const customStyles = {
-    content : {
-      top                   : '50%',
-      left                  : '50%',
-      right                 : 'auto',
-      bottom                : 'auto',
-      marginRight           : '-50%',
-      transform             : 'translate(-50%, -50%)'
-    }
-  };
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  }
+};
 
 class Logout extends React.Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.state = {
-            modalIsOpen: false
-        };
+    this.state = {
+      modalIsOpen: false
+    };
 
-        this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-    }
-    
-    onLogoutClick(e) {
-        e.preventDefault();
-        this.props.logoutUser();
-    }
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
 
-    openModal() {
-        this.setState({modalIsOpen: true});
-    }
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+  }
 
-    afterOpenModal() {
-    }
+  openModal() {
+    this.setState({ modalIsOpen: true });
+  }
 
-    closeModal() {
-        this.setState({modalIsOpen: false});
-    }
+  afterOpenModal() {}
 
-    render() {
-        return(
-            <div>
-                <li className="nav-item">
-                <a
-                    onClick={this.openModal}
-                    className="btn btn-primary mr-2"
-                >
-                    Logout
-                </a>
-                </li>
-                <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onAfterOpen={this.afterOpenModal}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                >
-                
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Logging out</h2>
-                    <div>You are about to log out. Do you want to proceed?</div>
-                    <form>
-                        <button onClick={this.onLogoutClick.bind(this)}>Logout</button>
-                        <button onClick={this.closeModal}>Cancel</button>
-                    </form>
-                </Modal>
-            </div>
-        );
-    }
+  closeModal() {
+    this.setState({ modalIsOpen: false });
+  }
+
+  render() {
+    return (
+      <div>
+        <li className="nav-item">
+          <button onClick={this.openModal} className="btn btn-primary mr-2">
+            Logout
+          </button>
+        </li>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+        >
+          <h2 ref={subtitle => (this.subtitle = subtitle)}>Logging out</h2>
+          <div>You are about to log out. Do you want to proceed?</div>
+          <form>
+            <button onClick={this.onLogoutClick.bind(this)}>Logout</button>
+            <button onClick={this.closeModal}>Cancel</button>
+          </form>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 Logout.propTypes = {
