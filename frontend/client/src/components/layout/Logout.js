@@ -59,9 +59,20 @@ class Logout extends React.Component {
         >
           <h2 ref={subtitle => (this.subtitle = subtitle)}>Logging out</h2>
           <div>You are about to log out. Do you want to proceed?</div>
-          <form>
-            <button onClick={this.onLogoutClick.bind(this)}>Logout</button>
-            <button onClick={this.closeModal}>Cancel</button>
+          <hr />
+          <form className="nav-item form-row mx-auto">
+            <button
+                onClick={this.onLogoutClick.bind(this)}
+                className="btn btn-primary mx-auto"
+            >
+              Logout
+            </button>
+            <button 
+                onClick={this.closeModal}
+                className="btn btn-primary mx-auto"
+            >
+              Cancel
+            </button>
           </form>
         </Modal>
       </div>
