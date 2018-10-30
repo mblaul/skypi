@@ -31,7 +31,6 @@ class Logout extends React.Component {
     onLogoutClick(e) {
         e.preventDefault();
         this.props.logoutUser();
-        alert('You have been logged out!');
     }
 
     openModal() {
@@ -61,13 +60,12 @@ class Logout extends React.Component {
                     onAfterOpen={this.afterOpenModal}
                     onRequestClose={this.closeModal}
                     style={customStyles}
-                    contentLabel="Example Modal"
                 >
                 
                     <h2 ref={subtitle => this.subtitle = subtitle}>Logging out</h2>
                     <div>You are about to log out. Do you want to proceed?</div>
                     <form>
-                        <button>Logout</button>
+                        <button onClick={this.onLogoutClick.bind(this)}>Logout</button>
                         <button onClick={this.closeModal}>Cancel</button>
                     </form>
                 </Modal>
@@ -76,9 +74,17 @@ class Logout extends React.Component {
     }
 }
 
-Logout.PropTypes = {
-    logoutUser: PropTypes.func.isRequired
+Logout.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
+// Bring in auth state
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
 export default connect(
-  )(Logout);
+  mapStateToProps,
+  { logoutUser }
+)(Logout);
