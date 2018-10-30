@@ -28,7 +28,7 @@ router.get(
 );
 
 // @route   POST api/weather/data/public/dates
-// @desc    Get all weather data that's public
+// @desc    Get all weather data in a specific date range for public devices
 // @access  Private
 router.post(
   '/data/public/dates',
@@ -43,6 +43,15 @@ router.get(
   '/data/favorite',
   passport.authenticate('jwt', { session: false }),
   weatherController.data_favorite_get
+);
+
+// @route   POST api/weather/data/favorite/dates
+// @desc    Get all weather data in a specific date range for user's favorite devices
+// @access  Private
+router.post(
+  '/data/favorite/dates',
+  passport.authenticate('jwt', { session: false }),
+  weatherController.data_favorite_dates_post
 );
 
 // @route   GET api/weather/data/device/:deviceId

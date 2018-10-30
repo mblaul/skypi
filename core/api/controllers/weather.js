@@ -150,6 +150,8 @@ module.exports.data_public_dates_post = (req, res) => {
           .find({
             $and: [{ date: { $gte: startDate } }, { date: { $lte: endDate } }]
           })
+          .sort({ date: -1 })
+          .limit(250)
           .then(datedLogs => res.json(datedLogs));
       });
     })
@@ -161,7 +163,7 @@ module.exports.data_public_dates_post = (req, res) => {
 };
 
 module.exports.data_favorite_get = (req, res) => {
-  // Find all device logs for public devices
+  // Find all device logs for favorite devices
   User.findById(req.user.id)
     .then(user => {
       Device.findById(user.favoriteDevice)
@@ -170,6 +172,42 @@ module.exports.data_favorite_get = (req, res) => {
             .sort({ date: -1 })
             .limit(10)
             .then(favoritedata => res.json(favoritedata));
+        })
+        .catch(err => {
+          console.log(err);
+          errors.favoriteDevice =
+            'The user has not favorited a device or the device no longer exists';
+          return res.status(500).json(errors);
+        });
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
+module.exports.data_favorite_dates_post = (req, res) => {
+  const startDate = req.body.startdate;
+  const endDate = req.body.enddate;
+
+  // Find all device logs for favorite devices
+  User.findById(req.user.id)
+    .then(user => {
+      Device.findById(user.favoriteDevice)
+        .then(device => {
+          Weather.find({ device: device._id }).then(datedLogs => {
+            datedLogs
+              .find({
+                $and: [
+                  { date: { $gte: startDate } },
+                  { date: { $lte: endDate } }
+                ]
+              })
+              .sort({ date: -1 })
+              .limit(250)
+              .then(favoriteDatedLogs => res.json(favoriteDatedLogs));
+          });
         })
         .catch(err => {
           console.log(err);
