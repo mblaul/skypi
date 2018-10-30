@@ -262,7 +262,8 @@ module.exports.data_location_get = (req, res) => {
           { zipcode: zipcode }
         ]
       })
-        .limit(250)
+        .sort({ date: -1 })
+        .limit(1000)
         .then(logs => res.json(logs));
     })
     .catch(err => {
