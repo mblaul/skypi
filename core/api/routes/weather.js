@@ -67,9 +67,9 @@ router.get(
 // @desc    Get weather data for one location
 // @access  Private
 router.get(
-  '/data/location/city=:city&state=:state&zipcode=:zipcode',
+  '/data/location?',
   passport.authenticate('jwt', { session: false }),
-  weatherController.data_device_get
+  weatherController.data_location_get
 );
 
 module.exports = router;

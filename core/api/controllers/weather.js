@@ -6,7 +6,7 @@ var moment = require('moment');
 
 //Load input validation
 const validateWeatherLogInput = require('../validation/weather/log');
-const validateWeatherLocationParams = require('../validation/weather/location');
+const validateWeatherLocationQuery = require('../validation/weather/location');
 
 //Need to add validation for other routes
 
@@ -233,16 +233,16 @@ module.exports.data_favorite_dates_post = (req, res) => {
 };
 
 module.exports.data_location_get = (req, res) => {
-  const { errors, isValid } = validateWeatherLocationParams(req.params);
+  const { errors, isValid } = validateWeatherLocationQuery(req.query);
 
   //Check validation
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  const city = req.params.city;
-  const state = req.params.state;
-  const zipcode = req.params.zipcode;
+  const city = req.query.city;
+  const state = req.query.state;
+  const zipcode = req.query.zipcode;
 
   // Find all device logs for public devices
   Device.find({ 'roles.isPublic': true })
@@ -256,10 +256,10 @@ module.exports.data_location_get = (req, res) => {
       Weather.find({
         device: { $in: deviceIds },
         $or: [
-          { zipcode: zipcode },
           {
             $and: [{ city: city }, { state: state }]
-          }
+          },
+          { zipcode: zipcode }
         ]
       })
         .limit(250)

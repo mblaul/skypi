@@ -1,7 +1,7 @@
 const Validator = require('validator');
 const isEmpty = require('../is-empty');
 
-module.exports = function validateWeatherLocationParams(data) {
+module.exports = function validateWeatherLocationQuery(data) {
   let errors = {};
 
   data.city = !isEmpty(data.city) ? data.city : '';
