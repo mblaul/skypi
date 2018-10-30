@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteUser } from '../../../actions/authActions';
+import DeleteModal from './DeleteModal';
 
 class Settings extends Component {
   
@@ -36,12 +37,7 @@ class Settings extends Component {
                   <th scope="row" />
                   <td className="align-middle">Delete Account</td>
                   <td>
-                    <button
-                      className="btn btn-danger float-right"
-                      onClick={this.onDeleteClick.bind(this)}
-                    >
-                      Delete
-                    </button>
+                    <DeleteModal />
                   </td>
                 </tr>
               </tbody>
