@@ -35,11 +35,33 @@ export const getPublicWeatherData = () => dispatch => {
     .catch(err => dispatch({ type: GET_PUBLIC_WEATHER_LOGS, payload: [] }));
 };
 
-// Get weather logs for current users favorite device
+// Get weather logs for current users favorite device in a specific date range
+export const getPublicWeatherDataWithDates = dateRange => dispatch => {
+  dispatch(setWeatherLogLoading());
+  axios
+    .post('/api/weather/data/public/dates', dateRange)
+    .then(result => {
+      dispatch({ type: GET_PUBLIC_WEATHER_LOGS, payload: result.data });
+    })
+    .catch(err => dispatch({ type: GET_PUBLIC_WEATHER_LOGS, payload: [] }));
+};
+
+// Get all weather logs for current user's favorite device
 export const getFavoriteWeatherData = () => dispatch => {
   dispatch(setWeatherLogLoading());
   axios
     .get('/api/weather/data/favorite')
+    .then(result => {
+      dispatch({ type: GET_FAVORITE_WEATHER_LOGS, payload: result.data });
+    })
+    .catch(err => dispatch({ type: GET_FAVORITE_WEATHER_LOGS, payload: [] }));
+};
+
+// Get weather logs for current users favorite device in a specific date range
+export const getFavoriteWeatherDataWithDates = dateRange => dispatch => {
+  dispatch(setWeatherLogLoading());
+  axios
+    .post('/api/weather/data/favorite/dates', dateRange)
     .then(result => {
       dispatch({ type: GET_FAVORITE_WEATHER_LOGS, payload: result.data });
     })
