@@ -1,5 +1,6 @@
 var Weather = require('../models/Weather');
 var Device = require('../models/Device');
+var moment = require('moment');
 
 //Load input validation
 const validateWeatherLogInput = require('../validation/weather/log');
@@ -133,8 +134,12 @@ module.exports.data_public_get = (req, res) => {
 };
 
 module.exports.data_public_dates_post = (req, res) => {
-  const startDate = req.body.startdate;
-  const endDate = req.body.enddate;
+  const startDate = moment(req.body.startdate).format(
+    'YYYY-MM-DDTHH:mm:ss.SSSZ'
+  );
+  const endDate = moment(req.body.enddate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+
+  console.log(typeof startDate, endDate);
 
   // Find all device logs for public devices
   Device.find({ 'roles.isPublic': true })
@@ -145,15 +150,16 @@ module.exports.data_public_dates_post = (req, res) => {
       });
 
       // Find logs for the device IDs from above
-      Weather.find({ device: { $in: deviceIds } }).then(logs => {
-        logs
-          .find({
-            $and: [{ date: { $gte: startDate } }, { date: { $lte: endDate } }]
-          })
-          .sort({ date: -1 })
-          .limit(250)
-          .then(datedLogs => res.json(datedLogs));
-      });
+      Weather.find({
+        device: { $in: deviceIds },
+        date: {
+          $gte: startDate,
+          $lte: endDate
+        }
+      })
+        .sort({ date: -1 })
+        .limit(250)
+        .then(datedLogs => res.json(datedLogs));
     })
     .catch(err => {
       console.log(err);
@@ -188,26 +194,26 @@ module.exports.data_favorite_get = (req, res) => {
 };
 
 module.exports.data_favorite_dates_post = (req, res) => {
-  const startDate = req.body.startdate;
-  const endDate = req.body.enddate;
+  const startDate = moment(req.body.startdate).format(
+    'YYYY-MM-DDTHH:mm:ss.SSSZ'
+  );
+  const endDate = moment(req.body.enddate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
   // Find all device logs for favorite devices
   User.findById(req.user.id)
     .then(user => {
       Device.findById(user.favoriteDevice)
         .then(device => {
-          Weather.find({ device: device._id }).then(datedLogs => {
-            datedLogs
-              .find({
-                $and: [
-                  { date: { $gte: startDate } },
-                  { date: { $lte: endDate } }
-                ]
-              })
-              .sort({ date: -1 })
-              .limit(250)
-              .then(favoriteDatedLogs => res.json(favoriteDatedLogs));
-          });
+          Weather.find({
+            device: device._id,
+            date: {
+              $gte: startDate,
+              $lte: endDate
+            }
+          })
+            .sort({ date: -1 })
+            .limit(250)
+            .then(favoriteDatedLogs => res.json(favoriteDatedLogs));
         })
         .catch(err => {
           console.log(err);
