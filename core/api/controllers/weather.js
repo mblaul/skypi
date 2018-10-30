@@ -124,6 +124,7 @@ module.exports.data_public_get = (req, res) => {
       // Find logs for the device IDs from above
       Weather.find({ device: { $in: deviceIds } })
         .sort({ date: -1 })
+        .limit(250)
         .then(logs => res.json(logs));
     })
     .catch(err => {
@@ -219,6 +220,39 @@ module.exports.data_favorite_dates_post = (req, res) => {
             'The user has not favorited a device or the device no longer exists';
           return res.status(500).json(errors);
         });
+    })
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
+
+module.exports.data_location_get = (req, res) => {
+  const city = req.params.city;
+  const state = req.params.state;
+  const zipcode = req.params.zipcode;
+
+  // Find all device logs for public devices
+  Device.find({ 'roles.isPublic': true })
+    .then(devices => {
+      // Collect all the device IDs from the isPublic field
+      const deviceIds = devices.map(device => {
+        return device._id;
+      });
+
+      // Find logs for the device IDs from above
+      Weather.find({
+        device: { $in: deviceIds },
+        $or: [
+          { zipcode: zipcode },
+          {
+            $and: [{ city: city }, { state: state }]
+          }
+        ]
+      })
+        .limit(250)
+        .then(logs => res.json(logs));
     })
     .catch(err => {
       console.log(err);
