@@ -132,9 +132,9 @@ module.exports.data_public_get = (req, res) => {
     });
 };
 
-module.exports.data_public_dates_get = (req, res) => {
-  const startDate = req.params.startdate;
-  const endDate = req.params.enddate;
+module.exports.data_public_dates_post = (req, res) => {
+  const startDate = req.body.startdate;
+  const endDate = req.body.enddate;
 
   // Find all device logs for public devices
   Device.find({ 'roles.isPublic': true })

@@ -27,13 +27,13 @@ router.get(
   weatherController.data_private_get
 );
 
-// @route   GET api/weather/data/public
+// @route   POST api/weather/data/public/dates
 // @desc    Get all weather data that's public
 // @access  Private
 router.get(
-  '/data/public/:startdate&:enddate',
+  '/data/public/dates',
   passport.authenticate('jwt', { session: false }),
-  weatherController.data_public_get
+  weatherController.data_public_dates_post
 );
 
 // @route   GET api/weather/data/favorite
