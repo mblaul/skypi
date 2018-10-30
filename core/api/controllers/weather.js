@@ -139,8 +139,6 @@ module.exports.data_public_dates_post = (req, res) => {
   );
   const endDate = moment(req.body.enddate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
-  console.log(typeof startDate, endDate);
-
   // Find all device logs for public devices
   Device.find({ 'roles.isPublic': true })
     .then(devices => {
