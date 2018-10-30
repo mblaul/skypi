@@ -2,8 +2,12 @@ var Weather = require('../models/Weather');
 var Device = require('../models/Device');
 var moment = require('moment');
 
+//Load is
+
 //Load input validation
 const validateWeatherLogInput = require('../validation/weather/log');
+const validateWeatherLocationParams = require('../validation/weather/location');
+
 //Need to add validation for other routes
 
 //Set up an empty errors object is no validation is used in a route
@@ -229,6 +233,13 @@ module.exports.data_favorite_dates_post = (req, res) => {
 };
 
 module.exports.data_location_get = (req, res) => {
+  const { errors, isValid } = validateWeatherLocationParams(req.params);
+
+  //Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const city = req.params.city;
   const state = req.params.state;
   const zipcode = req.params.zipcode;
