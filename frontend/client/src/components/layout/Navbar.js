@@ -3,14 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
+import Logout from '../layout/Logout';
 
 class Navbar extends Component {
-  onLogoutClick(e) {
-    e.preventDefault();
-    this.props.logoutUser();
-    alert('You have been logged out!');
-  }
-
+  
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
@@ -40,15 +36,7 @@ class Navbar extends Component {
             Stations
           </Link>
         </li>
-        <li className="nav-item">
-          <a
-            href="/"
-            onClick={this.onLogoutClick.bind(this)}
-            className="btn btn-primary mr-2"
-          >
-            Logout
-          </a>
-        </li>
+        <Logout />
         <li className="nav-item">
           <Link className="btn btn-secondary mr-2" to="/settings">
             <i className="fas fa-cog" />
