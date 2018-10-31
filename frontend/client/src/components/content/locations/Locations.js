@@ -34,10 +34,10 @@ class Locations extends Component {
     } else {
       // Check to see if values have fully loaded for weather data
       if (devices.length > 0) {
-        //Get a list of unique cities
-        const cities = [
-          ...new Set(devices.map(device => device.lastWeatherLog.city))
-        ];
+        // Create an array of cities and their last logs
+        const lastUpdates = devices.map(device => {
+          return { [device.lastWeatherLog.city]: device.lastWeatherLog.date };
+        });
 
         locationsContent = (
           <table className="table table-striped">
