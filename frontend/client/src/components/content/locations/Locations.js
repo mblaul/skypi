@@ -27,7 +27,7 @@ class Locations extends Component {
     let locationsContent;
 
     // Table headers for table below
-    const tableHeaders = ['Location', 'Last Update', 'Favorite'];
+    const tableHeaders = ['Location', 'Last Update'];
 
     if (devices === [] || loading) {
       locationsContent = <Spinner />;
@@ -35,9 +35,25 @@ class Locations extends Component {
       // Check to see if values have fully loaded for weather data
       if (devices.length > 0) {
         // Create an array of cities and their last logs
-        const lastUpdates = devices.map(device => {
+        let lastUpdates = devices.map(device => {
           return { [device.lastWeatherLog.city]: device.lastWeatherLog.date };
         });
+
+        // Aggregate the list to leave only unique names and latest value
+        let cityList = [];
+        lastUpdates.forEach(update => {
+          if (
+            !cityList.includes({
+              [Object.keys(update).toString()]: Object.values(update).toString()
+            })
+          ) {
+            cityList.unshift({
+              [Object.keys(update).toString()]: Object.values(update).toString()
+            });
+          }
+        });
+        console.log(cityList);
+        console.log(typeof cityList);
 
         locationsContent = (
           <table className="table table-striped">
@@ -51,33 +67,12 @@ class Locations extends Component {
               </tr>
             </thead>
             <tbody>
-              {devices.map(device => (
-                <tr key={device._id}>
-                  {device.lastWeatherLog ? (
-                    Object.keys(device.lastWeatherLog).length > 0 ? (
-                      <td>{device.lastWeatherLog.city}</td>
-                    ) : (
-                      <td>Not logged yet</td>
-                    )
-                  ) : (
-                    <td>Not logged yet</td>
-                  )}
-                  {device.lastWeatherLog ? (
-                    Object.keys(device.lastWeatherLog).length > 0 ? (
-                      <td>
-                        <Moment format="YYYY/MM/DD h:mm A">
-                          {device.lastWeatherLog.date}
-                        </Moment>
-                      </td>
-                    ) : (
-                      <td>Not logged yet</td>
-                    )
-                  ) : (
-                    <td>Not logged yet</td>
-                  )}
-                  <td>{device.status}</td>
+              {/* {cityList.map(city => (
+                <tr key={city}>
+                  <td>{city}</td>
+                  <td>{city}</td>
                 </tr>
-              ))}
+              ))} */}
             </tbody>
           </table>
         );
