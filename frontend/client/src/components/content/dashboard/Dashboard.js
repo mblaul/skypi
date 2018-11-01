@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
+import Datepicker from 'react-datepicker';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -15,6 +16,13 @@ import Quickview from './Quickview';
 import weatherIcons from './weatherIcons';
 
 class Dashboard extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      startDate: ""
+    }
+  }
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -77,8 +85,14 @@ class Dashboard extends Component {
               />
               <Quickview
                 Type={'Precipitation %'}
-                Reading={quickInfo.precipitation + '%'}
+                Reading={Number(quickInfo.precipitation)*100 + '%'}
               />
+            </div>
+            <div className="row mb-2">
+               <Datepicker 
+                  selected={this.state.startDate}
+                  onChange={this.handleChange}
+               /> 
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
