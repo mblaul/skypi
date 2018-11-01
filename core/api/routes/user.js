@@ -90,7 +90,7 @@ router.get(
   '/all',
   passport.authenticate('jwt', { session: false }),
   verifyIsAdmin,
-  userController.current_get
+  userController.all_get
 );
 
 module.exports = router;
