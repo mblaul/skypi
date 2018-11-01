@@ -404,3 +404,13 @@ module.exports.preferences_post = (req, res) => {
       return res.status(500).json(errors);
     });
 };
+
+module.exports.all_get = (req, res) => {
+  User.findAll()
+    .then(users => res.json(users))
+    .catch(err => {
+      console.log(err);
+      errors.server = 'An error occured, please try again';
+      return res.status(500).json(errors);
+    });
+};
