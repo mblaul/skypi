@@ -4,6 +4,9 @@ const passport = require('passport');
 
 var userController = require('../controllers/user');
 
+// Role verification functions
+var verifyIsAdmin = require('../middleware/roleVerification/verifyIsAdmin');
+
 // @route   GET api/user/current
 // @desc    Return current user
 // @access  Private
@@ -76,6 +79,18 @@ router.post(
   '/preferences',
   passport.authenticate('jwt', { session: false }),
   userController.preferences_post
+);
+
+// Admin funcions //
+
+// @route   GET api/user/all
+// @desc    Return all users
+// @access  Private, Admin
+router.get(
+  '/all',
+  passport.authenticate('jwt', { session: false }),
+  verifyIsAdmin,
+  userController.current_get
 );
 
 module.exports = router;
