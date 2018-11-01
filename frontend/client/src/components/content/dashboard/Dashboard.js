@@ -13,6 +13,7 @@ import Stripetable from './Stripetable';
 import Timegraph from './Timegraph';
 import Quickview from './Quickview';
 import weatherIcons from './weatherIcons';
+import Datepicker from './Datepicker';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -37,6 +38,7 @@ class Dashboard extends Component {
     } else {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
+        const weather2Logs = weatherLogs.map((logs) => logs);
         const quickInfo = weatherLogs[0];
         const weatherDates = weatherLogs.map((logs) => logs.date);
         const weatherHumidity = weatherLogs.map((logs) => logs.humidity);
@@ -77,8 +79,16 @@ class Dashboard extends Component {
               />
               <Quickview
                 Type={'Precipitation %'}
-                Reading={quickInfo.precipitation + '%'}
+                Reading={Number(quickInfo.precipitation)*100 + '%'}
               />
+            </div>
+            <div className="row mb-2">
+              <div className="col-sm-12 col-md-12 col-lg-4">
+                  <p>Start date:</p><Datepicker />
+               </div>
+               <div className="col-sm-12 col-md-12 col-lg-4">
+                  <p>End date:</p><Datepicker />
+               </div>
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
