@@ -406,7 +406,7 @@ module.exports.preferences_post = (req, res) => {
 };
 
 module.exports.all_get = (req, res) => {
-  User.findAll()
+  User.find()
     .then(users => res.json(users))
     .catch(err => {
       console.log(err);

@@ -15,3 +15,7 @@ export const DEVICES_LOADING = 'DEVICES_LOADING';
 export const GET_PUBLIC_DEVICES = 'GET_PUBLIC_DEVICES';
 export const GET_PRIVATE_DEVICES = 'GET_PRIVATE_DEVICES';
 export const GET_DEVICE = 'GET_DEVICE';
+
+// Admin types
+export const USERS_LOADING = 'USERS_LOADING';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
