@@ -1,6 +1,4 @@
-import isEmpty from '../validation/is-empty';
-
-import { GET_ERRORS, USERS_LOADING, GET_ALL_USERS } from '../actions/types';
+import { USERS_LOADING, GET_ALL_USERS } from '../actions/types';
 
 const initialState = {
   loading: false,

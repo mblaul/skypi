@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllUsers } from '../../../actions/adminActions';
@@ -41,35 +40,20 @@ class Admin extends Component {
       // Check to see if values have fully loaded for weather data
       if (users.length > 0) {
         adminContent = (
-          // <div>
-          //   <div className="row mb-2">
-          //     <div className="col-sm-12 col-md-12 col-lg-12">
-          //       <Stripetable
-          //         TableHeader={'All Users in the System'}
-          //         TableSubtitle={
-          //           'View all users and perform administrative actions as necessary'
-          //         }
-          //         TableHeaders={AdminHeader}
-          //         weatherLogs={AdminDummyData}
-          //         SourcePage={'AdminPage'}
-          //       />
-          //     </div>
-          //   </div>
-          // </div>
-          <div>HEllo</div>
-        );
-      } else {
-        // User is logged in but has not favorited a device yet
-        adminContent = (
-          <div className="mx-auto">
-            <p className="lead alert alert-warning">
-              You need to favorite a device!
-              <br />
-              Please follow the link below to find a favorite.
-            </p>
-            <Link to="/stations" className="btn btn-lg btn-info">
-              Device List
-            </Link>
+          <div>
+            <div className="row mb-2">
+              <div className="col-sm-12 col-md-12 col-lg-12">
+                <Stripetable
+                  TableHeader={'Users'}
+                  TableSubtitle={
+                    'View all users and perform administrative actions as necessary'
+                  }
+                  TableHeaders={AdminHeader}
+                  weatherLogs={users}
+                  SourcePage={'AdminPage'}
+                />
+              </div>
+            </div>
           </div>
         );
       }
@@ -84,6 +68,7 @@ Admin.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   admin: state.admin
 });
 
