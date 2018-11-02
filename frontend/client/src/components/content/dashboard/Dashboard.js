@@ -9,19 +9,18 @@ import Datepicker from 'react-datepicker';
 // Import common components
 import Spinner from '../../common/Spinner';
 
-//import pieces of Dashboard
-import Stripetable from './Stripetable';
+// Import pieces of Dashboard
 import Timegraph from './Timegraph';
 import Quickview from './Quickview';
 import weatherIcons from './weatherIcons';
 
 class Dashboard extends Component {
-  constructor(){
+  constructor() {
     super();
 
     this.state = {
-      startDate: ""
-    }
+      startDate: ''
+    };
   }
   componentDidMount() {
     if (!this.props.auth) {
@@ -39,24 +38,27 @@ class Dashboard extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let dashboardContent;
-    const TableHeaderArray = ['Date/Time', 'Temp', 'Humidity', 'Wind Speed', 'Wind Direction', 'Pressure']
+
     if (weatherLogs === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        const weatherDates = weatherLogs.map((logs) => logs.date);
-        const weatherHumidity = weatherLogs.map((logs) => logs.humidity);
-        const weatherPressure = weatherLogs.map((logs) => logs.pressure);
-        const weatherTemperature = weatherLogs.map((logs) => logs.temperature);
-        const weatherWind = weatherLogs.map((logs) => logs.wind);
+        const weatherDates = weatherLogs.map(logs => logs.date);
+        const weatherHumidity = weatherLogs.map(logs => logs.humidity);
+        const weatherPressure = weatherLogs.map(logs => logs.pressure);
+        const weatherTemperature = weatherLogs.map(logs => logs.temperature);
+        const weatherWind = weatherLogs.map(logs => logs.wind);
         dashboardContent = (
           <div>
             <div className="display-4">
-            {quickInfo.source}
-            <img className = "my-0 py-0 h-50" src = {weatherIcons(quickInfo.description)} 
-                alt = {quickInfo.description} />
+              {quickInfo.source}
+              <img
+                className="my-0 py-0 h-50"
+                src={weatherIcons(quickInfo.description)}
+                alt={quickInfo.description}
+              />
             </div>
             <div className="text-muted mb-3">
               Last Updated:{' '}
@@ -71,10 +73,7 @@ class Dashboard extends Component {
                 Type={'Wind Speed'}
                 Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview 
-                Type={'Humidity'} 
-                Reading={quickInfo.humidity + '%'} 
-                />
+              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -85,51 +84,44 @@ class Dashboard extends Component {
               />
               <Quickview
                 Type={'Precipitation %'}
-                Reading={Number(quickInfo.precipitation)*100 + '%'}
+                Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
             </div>
             <div className="row mb-2">
-               <Datepicker 
-                  selected={this.state.startDate}
-                  onChange={this.handleChange}
-               /> 
+              <Datepicker
+                selected={this.state.startDate}
+                onChange={this.handleChange}
+              />
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <Timegraph 
-                  chartLabel={"Temperature"}
+                <Timegraph
+                  chartLabel={'Temperature'}
                   weatherDates={weatherDates}
-                  weatherLogs={weatherTemperature} />
+                  weatherLogs={weatherTemperature}
+                />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <Timegraph 
-                  chartLabel={"Wind"}
+                <Timegraph
+                  chartLabel={'Wind'}
                   weatherDates={weatherDates}
-                  weatherLogs={weatherWind} />
+                  weatherLogs={weatherWind}
+                />
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <Timegraph 
-                  chartLabel={"Humidity"}
+                <Timegraph
+                  chartLabel={'Humidity'}
                   weatherDates={weatherDates}
-                  weatherLogs={weatherHumidity} />
+                  weatherLogs={weatherHumidity}
+                />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
-                <Timegraph 
-                  chartLabel={"Pressure"}
+                <Timegraph
+                  chartLabel={'Pressure'}
                   weatherDates={weatherDates}
-                  weatherLogs={weatherPressure} />
-              </div>
-            </div>
-            <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-12">
-                <Stripetable
-                  TableHeader={'Weather Readings'}
-                  TableSubtitle={'Recent Data From Favorited Station'}
-                  weatherLogs={weatherLogs}
-                  TableHeaders = {TableHeaderArray}
-                  SourcePage = {"Dashboard"}
+                  weatherLogs={weatherPressure}
                 />
               </div>
             </div>
@@ -168,15 +160,15 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
-  weather: PropTypes.object.isRequired,
+  weather: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   weather: state.weather,
-  auth: state.auth,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getFavoriteWeatherData },
+  { getFavoriteWeatherData }
 )(Dashboard);

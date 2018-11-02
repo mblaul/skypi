@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { forgotPassword, deleteUser } from '../../../actions/authActions';
 import { getAllUsers } from '../../../actions/adminActions';
 
 // Import common components
@@ -44,13 +45,13 @@ class Admin extends Component {
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-12">
                 <Stripetable
-                  TableHeader={'Users'}
+                  tableHeader={'Users'}
                   TableSubtitle={
                     'View all users and perform administrative actions as necessary'
                   }
-                  TableHeaders={AdminHeader}
-                  weatherLogs={users}
-                  SourcePage={'AdminPage'}
+                  tableHeaders={AdminHeader}
+                  data={users}
+                  functions={{ forgotPassword, deleteUser }}
                 />
               </div>
             </div>
@@ -64,7 +65,9 @@ class Admin extends Component {
 }
 
 Admin.propTypes = {
-  getAllUsers: PropTypes.func.isRequired
+  getAllUsers: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  forgotPassword: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -74,5 +77,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllUsers }
+  { getAllUsers, deleteUser, forgotPassword }
 )(Admin);

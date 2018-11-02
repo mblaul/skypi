@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 
-export default class Stripetable extends Component {
+class Stripetable extends Component {
+  constructor(props) {
+    super(props);
+    this.deleteUser = this.props.functions.deleteUser.bind(this);
+    alert('User deleted');
+  }
+
   resetUserPassword(UserID) {
     var alertMessage = 'Password Reset Email Sent To User';
     //Delcare Dummy Function for resetting a User's Password
@@ -9,20 +15,19 @@ export default class Stripetable extends Component {
     //this.props.sendResetEmail(UserID);
     window.alert(alertMessage);
   }
-  deleteUserAccount(UserID) {
-    var alertMessage =
-      'Are you sure you want to delete this Account? This action cannot be undone';
-    var confirmDelete = window.confirm(alertMessage);
-    if (confirmDelete === true) {
-      window.alert('User Sucessfully Deleted');
-    } else {
-      //Safely exit without deleting the account
-    }
-  }
+
   changeAdminStatus(UserID, userName, AdminStatus) {
     var alertMessage = "The User's Admin Status has been updated";
     //Function to change Admin Privledges in the Database
     window.alert(alertMessage);
+  }
+
+  onDeleteClick(userId, userEmail) {
+    // let proceed = window.confirm(
+    //   `Are you sure you want to delete ${userEmail}?`
+    // );
+    // proceed ? this.props.deleteUser(userId) : null;
+    this.deleteUser(userId);
   }
   /*
     Units for Temp, WindSpeed, and Pressure repectivly
@@ -57,24 +62,13 @@ export default class Stripetable extends Component {
     }
   }
   render() {
-    // Declare an Array for the headers to display in the table
-    const WeatherLogData = [
-      this.props.weatherLogs[0],
-      this.props.weatherLogs[1],
-      this.props.weatherLogs[2],
-      this.props.weatherLogs[3],
-      this.props.weatherLogs[4]
-    ];
-    var DashboardSource = true;
     //Declare an Array of the users perfered units, in furute will be passed from the DB/API
     const PreferedUnit = ['Celsius', 'mps', 'hPa'];
-    if (this.props.SourcePage === 'Dashboard') {
-      DashboardSource = true;
-    } else {
-      DashboardSource = false;
-    }
+
     // Accept an Parameter to dictate when shows as the headers for Table Rows
-    const tableHeaders = this.props.TableHeaders;
+    const { tableHeaders, data } = this.props;
+    const { forgotPassword, deleteUser } = this.props.functions;
+
     return (
       <div className="card">
         <div className="header">
@@ -94,97 +88,64 @@ export default class Stripetable extends Component {
                 ))}
               </tr>
             </thead>
-            {DashboardSource ? (
-              /* If source Page is Dashboard.JS render Dashboard Stuff*/
-              <tbody>
-                {WeatherLogData.map(DataLog => (
-                  <tr key={DataLog._id}>
-                    <td>
-                      <Moment format="YYYY/MM/DD h:mm A">{DataLog.date}</Moment>
-                    </td>
-                    <td>
-                      {this.tempConversions(
-                        PreferedUnit[0],
-                        DataLog.temperature
-                      )}
-                    </td>
-                    <td>{DataLog.humidity} %</td>
-                    <td>
-                      {this.speedConversions(PreferedUnit[1], DataLog.wind)}
-                    </td>
-                    <td>{DataLog.winddirection}</td>
-                    <td>
-                      {this.pressureConversions(
-                        PreferedUnit[2],
-                        DataLog.pressure
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            ) : (
-              /* If source Page is AdminPage.JS render AdminPage Stuff*/
-              <tbody>
-                {WeatherLogData.map(DataLog => (
-                  <tr key={DataLog._id}>
-                    <td>{DataLog.name}</td>
-                    <td>{DataLog.email}</td>
-                    <td>
-                      <button
-                        onClick={this.resetUserPassword.bind(
-                          'Reset Email Sent'
-                        )}
-                        type="button"
-                        className="btn"
-                      >
-                        Reset Password
-                      </button>
-                    </td>
-                    <td>
-                      {DataLog.Admin ? (
-                        <React.Fragment>
-                          <input
-                            type="checkbox"
-                            name={DataLog._id}
-                            onChange={this.changeAdminStatus.bind(
-                              DataLog._id,
-                              DataLog.Admin
-                            )}
-                            defaultChecked
-                          />
-                        </React.Fragment>
-                      ) : (
-                        <React.Fragment>
-                          <input
-                            type="checkbox"
-                            name={DataLog._id}
-                            onChange={this.changeAdminStatus.bind(
-                              DataLog._id,
-                              DataLog.name,
-                              DataLog.Admin
-                            )}
-                          />
-                        </React.Fragment>
-                      )}
-                    </td>
-                    <td>
-                      <button
-                        onClick={this.deleteUserAccount.bind('')}
-                        type="button"
-                        className="btn"
-                      >
-                        Delete Account
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            )}
+            <tbody>
+              {data.map(data => (
+                <tr key={data._id}>
+                  <td>{data.name}</td>
+                  <td>{data.email}</td>
+                  <td>
+                    <button
+                      onClick={forgotPassword({ email: data.email })}
+                      type="button"
+                      className="btn btn-secondary"
+                    >
+                      Reset Password
+                    </button>
+                  </td>
+                  <td>
+                    {data.roles.isAdmin ? (
+                      <React.Fragment>
+                        <input
+                          type="checkbox"
+                          name={data._id}
+                          onChange={this.changeAdminStatus.bind(
+                            data._id,
+                            data.Admin
+                          )}
+                          defaultChecked
+                        />
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <input
+                          type="checkbox"
+                          name={data._id}
+                          onChange={this.changeAdminStatus.bind(
+                            data._id,
+                            data.name,
+                            data.Admin
+                          )}
+                        />
+                      </React.Fragment>
+                    )}
+                  </td>
+                  <td>
+                    <button
+                      onCLick={this.onDeleteClick(data._id, data._email)}
+                      type="button"
+                      className="btn btn-danger"
+                    >
+                      Delete User
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
     );
-    //End Render Bracket
   }
-  //End Class Bracket
 }
+
+export default Stripetable;
