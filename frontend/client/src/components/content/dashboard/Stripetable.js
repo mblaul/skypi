@@ -4,8 +4,12 @@ import Moment from 'react-moment';
 class Stripetable extends Component {
   constructor(props) {
     super(props);
-    this.deleteUser = this.props.functions.deleteUser.bind(this);
-    alert('User deleted');
+
+    this.deleteUser = this.deleteUser.bind(this);
+  }
+
+  componentDidMount() {
+    console.log(this.props.deleteUser);
   }
 
   resetUserPassword(UserID) {
@@ -22,13 +26,7 @@ class Stripetable extends Component {
     window.alert(alertMessage);
   }
 
-  onDeleteClick(userId, userEmail) {
-    // let proceed = window.confirm(
-    //   `Are you sure you want to delete ${userEmail}?`
-    // );
-    // proceed ? this.props.deleteUser(userId) : null;
-    this.deleteUser(userId);
-  }
+  onDeleteClick(userId, userEmail) {}
   /*
     Units for Temp, WindSpeed, and Pressure repectivly
     Database uses °C , mps, and hPa
@@ -67,7 +65,7 @@ class Stripetable extends Component {
 
     // Accept an Parameter to dictate when shows as the headers for Table Rows
     const { tableHeaders, data } = this.props;
-    const { forgotPassword, deleteUser } = this.props.functions;
+    const { forgotPassword } = this.props.functions;
 
     return (
       <div className="card">
