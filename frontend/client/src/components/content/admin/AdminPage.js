@@ -26,7 +26,7 @@ class Admin extends Component {
 
   render() {
     const { users, loading } = this.props.admin;
-    console.log(users);
+
     let adminContent;
     const AdminHeader = [
       'User',
@@ -51,7 +51,7 @@ class Admin extends Component {
                   }
                   tableHeaders={AdminHeader}
                   data={users}
-                  functions={{ forgotPassword, deleteUser }}
+                  functions={{ forgotPassword, deleteUser, getAllUsers }}
                 />
               </div>
             </div>

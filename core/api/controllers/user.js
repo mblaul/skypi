@@ -125,12 +125,20 @@ module.exports.delete_delete = (req, res) => {
   const userToDelete = req.params.userId;
 
   User.findById(user)
-    .then(user => {
-      if (user.roles.isAdmin || user._id.toString() === userToDelete) {
-        user.remove().then(() => {
-          return res.json({ message: 'User removed' });
-        });
-      }
+    .then(actionUser => {
+      User.findById(userToDelete).then(userBeingDeleted => {
+        if (
+          actionUser.roles.isAdmin ||
+          actionUser._id.toString() === userToDelete
+        ) {
+          userBeingDeleted.remove().then(() => {
+            return res.json({ message: 'User removed' });
+          });
+        } else {
+          errors.server = 'You are not authorized to perform this action';
+          return res.status(401).json(errors);
+        }
+      });
     })
     .catch(err => {
       console.log(err);

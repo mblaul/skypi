@@ -52,7 +52,7 @@ export const logoutUser = () => dispatch => {
 // Let user delete their account
 export const deleteUser = userId => dispatch => {
   axios
-    .delete(`/api/user/delete/${userId}`)
+    .delete(`api/user/delete/${userId}`)
     .then(() => dispatch(logoutUser(), alert('Your account has been deleted')))
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };

@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
 
 class Stripetable extends Component {
   constructor(props) {
     super(props);
 
-    this.deleteUser = this.deleteUser.bind(this);
-  }
-
-  componentDidMount() {
-    console.log(this.props.deleteUser);
+    this.deleteUser = this.props.functions.deleteUser;
+    this.getAllUsers = this.props.functions.getAllUsers;
   }
 
   resetUserPassword(UserID) {
@@ -26,7 +22,15 @@ class Stripetable extends Component {
     window.alert(alertMessage);
   }
 
-  onDeleteClick(userId, userEmail) {}
+  onDeleteClick(userId, userEmail) {
+    if (window.confirm(`Are you sure you want to delete ${userEmail}?`)) {
+      console.log(userId);
+      this.deleteUser(userId);
+      this.getAllUsers();
+    } else {
+      alert(`${userEmail} has been spared.`);
+    }
+  }
   /*
     Units for Temp, WindSpeed, and Pressure repectivly
     Database uses °C , mps, and hPa
@@ -129,7 +133,7 @@ class Stripetable extends Component {
                   </td>
                   <td>
                     <button
-                      onCLick={this.onDeleteClick(data._id, data._email)}
+                      onClick={() => this.onDeleteClick(data._id, data.email)}
                       type="button"
                       className="btn btn-danger"
                     >
