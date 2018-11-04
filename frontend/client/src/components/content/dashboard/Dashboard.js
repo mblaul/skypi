@@ -89,10 +89,18 @@ class Dashboard extends Component {
               />
             </div>
             <div className="row mb-2">
+              <div className="col-sm-12 col-md-12 col-lg-3">
               <Datepicker
                 selected={this.state.startDate}
                 onChange={this.handleChange}
               />
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              <Datepicker
+                selected={this.state.startDate}
+                onChange={this.handleChange}
+              />
+              </div>
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">

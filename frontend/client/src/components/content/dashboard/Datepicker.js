@@ -16,8 +16,7 @@ export default class Datepicker extends Component {
     
       handleChange(date) {
         this.setState({
-          startDate: date,
-          endDate: date
+          startDate: date
         });
       }
   render() {
