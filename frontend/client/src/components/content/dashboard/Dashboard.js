@@ -19,7 +19,8 @@ class Dashboard extends Component {
     super();
 
     this.state = {
-      startDate: ''
+      startDate: '',
+      endDate: ''
     };
   }
   componentDidMount() {
@@ -90,15 +91,27 @@ class Dashboard extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
+              Start Time:
               <Datepicker
                 selected={this.state.startDate}
                 onChange={this.handleChange}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                dateFormat="LT"
+                timeCaption="Time"
               />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
+              End Time:
               <Datepicker
-                selected={this.state.startDate}
+                selected={this.state.endDate}
                 onChange={this.handleChange}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={15}
+                dateFormat="LT"
+                timeCaption="Time"
               />
               </div>
             </div>
