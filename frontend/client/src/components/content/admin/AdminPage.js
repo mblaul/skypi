@@ -51,7 +51,6 @@ class Admin extends Component {
                   }
                   tableHeaders={AdminHeader}
                   data={users}
-                  functions={{ forgotPassword, deleteUser, getAllUsers }}
                 />
               </div>
             </div>

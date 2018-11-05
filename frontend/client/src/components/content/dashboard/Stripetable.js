@@ -1,32 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getAllUsers, deleteUser } from '../../../actions/adminActions';
+import { resetPassword } from '../../../actions/authActions';
 
 class Stripetable extends Component {
-  constructor(props) {
-    super(props);
-
-    this.deleteUser = this.props.functions.deleteUser;
-    this.getAllUsers = this.props.functions.getAllUsers;
-  }
-
-  resetUserPassword(UserID) {
-    var alertMessage = 'Password Reset Email Sent To User';
-    //Delcare Dummy Function for resetting a User's Password
-    //Call Function to SEnd a Password Reset
-    //this.props.sendResetEmail(UserID);
-    window.alert(alertMessage);
-  }
-
   changeAdminStatus(UserID, userName, AdminStatus) {
     var alertMessage = "The User's Admin Status has been updated";
     //Function to change Admin Privledges in the Database
     window.alert(alertMessage);
   }
 
+  onResetPasswordClick(userEmail) {
+    this.props.resetPassword(userEmail);
+  }
+
   onDeleteClick(userId, userEmail) {
     if (window.confirm(`Are you sure you want to delete ${userEmail}?`)) {
-      console.log(userId);
-      this.deleteUser(userId);
-      this.getAllUsers();
+      this.props.deleteUser(userId);
+      this.props.getAllUsers();
     } else {
       alert(`${userEmail} has been spared.`);
     }
@@ -69,7 +61,6 @@ class Stripetable extends Component {
 
     // Accept an Parameter to dictate when shows as the headers for Table Rows
     const { tableHeaders, data } = this.props;
-    const { forgotPassword } = this.props.functions;
 
     return (
       <div className="card">
@@ -97,7 +88,9 @@ class Stripetable extends Component {
                   <td>{data.email}</td>
                   <td>
                     <button
-                      onClick={forgotPassword({ email: data.email })}
+                      onClick={() =>
+                        this.onResetPasswordClick({ email: data.email })
+                      }
                       type="button"
                       className="btn btn-secondary"
                     >
@@ -150,4 +143,12 @@ class Stripetable extends Component {
   }
 }
 
-export default Stripetable;
+const mapStateToProps = state => ({
+  auth: state.auth,
+  users: state.users
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllUsers, resetPassword, deleteUser }
+)(Stripetable);
