@@ -28,9 +28,7 @@ class Settings extends Component {
                   <td className="align-middle">Measurement Units</td>
                   <td>
                     <button className="btn btn-info float-right">Metric</button>
-                    <button className="btn btn-primary float-right mr-2">
-                      Imperial
-                    </button>
+                    <button className="btn btn-primary float-right mr-2">Imperial</button>
                   </td>
                 </tr>
                 <tr>

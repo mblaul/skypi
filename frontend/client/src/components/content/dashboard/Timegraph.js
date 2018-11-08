@@ -9,14 +9,6 @@ export default class Timegraph extends Component {
         (this.props.weatherDates.map((weatherDates, i) => {
           return (moment(this.props.weatherDates[i]).format("h:mm A"));
         })).reverse()
-        /* moment(this.props.weatherDates[7]).format("h:mm A"),
-        moment(this.props.weatherDates[6]).format("h:mm A"),
-        moment(this.props.weatherDates[5]).format("h:mm A"),
-        moment(this.props.weatherDates[4]).format("h:mm A"), 
-        moment(this.props.weatherDates[3]).format("h:mm A"), 
-        moment(this.props.weatherDates[2]).format("h:mm A"), 
-        moment(this.props.weatherDates[1]).format("h:mm A"), 
-        moment(this.props.weatherDates[0]).format("h:mm A") */
       ,
       datasets: [
         {

@@ -9,11 +9,19 @@ import { getDeviceWeatherData } from '../../../actions/weatherActions';
 import Spinner from '../../common/Spinner';
 
 //import pieces of Station
-import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
+import Datepicker from '../dashboard/Datepicker';
 
 class Station extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      startDate: '',
+      endDate: ''
+    };
+  }
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -30,14 +38,6 @@ class Station extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let dashboardContent;
-    const TableHeaderArray = [
-      'Date/Time',
-      'Temp',
-      'Humidity',
-      'Wind Speed',
-      'Wind Direction',
-      'Pressure'
-    ];
     if (weatherLogs === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
@@ -69,7 +69,10 @@ class Station extends Component {
                 Type={'Wind Speed'}
                 Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
+              <Quickview
+                Type={'Humidity'}
+                Reading={quickInfo.humidity + '%'}
+              />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -78,6 +81,26 @@ class Station extends Component {
                 Type={'Pressure'}
                 Reading={quickInfo.pressure + ' hPa'}
               />
+              <Quickview
+                Type={'Precipitation %'}
+                Reading={Number(quickInfo.precipitation) * 100 + '%'}
+              />
+            </div>
+            <div className="row mb-2">
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              Start Time:
+              <Datepicker
+                selected={this.state.startDate}
+                onChange={this.handleChange}
+              />
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              End Time:
+              <Datepicker
+                selected={this.state.endDate}
+                onChange={this.handleChange}
+              />
+              </div>
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
