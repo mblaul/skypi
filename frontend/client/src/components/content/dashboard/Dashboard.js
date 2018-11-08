@@ -4,7 +4,6 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
-
 // Import common components
 import Spinner from '../../common/Spinner';
 
@@ -13,7 +12,7 @@ import Timegraph from './Timegraph';
 import Quickview from './Quickview';
 import weatherIcons from './weatherIcons';
 import Datepicker from './Datepicker';
-
+import UnitConversions from './UnitConversions';
 class Dashboard extends Component {
   constructor() {
     super();
@@ -52,6 +51,7 @@ class Dashboard extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
+        const convertUnits = true;
         dashboardContent = (
           <div>
             <div className="display-4">
@@ -69,20 +69,26 @@ class Dashboard extends Component {
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
-                Reading={quickInfo.temperature + '°C'}
+                Reading={UnitConversions.tempConversions(quickInfo.temperature, convertUnit)}
+                //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
-                Reading={quickInfo.wind + ' mps'}
+                Reading={UnitConversions.speedConversions(quickInfo.wind, convertUnits)}
+                //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
+              <Quickview
+                Type={'Humidity'}
+                Reading={quickInfo.humidity + '%'}
+              />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
               />
               <Quickview
                 Type={'Pressure'}
-                Reading={quickInfo.pressure + ' hPa'}
+                Reading={UnitConversions.pressureToConvert(quickInfo.pressure, convertUnits)}
+                //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
                 Type={'Precipitation %'}

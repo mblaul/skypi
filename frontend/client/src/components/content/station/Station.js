@@ -11,8 +11,17 @@ import Spinner from '../../common/Spinner';
 //import pieces of Station
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
+import Datepicker from '../dashboard/Datepicker';
 
 class Station extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      startDate: '',
+      endDate: ''
+    };
+  }
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -60,9 +69,15 @@ class Station extends Component {
                 Type={'Wind Speed'}
                 Reading={quickInfo.wind + ' mps'}
               />
+<<<<<<< HEAD
               <Quickview 
                 Type={'Humidity'} 
                 Reading={quickInfo.humidity + '%'} 
+=======
+              <Quickview
+                Type={'Humidity'}
+                Reading={quickInfo.humidity + '%'}
+>>>>>>> 90fafe41890d88e7cc5652f57f323507b1c67214
               />
               <Quickview
                 Type={'Wind Direction'}
@@ -76,6 +91,22 @@ class Station extends Component {
                 Type={'Precipitation %'}
                 Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
+            </div>
+            <div className="row mb-2">
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              Start Time:
+              <Datepicker
+                selected={this.state.startDate}
+                onChange={this.handleChange}
+              />
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              End Time:
+              <Datepicker
+                selected={this.state.endDate}
+                onChange={this.handleChange}
+              />
+              </div>
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
