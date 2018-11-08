@@ -77,7 +77,10 @@ class Dashboard extends Component {
                 Reading={UnitConversions.speedConversions(quickInfo.wind, convertUnits)}
                 //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
+              <Quickview
+                Type={'Humidity'}
+                Reading={quickInfo.humidity + '%'}
+              />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
