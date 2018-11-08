@@ -95,11 +95,6 @@ class Dashboard extends Component {
               <Datepicker
                 selected={this.state.startDate}
                 onChange={this.handleChange}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                dateFormat="LT"
-                timeCaption="Time"
               />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
@@ -107,11 +102,6 @@ class Dashboard extends Component {
               <Datepicker
                 selected={this.state.endDate}
                 onChange={this.handleChange}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={15}
-                dateFormat="LT"
-                timeCaption="Time"
               />
               </div>
             </div>

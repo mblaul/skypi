@@ -26,11 +26,6 @@ export default class Datepicker extends Component {
         <DatePicker
             selected={this.state.startDate}
             onChange={this.handleChange}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={15}
-            dateFormat="LT"
-            timeCaption="Time"
         />
       </div>
     )
