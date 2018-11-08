@@ -9,7 +9,6 @@ import { getDeviceWeatherData } from '../../../actions/weatherActions';
 import Spinner from '../../common/Spinner';
 
 //import pieces of Station
-import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
 
@@ -29,17 +28,9 @@ class Station extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
-    let dashboardContent;
-    const TableHeaderArray = [
-      'Date/Time',
-      'Temp',
-      'Humidity',
-      'Wind Speed',
-      'Wind Direction',
-      'Pressure'
-    ];
+    let stationContent;
     if (weatherLogs === undefined || loading) {
-      dashboardContent = <Spinner />;
+      stationContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
@@ -49,7 +40,7 @@ class Station extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
-        dashboardContent = (
+        stationContent = (
           <div>
             <div className="row my-4">
               <div className="text-center mx-auto">
@@ -77,6 +68,10 @@ class Station extends Component {
               <Quickview
                 Type={'Pressure'}
                 Reading={quickInfo.pressure + ' hPa'}
+              />
+              <Quickview
+                Type={'Precipitation %'}
+                Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
             </div>
             <div className="row mb-2">
@@ -115,7 +110,7 @@ class Station extends Component {
         );
       } else {
         // User is logged in but has not favorited a device yet
-        dashboardContent = (
+        stationContent = (
           <div className="mx-auto">
             <p className="lead alert alert-warning">
               You need to favorite a device!
@@ -130,7 +125,7 @@ class Station extends Component {
       }
     }
 
-    return <div className="container mt-2">{dashboardContent}</div>;
+    return <div className="container mt-2">{stationContent}</div>;
   }
 }
 
