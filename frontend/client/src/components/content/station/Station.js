@@ -37,9 +37,13 @@ class Station extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
+<<<<<<< HEAD
     let dashboardContent;
+=======
+    let stationContent;
+>>>>>>> 0a6d4305a144e70b410782cadc17f0014f02ef39
     if (weatherLogs === undefined || loading) {
-      dashboardContent = <Spinner />;
+      stationContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
@@ -49,7 +53,7 @@ class Station extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
-        dashboardContent = (
+        stationContent = (
           <div>
             <div className="row my-4">
               <div className="text-center mx-auto">
@@ -85,6 +89,7 @@ class Station extends Component {
                 Type={'Precipitation %'}
                 Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
+<<<<<<< HEAD
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
@@ -101,6 +106,8 @@ class Station extends Component {
                 onChange={this.handleChange}
               />
               </div>
+=======
+>>>>>>> 0a6d4305a144e70b410782cadc17f0014f02ef39
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -138,7 +145,7 @@ class Station extends Component {
         );
       } else {
         // User is logged in but has not favorited a device yet
-        dashboardContent = (
+        stationContent = (
           <div className="mx-auto">
             <p className="lead alert alert-warning">
               You need to favorite a device!
@@ -153,7 +160,7 @@ class Station extends Component {
       }
     }
 
-    return <div className="container mt-2">{dashboardContent}</div>;
+    return <div className="container mt-2">{stationContent}</div>;
   }
 }
 
