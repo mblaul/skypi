@@ -111,17 +111,6 @@ class Station extends Component {
                 />
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-12">
-                <Stripetable
-                  TableHeader={'Weather Readings'}
-                  TableSubtitle={'Recent Data From Favorited Station'}
-                  weatherLogs={weatherLogs}
-                  TableHeaders={TableHeaderArray}
-                  SourcePage={'Dashboard'}
-                />
-              </div>
-            </div>
           </div>
         );
       } else {
