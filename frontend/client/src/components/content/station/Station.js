@@ -37,11 +37,7 @@ class Station extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
-<<<<<<< HEAD
-    let dashboardContent;
-=======
     let stationContent;
->>>>>>> 0a6d4305a144e70b410782cadc17f0014f02ef39
     if (weatherLogs === undefined || loading) {
       stationContent = <Spinner />;
     } else {
@@ -89,7 +85,6 @@ class Station extends Component {
                 Type={'Precipitation %'}
                 Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
-<<<<<<< HEAD
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
@@ -106,8 +101,6 @@ class Station extends Component {
                 onChange={this.handleChange}
               />
               </div>
-=======
->>>>>>> 0a6d4305a144e70b410782cadc17f0014f02ef39
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
