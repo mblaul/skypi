@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
+import { connect } from 'react-redux';
 
-export default class Stripetable extends Component {
+import { getAllUsers, deleteUser } from '../../../actions/adminActions';
+import { resetPassword } from '../../../actions/authActions';
 
-  resetUserPassword(UserID) {
-    var alertMessage = "Password Reset Email Sent To User"
-    //Delcare Dummy Function for resetting a User's Password
-    //Call Function to SEnd a Password Reset
-    //this.props.sendResetEmail(UserID);
+class Stripetable extends Component {
+  changeAdminStatus(UserID, userName, AdminStatus) {
+    var alertMessage = "The User's Admin Status has been updated";
+    //Function to change Admin Privledges in the Database
     window.alert(alertMessage);
   }
-  deleteUserAccount(UserID) {
-    var alertMessage = "Are you sure you want to delete this Account? This action cannot be undone"
-    var confirmDelete = window.confirm(alertMessage)
-    if (confirmDelete === true)
-    {
-      window.alert("User Sucessfully Deleted") 
-    } else {
-      //Safely exit without deleting the account
-    }
+
+  onResetPasswordClick(userEmail) {
+    this.props.resetPassword(userEmail);
   }
-  changeAdminStatus(UserID, userName, AdminStatus) {
-    var alertMessage = "The User's Admin Status has been updated"
-    //Function to change Admin Privledges in the Database
-    window.alert(alertMessage)
+
+  onDeleteClick(userId, userEmail) {
+    if (window.confirm(`Are you sure you want to delete ${userEmail}?`)) {
+      this.props.deleteUser(userId);
+      this.props.getAllUsers();
+    } else {
+      alert(`${userEmail} has been spared.`);
+    }
   }
   /*
     Units for Temp, WindSpeed, and Pressure repectivly
@@ -33,51 +31,38 @@ export default class Stripetable extends Component {
     Pressure Unitrs are KPa,  and PSI
   */
   tempConversions(DesiredUnit, tempToConvert) {
-    if (DesiredUnit === "Fahrenheit"){
-      return (((tempToConvert * 1.8) + 32).toFixed(2)) + " °F"
+    if (DesiredUnit === 'Fahrenheit') {
+      return (tempToConvert * 1.8 + 32).toFixed(2) + ' °F';
     } else {
-      return tempToConvert + "°C";
+      return tempToConvert + '°C';
     }
   }
   speedConversions(DesiredUnit, speedToConvert) {
-    if (DesiredUnit === "MPH") {
-      return ((speedToConvert * 2.23694).toFixed(2)) + " MPH";
-    } else if (DesiredUnit === "KPH"){
-      return ((speedToConvert * 3.6).toFixed(2)) + " KPH";
+    if (DesiredUnit === 'MPH') {
+      return (speedToConvert * 2.23694).toFixed(2) + ' MPH';
+    } else if (DesiredUnit === 'KPH') {
+      return (speedToConvert * 3.6).toFixed(2) + ' KPH';
     } else {
-      return (speedToConvert) + " mps";
+      return speedToConvert + ' mps';
     }
   }
   pressureConversions(DesiredUnit, pressureToConvert) {
-    if (DesiredUnit === "PSI") {
-      return ((pressureToConvert * 0.0145037738).toFixed(2)) + " PSI";
-    } else if (DesiredUnit === "KPa"){
-      return ((pressureToConvert * 0.1).toFixed(2)) + " KPa";
+    if (DesiredUnit === 'PSI') {
+      return (pressureToConvert * 0.0145037738).toFixed(2) + ' PSI';
+    } else if (DesiredUnit === 'KPa') {
+      return (pressureToConvert * 0.1).toFixed(2) + ' KPa';
     } else {
-      return (pressureToConvert) + " hPa"
+      return pressureToConvert + ' hPa';
     }
   }
   render() {
-    // Declare an Array for the headers to display in the table
-    const WeatherLogData = [
-      this.props.weatherLogs[0], 
-      this.props.weatherLogs[1],
-      this.props.weatherLogs[2],
-      this.props.weatherLogs[3],
-      this.props.weatherLogs[4]
-      ]
-    var DashboardSource = true
     //Declare an Array of the users perfered units, in furute will be passed from the DB/API
-    const PreferedUnit = ["Celsius", "mps", "hPa"];
-    if (this.props.SourcePage === "Dashboard")
-      {
-        DashboardSource = true
-    } else {
-        DashboardSource = false
-    }
+    const PreferedUnit = ['Celsius', 'mps', 'hPa'];
+
     // Accept an Parameter to dictate when shows as the headers for Table Rows
-    const tableHeaders = this.props.TableHeaders
-      return (
+    const { tableHeaders, data } = this.props;
+
+    return (
       <div className="card">
         <div className="header">
           {/* This takes the passed variable "TableHeader" and Puts it in the top of the table */}
@@ -89,101 +74,81 @@ export default class Stripetable extends Component {
           <table className="table table-hover table-striped">
             <thead>
               <tr>
-              {tableHeaders.map(header => (
+                {tableHeaders.map(header => (
                   <th scope="col" key={header}>
                     {header}
                   </th>
                 ))}
               </tr>
             </thead>
-              {DashboardSource ?
-                /* If source Page is Dashboard.JS render Dashboard Stuff*/
-                (
-                  <tbody>
-                  {WeatherLogData.map(DataLog => (
-                    <tr key={DataLog._id}>
-                      <td>                         
-                        <Moment format="YYYY/MM/DD h:mm A">
-                          {DataLog.date}
-                        </Moment>
-                      </td>
-                      <td>
-                          {this.tempConversions(PreferedUnit[0], DataLog.temperature)}
-                      </td>
-                      <td> 
-                        {DataLog.humidity} %
-                      </td>
-                      <td> 
-                        {this.speedConversions(PreferedUnit[1], DataLog.wind)}
-                      </td>
-                      <td> 
-                        {DataLog.winddirection}
-                      </td>
-                      <td>
-                        {this.pressureConversions(PreferedUnit[2], DataLog.pressure)}
-                      </td>
-                    </tr>
-                  ))}
-                  </tbody>
-                ):
-                /* If source Page is AdminPage.JS render AdminPage Stuff*/
-                (
-                <tbody>
-                  {WeatherLogData.map(DataLog => (
-                    <tr key={DataLog._id}>
-                      <td>                         
-                        {DataLog.userName}
-                      </td>
-                      <td> 
-                        {DataLog.email}
-                      </td>
-                      <td> 
-                        <button 
-                          onClick={this.resetUserPassword.bind("Reset Email Sent")} 
-                          type="button" 
-                          className="btn" >
-                          Reset Password
-                        </button>
-                      </td>
-                      <td> 
-                        {DataLog.Admin ?
-                        (
-                          <React.Fragment>
-                            <input 
-                                type='checkbox' 
-                                name={DataLog._id} 
-                                onChange={this.changeAdminStatus.bind(DataLog._id, DataLog.Admin)}
-                                defaultChecked >
-                              </input>
-                          </React.Fragment>
-                        ): (
-                          <React.Fragment>
-                            <input 
-                                type='checkbox' 
-                                name={DataLog._id} 
-                                onChange={this.changeAdminStatus.bind(DataLog._id, DataLog.name, DataLog.Admin)} >
-                              </input>
-                          </React.Fragment>
-                        )}
-                      </td>
-                      <td> 
-                        <button 
-                          onClick={this.deleteUserAccount.bind("")}
-                          type="button" 
-                          className="btn" > 
-                          Delete Account 
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                  </tbody>
-                )}
-            
+            <tbody>
+              {data.map(data => (
+                <tr key={data._id}>
+                  <td>{data.name}</td>
+                  <td>{data.email}</td>
+                  <td>
+                    <button
+                      onClick={() =>
+                        this.onResetPasswordClick({ email: data.email })
+                      }
+                      type="button"
+                      className="btn btn-secondary"
+                    >
+                      Reset Password
+                    </button>
+                  </td>
+                  <td>
+                    {data.roles.isAdmin ? (
+                      <React.Fragment>
+                        <input
+                          type="checkbox"
+                          name={data._id}
+                          onChange={this.changeAdminStatus.bind(
+                            data._id,
+                            data.Admin
+                          )}
+                          defaultChecked
+                        />
+                      </React.Fragment>
+                    ) : (
+                      <React.Fragment>
+                        <input
+                          type="checkbox"
+                          name={data._id}
+                          onChange={this.changeAdminStatus.bind(
+                            data._id,
+                            data.name,
+                            data.Admin
+                          )}
+                        />
+                      </React.Fragment>
+                    )}
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => this.onDeleteClick(data._id, data.email)}
+                      type="button"
+                      className="btn btn-danger"
+                    >
+                      Delete User
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>
     );
-//End Render Bracket
   }
-//End Class Bracket
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  users: state.users
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllUsers, resetPassword, deleteUser }
+)(Stripetable);
