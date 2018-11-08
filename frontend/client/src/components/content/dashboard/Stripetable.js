@@ -51,7 +51,9 @@ class Stripetable extends Component {
       return (pressureToConvert * 0.0145037738).toFixed(2) + ' PSI';
     } else if (DesiredUnit === 'KPa') {
       return (pressureToConvert * 0.1).toFixed(2) + ' KPa';
-    } else {
+    } else if (DesiredUnit === 'mb'){
+      return (pressureToConvert + 'mbar');
+    }  {
       return pressureToConvert + ' hPa';
     }
   }
@@ -61,7 +63,6 @@ class Stripetable extends Component {
 
     // Accept an Parameter to dictate when shows as the headers for Table Rows
     const { tableHeaders, data } = this.props;
-
     return (
       <div className="card">
         <div className="header">
