@@ -45,7 +45,9 @@ class DeleteModal extends React.Component {
     this.setState({ modalIsOpen: true });
   }
 
-  afterOpenModal() {}
+  afterOpenModal() {
+    this.subtitle.style.color = '#f00';
+  }
 
   closeModal() {
     this.setState({ modalIsOpen: false });
