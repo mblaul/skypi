@@ -69,7 +69,7 @@ class Dashboard extends Component {
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
-                Reading={UnitConversions(quickInfo.temperature, convertUnits, "Temp")}
+                Reading={UnitConversions(quickInfo.temperature, convertUnits, "Temperature")}
                 //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
