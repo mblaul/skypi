@@ -69,11 +69,13 @@ class Dashboard extends Component {
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
-                Reading={quickInfo.temperature + '°C'}
+                Reading={UnitConversions(quickInfo.temperature, convertUnits, "Temp")}
+                //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
-                Reading={quickInfo.wind + ' mps'}
+                Reading={UnitConversions(quickInfo.wind, convertUnits, "Wind")}
+                //Reading={quickInfo.wind + ' mps'}
               />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
@@ -82,7 +84,8 @@ class Dashboard extends Component {
               />
               <Quickview
                 Type={'Pressure'}
-                Reading={quickInfo.pressure + ' hPa'}
+                Reading={UnitConversions(quickInfo.pressure, convertUnits, "Pressure")}
+                //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
                 Type={'Precipitation %'}
