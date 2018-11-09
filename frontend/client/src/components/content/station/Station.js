@@ -69,16 +69,7 @@ class Station extends Component {
                 Type={'Wind Speed'}
                 Reading={quickInfo.wind + ' mps'}
               />
-<<<<<<< HEAD
-              <Quickview 
-                Type={'Humidity'} 
-                Reading={quickInfo.humidity + '%'} 
-=======
-              <Quickview
-                Type={'Humidity'}
-                Reading={quickInfo.humidity + '%'}
->>>>>>> 90fafe41890d88e7cc5652f57f323507b1c67214
-              />
+              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -94,18 +85,18 @@ class Station extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
-              Start Time:
-              <Datepicker
-                selected={this.state.startDate}
-                onChange={this.handleChange}
-              />
+                Start Time:
+                <Datepicker
+                  selected={this.state.startDate}
+                  onChange={this.handleChange}
+                />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
-              End Time:
-              <Datepicker
-                selected={this.state.endDate}
-                onChange={this.handleChange}
-              />
+                End Time:
+                <Datepicker
+                  selected={this.state.endDate}
+                  onChange={this.handleChange}
+                />
               </div>
             </div>
             <div className="row mb-2">

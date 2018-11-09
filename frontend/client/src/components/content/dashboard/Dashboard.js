@@ -69,25 +69,34 @@ class Dashboard extends Component {
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
-                Reading={UnitConversions.tempConversions(quickInfo.temperature, convertUnit, "Temp")}
+                Reading={UnitConversions.tempConversions(
+                  quickInfo.temperature,
+                  convertUnits,
+                  'Temp'
+                )}
                 //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
-                Reading={UnitConversions.speedConversions(quickInfo.wind, convertUnits, "Wind")}
+                Reading={UnitConversions.speedConversions(
+                  quickInfo.wind,
+                  convertUnits,
+                  'Wind'
+                )}
                 //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview
-                Type={'Humidity'}
-                Reading={quickInfo.humidity + '%'}
-              />
+              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
               />
               <Quickview
                 Type={'Pressure'}
-                Reading={UnitConversions.pressureToConvert(quickInfo.pressure, convertUnits, "Pressure")}
+                Reading={UnitConversions.pressureToConvert(
+                  quickInfo.pressure,
+                  convertUnits,
+                  'Pressure'
+                )}
                 //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
@@ -97,18 +106,18 @@ class Dashboard extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
-              Start Time:
-              <Datepicker
-                selected={this.state.startDate}
-                onChange={this.handleChange}
-              />
+                Start Time:
+                <Datepicker
+                  selected={this.state.startDate}
+                  onChange={this.handleChange}
+                />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
-              End Time:
-              <Datepicker
-                selected={this.state.endDate}
-                onChange={this.handleChange}
-              />
+                End Time:
+                <Datepicker
+                  selected={this.state.endDate}
+                  onChange={this.handleChange}
+                />
               </div>
             </div>
             <div className="row mb-2">
