@@ -1,17 +1,17 @@
 export default function UnitConversions(unitToConvert, convertUnit, reading){
   if (convertUnit){
-    if (reading == 'Temp') 
+    if (reading === 'Temp') 
     {
       return (unitToConvert * 1.8 + 32).toFixed(2) + ' °F';
-    } else if (reading == 'wind') {
+    } else if (reading === 'wind') {
       return (unitToConvert * 2.23694).toFixed(2) + ' MPH';
-    } else if (reading == 'Pressure') {
+    } else if (reading === 'Pressure') {
       return (unitToConvert * 0.0145037738).toFixed(2) + ' PSI';
     } else {
-      if (reading == 'Wind') 
+      if (reading === 'Wind') 
       {
         return (unitToConvert * 3.6).toFixed(2) + 'KPH';
-      } else if (reading == 'Presure') {
+      } else if (reading === 'Presure') {
         return (unitToConvert + 'mbar');
       }
     }
