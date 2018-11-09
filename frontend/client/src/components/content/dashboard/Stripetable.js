@@ -58,9 +58,6 @@ class Stripetable extends Component {
     }
   }
   render() {
-    //Declare an Array of the users perfered units, in furute will be passed from the DB/API
-    const PreferedUnit = ['Celsius', 'mps', 'hPa'];
-
     // Accept an Parameter to dictate when shows as the headers for Table Rows
     const { tableHeaders, data } = this.props;
     return (
