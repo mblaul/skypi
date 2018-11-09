@@ -1,6 +1,6 @@
 export default function UnitConversions(unitToConvert, convertUnit, reading){
   if (convertUnit){
-    if (reading === 'Temp') 
+    if (reading === 'Temperature') 
     {
       return (unitToConvert * 1.8 + 32).toFixed(2) + ' °F';
     } else if (reading === 'Wind') {
