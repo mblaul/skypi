@@ -51,7 +51,7 @@ class Dashboard extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
-        const convertUnits = true;
+        const convertUnits = false;
         dashboardContent = (
           <div>
             <div className="display-4">
@@ -69,12 +69,16 @@ class Dashboard extends Component {
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
-                Reading={UnitConversions(quickInfo.temperature, convertUnits, "Temperature")}
+                Reading={UnitConversions(
+                  quickInfo.temperature,
+                  convertUnits,
+                  'Temperature'
+                )}
                 //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
-                Reading={UnitConversions(quickInfo.wind, convertUnits, "Wind")}
+                Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
                 //Reading={quickInfo.wind + ' mps'}
               />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
@@ -84,7 +88,11 @@ class Dashboard extends Component {
               />
               <Quickview
                 Type={'Pressure'}
-                Reading={UnitConversions(quickInfo.pressure, convertUnits, "Pressure")}
+                Reading={UnitConversions(
+                  quickInfo.pressure,
+                  convertUnits,
+                  'Pressure'
+                )}
                 //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
