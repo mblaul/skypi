@@ -78,3 +78,16 @@ export const getDeviceWeatherData = deviceId => dispatch => {
     })
     .catch(err => dispatch({ type: GET_DEVICE_WEATHER_LOGS, payload: [] }));
 };
+
+// Get weather logs for current users favorite device
+export const getLocationWeatherData = (city, state, zipcode) => dispatch => {
+  dispatch(setWeatherLogLoading());
+  axios
+    .get(
+      `/api/weather/data/location?city=${city}&state=${state}&zipcode=${zipcode}`
+    )
+    .then(result => {
+      dispatch({ type: GET_DEVICE_WEATHER_LOGS, payload: result.data });
+    })
+    .catch(err => dispatch({ type: GET_DEVICE_WEATHER_LOGS, payload: [] }));
+};

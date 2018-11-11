@@ -9,7 +9,6 @@ import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 import Spinner from '../../common/Spinner';
 
 //import pieces of Dashboard
-import Stripetable from '../dashboard/Stripetable';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
 import weatherIcons from '../dashboard/weatherIcons';
@@ -31,14 +30,7 @@ class Location extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let locationContent;
-    const TableHeaderArray = [
-      'Date/Time',
-      'Temp',
-      'Humidity',
-      'Wind Speed',
-      'Wind Direction',
-      'Pressure'
-    ];
+
     if (weatherLogs === undefined || loading) {
       locationContent = <Spinner />;
     } else {
@@ -119,17 +111,6 @@ class Location extends Component {
                 />
               </div>
             </div>
-            <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-12">
-                <Stripetable
-                  TableHeader={'Weather Readings'}
-                  TableSubtitle={'Recent Data From Favorited Station'}
-                  weatherLogs={weatherLogs}
-                  TableHeaders={TableHeaderArray}
-                  SourcePage={'Dashboard'}
-                />
-              </div>
-            </div>
           </div>
         );
       } else {
@@ -149,17 +130,7 @@ class Location extends Component {
       }
     }
 
-    return (
-      <div className="container mt-2">
-        <div className="row mb-3">
-          <div className="display-3 my-3">
-            Hello, {this.props.auth.user.name}
-          </div>
-          <hr />
-        </div>
-        {locationContent}
-      </div>
-    );
+    return <div className="container mt-2">{locationContent}</div>;
   }
 }
 
