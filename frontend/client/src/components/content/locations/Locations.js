@@ -28,33 +28,20 @@ class Locations extends Component {
     let locationsContent;
 
     // Table headers for table below
-    const tableHeaders = ['Location', 'Last Update'];
+    const tableHeaders = ['Location'];
 
     if (devices === [] || loading) {
       locationsContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
       if (devices.length > 0) {
-        let cityList = [];
-        let lastUpdates = [];
-
-        cityList = [
+        const cityList = [
           ...new Set(
             devices.map(device => {
-              return {
-                city: device.lastWeatherLog.city,
-                date: device.lastWeatherLog.date
-              };
+              return device.lastWeatherLog.city;
             })
           )
         ];
-        let aggList = [];
-
-        cityList.forEach(city => {
-          aggList.push(city);
-        });
-
-        console.log(aggList);
 
         locationsContent = (
           <table className="table table-striped">
@@ -68,12 +55,11 @@ class Locations extends Component {
               </tr>
             </thead>
             <tbody>
-              {/* {cityList.map(city => (
+              {cityList.map(city => (
                 <tr key={city}>
                   <td>{city}</td>
-                  <td>{city}</td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         );
