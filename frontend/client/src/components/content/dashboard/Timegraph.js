@@ -8,25 +8,16 @@ export default class Timegraph extends Component {
     //Temp boolean called 'convertUnits' to control if units are converted
     const convertUnits = false;
     // true => Convert Readings to the Imperial system
-    // flase => Don't convert (keep readings in the Metric system)
+    // false => Don't convert (keep readings in the Metric system)
     //Declare a String variable for what readingType to convert, initalized to whatever the Chart's label is
     const readingType = this.props.chartLabel;
     const data = {
-      labels: this.props.weatherDates
-        .map((weatherDates, i) => {
-          return moment(this.props.weatherDates[i]).format('h:mm A');
-        })
-        .reverse(),
-      /*
-        moment(this.props.weatherDates[7]).format("h:mm A"),
-        moment(this.props.weatherDates[6]).format("h:mm A"),
-        moment(this.props.weatherDates[5]).format("h:mm A"),
-        moment(this.props.weatherDates[4]).format("h:mm A"), 
-        moment(this.props.weatherDates[3]).format("h:mm A"), 
-        moment(this.props.weatherDates[2]).format("h:mm A"), 
-        moment(this.props.weatherDates[1]).format("h:mm A"), 
-        moment(this.props.weatherDates[0]).format("h:mm A")
-        */
+      labels: 
+      this.props.weatherDates.map((weatherDates, i) => 
+      {
+        return moment(this.props.weatherDates[i]).format("h:mm A");
+      })
+      .reverse(),
       datasets: [
         {
           label: this.props.chartLabel,
