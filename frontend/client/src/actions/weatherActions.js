@@ -80,11 +80,13 @@ export const getDeviceWeatherData = deviceId => dispatch => {
 };
 
 // Get weather logs for current users favorite device
-export const getLocationWeatherData = (city, state, zipcode) => dispatch => {
+export const getLocationWeatherData = locationData => dispatch => {
   dispatch(setWeatherLogLoading());
   axios
     .get(
-      `/api/weather/data/location?city=${city}&state=${state}&zipcode=${zipcode}`
+      `/api/weather/data/location?city=${locationData.city}&state=${
+        locationData.state
+      }&zipcode=${locationData.zipcode}`
     )
     .then(result => {
       dispatch({ type: GET_DEVICE_WEATHER_LOGS, payload: result.data });

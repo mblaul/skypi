@@ -78,7 +78,7 @@ class App extends Component {
                 component={Station}
               />
               <VerifiedRoute exact path="/locations/" component={Locations} />
-              <VerifiedRoute exact path="/location/" component={Location} />
+              <VerifiedRoute exact path="/location" component={Location} />
             </Switch>
             <Switch>
               <AdminRoute exact path="/admin" component={Admin} />

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import { getFavoriteWeatherData } from '../../../actions/weatherActions';
+import { getLocationWeatherData } from '../../../actions/weatherActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -20,8 +20,10 @@ class Location extends Component {
     if (!this.props.auth) {
       this.props.history.push('/login');
     }
-    const values = queryString.parse(this.props.location.search);
-    this.props.getFavoriteWeatherData();
+    console.log(this.props.location.search);
+    const locationData = queryString.parse(this.props.location.search);
+    console.log(locationData);
+    this.props.getLocationWeatherData(locationData);
   }
 
   componentWillReceieveProps(nextProps) {
@@ -48,7 +50,7 @@ class Location extends Component {
         locationContent = (
           <div>
             <div className="display-4">
-              {quickInfo.source}
+              {quickInfo.city}
               <img
                 className="my-0 py-0 h-50"
                 src={weatherIcons(quickInfo.description)}
@@ -149,5 +151,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getFavoriteWeatherData }
+  { getLocationWeatherData }
 )(Location);
