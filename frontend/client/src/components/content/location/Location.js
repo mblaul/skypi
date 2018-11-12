@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import queryString from 'query-string';
+
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 
 // Import common components
@@ -18,6 +20,7 @@ class Location extends Component {
     if (!this.props.auth) {
       this.props.history.push('/login');
     }
+    const values = queryString.parse(this.props.location.search);
     this.props.getFavoriteWeatherData();
   }
 
