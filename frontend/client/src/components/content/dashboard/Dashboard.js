@@ -44,7 +44,6 @@ class Dashboard extends Component {
     } else {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
-        const weather2Logs = weatherLogs.map(logs => logs);
         const quickInfo = weatherLogs[0];
         const weatherDates = weatherLogs.map(logs => logs.date);
         const weatherHumidity = weatherLogs.map(logs => logs.humidity);
@@ -102,14 +101,14 @@ class Dashboard extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
-                Start Time:
+                Start Date:
                 <Datepicker
                   selected={this.state.startDate}
                   onChange={this.handleChange}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
-                End Time:
+                End Date:
                 <Datepicker
                   selected={this.state.endDate}
                   onChange={this.handleChange}
