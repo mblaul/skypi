@@ -30,6 +30,7 @@ import Locations from './components/content/locations/Locations';
 import Location from './components/content/location/Location';
 import ResetPassword from './components/authentication/ResetPassword';
 import ForgotPassword from './components/authentication/ForgotPassword';
+import NotFound from './components/common/NotFound';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -83,6 +84,7 @@ class App extends Component {
             <Switch>
               <AdminRoute exact path="/admin" component={Admin} />
             </Switch>
+            <Route exact path="/notfound" component={NotFound} />
           </div>
         </Router>
       </Provider>
