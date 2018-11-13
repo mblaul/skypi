@@ -98,14 +98,14 @@ class Station extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
-                Start Time:
+                Start Date:
                 <Datepicker
                   selected={this.state.startDate}
                   onChange={this.handleChange}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
-                End Time:
+                End Date:
                 <Datepicker
                   selected={this.state.endDate}
                   onChange={this.handleChange}
