@@ -20,9 +20,7 @@ class Location extends Component {
     if (!this.props.auth) {
       this.props.history.push('/login');
     }
-    console.log(this.props.location.search);
     const locationData = queryString.parse(this.props.location.search);
-    console.log(locationData);
     this.props.getLocationWeatherData(locationData);
   }
 
@@ -47,10 +45,11 @@ class Location extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
+
         locationContent = (
           <div>
             <div className="display-4">
-              {quickInfo.city}
+              {quickInfo.city}, {quickInfo.state}
               <img
                 className="my-0 py-0 h-50"
                 src={weatherIcons(quickInfo.description)}
@@ -61,6 +60,7 @@ class Location extends Component {
               Last Updated:{' '}
               <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
             </div>
+            <br />
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
