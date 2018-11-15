@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import moment from 'moment';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
@@ -45,6 +47,32 @@ class Location extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
+
+        let aggData;
+
+        console.log(weatherLogs);
+
+        aggData = _.values(
+          _.reduce(
+            weatherLogs,
+            (result, obj) => {
+              const formattedDate = moment(obj.date).format('MM/DD/YYYY');
+              console.log(obj.date, obj.temperature);
+              result[formattedDate] = {
+                date: formattedDate,
+                temperature: obj.temperature,
+                wind: obj.wind,
+                humidity: obj.humidity,
+                pressure: obj.pressure,
+                precipitation: obj.precipitation
+              };
+              return result;
+            },
+            {}
+          )
+        );
+
+        console.log(aggData);
 
         locationContent = (
           <div>
