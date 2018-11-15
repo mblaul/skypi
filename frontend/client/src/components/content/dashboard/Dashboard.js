@@ -179,6 +179,7 @@ class Dashboard extends Component {
         {dashboardContent}
         <hr />
         <Map />
+        <hr />
       </div>
     );
   }
