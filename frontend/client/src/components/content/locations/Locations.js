@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -57,7 +57,11 @@ class Locations extends Component {
             <tbody>
               {cityList.map(city => (
                 <tr key={city}>
-                  <td>{city}</td>
+                  <td>
+                    <Link to={`/location?city=${city}&state=Michigan`}>
+                      {city}
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

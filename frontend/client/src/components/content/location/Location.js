@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import moment from 'moment';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
@@ -14,15 +16,14 @@ import Spinner from '../../common/Spinner';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
 import weatherIcons from '../dashboard/weatherIcons';
+import UnitConversions from '../dashboard/UnitConversions';
 
 class Location extends Component {
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
     }
-    console.log(this.props.location.search);
     const locationData = queryString.parse(this.props.location.search);
-    console.log(locationData);
     this.props.getLocationWeatherData(locationData);
   }
 
@@ -35,22 +36,49 @@ class Location extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let locationContent;
-
+    //Declare a temp variable to control unit conversions
+    const convertUnits = true;
     if (weatherLogs === undefined || loading) {
       locationContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        const weatherDates = weatherLogs.map(logs => logs.date);
-        const weatherHumidity = weatherLogs.map(logs => logs.humidity);
-        const weatherPressure = weatherLogs.map(logs => logs.pressure);
-        const weatherTemperature = weatherLogs.map(logs => logs.temperature);
-        const weatherWind = weatherLogs.map(logs => logs.wind);
+
+        let aggData = _.values(
+          _.reduce(
+            weatherLogs,
+            (result, obj) => {
+              const formattedDate = moment(obj.date).format('MM/DD/YYYY');
+              //console.log(obj.date, obj.temperature);
+              result[formattedDate] = {
+                date: formattedDate,
+                temperature: obj.temperature,
+                wind: obj.wind,
+                humidity: obj.humidity,
+                pressure: obj.pressure,
+                precipitation: obj.precipitation
+              };
+              return result;
+            },
+            {}
+          )
+        );
+
+        const weatherDates = aggData.map(logs => logs.date);
+        const weatherHumidity = aggData.map(logs => logs.humidity);
+        const weatherPressure = aggData.map(logs => logs.pressure);
+        const weatherTemperature = aggData.map(logs => logs.temperature);
+        const weatherWind = aggData.map(logs => logs.wind);
+
+        //console.log(aggData);
+        weatherDates.map((weatherDates, i) => {
+          console.log(weatherDates[i]);
+        })
         locationContent = (
           <div>
             <div className="display-4">
-              {quickInfo.city}
+              {quickInfo.city}, {quickInfo.state}
               <img
                 className="my-0 py-0 h-50"
                 src={weatherIcons(quickInfo.description)}
@@ -61,14 +89,21 @@ class Location extends Component {
               Last Updated:{' '}
               <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
             </div>
+            <br />
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
-                Reading={quickInfo.temperature + '°C'}
+                Reading={UnitConversions(
+                  quickInfo.temperature,
+                  convertUnits,
+                  'Temperature'
+                )}
+                //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
-                Reading={quickInfo.wind + ' mps'}
+                Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
+                //Reading={quickInfo.wind + ' mps'}
               />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
@@ -77,11 +112,16 @@ class Location extends Component {
               />
               <Quickview
                 Type={'Pressure'}
-                Reading={quickInfo.pressure + ' hPa'}
+                Reading={UnitConversions(
+                  quickInfo.pressure,
+                  convertUnits,
+                  'Pressure'
+                )}
+                //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
                 Type={'Precipitation %'}
-                Reading={quickInfo.precipitation + '%'}
+                Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
             </div>
             <div className="row mb-2">

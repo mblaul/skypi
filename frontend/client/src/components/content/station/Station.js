@@ -39,10 +39,12 @@ class Station extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let stationContent;
+    // Check to see if values have fully loaded for weather data
     if (weatherLogs === undefined || loading) {
+      //If it hasn't loaded display spinner
       stationContent = <Spinner />;
     } else {
-      // Check to see if values have fully loaded for weather data
+      //If it has loaded, ensure weatherLogs' length isn't zero then display data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
         const weatherDates = weatherLogs.map(logs => logs.date);
@@ -110,6 +112,7 @@ class Station extends Component {
                   selected={this.state.endDate}
                   onChange={this.handleChange}
                 />
+                
               </div>
             </div>
             <div className="row mb-2">
@@ -118,6 +121,7 @@ class Station extends Component {
                   chartLabel={'Temperature'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
+                  limitDisplay={true}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -125,6 +129,7 @@ class Station extends Component {
                   chartLabel={'Wind'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
+                  limitDisplay={true}
                 />
               </div>
             </div>
@@ -134,6 +139,7 @@ class Station extends Component {
                   chartLabel={'Humidity'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
+                  limitDisplay={true}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -141,6 +147,7 @@ class Station extends Component {
                   chartLabel={'Pressure'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
+                  limitDisplay={true}
                 />
               </div>
             </div>

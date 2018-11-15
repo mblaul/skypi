@@ -19,6 +19,8 @@ export default class Datepicker extends Component {
           startDate: date,
           endDate: date
         });
+        console.log((this.state.startDate).format("YYYY-MM-DD h:mm A"));
+        console.log((this.state.endDate).format("YYYY-MM-DD h:mm A"));
       }
   render() {
     return (

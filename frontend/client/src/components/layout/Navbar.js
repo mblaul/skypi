@@ -6,7 +6,6 @@ import { logoutUser } from '../../actions/authActions';
 import LogoutModal from './LogoutModal';
 
 class Navbar extends Component {
-  
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
@@ -34,6 +33,11 @@ class Navbar extends Component {
         <li className="nav-item">
           <Link className="btn btn-info mr-2" to="/stations">
             Stations
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="btn btn-info mr-2" to="/locations">
+            Locations
           </Link>
         </li>
         <LogoutModal />
