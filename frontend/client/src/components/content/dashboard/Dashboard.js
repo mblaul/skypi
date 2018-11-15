@@ -13,6 +13,8 @@ import Quickview from './Quickview';
 import weatherIcons from './weatherIcons';
 import Datepicker from './Datepicker';
 import UnitConversions from './UnitConversions';
+import Map from '../../common/Map';
+
 class Dashboard extends Component {
   constructor() {
     super();
@@ -176,6 +178,8 @@ class Dashboard extends Component {
           <hr />
         </div>
         {dashboardContent}
+        <hr />
+        <Map />
       </div>
     );
   }
