@@ -112,6 +112,7 @@ class Station extends Component {
                   selected={this.state.endDate}
                   onChange={this.handleChange}
                 />
+                
               </div>
             </div>
             <div className="row mb-2">
@@ -120,6 +121,7 @@ class Station extends Component {
                   chartLabel={'Temperature'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
+                  limitDisplay={true}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -127,6 +129,7 @@ class Station extends Component {
                   chartLabel={'Wind'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
+                  limitDisplay={true}
                 />
               </div>
             </div>
@@ -136,6 +139,7 @@ class Station extends Component {
                   chartLabel={'Humidity'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
+                  limitDisplay={true}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -143,6 +147,7 @@ class Station extends Component {
                   chartLabel={'Pressure'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
+                  limitDisplay={true}
                 />
               </div>
             </div>
