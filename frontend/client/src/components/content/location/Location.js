@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import moment from 'moment';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
@@ -20,9 +22,7 @@ class Location extends Component {
     if (!this.props.auth) {
       this.props.history.push('/login');
     }
-    console.log(this.props.location.search);
     const locationData = queryString.parse(this.props.location.search);
-    console.log(locationData);
     this.props.getLocationWeatherData(locationData);
   }
 
@@ -42,15 +42,39 @@ class Location extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        const weatherDates = weatherLogs.map(logs => logs.date);
-        const weatherHumidity = weatherLogs.map(logs => logs.humidity);
-        const weatherPressure = weatherLogs.map(logs => logs.pressure);
-        const weatherTemperature = weatherLogs.map(logs => logs.temperature);
-        const weatherWind = weatherLogs.map(logs => logs.wind);
+
+        let aggData = _.values(
+          _.reduce(
+            weatherLogs,
+            (result, obj) => {
+              const formattedDate = moment(obj.date).format('MM/DD/YYYY');
+              console.log(obj.date, obj.temperature);
+              result[formattedDate] = {
+                date: formattedDate,
+                temperature: obj.temperature,
+                wind: obj.wind,
+                humidity: obj.humidity,
+                pressure: obj.pressure,
+                precipitation: obj.precipitation
+              };
+              return result;
+            },
+            {}
+          )
+        );
+
+        const weatherDates = aggData.map(logs => logs.date);
+        const weatherHumidity = aggData.map(logs => logs.humidity);
+        const weatherPressure = aggData.map(logs => logs.pressure);
+        const weatherTemperature = aggData.map(logs => logs.temperature);
+        const weatherWind = aggData.map(logs => logs.wind);
+
+        console.log(aggData);
+
         locationContent = (
           <div>
             <div className="display-4">
-              {quickInfo.city}
+              {quickInfo.city}, {quickInfo.state}
               <img
                 className="my-0 py-0 h-50"
                 src={weatherIcons(quickInfo.description)}
@@ -61,6 +85,7 @@ class Location extends Component {
               Last Updated:{' '}
               <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
             </div>
+            <br />
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}

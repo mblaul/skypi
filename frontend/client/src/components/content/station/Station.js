@@ -12,6 +12,7 @@ import Spinner from '../../common/Spinner';
 import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
 import Datepicker from '../dashboard/Datepicker';
+import UnitConversions from '../dashboard/UnitConversions';
 
 class Station extends Component {
   constructor() {
@@ -51,6 +52,7 @@ class Station extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
+        const convertUnits = true;
         stationContent = (
           <div>
             <div className="row my-4">
@@ -65,11 +67,17 @@ class Station extends Component {
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
-                Reading={quickInfo.temperature + '°C'}
+                Reading={UnitConversions(
+                  quickInfo.temperature,
+                  convertUnits,
+                  'Temperature'
+                )}
+                //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
-                Reading={quickInfo.wind + ' mps'}
+                Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
+                //Reading={quickInfo.wind + ' mps'}
               />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
@@ -78,7 +86,12 @@ class Station extends Component {
               />
               <Quickview
                 Type={'Pressure'}
-                Reading={quickInfo.pressure + ' hPa'}
+                Reading={UnitConversions(
+                  quickInfo.pressure,
+                  convertUnits,
+                  'Pressure'
+                )}
+                //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
                 Type={'Precipitation %'}
@@ -87,14 +100,14 @@ class Station extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
-                Start Time:
+                Start Date:
                 <Datepicker
                   selected={this.state.startDate}
                   onChange={this.handleChange}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
-                End Time:
+                End Date:
                 <Datepicker
                   selected={this.state.endDate}
                   onChange={this.handleChange}
