@@ -11,87 +11,37 @@ export default class Timegraph extends Component {
     // false => Don't convert (keep readings in the Metric system)
     //Declare a String variable for what readingType to convert, initalized to whatever the Chart's label is
     const readingType = this.props.chartLabel;
+    // this.props.weatherLogs.map((weatherLogs, i) => 
+    // {
+    //   console.log(this.props.weatherLogs[i]);
+    //   x = this.props.weatherDates[i];
+    //   y = this.props.weatherLogs[i];
+    //   return x, y;
+    // })
+    // .reverse()
+
+    //Creates a new variable and brings the weatherLogs data into it, ideally the data would be modified
+    //to whatever range the user wants in Dashboard and then passed into Timegraph
+    let weather2Logs = [];
+    weather2Logs = this.props.weatherLogs.map((weatherLogs, i) => 
+            {
+              console.log(this.props.weatherLogs[i]);
+              return this.props.weatherLogs[i];
+            });
     const data = {
       labels: 
       this.props.weatherDates.map((weatherDates, i) => 
       {
-        return moment(this.props.weatherDates[i]).format("YYYY/MM/DD h:mm A");
+        console.log(this.props.weatherDates[i]);
+        return moment(this.props.weatherDates[i]).format("h:mm A");
       })
       .reverse(),
       datasets: [
         {
           label: this.props.chartLabel,
-          data: [
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[7],
-                convertUnits,
-                readingType
-              )
-            ),
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[6],
-                convertUnits,
-                readingType
-              )
-            ),
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[5],
-                convertUnits,
-                readingType
-              )
-            ),
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[4],
-                convertUnits,
-                readingType
-              )
-            ),
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[3],
-                convertUnits,
-                readingType
-              )
-            ),
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[2],
-                convertUnits,
-                readingType
-              )
-            ),
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[1],
-                convertUnits,
-                readingType
-              )
-            ),
-            parseFloat(
-              UnitConversions(
-                this.props.weatherLogs[0],
-                convertUnits,
-                readingType
-              )
-            )
-          ],
-          /*
-           *-----Previous Data Initalization-----
-           *data: [
-           *  this.props.weatherLogs[7],
-           *  this.props.weatherLogs[6],
-           *  this.props.weatherLogs[5],
-           *  this.props.weatherLogs[4],
-           *  this.props.weatherLogs[3],
-           *  this.props.weatherLogs[2],
-           *  this.props.weatherLogs[1],
-           *  this.props.weatherLogs[0]
-           *],
-           */
+          //Takes data points individually but not in a loop when square brackets present
+          //Lack of square brackets allows for the variable to be given flat because science
+          data: weather2Logs,
           backgroundColor: ['rgba(0, 0, 0, 0)'],
           borderColor: ['rgba(0, 102, 255, .7)'],
           borderWidth: 2,
@@ -126,3 +76,4 @@ export default class Timegraph extends Component {
     );
   }
 }
+
