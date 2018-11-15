@@ -42,17 +42,8 @@ class Location extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        const weatherDates = weatherLogs.map(logs => logs.date);
-        const weatherHumidity = weatherLogs.map(logs => logs.humidity);
-        const weatherPressure = weatherLogs.map(logs => logs.pressure);
-        const weatherTemperature = weatherLogs.map(logs => logs.temperature);
-        const weatherWind = weatherLogs.map(logs => logs.wind);
 
-        let aggData;
-
-        console.log(weatherLogs);
-
-        aggData = _.values(
+        let aggData = _.values(
           _.reduce(
             weatherLogs,
             (result, obj) => {
@@ -71,6 +62,12 @@ class Location extends Component {
             {}
           )
         );
+
+        const weatherDates = aggData.map(logs => logs.date);
+        const weatherHumidity = aggData.map(logs => logs.humidity);
+        const weatherPressure = aggData.map(logs => logs.pressure);
+        const weatherTemperature = aggData.map(logs => logs.temperature);
+        const weatherWind = aggData.map(logs => logs.wind);
 
         console.log(aggData);
 
