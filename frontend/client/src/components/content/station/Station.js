@@ -38,10 +38,12 @@ class Station extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let stationContent;
+    // Check to see if values have fully loaded for weather data
     if (weatherLogs === undefined || loading) {
+      //If it hasn't loaded display spinner
       stationContent = <Spinner />;
     } else {
-      // Check to see if values have fully loaded for weather data
+      //If it has loaded, ensure weatherLogs' length isn't zero then display data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
         const weatherDates = weatherLogs.map(logs => logs.date);
