@@ -6,6 +6,7 @@ import { MapMarkerStyle } from './MapMarkerStyle';
 class MapMarker extends Component {
 
     render() {
+        console.log(this.props.text);
         return (
             <div style={MapMarkerStyle}>
                 {this.props.text}
@@ -18,10 +19,10 @@ MapMarker.propTypes = {
     text: PropTypes.string
 };
 
-const mapStateToProps = state => ({
-  text: state.text,
-});
+// const mapStateToProps = state => ({
+//   text: state.text,
+// });
 
 export default connect(
-  mapStateToProps
+//   mapStateToProps
 )(MapMarker);

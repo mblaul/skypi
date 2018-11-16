@@ -1,5 +1,3 @@
-import weatherIcons from '../content/dashboard/weatherIcons';
-
 const MARKER_WIDTH = 20;
 const MARKER_HEIGHT = 20;
 

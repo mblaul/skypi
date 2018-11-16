@@ -26,7 +26,7 @@ class Map extends Component {
     console.log(devices);
     return (
       //The map will fill the size of the container
-      <div style={{ height: '90vh', width: '100%' }}>
+      <div style={{ height: '60vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: API_KEY }}
           defaultCenter={this.props.center}
@@ -39,11 +39,11 @@ class Map extends Component {
               text={device.name}
             />
           )}
-          {/* <MapMarker
-            lat={42.66}
-            lng={-83.20}
-            text={'A'}
-          /> */}
+          <MapMarker
+            lat={42.6727}
+            lng={-83.2157}
+            text={'Kresge'}
+          />
         </GoogleMapReact>
       </div>
     );
