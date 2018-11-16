@@ -96,3 +96,10 @@ export const setFavoriteDevice = deviceId => dispatch => {
     .then()
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
+
+export const setUserPreferences = units => dispatch => {
+  axios
+    .post(`/api/user/preferences`, units)
+    .then()
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
