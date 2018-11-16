@@ -3,17 +3,21 @@ import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+// Import functions
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
+import { getPublicDevices } from '../../../actions/deviceActions';
+
 // Import common components
 import Spinner from '../../common/Spinner';
 
 // Import pieces of Dashboard
-import Timegraph from './Timegraph';
-import Quickview from './Quickview';
-import weatherIcons from './weatherIcons';
 import Datepicker from './Datepicker';
-import UnitConversions from './UnitConversions';
 import Map from '../../common/Map';
+import Quickview from './Quickview';
+import Timegraph from './Timegraph';
+import UnitConversions from './UnitConversions';
+import weatherIcons from './weatherIcons';
 
 class Dashboard extends Component {
   constructor() {
@@ -29,6 +33,7 @@ class Dashboard extends Component {
       this.props.history.push('/login');
     }
     this.props.getFavoriteWeatherData();
+    this.props.getPublicDevices();
   }
 
   componentWillReceieveProps(nextProps) {
@@ -39,6 +44,8 @@ class Dashboard extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
+    const devices = this.props.devices;
+    let myDevice;
     let dashboardContent;
 
     if (weatherLogs === undefined || loading) {
@@ -53,6 +60,13 @@ class Dashboard extends Component {
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = false;
+
+        for(let x=0 ; x<devices.devices.length ; x++){
+          if(devices.devices[x].name === weatherLogs[0].source){
+            myDevice = devices.devices[x]
+          }
+        };
+
         dashboardContent = (
           <div>
             <div className="display-4">
@@ -178,7 +192,10 @@ class Dashboard extends Component {
         </div>
         {dashboardContent}
         <hr />
-        <Map />
+        {console.log(myDevice)}
+        <Map 
+          devices={myDevice}
+        />
         <hr />
       </div>
     );
@@ -187,15 +204,18 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getFavoriteWeatherData: PropTypes.func.isRequired,
+  getPublicDevices: PropTypes.func.isRequired,
+  devices: PropTypes.object.isRequired,
   weather: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  weather: state.weather,
-  auth: state.auth
+  auth: state.auth,
+  devices: state.devices,
+  weather: state.weather
 });
 
 export default connect(
   mapStateToProps,
-  { getFavoriteWeatherData }
+  { getFavoriteWeatherData, getPublicDevices }
 )(Dashboard);

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPublicDevices } from '../../actions/deviceActions';
 
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
@@ -9,10 +8,6 @@ import MapMarker from './MapMarker';
 const API_KEY = "AIzaSyDF7OuqlgIjCV8SFZ5BVH23pGK4-UQ1qlY";
  
 class Map extends Component {
-  componentDidMount() {
-    this.props.getPublicDevices();
-  }
-
   static defaultProps = {
     center: {
       lat: 42.6679,
@@ -23,7 +18,9 @@ class Map extends Component {
  
   render() {
     const { devices } = this.props.devices;
+    console.log("map1");
     console.log(devices);
+    console.log("map2");
     return (
       //The map will fill the size of the container
       <div style={{ height: '60vh', width: '100%' }}>
@@ -39,11 +36,6 @@ class Map extends Component {
               text={device.name}
             />
           )}
-          <MapMarker
-            lat={42.6727}
-            lng={-83.2157}
-            text={'Kresge'}
-          />
         </GoogleMapReact>
       </div>
     );
@@ -51,7 +43,6 @@ class Map extends Component {
 }
 
 Map.propTypes = {
-  getPublicDevices: PropTypes.func.isRequired,
   devices: PropTypes.object.isRequired
 };
 
@@ -60,6 +51,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(
-  mapStateToProps,
-  { getPublicDevices }
+  mapStateToProps
 )(Map);
