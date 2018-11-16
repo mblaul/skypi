@@ -398,11 +398,11 @@ module.exports.favoritedevice_get = (req, res) => {
 module.exports.preferences_post = (req, res) => {
   let errors = {};
 
-  const preferences = req.body.preferences;
+  const units = req.body.units;
 
   User.findById(req.user.id)
     .then(user => {
-      user.preferences = preferences;
+      user.preferences.units = units;
       user.save();
       return res.json(user);
     })
