@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { deleteUser } from '../../../actions/authActions';
+import { deleteUser, setUserPreferences } from '../../../actions/authActions';
 import DeleteModal from './DeleteModal';
 
 class Settings extends Component {
-  
   onDeleteClick(e) {
     e.preventDefault();
     this.props.deleteUser(this.props.auth.user.id);
+  }
+
+  onImperialClick(e) {
+    this.props.setUserPreferences('imperial');
+    //this.forceUpdate();
+  }
+
+  onMetricClick(e) {
+    this.props.setUserPreferences('metric');
+    //this.forceUpdate();
   }
 
   render() {
@@ -17,7 +26,8 @@ class Settings extends Component {
         <div className="container mt-4">
           <div className="row mb-3">
             <div className="display-3 mx-auto">
-              <i className="fas fa-cog" /> User Settings
+              <i className="fas fa-cog" />
+              User Settings
             </div>
           </div>
           <div className="col-lg-8 mt-3 mx-auto">
@@ -27,8 +37,18 @@ class Settings extends Component {
                   <th scope="row" />
                   <td className="align-middle">Measurement Units</td>
                   <td>
-                    <button className="btn btn-info float-right">Metric</button>
-                    <button className="btn btn-primary float-right mr-2">Imperial</button>
+                    <button
+                      className="btn btn-outline-secondary float-right"
+                      onClick={this.onImperialClick}
+                    >
+                      Imperial
+                    </button>
+                    <button
+                      className="btn btn-success float-right mr-2"
+                      onClick={this.onMetricClick}
+                    >
+                      Metric
+                    </button>
                   </td>
                 </tr>
                 <tr>
@@ -49,6 +69,7 @@ class Settings extends Component {
 
 Settings.propTypes = {
   deleteUser: PropTypes.func.isRequired,
+  setUserPreferences: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
@@ -59,5 +80,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteUser }
+  { deleteUser, setUserPreferences }
 )(Settings);

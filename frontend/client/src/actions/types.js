@@ -2,6 +2,7 @@ export const GET_ERRORS = 'GET_ERRORS';
 
 // Auth types
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const SET_USER_PREFERENCES = 'SET_USER_PREFERENCES';
 
 // Weather types
 export const WEATHER_LOGS_LOADING = 'WEATHER_LOGS_LOADING';
