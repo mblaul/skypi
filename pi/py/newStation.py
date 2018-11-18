@@ -68,8 +68,8 @@ else:
 print('Sensor set up complete. We will now set up your device so you can begin push weather data to SkyPi HQ')
 print('_____________________________________________________________________________________________________')
 
-user = raw_input('Enter the Email address you use to login to SkyPi Weather Services:\n')
-pw = raw_input('Enter the corresponding password:\n')
+user = input('Enter the Email address you use to login to SkyPi Weather Services:\n')
+pw = input('Enter the corresponding password:\n')
 
 token = login(user,pw)
 register(token)
