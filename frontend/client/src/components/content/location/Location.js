@@ -44,21 +44,22 @@ class Location extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        let count;
 
         let aggData = _.values(
           _.reduce(
             weatherLogs,
             (result, obj) => {
               const formattedDate = moment(obj.date).format('MM/DD/YYYY');
+              console.log(this);
               result[formattedDate] = {
                 date: formattedDate,
-                temperature: obj.temperature,
-                wind: obj.wind,
-                humidity: obj.humidity,
-                pressure: obj.pressure,
-                precipitation: obj.precipitation,
-                numLogs: this.precipitation
+                temperature: [obj.temperature]
+                // wind: result[formattedDate].wind.push(obj.wind),
+                // humidity: result[formattedDate].humidity.push(obj.humidity),
+                // pressure: result[formattedDate].pressure.push(obj.pressure),
+                // precipitation: result[formattedDate].precipitation.push(
+                //   obj.precipitation
+                //)
               };
               return result;
             },
@@ -67,11 +68,11 @@ class Location extends Component {
         );
 
         console.log(aggData);
-        const weatherDates = aggData.map(logs => logs.date);
-        const weatherHumidity = aggData.map(logs => logs.humidity);
-        const weatherPressure = aggData.map(logs => logs.pressure);
-        const weatherTemperature = aggData.map(logs => logs.temperature);
-        const weatherWind = aggData.map(logs => logs.wind);
+        const weatherDates = weatherLogs.map(logs => logs.date);
+        const weatherHumidity = weatherLogs.map(logs => logs.humidity);
+        const weatherPressure = weatherLogs.map(logs => logs.pressure);
+        const weatherTemperature = weatherLogs.map(logs => logs.temperature);
+        const weatherWind = weatherLogs.map(logs => logs.wind);
 
         locationContent = (
           <div>

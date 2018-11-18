@@ -4,14 +4,16 @@ import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getDeviceWeatherData } from '../../../actions/weatherActions';
+import { getPublicDevices } from '../../../actions/deviceActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
 
-//import pieces of Station
-import Timegraph from '../dashboard/Timegraph';
-import Quickview from '../dashboard/Quickview';
+// Import pieces of Station
 import Datepicker from '../dashboard/Datepicker';
+import Map from '../../common/Map';
+import Quickview from '../dashboard/Quickview';
+import Timegraph from '../dashboard/Timegraph';
 import UnitConversions from '../dashboard/UnitConversions';
 
 class Station extends Component {
@@ -28,6 +30,7 @@ class Station extends Component {
       this.props.history.push('/login');
     }
     this.props.getDeviceWeatherData(this.props.match.params.deviceId);
+    this.props.getPublicDevices();
   }
 
   componentWillReceieveProps(nextProps) {
@@ -38,6 +41,8 @@ class Station extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
+    const devices = this.props.devices;
+    let myDevice;
     let stationContent;
     // Check to see if values have fully loaded for weather data
     if (weatherLogs === undefined || loading) {
@@ -53,6 +58,13 @@ class Station extends Component {
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = true;
+
+        for(let x=0 ; x<devices.devices.length ; x++){
+          if(devices.devices[x].name === weatherLogs[0].source){
+            myDevice = devices.devices[x]
+          }
+        };
+
         stationContent = (
           <div>
             <div className="row my-4">
@@ -170,21 +182,31 @@ class Station extends Component {
       }
     }
 
-    return <div className="container mt-2">{stationContent}</div>;
+    return <div className="container mt-2">
+      {stationContent}
+      <hr />
+      <Map
+        devices={myDevice}
+      />
+      <hr />
+    </div>;
   }
 }
 
 Station.propTypes = {
   getDeviceWeatherData: PropTypes.func.isRequired,
+  getPublicDevices: PropTypes.func.isRequired,
+  devices: PropTypes.object.isRequired,
   weather: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  weather: state.weather,
-  auth: state.auth
+  auth: state.auth,
+  devices: state.devices,
+  weather: state.weather
 });
 
 export default connect(
   mapStateToProps,
-  { getDeviceWeatherData }
+  { getDeviceWeatherData, getPublicDevices }
 )(Station);
