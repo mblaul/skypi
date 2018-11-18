@@ -41,7 +41,7 @@ class Station extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
-    const devices = this.props.devices;
+    const allDevices = this.props.devices;
     let myDevice;
     let stationContent;
     // Check to see if values have fully loaded for weather data
@@ -59,9 +59,9 @@ class Station extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = true;
 
-        for(let x=0 ; x<devices.devices.length ; x++){
-          if(devices.devices[x].name === weatherLogs[0].source){
-            myDevice = devices.devices[x]
+        for(let x=0 ; x<allDevices.devices.length ; x++){
+          if(allDevices.devices[x].name === weatherLogs[0].source){
+            myDevice = allDevices.devices[x]
           }
         };
 
@@ -163,6 +163,7 @@ class Station extends Component {
                 />
               </div>
             </div>
+            <Map devices={[myDevice]} />
           </div>
         );
       } else {
@@ -184,11 +185,6 @@ class Station extends Component {
 
     return <div className="container mt-2">
       {stationContent}
-      <hr />
-      <Map
-        devices={myDevice}
-      />
-      <hr />
     </div>;
   }
 }

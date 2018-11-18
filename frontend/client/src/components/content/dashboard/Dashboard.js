@@ -44,11 +44,11 @@ class Dashboard extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
-    const devices = this.props.devices;
+    const allDevices = this.props.devices;
     let myDevice;
     let dashboardContent;
 
-    if (weatherLogs === undefined || loading) {
+    if (weatherLogs === undefined || allDevices === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
@@ -61,9 +61,9 @@ class Dashboard extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = false;
 
-        for(let x=0 ; x<devices.devices.length ; x++){
-          if(devices.devices[x].name === weatherLogs[0].source){
-            myDevice = devices.devices[x]
+        for(let x=0 ; x<allDevices.devices.length ; x++){
+          if(allDevices.devices[x].name === weatherLogs[0].source){
+            myDevice = allDevices.devices[x]
           }
         };
 
@@ -163,6 +163,10 @@ class Dashboard extends Component {
                 />
               </div>
             </div>
+          <hr />
+          {console.log(myDevice)}
+          <Map devices={[myDevice]} />
+          <hr />
           </div>
         );
       } else {
@@ -191,12 +195,6 @@ class Dashboard extends Component {
           <hr />
         </div>
         {dashboardContent}
-        <hr />
-        {console.log(myDevice)}
-        <Map 
-          devices={myDevice}
-        />
-        <hr />
       </div>
     );
   }

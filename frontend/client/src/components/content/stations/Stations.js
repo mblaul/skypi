@@ -55,73 +55,76 @@ class Stations extends Component {
           'Favorite'
         ];
         stationsContent = (
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                {tableHeaders.map(header => (
-                  <th scope="col" key={header}>
-                    {header}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {devices.map(device => (
-                <tr key={device._id}>
-                  <th scope="row" key={device._id}>
-                    <Link to={`/station/${device._id}`}>{device.name}</Link>
-                  </th>
-                  {device.lastWeatherLog ? (
-                    Object.keys(device.lastWeatherLog).length > 0 ? (
-                      <td>{device.lastWeatherLog.city}</td>
+          <div>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  {tableHeaders.map(header => (
+                    <th scope="col" key={header}>
+                      {header}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {devices.map(device => (
+                  <tr key={device._id}>
+                    <th scope="row" key={device._id}>
+                      <Link to={`/station/${device._id}`}>{device.name}</Link>
+                    </th>
+                    {device.lastWeatherLog ? (
+                      Object.keys(device.lastWeatherLog).length > 0 ? (
+                        <td>{device.lastWeatherLog.city}</td>
+                      ) : (
+                        <td>Not logged yet</td>
+                      )
                     ) : (
                       <td>Not logged yet</td>
-                    )
-                  ) : (
-                    <td>Not logged yet</td>
-                  )}
-                  {device.lastWeatherLog ? (
-                    Object.keys(device.lastWeatherLog).length > 0 ? (
-                      <td>
-                        <Moment format="YYYY/MM/DD h:mm A">
-                          {device.lastWeatherLog.date}
-                        </Moment>
-                      </td>
+                    )}
+                    {device.lastWeatherLog ? (
+                      Object.keys(device.lastWeatherLog).length > 0 ? (
+                        <td>
+                          <Moment format="YYYY/MM/DD h:mm A">
+                            {device.lastWeatherLog.date}
+                          </Moment>
+                        </td>
+                      ) : (
+                        <td>Not logged yet</td>
+                      )
                     ) : (
                       <td>Not logged yet</td>
-                    )
-                  ) : (
-                    <td>Not logged yet</td>
-                  )}
-                  <td>{device.status}</td>
-                  <td>
-                    <button
-                      onClick={this.onFavoriteClick.bind(this, device._id)}
-                      type="button"
-                      className={
-                        currentFavorite !== undefined &&
-                        (device.name === currentFavorite.source ||
-                          device.name === currentFavorite.name)
-                          ? 'btn bg-warning'
-                          : 'btn'
-                      }
-                    >
-                      {/* If this row is the favorite device, highlight the star */}
-                      <i
+                    )}
+                    <td>{device.status}</td>
+                    <td>
+                      <button
+                        onClick={this.onFavoriteClick.bind(this, device._id)}
+                        type="button"
                         className={
                           currentFavorite !== undefined &&
                           (device.name === currentFavorite.source ||
                             device.name === currentFavorite.name)
-                            ? 'fas fa-star fa-inverse'
-                            : 'fas fa-star'
+                            ? 'btn bg-warning'
+                            : 'btn'
                         }
-                      />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                      >
+                        {/* If this row is the favorite device, highlight the star */}
+                        <i
+                          className={
+                            currentFavorite !== undefined &&
+                            (device.name === currentFavorite.source ||
+                              device.name === currentFavorite.name)
+                              ? 'fas fa-star fa-inverse'
+                              : 'fas fa-star'
+                          }
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {/* <Map devices={[devices]} /> */}
+          </div>
         );
       }
     }
@@ -164,11 +167,6 @@ class Stations extends Component {
               </div>
             </div>
             {stationsContent}
-            <hr />
-            <Map
-              devices={devices}
-            />
-            <hr />
           </div>
         </div>
       </div>
