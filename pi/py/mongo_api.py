@@ -2,7 +2,7 @@ import requests
 
 def pushdata(host,temperature,humidity,lat,lng,pressure,city, state, zip_code, country, wind,wind_direction,percipitation,description):
 
-    with open('/home/ansible/id.key', 'r') as myfile:
+    with open('/home/skypi/skypi/id.key', 'r') as myfile:
         device_key = myfile.read()
     
     url = "http://18.235.27.33/api/weather/log"
