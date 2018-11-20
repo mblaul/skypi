@@ -25,6 +25,14 @@ class Station extends Component {
       endDate: ''
     };
   }
+
+  applyDateRange() {
+    //this.endDate = 0;
+    //this.startDate = 0;
+    //Function to change Admin Privledges in the Database
+    window.alert(this.endDate);
+  }
+
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -91,7 +99,10 @@ class Station extends Component {
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
                 //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
+              <Quickview 
+                Type={'Humidity'} 
+                Reading={quickInfo.humidity + '%'} 
+              />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -144,6 +155,16 @@ class Station extends Component {
                   endDate={this.state.endDate}
                   onChange={this.handleChangeEnd}
                 />
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3"> 
+                <p> </p>
+                <button 
+                  onClick={() => window.alert(this.state.endDate)}
+                  type="button"
+                  className="btn btn-secondary"  
+                > 
+                  Apply Date Range 
+                </button>
               </div>
             </div>
             <div className="row mb-2">
