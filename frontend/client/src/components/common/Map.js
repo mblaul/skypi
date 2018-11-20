@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import keys from './GoogleKey';
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
 
-const API_KEY = 'AIzaSyDF7OuqlgIjCV8SFZ5BVH23pGK4-UQ1qlY';
+const API_KEY = keys.SKYPI_KEY;
 
 class Map extends Component {
   static defaultProps = {
