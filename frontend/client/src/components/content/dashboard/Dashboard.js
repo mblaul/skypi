@@ -34,10 +34,10 @@ class Dashboard extends Component {
   }
   //Function to handle DatePicker getting values based on user input
   applyDateRange() {
-    this.endDate = 0;
-    this.startDate = 0;
+    //this.endDate = 0;
+    //this.startDate = 0;
     //Function to change Admin Privledges in the Database
-    window.alert(this.EndDate);
+    window.alert(this.endDate);
   }
   componentDidMount() {
     if (!this.props.auth) {
@@ -74,8 +74,8 @@ class Dashboard extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = false;
         //Declare 2 variables to hold to current start and end dates
-        // this.state.startDate = moment(weatherDates[9]).format("YYYY-MM-DD h:mm A");
-        // this.state.endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");  
+        let startDate = moment(weatherDates[9]).format("YYYY-MM-DD h:mm A");
+        let endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");  
         for(let x=0 ; x<allDevices.devices.length ; x++){
           if(allDevices.devices[x].name === weatherLogs[0].source){
             myDevice = allDevices.devices[x]
@@ -131,18 +131,23 @@ class Dashboard extends Component {
               />
             </div>
             <div className="row mb-2">
+            {/* DatePicker now correctly finds and prints the correctly selected date to the user, still need a reliable way to get the data from the datepicker into a variable in Dashboard.js */}
               <div className="col-sm-12 col-md-12 col-lg-3">
                   Start Time:
                   <Datepicker
+                    onSelect={this.handleSelect}
                     selected={this.state.startDate}
                     onChange={this.handleChange}
+                    value={startDate}
                   />
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-3">
                   End Time:
                   <Datepicker
+                    onSelect={this.handleSelect}
                     selected={this.state.endDate}
                     onChange={this.handleChange}
+                    value={this.state.endDate}
                   />
                 </div>
                 {/* Code below here is our latest attempt at getting DatePicker to return data to the page*/}
@@ -165,7 +170,7 @@ class Dashboard extends Component {
               <div className="col-sm-12 col-md-12 col-lg-3"> 
                 <p> </p>
                 <button 
-                  onClick={() => this.applyDateRange()}
+                  onClick={() => window.alert(this.state.endDate)}
                   type="button"
                   className="btn btn-secondary"  
                 > 
