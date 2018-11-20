@@ -111,7 +111,7 @@ class Station extends Component {
               />
             </div>
             <div className="row mb-2">
-              <div className="col-sm-12 col-md-12 col-lg-3">
+              {/* <div className="col-sm-12 col-md-12 col-lg-3">
                 Start Date:
                 <Datepicker
                   selected={this.state.startDate}
@@ -125,6 +125,25 @@ class Station extends Component {
                   onChange={this.handleChange}
                 />
                 
+              </div>
+                */}
+                <div className="col-sm-12 col-md-12 col-lg-3">
+                <Datepicker
+                  selected={this.state.startDate}
+                  selectsStart
+                  startDate={this.state.startDate}
+                  endDate={this.state.endDate}
+                  onChange={this.handleChangeStart}
+                />
+                </div>
+                <div className="col-sm-12 col-md-12 col-lg-3">
+                <Datepicker
+                  selected={this.state.endDate}
+                  selectsEnd
+                  startDate={this.state.startDate}
+                  endDate={this.state.endDate}
+                  onChange={this.handleChangeEnd}
+                />
               </div>
             </div>
             <div className="row mb-2">

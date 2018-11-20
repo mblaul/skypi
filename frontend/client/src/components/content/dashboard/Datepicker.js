@@ -1,43 +1,56 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
+import { isAfter } from 'date-fns';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
 
-export default class OldDatepicker extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-          baseDate: moment(),
-          returnDate: moment()
-        };
-        this.handleChange = this.handleChange.bind(this);
-      }
-    
-      handleChange(date) {
-        console.log((this.state.baseDate).format("YYYY-MM-DD h:mm A"));
-        this.setState({
-          baseDate: date
-          //Trying to get it to output Start and end date properly
-        });
-        //window.alert(this.state.baseDate);
-      }
-      //HandleSelect Function provides the value after selection, where as on change often returned the value prior to the change
-      handleSelect(date) {
-        var returnDate = date.format("YYYY-MM-DD h:mm A")
-        window.alert(returnDate);
-        return returnDate;
-      }
+export default class Datepicker extends Component {
+  constructor(props) {
+    super(props);
+     this.state = {
+       startDate: moment(),
+       endDate: moment()
+     };
+  }
+
+  handleChange = ({ startDate, endDate }) => {
+    startDate = startDate || this.startDate;
+    endDate = endDate || this.endDate;
+
+    if (isAfter(startDate, endDate)) {
+      endDate = startDate;
+    }
+
+    this.setState({ startDate, endDate });
+    window.alert(startDate);
+  };
+
+  handleChangeStart = startDate => this.handleChange({ startDate });
+
+  handleChangeEnd = endDate => this.handleChange({ endDate });
+
   render() {
     return (
-      <div>
-        <DatePicker
-          onChange = {this.handleChange}
-          selected={this.state.baseDate}
-          onSelect={this.handleSelect}
-          value={this.handleSelect}
-        />
+      <div className="row">
+        <div className="column">
+          <DatePicker
+            selected={this.state.startDate}
+            selectsStart
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onChange={this.handleChangeStart}
+          />
+          <DatePicker
+            selected={this.state.endDate}
+            selectsEnd
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            onChange={this.handleChangeEnd}
+          />
+        </div>
       </div>
-    )
+    );
   }
 }
+ 
