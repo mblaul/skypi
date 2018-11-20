@@ -19,9 +19,9 @@ import Timegraph from './Timegraph';
 import UnitConversions from './UnitConversions';
 import weatherIcons from './weatherIcons';
 //Import Moment for formatting the Dates
-import moment from 'moment';
+//import moment from 'moment';
 //import DateRange to allow for the datepicker to return the selected dates
-import DatePicker from 'react-datepicker';
+//import DatePicker from 'react-datepicker';
 
 class Dashboard extends Component {
   constructor() {
@@ -74,8 +74,8 @@ class Dashboard extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = false;
         //Declare 2 variables to hold to current start and end dates
-        let startDate = moment(weatherDates[9]).format("YYYY-MM-DD h:mm A");
-        let endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");  
+        //let startDate = moment(weatherDates[9]).format("YYYY-MM-DD h:mm A");
+        //let endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");  
         for(let x=0 ; x<allDevices.devices.length ; x++){
           if(allDevices.devices[x].name === weatherLogs[0].source){
             myDevice = allDevices.devices[x]
@@ -111,7 +111,10 @@ class Dashboard extends Component {
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
                 //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
+              <Quickview 
+                Type={'Humidity'} 
+                Reading={quickInfo.humidity + '%'} 
+              />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -132,7 +135,7 @@ class Dashboard extends Component {
             </div>
             <div className="row mb-2">
             {/* DatePicker now correctly finds and prints the correctly selected date to the user, still need a reliable way to get the data from the datepicker into a variable in Dashboard.js */}
-              <div className="col-sm-12 col-md-12 col-lg-3">
+             {/* <div className="col-sm-12 col-md-12 col-lg-3">
                   Start Time:
                   <Datepicker
                     onSelect={this.handleSelect}
@@ -149,24 +152,26 @@ class Dashboard extends Component {
                     onChange={this.handleChange}
                     value={this.state.endDate}
                   />
-                </div>
+                </div> */}
                 {/* Code below here is our latest attempt at getting DatePicker to return data to the page*/}
-              {/* <div className="col-sm-12 col-md-12 col-lg-3">
-              <DatePicker
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              <Datepicker
                 selected={this.state.startDate}
                 selectsStart
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 onChange={this.handleChangeStart}
               />
-              <DatePicker
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              <Datepicker
                 selected={this.state.endDate}
                 selectsEnd
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 onChange={this.handleChangeEnd}
               />
-              </div> */}
+              </div>
               <div className="col-sm-12 col-md-12 col-lg-3"> 
                 <p> </p>
                 <button 
