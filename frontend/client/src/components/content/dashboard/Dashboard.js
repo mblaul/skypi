@@ -12,7 +12,7 @@ import { getPublicDevices } from '../../../actions/deviceActions';
 import Spinner from '../../common/Spinner';
 
 // Import pieces of Dashboard
-//import Datepicker from './Datepicker';
+import Datepicker from './Datepicker';
 import Map from '../../common/Map';
 import Quickview from './Quickview';
 import Timegraph from './Timegraph';
@@ -21,7 +21,7 @@ import weatherIcons from './weatherIcons';
 //Import Moment for formatting the Dates
 //import moment from 'moment';
 //import DateRange to allow for the datepicker to return the selected dates
-import DatePicker from 'react-datepicker';
+//import DatePicker from 'react-datepicker';
 
 class Dashboard extends Component {
   constructor() {
@@ -111,7 +111,10 @@ class Dashboard extends Component {
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
                 //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
+              <Quickview 
+                Type={'Humidity'} 
+                Reading={quickInfo.humidity + '%'} 
+              />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -152,14 +155,16 @@ class Dashboard extends Component {
                 </div> */}
                 {/* Code below here is our latest attempt at getting DatePicker to return data to the page*/}
               <div className="col-sm-12 col-md-12 col-lg-3">
-              <DatePicker
+              <Datepicker
                 selected={this.state.startDate}
                 selectsStart
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
                 onChange={this.handleChangeStart}
               />
-              <DatePicker
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+              <Datepicker
                 selected={this.state.endDate}
                 selectsEnd
                 startDate={this.state.startDate}
