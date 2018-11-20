@@ -4,29 +4,27 @@ import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class Datepicker extends Component {
+export default class OldDatepicker extends Component {
     constructor(props){
         super(props);
         this.state = {
-          startDate: moment(),
-          endDate: moment()
+          baseDate: moment()
         };
         this.handleChange = this.handleChange.bind(this);
       }
     
       handleChange(date) {
         this.setState({
-          startDate: date,
-          endDate: date
+          baseDate: date
+          //Trying to get it to output Start and end date properly
         });
-        console.log((this.state.startDate).format("YYYY-MM-DD h:mm A"));
-        console.log((this.state.endDate).format("YYYY-MM-DD h:mm A"));
+        console.log((this.state.baseDate).format("YYYY-MM-DD h:mm A"));
       }
   render() {
     return (
       <div>
         <DatePicker
-            selected={this.state.startDate}
+            selected={this.state.baseDate}
             onChange={this.handleChange}
         />
       </div>

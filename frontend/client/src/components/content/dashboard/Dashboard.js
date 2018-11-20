@@ -18,6 +18,10 @@ import Quickview from './Quickview';
 import Timegraph from './Timegraph';
 import UnitConversions from './UnitConversions';
 import weatherIcons from './weatherIcons';
+//Import Moment for formatting the Dates
+import moment from 'moment';
+//import DateRange to allow for the datepicker to return the selected dates
+import DatePicker from 'react-datepicker';
 
 class Dashboard extends Component {
   constructor() {
@@ -27,6 +31,13 @@ class Dashboard extends Component {
       startDate: '',
       endDate: ''
     };
+  }
+  //Function to handle DatePicker getting values based on user input
+  applyDateRange() {
+    this.endDate = 0;
+    this.startDate = 0;
+    //Function to change Admin Privledges in the Database
+    window.alert(this.EndDate);
   }
   componentDidMount() {
     if (!this.props.auth) {
@@ -47,6 +58,8 @@ class Dashboard extends Component {
     const allDevices = this.props.devices;
     let myDevice;
     let dashboardContent;
+    //Declare a constant to force moment, allowing us to format dates in varables
+    const moment = require('moment');
 
     if (weatherLogs === undefined || allDevices === undefined || loading) {
       dashboardContent = <Spinner />;
@@ -60,7 +73,9 @@ class Dashboard extends Component {
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = false;
-
+        //Declare 2 variables to hold to current start and end dates
+        // this.state.startDate = moment(weatherDates[9]).format("YYYY-MM-DD h:mm A");
+        // this.state.endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");  
         for(let x=0 ; x<allDevices.devices.length ; x++){
           if(allDevices.devices[x].name === weatherLogs[0].source){
             myDevice = allDevices.devices[x]
@@ -117,18 +132,45 @@ class Dashboard extends Component {
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
-                Start Date:
-                <Datepicker
-                  selected={this.state.startDate}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-3">
-                End Date:
-                <Datepicker
-                  selected={this.state.endDate}
-                  onChange={this.handleChange}
-                />
+                  Start Time:
+                  <Datepicker
+                    selected={this.state.startDate}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div className="col-sm-12 col-md-12 col-lg-3">
+                  End Time:
+                  <Datepicker
+                    selected={this.state.endDate}
+                    onChange={this.handleChange}
+                  />
+                </div>
+                {/* Code below here is our latest attempt at getting DatePicker to return data to the page*/}
+              {/* <div className="col-sm-12 col-md-12 col-lg-3">
+              <DatePicker
+                selected={this.state.startDate}
+                selectsStart
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeStart}
+              />
+              <DatePicker
+                selected={this.state.endDate}
+                selectsEnd
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeEnd}
+              />
+              </div> */}
+              <div className="col-sm-12 col-md-12 col-lg-3"> 
+                <p> </p>
+                <button 
+                  onClick={() => this.applyDateRange()}
+                  type="button"
+                  className="btn btn-secondary"  
+                > 
+                  Apply Date Range 
+                </button>
               </div>
             </div>
             <div className="row mb-2">
