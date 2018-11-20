@@ -10,14 +10,14 @@ class Settings extends Component {
     this.props.deleteUser(this.props.auth.user.id);
   }
 
-  onImperialClick(e) {
+  onImperialClick() {
     this.props.setUserPreferences('imperial');
-    //this.forceUpdate();
+    this.forceUpdate();
   }
 
-  onMetricClick(e) {
+  onMetricClick() {
     this.props.setUserPreferences('metric');
-    //this.forceUpdate();
+    this.forceUpdate();
   }
 
   render() {
@@ -39,13 +39,13 @@ class Settings extends Component {
                   <td>
                     <button
                       className="btn btn-outline-secondary float-right"
-                      onClick={this.onImperialClick}
+                      onClick={this.onImperialClick.bind(this)}
                     >
                       Imperial
                     </button>
                     <button
                       className="btn btn-success float-right mr-2"
-                      onClick={this.onMetricClick}
+                      onClick={this.onMetricClick.bind(this)}
                     >
                       Metric
                     </button>

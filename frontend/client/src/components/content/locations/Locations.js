@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 // import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { getPublicDevices } from '../../../actions/deviceActions';
 
 // Import common components
@@ -38,7 +37,7 @@ class Locations extends Component {
         const cityList = [
           ...new Set(
             devices.map(device => {
-              return device.lastWeatherLog.city;
+              return device.lastWeatherLog ? device.lastWeatherLog.city : '';
             })
           )
         ];
