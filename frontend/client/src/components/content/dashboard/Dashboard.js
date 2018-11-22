@@ -56,10 +56,9 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { preferences } = this.props.auth.user;
+    let { preferences } = this.props.auth;
     const { weatherLogs, loading } = this.props.weather;
     const allDevices = this.props.devices;
-    console.log(preferences);
     let myDevice;
     let dashboardContent;
     //Declare a constant to force moment, allowing us to format dates in varables

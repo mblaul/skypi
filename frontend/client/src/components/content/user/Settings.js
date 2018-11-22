@@ -12,12 +12,10 @@ class Settings extends Component {
 
   onImperialClick() {
     this.props.setUserPreferences('imperial');
-    this.forceUpdate();
   }
 
   onMetricClick() {
     this.props.setUserPreferences('metric');
-    this.forceUpdate();
   }
 
   render() {
@@ -32,7 +30,7 @@ class Settings extends Component {
             </div>
           </div>
           <div className="col-lg-8 mt-3 mx-auto">
-            <table class="table">
+            <table className="table">
               <tbody>
                 <tr>
                   <th scope="row" />
