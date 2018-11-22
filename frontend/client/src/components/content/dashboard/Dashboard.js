@@ -44,7 +44,7 @@ class Dashboard extends Component {
     if (!this.props.auth) {
       this.props.history.push('/login');
     }
-    //this.props.getUserPreferences();
+    this.props.getUserPreferences();
     this.props.getFavoriteWeatherData();
     this.props.getPublicDevices();
   }
@@ -59,7 +59,7 @@ class Dashboard extends Component {
     const { preferences } = this.props.auth.user;
     const { weatherLogs, loading } = this.props.weather;
     const allDevices = this.props.devices;
-
+    console.log(preferences);
     let myDevice;
     let dashboardContent;
     //Declare a constant to force moment, allowing us to format dates in varables

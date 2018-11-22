@@ -21,6 +21,7 @@ class Settings extends Component {
   }
 
   render() {
+    const { units } = this.props.auth.preferences;
     return (
       <div>
         <div className="container mt-4">
@@ -38,13 +39,17 @@ class Settings extends Component {
                   <td className="align-middle">Measurement Units</td>
                   <td>
                     <button
-                      className="btn btn-outline-secondary float-right"
+                      className={`btn btn-${
+                        units === 'imperial' ? 'success' : 'outline-secondary'
+                      } float-right mr-2`}
                       onClick={this.onImperialClick.bind(this)}
                     >
                       Imperial
                     </button>
                     <button
-                      className="btn btn-success float-right mr-2"
+                      className={`btn btn-${
+                        units === 'metric' ? 'success' : 'outline-secondary'
+                      } float-right mr-2`}
                       onClick={this.onMetricClick.bind(this)}
                     >
                       Metric

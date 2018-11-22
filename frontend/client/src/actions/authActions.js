@@ -106,12 +106,11 @@ export const setUserPreferences = units => dispatch => {
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
-export const getUserPreferences = dispatch => {
+export const getUserPreferences = () => dispatch => {
   axios
     .get(`/api/user/current`)
     .then(result => {
       dispatch({ type: SET_USER_PREFERENCES, payload: result.data });
-      console.log(result.data);
     })
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
