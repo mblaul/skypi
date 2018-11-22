@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 // Import functions
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 import { getPublicDevices } from '../../../actions/deviceActions';
+import { getUserPreferences } from '../../../actions/authActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -43,6 +44,7 @@ class Dashboard extends Component {
     if (!this.props.auth) {
       this.props.history.push('/login');
     }
+    //this.props.getUserPreferences();
     this.props.getFavoriteWeatherData();
     this.props.getPublicDevices();
   }
@@ -54,8 +56,10 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { preferences } = this.props.auth.user;
     const { weatherLogs, loading } = this.props.weather;
     const allDevices = this.props.devices;
+
     let myDevice;
     let dashboardContent;
     //Declare a constant to force moment, allowing us to format dates in varables
@@ -72,15 +76,15 @@ class Dashboard extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
-        const convertUnits = false;
+        const convertUnits = preferences.units === 'metric' ? false : true;
         //Declare 2 variables to hold to current start and end dates
         //let startDate = moment(weatherDates[9]).format("YYYY-MM-DD h:mm A");
-        //let endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");  
-        for(let x=0 ; x<allDevices.devices.length ; x++){
-          if(allDevices.devices[x].name === weatherLogs[0].source){
-            myDevice = allDevices.devices[x]
+        //let endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");
+        for (let x = 0; x < allDevices.devices.length; x++) {
+          if (allDevices.devices[x].name === weatherLogs[0].source) {
+            myDevice = allDevices.devices[x];
           }
-        };
+        }
 
         dashboardContent = (
           <div>
@@ -111,10 +115,7 @@ class Dashboard extends Component {
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
                 //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview 
-                Type={'Humidity'} 
-                Reading={quickInfo.humidity + '%'} 
-              />
+              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -134,8 +135,8 @@ class Dashboard extends Component {
               />
             </div>
             <div className="row mb-2">
-            {/* DatePicker now correctly finds and prints the correctly selected date to the user, still need a reliable way to get the data from the datepicker into a variable in Dashboard.js */}
-             {/* <div className="col-sm-12 col-md-12 col-lg-3">
+              {/* DatePicker now correctly finds and prints the correctly selected date to the user, still need a reliable way to get the data from the datepicker into a variable in Dashboard.js */}
+              {/* <div className="col-sm-12 col-md-12 col-lg-3">
                   Start Time:
                   <Datepicker
                     onSelect={this.handleSelect}
@@ -153,33 +154,33 @@ class Dashboard extends Component {
                     value={this.state.endDate}
                   />
                 </div> */}
-                {/* Code below here is our latest attempt at getting DatePicker to return data to the page*/}
+              {/* Code below here is our latest attempt at getting DatePicker to return data to the page*/}
               <div className="col-sm-12 col-md-12 col-lg-3">
-              <Datepicker
-                selected={this.state.startDate}
-                selectsStart
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
-                onChange={this.handleChangeStart}
-              />
+                <Datepicker
+                  selected={this.state.startDate}
+                  selectsStart
+                  startDate={this.state.startDate}
+                  endDate={this.state.endDate}
+                  onChange={this.handleChangeStart}
+                />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-3">
-              <Datepicker
-                selected={this.state.endDate}
-                selectsEnd
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
-                onChange={this.handleChangeEnd}
-              />
+                <Datepicker
+                  selected={this.state.endDate}
+                  selectsEnd
+                  startDate={this.state.startDate}
+                  endDate={this.state.endDate}
+                  onChange={this.handleChangeEnd}
+                />
               </div>
-              <div className="col-sm-12 col-md-12 col-lg-3"> 
+              <div className="col-sm-12 col-md-12 col-lg-3">
                 <p> </p>
-                <button 
+                <button
                   onClick={() => window.alert(this.state.endDate)}
                   type="button"
-                  className="btn btn-secondary"  
-                > 
-                  Apply Date Range 
+                  className="btn btn-secondary"
+                >
+                  Apply Date Range
                 </button>
               </div>
             </div>
@@ -215,10 +216,9 @@ class Dashboard extends Component {
                 />
               </div>
             </div>
-          <hr />
-          {console.log(myDevice)}
-          <Map devices={[myDevice]} />
-          <hr />
+            <hr />
+            <Map devices={[myDevice]} />
+            <hr />
           </div>
         );
       } else {
@@ -267,5 +267,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getFavoriteWeatherData, getPublicDevices }
+  { getUserPreferences, getFavoriteWeatherData, getPublicDevices }
 )(Dashboard);

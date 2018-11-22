@@ -2,7 +2,7 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwtDecode from 'jwt-decode';
 
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { GET_ERRORS, SET_CURRENT_USER, SET_USER_PREFERENCES } from './types';
 
 //Register
 export const registerUser = (userData, history) => dispatch => {
@@ -77,7 +77,7 @@ export const confirmUserVerification = verificationData => dispatch => {
 export const forgotPassword = forgotPasswordData => dispatch => {
   axios
     .post('/api/user/changepassword', forgotPasswordData)
-    .then(result => {})
+    .then()
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
@@ -99,7 +99,19 @@ export const setFavoriteDevice = deviceId => dispatch => {
 
 export const setUserPreferences = units => dispatch => {
   axios
-    .post(`/api/user/preferences`, units)
-    .then()
+    .post(`/api/user/preferences`, { units })
+    .then(result =>
+      dispatch({ type: SET_USER_PREFERENCES, payload: result.data })
+    )
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+export const getUserPreferences = dispatch => {
+  axios
+    .get(`/api/user/current`)
+    .then(result => {
+      dispatch({ type: SET_USER_PREFERENCES, payload: result.data });
+      console.log(result.data);
+    })
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };

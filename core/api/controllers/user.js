@@ -19,7 +19,8 @@ module.exports.current_get = (req, res) => {
   return res.json({
     id: req.user.id,
     name: req.user.name,
-    email: req.user.email
+    email: req.user.email,
+    preferences: req.user.preferences
   });
 };
 
