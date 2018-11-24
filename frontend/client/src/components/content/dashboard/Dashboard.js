@@ -61,8 +61,6 @@ class Dashboard extends Component {
     const allDevices = this.props.devices;
     let myDevice;
     let dashboardContent;
-    //Declare a constant to force moment, allowing us to format dates in varables
-    const moment = require('moment');
 
     if (weatherLogs === undefined || allDevices === undefined || loading) {
       dashboardContent = <Spinner />;
