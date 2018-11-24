@@ -9,9 +9,9 @@ export default class Landing extends Component {
             <div className="row">
               <div className="col-xl-9 mx-auto">
                 <div className="display-1 mb-3">
-                  <strong>SkyPi</strong>
+                  <strong className="header-title">SkyPi</strong>
                 </div>
-                <h2 className="mb-4">
+                <h2 className="header-subtitle mb-4">
                   Your source for reliable weather information.
                 </h2>
               </div>
