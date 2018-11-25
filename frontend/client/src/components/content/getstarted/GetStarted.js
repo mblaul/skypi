@@ -53,15 +53,31 @@ class GetStarted extends Component {
             <li>Select your wifi Network, and enter the credentials</li>
             <li>Make note of the displayed IP address</li> 
             <li>Connect to your device in Termius using the username skypi and password weather</li>
-            <li>Run the command ‘sudo python3 newStation.py’</li>
+            <li>Run the following commands:</li>
+                <ol>
+                <li>cd skypi</li>
+                <li>sudo python3 new_station.py</li>
+                </ol>
             <li>Follow the instructions to finish setup</li>
             </ol>
             <p></p>
         <h4>Existing Device</h4>
             <ol>
-            <li>Download the required python3 module list and newStation.py</li>
-            <li>Run the command ‘sudo pip3 install -r requirements.txt’</li>
-            <li>Run the command ‘sudo python3 newStation.py’</li>
+            <li>Ensure that you have Python 3 and Pip for Python 3 installed</li>
+            <li>Ensure that Git is installed</li>
+                <ol>
+                <li>sudo apt install git</li>
+                </ol>
+            <li>Clone the GitHub repository below:</li>
+                <ol>
+                <li>git clone https://github.com/alexanderwoodle/skypi</li>
+                </ol>
+            <li>Enter the following command to change into the SkyPi directory to install the required modules, and register your device</li>
+                <ol>
+                <li>cd skypi</li>
+                <li>sudo pip3 install -r requirements.txt</li>
+                <li>sudo python3 new_station.py</li>
+                </ol>
             <li>Follow the instructions to finish setup</li>
             </ol>
         </div>
