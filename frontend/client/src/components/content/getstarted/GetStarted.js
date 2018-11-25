@@ -55,8 +55,8 @@ class GetStarted extends Component {
             <li>Connect to your device in Termius using the username skypi and password weather</li>
             <li>Run the following commands:</li>
                 <ol>
-                <li>cd skypi</li>
-                <li>sudo python3 new_station.py</li>
+                <li><pre>cd skypi</pre></li>
+                <li><pre>sudo python3 new_station.py</pre></li>
                 </ol>
             <li>Follow the instructions to finish setup</li>
             </ol>
@@ -66,20 +66,21 @@ class GetStarted extends Component {
             <li>Ensure that you have Python 3 and Pip for Python 3 installed</li>
             <li>Ensure that Git is installed</li>
                 <ol>
-                <li>sudo apt install git</li>
+                <li><pre>sudo apt install git</pre></li>
                 </ol>
             <li>Clone the GitHub repository below:</li>
                 <ol>
-                <li>git clone https://github.com/alexanderwoodle/skypi</li>
+                <li><pre>git clone https://github.com/alexanderwoodle/skypi</pre></li>
                 </ol>
             <li>Enter the following command to change into the SkyPi directory to install the required modules, and register your device</li>
                 <ol>
-                <li>cd skypi</li>
-                <li>sudo pip3 install -r requirements.txt</li>
-                <li>sudo python3 new_station.py</li>
+                <li><pre>cd skypi</pre></li>
+                <li><pre>sudo pip3 install -r requirements.txt</pre></li>
+                <li><pre>sudo python3 new_station.py</pre></li>
                 </ol>
             <li>Follow the instructions to finish setup</li>
             </ol>
+        <h4>Click <a href="https://drive.google.com/a/oakland.edu/file/d/1q-83aGAs-a4eRIyc31KtDajOA2Egix8C/view?usp=sharing">HERE</a> to download the SkyPi Raspbian Image</h4>  
         </div>
         </div>
       </div>
