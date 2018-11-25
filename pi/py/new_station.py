@@ -26,13 +26,13 @@ def login(user,password):
 
     token = response.json()['token']
     return token
-def register(token,model):
+def register(token,model,hostname):
     mac = (''.join(['{:02x}'.format((uuid.getnode() >> i) & 0xff) for i in range(0,8*6,8)][::-1]))
-    host = socket.gethostname()
+    
 
     url = "http://18.235.27.33/api/device/register"
 
-    payload = "name=" + host + "&macaddress="+ mac + "&model=" +model + "&ipaddress=127.0.0.1&ispublic=true"
+    payload = "name=" + hostname + "&macaddress="+ mac + "&model=" +model + "&ipaddress=127.0.0.1&ispublic=true"
     headers = {
                         'Authorization': token,
                                         'Content-Type': "application/x-www-form-urlencoded"
@@ -141,7 +141,7 @@ except:
 	print(colored("Unable to authenticate", 'red'))
 
 try:
-	register(token,model)
+	register(token,model,newHostName)
 except:
 	print(colored("Unable to register device", 'red'))
 
