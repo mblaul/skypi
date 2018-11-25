@@ -25,7 +25,6 @@ def login(user,password):
     response = requests.request("POST", url, data=payload, headers=headers)
 
     token = response.json()['token']
-    #print('Your temporary token is: ' + token)
     return token
 def register(token,model):
     mac = (''.join(['{:02x}'.format((uuid.getnode() >> i) & 0xff) for i in range(0,8*6,8)][::-1]))
@@ -75,7 +74,7 @@ firstAplha = letters(firstName)
 lastName = input("Please enter your last name: \n")
 lastAplpha = letters(lastName)
 print("")
-newHostName = (firstAplha[:2] + lastAplpha[:2] + mac[-2:]).lower()
+newHostName = (firstAplha[:2] + lastAplpha[:2] + mac[-3:]).lower()
 print("Your current hostname is: " + host)
 time.sleep(1)
 print("Your new hostname will be: " + newHostName)
@@ -148,8 +147,7 @@ except:
 
 print(colored('\n_____________________________________________________________ \n', 'magenta'))
 print("We will now enable your weather station with scheduled tasks using cron. \n This will allow your device to start pushing weather data every 15 minutes.")
-os.system('echo "*/15 * * * * sudo python3 /home/skypi/skypi/sensor_info.py" | crontab -')
-time.sleep(2)
+os.system('echo "*/15 * * * * sudo python3 /home/skypi/skypi/sensor_info.py" | crontab - -u skypi')
 print(colored('Task scheduling complete!', 'green'))
 input("Press Enter to continue...")
 print()
