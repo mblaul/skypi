@@ -31,6 +31,7 @@ import Location from './components/content/location/Location';
 import ResetPassword from './components/authentication/ResetPassword';
 import ForgotPassword from './components/authentication/ForgotPassword';
 import NotFound from './components/common/NotFound';
+import GetStarted from './components/content/getstarted/GetStarted';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -73,6 +74,7 @@ class App extends Component {
               <VerifiedRoute exact path="/settings" component={Settings} />
               <VerifiedRoute exact path="/dashboard" component={Dashboard} />
               <VerifiedRoute exact path="/stations" component={Stations} />
+              <VerifiedRoute exact path="/getstarted" component={GetStarted} />
               <VerifiedRoute
                 exact
                 path="/station/:deviceId"

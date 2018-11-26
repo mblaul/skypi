@@ -31,6 +31,11 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
+          <Link className="btn btn-info mr-2" to="/getstarted">
+            Get Started
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link className="btn btn-info mr-2" to="/stations">
             Stations
           </Link>
