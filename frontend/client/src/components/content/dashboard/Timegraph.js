@@ -53,7 +53,7 @@ export default class Timegraph extends Component {
           label: this.props.chartLabel,
           //Takes data points individually but not in a loop when square brackets present
           //Lack of square brackets allows for the variable to be given flat because science
-          data: weather2Logs,
+          data: weather2Logs.reverse(),
           backgroundColor: ['rgba(0, 0, 0, 0)'],
           borderColor: ['rgba(0, 102, 255, .7)'],
           borderWidth: 2,
