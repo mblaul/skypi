@@ -174,6 +174,7 @@ class Station extends Component {
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
                   limitDisplay={true}
+                  convertUnits={convertUnits}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -182,6 +183,7 @@ class Station extends Component {
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
                   limitDisplay={true}
+                  convertUnits={convertUnits}
                 />
               </div>
             </div>
@@ -192,6 +194,7 @@ class Station extends Component {
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
                   limitDisplay={true}
+                  convertUnits={convertUnits}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -200,6 +203,7 @@ class Station extends Component {
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
                   limitDisplay={true}
+                  convertUnits={convertUnits}
                 />
               </div>
             </div>

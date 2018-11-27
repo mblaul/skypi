@@ -33,12 +33,14 @@ class Dashboard extends Component {
       endDate: ''
     };
   }
-  //Function to handle DatePicker getting values based on user input
-  applyDateRange() {
-    //this.endDate = 0;
-    //this.startDate = 0;
-    //Function to change Admin Privledges in the Database
-    window.alert(this.endDate);
+  //Function to handle user input regarding how many hours of readings to display
+  displayedReadingRange(selectedTimeFrame) {
+    /*parameter 'selectedTimeFrame' is an integer for how many hours back to display
+      System logs 1 reading every 15 minutes whihc means
+      4 readings per hour, or 96 readings per day (24 hours)
+    */
+    var numDisplayedReadings = parseInt(selectedTimeFrame * 4);
+    window.alert(numDisplayedReadings + " Readings will be displayed.");
   }
   componentDidMount() {
     if (!this.props.auth) {
@@ -132,27 +134,7 @@ class Dashboard extends Component {
               />
             </div>
             <div className="row mb-2">
-              {/* DatePicker now correctly finds and prints the correctly selected date to the user, still need a reliable way to get the data from the datepicker into a variable in Dashboard.js */}
               {/* <div className="col-sm-12 col-md-12 col-lg-3">
-                  Start Time:
-                  <Datepicker
-                    onSelect={this.handleSelect}
-                    selected={this.state.startDate}
-                    onChange={this.handleChange}
-                    value={startDate}
-                  />
-                </div>
-                <div className="col-sm-12 col-md-12 col-lg-3">
-                  End Time:
-                  <Datepicker
-                    onSelect={this.handleSelect}
-                    selected={this.state.endDate}
-                    onChange={this.handleChange}
-                    value={this.state.endDate}
-                  />
-                </div> */}
-              {/* Code below here is our latest attempt at getting DatePicker to return data to the page*/}
-              <div className="col-sm-12 col-md-12 col-lg-3">
                 <Datepicker
                   selected={this.state.startDate}
                   selectsStart
@@ -169,15 +151,41 @@ class Dashboard extends Component {
                   endDate={this.state.endDate}
                   onChange={this.handleChangeEnd}
                 />
-              </div>
+              </div> */}
               <div className="col-sm-12 col-md-12 col-lg-3">
-                <p> </p>
                 <button
-                  onClick={() => window.alert(this.state.endDate)}
+                  onClick={() => this.displayedReadingRange(2)}
                   type="button"
                   className="btn btn-secondary"
                 >
-                  Apply Date Range
+                  Past 2 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(6)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 6 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(12)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 12 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(24)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 24 Hours
                 </button>
               </div>
             </div>
@@ -187,6 +195,7 @@ class Dashboard extends Component {
                   chartLabel={'Temperature'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
+                  convertUnits={convertUnits}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -194,6 +203,7 @@ class Dashboard extends Component {
                   chartLabel={'Wind'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
+                  convertUnits={convertUnits}
                 />
               </div>
             </div>
@@ -203,6 +213,7 @@ class Dashboard extends Component {
                   chartLabel={'Humidity'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
+                  convertUnits={convertUnits}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -210,6 +221,7 @@ class Dashboard extends Component {
                   chartLabel={'Pressure'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
+                  convertUnits={convertUnits}
                 />
               </div>
             </div>
