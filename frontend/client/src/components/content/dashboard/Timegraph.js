@@ -5,14 +5,14 @@ import UnitConversions from './UnitConversions';
 export default class Timegraph extends Component {
   render() {
     const moment = require('moment');
-    //Temp boolean called 'convertUnits' to control if units are converted
-    const convertUnits = true;
+    //used a passed prop 'convertUnits' boolean to control if units are converted
     // true => Convert Readings to the Imperial system
     // false => Don't convert (keep readings in the Metric system)
     //Declare a String variable for what readingType to convert, initalized to whatever the Chart's label is
     const readingType = this.props.chartLabel;
     //Declare variable to limit how many records are displayed
-    var readingsToDisplay = this.props.weatherLogs.length;
+    //var readingsToDisplay = this.props.weatherLogs.length;
+    var readingsToDisplay = 8;
     const switcher = this.props.limitDisplay;
     if (switcher === true){
       readingsToDisplay = 10;
@@ -32,7 +32,7 @@ export default class Timegraph extends Component {
     let weather2Logs = [];
     for (let j = 0; j < readingsToDisplay; j++) 
     {
-      weather2Logs[j] = parseFloat(UnitConversions(this.props.weatherLogs[j], convertUnits, readingType));
+      weather2Logs[j] = parseFloat(UnitConversions(this.props.weatherLogs[j], this.props.convertUnits, readingType));
     }
     let weather2Dates = [];     
     for (let j = 0; j < readingsToDisplay; j++) 
