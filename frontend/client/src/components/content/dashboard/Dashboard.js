@@ -27,21 +27,24 @@ import weatherIcons from './weatherIcons';
 class Dashboard extends Component {
   constructor() {
     super();
-
     this.state = {
       startDate: '',
-      endDate: ''
+      endDate: '',
+      // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
+      displayLimit: 4
     };
   }
+
   //Function to handle user input regarding how many hours of readings to display
   displayedReadingRange(selectedTimeFrame) {
     /*parameter 'selectedTimeFrame' is an integer for how many hours back to display
       System logs 1 reading every 15 minutes whihc means
       4 readings per hour, or 96 readings per day (24 hours)
     */
-    var numDisplayedReadings = parseInt(selectedTimeFrame * 4);
-    window.alert(numDisplayedReadings + " Readings will be displayed.");
-  }
+    this.setState({
+      displayLimit: selectedTimeFrame * 4
+    });
+  };
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -63,7 +66,8 @@ class Dashboard extends Component {
     const allDevices = this.props.devices;
     let myDevice;
     let dashboardContent;
-
+    //readingLimit is a variable to control how many data points are displayed by Timegraph.js
+    let readingLimit = this.state.limitDisplay;
     if (weatherLogs === undefined || allDevices === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
@@ -195,6 +199,7 @@ class Dashboard extends Component {
                   chartLabel={'Temperature'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -203,6 +208,7 @@ class Dashboard extends Component {
                   chartLabel={'Wind'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -213,6 +219,7 @@ class Dashboard extends Component {
                   chartLabel={'Humidity'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -221,6 +228,7 @@ class Dashboard extends Component {
                   chartLabel={'Pressure'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>

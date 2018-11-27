@@ -22,10 +22,22 @@ class Station extends Component {
 
     this.state = {
       startDate: '',
-      endDate: ''
+      endDate: '',
+      // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
+      displayLimit: 4
     };
   }
 
+  //Function to handle user input regarding how many hours of readings to display
+  displayedReadingRange(selectedTimeFrame) {
+    /*parameter 'selectedTimeFrame' is an integer for how many hours back to display
+      System logs 1 reading every 15 minutes whihc means
+      4 readings per hour, or 96 readings per day (24 hours)
+    */
+    this.setState({
+      displayLimit: selectedTimeFrame * 4
+    });
+  };
   applyDateRange() {
     //this.endDate = 0;
     //this.startDate = 0;
@@ -122,23 +134,7 @@ class Station extends Component {
               />
             </div>
             <div className="row mb-2">
-              {/* <div className="col-sm-12 col-md-12 col-lg-3">
-                Start Date:
-                <Datepicker
-                  selected={this.state.startDate}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-3">
-                End Date:
-                <Datepicker
-                  selected={this.state.endDate}
-                  onChange={this.handleChange}
-                />
-                
-              </div>
-                */}
-                <div className="col-sm-12 col-md-12 col-lg-3">
+                {/* <div className="col-sm-12 col-md-12 col-lg-3">
                 <Datepicker
                   selected={this.state.startDate}
                   selectsStart
@@ -155,15 +151,41 @@ class Station extends Component {
                   endDate={this.state.endDate}
                   onChange={this.handleChangeEnd}
                 />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-3"> 
-                <p> </p>
-                <button 
-                  onClick={() => window.alert(this.state.endDate)}
+              </div> */}
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(2)}
                   type="button"
-                  className="btn btn-secondary"  
-                > 
-                  Apply Date Range 
+                  className="btn btn-secondary"
+                >
+                  Past 2 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(6)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 6 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(12)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 12 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(24)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 24 Hours
                 </button>
               </div>
             </div>
@@ -173,7 +195,7 @@ class Station extends Component {
                   chartLabel={'Temperature'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
-                  limitDisplay={true}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -182,7 +204,7 @@ class Station extends Component {
                   chartLabel={'Wind'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
-                  limitDisplay={true}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -193,7 +215,7 @@ class Station extends Component {
                   chartLabel={'Humidity'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
-                  limitDisplay={true}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -202,7 +224,7 @@ class Station extends Component {
                   chartLabel={'Pressure'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
-                  limitDisplay={true}
+                  limitDisplay={this.state.displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
