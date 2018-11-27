@@ -12,21 +12,12 @@ export default class Timegraph extends Component {
     const readingType = this.props.chartLabel;
     //Declare variable to limit how many records are displayed
     //var readingsToDisplay = this.props.weatherLogs.length;
-    var readingsToDisplay = 8;
-    const switcher = this.props.limitDisplay;
-    if (switcher === true){
-      readingsToDisplay = 10;
-    }
-    //const readingsToDisplay = 100;
-    // this.props.weatherLogs.map((weatherLogs, i) => 
-    // {
-    //   console.log(this.props.weatherLogs[i]);
-    //   x = this.props.weatherDates[i];
-    //   y = this.props.weatherLogs[i];
-    //   return x, y;
-    // })
-    // .reverse()
-
+    const readingsToDisplay = this.props.limitDisplay;
+    console.log(readingsToDisplay);
+    // const switcher = this.props.limitDisplay;
+    // if (switcher === true){
+    //   readingsToDisplay = 10;
+    // }
     //Creates a new variable and brings the weatherLogs data into it, ideally the data would be modified
     //to whatever range the user wants in Dashboard and then passed into Timegraph
     let weather2Logs = [];
