@@ -57,8 +57,6 @@ class Dashboard extends Component {
     const allDevices = this.props.devices;
     let myDevice;
     let dashboardContent;
-    //readingLimit is a variable to control how many data points are displayed by Timegraph.js
-    //let readingLimit = this.state.limitDisplay;
     if (weatherLogs === undefined || allDevices === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
