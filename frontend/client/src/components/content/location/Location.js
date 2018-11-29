@@ -7,16 +7,18 @@ import moment from 'moment';
 import _ from 'lodash';
 import queryString from 'query-string';
 
+//Import functions
 import { getLocationWeatherData } from '../../../actions/weatherActions';
+import { getUserPreferences } from '../../../actions/authActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
 
 //import pieces of Dashboard
-import Timegraph from '../dashboard/Timegraph';
 import Quickview from '../dashboard/Quickview';
-import weatherIcons from '../dashboard/weatherIcons';
+import Timegraph from '../dashboard/Timegraph';
 import UnitConversions from '../dashboard/UnitConversions';
+import weatherIcons from '../dashboard/weatherIcons';
 
 class Location extends Component {
   constructor() {
@@ -38,6 +40,8 @@ class Location extends Component {
       this.props.history.push('/login');
     }
     const locationData = queryString.parse(this.props.location.search);
+    //Get the user's preferences on unit conversions
+    this.props.getUserPreferences();
     this.props.getLocationWeatherData(locationData);
   }
 
@@ -50,8 +54,10 @@ class Location extends Component {
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let locationContent;
+    //Create a variable to hold the data from the getPreferences function
+    let { preferences } = this.props.auth;
     //Declare a temp variable to control unit conversions
-    const convertUnits = true;
+    const convertUnits = preferences.units === 'metric' ? false : true;
     if (weatherLogs === undefined || loading) {
       locationContent = <Spinner />;
     } else {
@@ -79,50 +85,6 @@ class Location extends Component {
             {}
           )
         );
-        /*
-    Function to check if the weatherReadings are from an incorrect device
-          let goodReadCnt = 0;
-          for (var i=0; i<weatherLogs.length; i++){
-            if (weatherLogs[i].source === "jebe1d9")
-            {
-              goodReadCnt++;
-            }
-            if (weatherLogs[i].source === "alwo8e")
-            {
-              goodReadCnt++;
-            }
-          }
-          console.log((weatherLogs.length-goodReadCnt) + " of " + weatherLogs.length + " are the wrong device");
-        */
-      /*
-      Matt's Old aggregation code 
-      console.log(aggData);
-      let aggData code with Matt's weird formatting
-         let aggData = _.values(
-           _.reduce(
-             weatherLogs,
-             (result, obj) => {
-               const formattedDate = moment(obj.date).format('MM/DD/YYYY');
-               console.log(this);
-               result[formattedDate] = {
-                 date: formattedDate,
-                 temperature: [obj.temperature],
-                 // wind: result[formattedDate].wind.push(obj.wind),
-                 // humidity: result[formattedDate].humidity.push(obj.humidity),
-                 // pressure: result[formattedDate].pressure.push(obj.pressure),
-                 // precipitation: result[formattedDate].precipitation.push(
-                 //   obj.precipitation
-                 //)
-               };
-               return result;
-             },
-             {}
-           )
-         );
-      */
-
-        // console.log(aggData);
-        // console.log(aggData.length);
         const weatherDates = weatherLogs.map(logs => logs.date);
         const weatherHumidity = weatherLogs.map(logs => logs.humidity);
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
@@ -175,7 +137,6 @@ class Location extends Component {
                 Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
             </div>
-            {/* Div below is soley the controller for time range selector buttons */}
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
                 <button
@@ -289,5 +250,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getLocationWeatherData }
+  { getLocationWeatherData, getUserPreferences }
 )(Location);
