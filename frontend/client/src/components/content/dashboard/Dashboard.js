@@ -121,6 +121,7 @@ class Dashboard extends Component {
                 Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
             </div>
+            {/* Div below is the container for Time range selector buttons */}
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
                 <button
