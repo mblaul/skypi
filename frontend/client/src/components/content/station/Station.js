@@ -29,19 +29,9 @@ class Station extends Component {
 
   //Function to handle user input regarding how many hours of readings to display
   displayedReadingRange(selectedTimeFrame) {
-    /*parameter 'selectedTimeFrame' is an integer for how many hours back to display
-      System logs 1 reading every 15 minutes whihc means
-      4 readings per hour, or 96 readings per day (24 hours)
-    */
     this.setState({
       displayLimit: selectedTimeFrame * 4
     });
-  }
-  applyDateRange() {
-    //this.endDate = 0;
-    //this.startDate = 0;
-    //Function to change Admin Privledges in the Database
-    window.alert(this.endDate);
   }
 
   componentDidMount() {
@@ -103,12 +93,10 @@ class Station extends Component {
                   convertUnits,
                   'Temperature'
                 )}
-                //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
-                //Reading={quickInfo.wind + ' mps'}
               />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
@@ -122,7 +110,6 @@ class Station extends Component {
                   convertUnits,
                   'Pressure'
                 )}
-                //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
                 Type={'Precipitation %'}
@@ -130,24 +117,6 @@ class Station extends Component {
               />
             </div>
             <div className="row mb-2">
-              {/* <div className="col-sm-12 col-md-12 col-lg-3">
-                <Datepicker
-                  selected={this.state.startDate}
-                  selectsStart
-                  startDate={this.state.startDate}
-                  endDate={this.state.endDate}
-                  onChange={this.handleChangeStart}
-                />
-                </div>
-                <div className="col-sm-12 col-md-12 col-lg-3">
-                <Datepicker
-                  selected={this.state.endDate}
-                  selectsEnd
-                  startDate={this.state.startDate}
-                  endDate={this.state.endDate}
-                  onChange={this.handleChangeEnd}
-                />
-              </div> */}
               <div className="col-sm-12 col-md-12 col-lg-3">
                 <button
                   onClick={() => this.displayedReadingRange(2)}
