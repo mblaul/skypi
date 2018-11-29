@@ -56,13 +56,46 @@ def letters(input):
     
 
 #Begin---------------------------------------
+
 host = socket.gethostname()
 os.system("clear")
 print("")
 print(colored('Welcome to the Skypi Weather Station Set Up Tool!', 'green'))
-print(colored('_____________________________________________________________ \n', 'magenta'))
+print(colored('___________________________________________________ \n', 'magenta'))
 time.sleep(2)
-print('We will first create your hostname for your SkyPi weather station')
+
+#Sensor---------------------------------------
+
+print('We will first enable your sensor and validate the connections')
+input("Press Enter to continue...")
+print("")
+print('Enabling BME280 Sensor...\n')
+time.sleep(2)
+os.system('raspi-config nonint do_i2c 0')
+dev = os.system('ls /dev/*i2c*')
+if dev != 0:
+	print(colored('Your Sensor was not found. Please ensure all conections are correct, and that you have the correct model', 'red'))
+	exit()
+else: 
+	print(colored('done!\n', 'green'))
+print('Ensuring the device is properly connected to the board...')
+time.sleep(2)
+print("")
+board = subprocess.check_output('i2cdetect -y 1',shell=True)
+try:
+    sensor = BME280(t_mode=BME280_OSAMPLE_8, p_mode=BME280_OSAMPLE_8, h_mode=BME280_OSAMPLE_8)
+    print("Sensor is properly connected to the GPIO pins")
+except:
+    print(colored("Please ensure that the sensor wires are connected to the correct GPIO pins", 'red'))
+    input("Unable to continue - Press Enter to exit...")
+    exit()
+print('Sensor set up complete. We will now set up your device so you can begin pushing weather data to SkyPi HQ')
+input("Press Enter to continue...")
+print(colored('___________________________________________________ \n', 'magenta'))
+
+#Hostname---------------------------------------
+
+print('We will now create your hostname for your SkyPi weather station')
 time.sleep(1)
 print("All numbers and special characters will be removed from the user input")
 time.sleep(1)
@@ -92,40 +125,19 @@ else:
         time.sleep(2)
     else:
         pass
-print(colored('_____________________________________________________________ \n', 'magenta'))
-print('We will now enable your sensor and validate the connections')
-input("Press Enter to continue...")
-print("")
-print('Enabling BME280 Sensor...\n')
-time.sleep(2)
-os.system('raspi-config nonint do_i2c 0')
-dev = os.system('ls /dev/*i2c*')
-if dev != 0:
-	print('Your Sensor was not found. Please ensure all conections are correct, and that you have the correct model')
-	exit()
+print(colored('___________________________________________________ \n', 'magenta'))
 
-else: 
-	print(colored('done!\n', 'green'))
-print('Ensuring the device is properly connected to the board...')
-time.sleep(2)
-print("")
-board = subprocess.check_output('i2cdetect -y 1',shell=True)
-#print(board)
-#if '77' not in board:
-#    print('Error: Sensor not configured correctly. Please check the connection of your sensor  matches the config in the BME_280 sensor docs provided.')
-#else:
-#    print('done!')
-
-print('Sensor set up complete. We will now set up your device so you can begin pushing weather data to SkyPi HQ')
-input("Press Enter to continue...")
-print(colored('_____________________________________________________________ \n', 'magenta'))
+#Registration---------------------------------------
 
 user = input('Enter the Email address you use to login to SkyPi Weather Services:\n')
 print("")
 pw = getpass.getpass('Enter the corresponding password:\n')
 time.sleep(1)
-print(colored('_____________________________________________________________ \n', 'magenta'))
+print(colored('___________________________________________________ \n', 'magenta'))
 time.sleep(2)
+
+#ModelSelection---------------------------------------
+
 modelSelect = input("Please select the Raspberry Pi model of your weather station: \n 1.) Raspberry Pi 3 B \n 2.) Raspberry Pi 3 B+ \n ")
 if modelSelect == '1':
 	model = ("Raspberry Pi 3B")
@@ -134,7 +146,10 @@ elif modelSelect == '2':
 else:
 	model = ("Raspberry Pi")
 time.sleep(2)
-print(colored('\n_____________________________________________________________ \n', 'magenta'))
+print(colored('\n___________________________________________________ \n', 'magenta'))
+
+#Authentication---------------------------------------
+
 try:
 	token = login(user,pw)
 except:
@@ -145,13 +160,19 @@ try:
 except:
 	print(colored("Unable to register device", 'red'))
 
-print(colored('\n_____________________________________________________________ \n', 'magenta'))
+print(colored('\n___________________________________________________ \n', 'magenta'))
+
+#CronJobs---------------------------------------
+
 print("We will now enable your weather station with scheduled tasks using cron. \n This will allow your device to start pushing weather data every 15 minutes.")
 os.system('echo "*/15 * * * * sudo python3 /home/skypi/skypi/sensor_info.py" | crontab - -u skypi')
 print(colored('Task scheduling complete!', 'green'))
 input("Press Enter to continue...")
 print()
-print(colored('\n_____________________________________________________________ \n', 'magenta'))
+print(colored('\n___________________________________________________ \n', 'magenta'))
+
+#SysReboot---------------------------------------
+
 systemRestart = input("The system needs to restart so that the changes take effect, would you like to restart now? (y/n): ")
 
 if systemRestart.lower() == 'y':
