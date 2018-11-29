@@ -10,7 +10,6 @@ import { getPublicDevices } from '../../../actions/deviceActions';
 import Spinner from '../../common/Spinner';
 
 // Import pieces of Station
-import Datepicker from '../dashboard/Datepicker';
 import Map from '../../common/Map';
 import Quickview from '../dashboard/Quickview';
 import Timegraph from '../dashboard/Timegraph';
@@ -37,7 +36,7 @@ class Station extends Component {
     this.setState({
       displayLimit: selectedTimeFrame * 4
     });
-  };
+  }
   applyDateRange() {
     //this.endDate = 0;
     //this.startDate = 0;
@@ -79,11 +78,11 @@ class Station extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = true;
 
-        for(let x=0 ; x<allDevices.devices.length ; x++){
-          if(allDevices.devices[x].name === weatherLogs[0].source){
-            myDevice = allDevices.devices[x]
+        for (let x = 0; x < allDevices.devices.length; x++) {
+          if (allDevices.devices[x].name === weatherLogs[0].source) {
+            myDevice = allDevices.devices[x];
           }
-        };
+        }
 
         stationContent = (
           <div>
@@ -111,10 +110,7 @@ class Station extends Component {
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
                 //Reading={quickInfo.wind + ' mps'}
               />
-              <Quickview 
-                Type={'Humidity'} 
-                Reading={quickInfo.humidity + '%'} 
-              />
+              <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
                 Type={'Wind Direction'}
                 Reading={quickInfo.winddirection}
@@ -134,7 +130,7 @@ class Station extends Component {
               />
             </div>
             <div className="row mb-2">
-                {/* <div className="col-sm-12 col-md-12 col-lg-3">
+              {/* <div className="col-sm-12 col-md-12 col-lg-3">
                 <Datepicker
                   selected={this.state.startDate}
                   selectsStart
@@ -249,9 +245,7 @@ class Station extends Component {
       }
     }
 
-    return <div className="container mt-2">
-      {stationContent}
-    </div>;
+    return <div className="container mt-2">{stationContent}</div>;
   }
 }
 

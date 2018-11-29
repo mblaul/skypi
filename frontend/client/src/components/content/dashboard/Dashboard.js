@@ -13,16 +13,11 @@ import { getUserPreferences } from '../../../actions/authActions';
 import Spinner from '../../common/Spinner';
 
 // Import pieces of Dashboard
-import Datepicker from './Datepicker';
 import Map from '../../common/Map';
 import Quickview from './Quickview';
 import Timegraph from './Timegraph';
 import UnitConversions from './UnitConversions';
 import weatherIcons from './weatherIcons';
-//Import Moment for formatting the Dates
-//import moment from 'moment';
-//import DateRange to allow for the datepicker to return the selected dates
-//import DatePicker from 'react-datepicker';
 
 class Dashboard extends Component {
   constructor() {
@@ -44,7 +39,7 @@ class Dashboard extends Component {
     this.setState({
       displayLimit: selectedTimeFrame * 4
     });
-  };
+  }
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -80,9 +75,7 @@ class Dashboard extends Component {
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = preferences.units === 'metric' ? false : true;
-        //Declare 2 variables to hold to current start and end dates
-        //let startDate = moment(weatherDates[9]).format("YYYY-MM-DD h:mm A");
-        //let endDate = moment(weatherDates[0]).format("YYYY-MM-DD h:mm A");
+
         for (let x = 0; x < allDevices.devices.length; x++) {
           if (allDevices.devices[x].name === weatherLogs[0].source) {
             myDevice = allDevices.devices[x];
@@ -138,24 +131,6 @@ class Dashboard extends Component {
               />
             </div>
             <div className="row mb-2">
-              {/* <div className="col-sm-12 col-md-12 col-lg-3">
-                <Datepicker
-                  selected={this.state.startDate}
-                  selectsStart
-                  startDate={this.state.startDate}
-                  endDate={this.state.endDate}
-                  onChange={this.handleChangeStart}
-                />
-              </div>
-              <div className="col-sm-12 col-md-12 col-lg-3">
-                <Datepicker
-                  selected={this.state.endDate}
-                  selectsEnd
-                  startDate={this.state.startDate}
-                  endDate={this.state.endDate}
-                  onChange={this.handleChangeEnd}
-                />
-              </div> */}
               <div className="col-sm-12 col-md-12 col-lg-3">
                 <button
                   onClick={() => this.displayedReadingRange(2)}

@@ -134,38 +134,6 @@ class Stations extends Component {
         <div className="row mb-2">
           <div className="col-sm-12 col-md-12 col-lg-12">
             <div className="display-3 mb-3 text-center">Stations</div>
-            <div className="my-2">
-              <div className="btn-group btn-group-toggle" data-toggle="buttons">
-                <label className="btn btn-secondary active">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option1"
-                    autoComplete="off"
-                    checked
-                  />{' '}
-                  Public
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option2"
-                    autoComplete="off"
-                  />{' '}
-                  Mine
-                </label>
-                <label className="btn btn-secondary">
-                  <input
-                    type="radio"
-                    name="options"
-                    id="option3"
-                    autoComplete="off"
-                  />{' '}
-                  Official
-                </label>
-              </div>
-            </div>
             {stationsContent}
           </div>
         </div>
