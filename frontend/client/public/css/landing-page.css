@@ -3,6 +3,10 @@
  * Copyright 2013-2018 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-landing-page/blob/master/LICENSE)
  */
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -18,9 +22,10 @@ h6 {
 }
 
 header.masthead {
+  height: 810px;
   position: relative;
   background-color: #343a40;
-  background: url('../img/bg-weather.gif') no-repeat center center;
+  background: url('../img/bg-weather.jpeg') no-repeat center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -112,7 +117,7 @@ header.masthead h1 {
 .call-to-action {
   position: relative;
   background-color: #343a40;
-  background: url('../img/bg-weather.gif') no-repeat center center;
+  background: url('../img/bg-weather.jpeg') no-repeat center center;
   background-size: cover;
   padding-top: 7rem;
   padding-bottom: 7rem;

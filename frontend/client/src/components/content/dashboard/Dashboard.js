@@ -215,7 +215,7 @@ class Dashboard extends Component {
               Please follow the link below to find a favorite.
             </p>
             <Link to="/stations" className="btn btn-lg btn-info">
-              Device List
+              Stations List
             </Link>
           </div>
         );

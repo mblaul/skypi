@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Spinner from './Spinner';
+
 import keys from './GoogleKey';
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
@@ -14,13 +16,15 @@ class Map extends Component {
 
   render() {
     const { devices } = this.props;
-    const center = {
-      lat: Math.floor(devices[0].lastWeatherLog.latitude * 10000) / 10000,
-      lng: Math.floor(devices[0].lastWeatherLog.longitude * 10000) / 10000
-    };
-    return (
-      <div className="my-5">
-        {/* The map will fill the size of the container */}
+
+    let center;
+    let mapContent;
+    if (devices.length > 0) {
+      center = {
+        lat: Math.floor(devices[0].lastWeatherLog.latitude * 10000) / 10000,
+        lng: Math.floor(devices[0].lastWeatherLog.longitude * 10000) / 10000
+      };
+      mapContent = (
         <div style={{ height: '60vh', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: API_KEY }}
@@ -36,6 +40,14 @@ class Map extends Component {
             ))}
           </GoogleMapReact>
         </div>
+      );
+    } else {
+      center = null;
+    }
+
+    return (
+      <div className="my-5">
+        {devices.length > 0 ? mapContent : <Spinner />}
       </div>
     );
   }
