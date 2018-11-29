@@ -32,10 +32,6 @@ class Dashboard extends Component {
 
   //Function to handle user input regarding how many hours of readings to display
   displayedReadingRange(selectedTimeFrame) {
-    /*parameter 'selectedTimeFrame' is an integer for how many hours back to display
-      System logs 1 reading every 15 minutes whihc means
-      4 readings per hour, or 96 readings per day (24 hours)
-    */
     this.setState({
       displayLimit: selectedTimeFrame * 4
     });
@@ -104,12 +100,10 @@ class Dashboard extends Component {
                   convertUnits,
                   'Temperature'
                 )}
-                //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
-                //Reading={quickInfo.wind + ' mps'}
               />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
@@ -123,7 +117,6 @@ class Dashboard extends Component {
                   convertUnits,
                   'Pressure'
                 )}
-                //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
                 Type={'Precipitation %'}
