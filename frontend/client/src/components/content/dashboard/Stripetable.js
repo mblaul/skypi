@@ -24,7 +24,6 @@ class Stripetable extends Component {
     }
   }
   render() {
-    // Accept an Parameter to dictate when shows as the headers for Table Rows
     const { tableHeaders, data } = this.props;
     return (
       <div className="card">
