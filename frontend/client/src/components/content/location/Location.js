@@ -19,6 +19,20 @@ import weatherIcons from '../dashboard/weatherIcons';
 import UnitConversions from '../dashboard/UnitConversions';
 
 class Location extends Component {
+  constructor() {
+    super();
+    this.state = {
+      // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
+      displayLimit: 4
+    };
+  }
+
+  //Function to handle user input regarding how many hours of readings to display
+  displayedReadingRange(selectedTimeFrame) {
+    this.setState({
+      displayLimit: selectedTimeFrame * 4
+    });
+  }
   componentDidMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
@@ -44,16 +58,15 @@ class Location extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-
         let aggData = _.values(
           _.reduce(
             weatherLogs,
             (result, obj) => {
               const formattedDate = moment(obj.date).format('MM/DD/YYYY');
-              console.log(this);
+              //console.log(this);
               result[formattedDate] = {
                 date: formattedDate,
-                temperature: [obj.temperature]
+                temperature: [obj.temperature],
                 // wind: result[formattedDate].wind.push(obj.wind),
                 // humidity: result[formattedDate].humidity.push(obj.humidity),
                 // pressure: result[formattedDate].pressure.push(obj.pressure),
@@ -66,8 +79,50 @@ class Location extends Component {
             {}
           )
         );
+        /*
+    Function to check if the weatherReadings are from an incorrect device
+          let goodReadCnt = 0;
+          for (var i=0; i<weatherLogs.length; i++){
+            if (weatherLogs[i].source === "jebe1d9")
+            {
+              goodReadCnt++;
+            }
+            if (weatherLogs[i].source === "alwo8e")
+            {
+              goodReadCnt++;
+            }
+          }
+          console.log((weatherLogs.length-goodReadCnt) + " of " + weatherLogs.length + " are the wrong device");
+        */
+      /*
+      Matt's Old aggregation code 
+      console.log(aggData);
+      let aggData code with Matt's weird formatting
+         let aggData = _.values(
+           _.reduce(
+             weatherLogs,
+             (result, obj) => {
+               const formattedDate = moment(obj.date).format('MM/DD/YYYY');
+               console.log(this);
+               result[formattedDate] = {
+                 date: formattedDate,
+                 temperature: [obj.temperature],
+                 // wind: result[formattedDate].wind.push(obj.wind),
+                 // humidity: result[formattedDate].humidity.push(obj.humidity),
+                 // pressure: result[formattedDate].pressure.push(obj.pressure),
+                 // precipitation: result[formattedDate].precipitation.push(
+                 //   obj.precipitation
+                 //)
+               };
+               return result;
+             },
+             {}
+           )
+         );
+      */
 
-        console.log(aggData);
+        // console.log(aggData);
+        // console.log(aggData.length);
         const weatherDates = weatherLogs.map(logs => logs.date);
         const weatherHumidity = weatherLogs.map(logs => logs.humidity);
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
@@ -97,12 +152,10 @@ class Location extends Component {
                   convertUnits,
                   'Temperature'
                 )}
-                //Reading={quickInfo.temperature + '°C'}
               />
               <Quickview
                 Type={'Wind Speed'}
                 Reading={UnitConversions(quickInfo.wind, convertUnits, 'Wind')}
-                //Reading={quickInfo.wind + ' mps'}
               />
               <Quickview Type={'Humidity'} Reading={quickInfo.humidity + '%'} />
               <Quickview
@@ -116,12 +169,50 @@ class Location extends Component {
                   convertUnits,
                   'Pressure'
                 )}
-                //Reading={quickInfo.pressure + ' hPa'}
               />
               <Quickview
                 Type={'Precipitation %'}
                 Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
+            </div>
+            {/* Div below is soley the controller for time range selector buttons */}
+            <div className="row mb-2">
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(2)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 2 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(6)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 6 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(12)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 12 Hours
+                </button>
+              </div>
+              <div className="col-sm-12 col-md-12 col-lg-3">
+                <button
+                  onClick={() => this.displayedReadingRange(24)}
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Past 24 Hours
+                </button>
+              </div>
             </div>
             <div className="row mb-2">
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -129,6 +220,8 @@ class Location extends Component {
                   chartLabel={'Temperature'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
+                  limitDisplay={this.state.displayLimit}
+                  convertUnits={convertUnits}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -136,6 +229,8 @@ class Location extends Component {
                   chartLabel={'Wind'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
+                  limitDisplay={this.state.displayLimit}
+                  convertUnits={convertUnits}
                 />
               </div>
             </div>
@@ -145,6 +240,8 @@ class Location extends Component {
                   chartLabel={'Humidity'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
+                  limitDisplay={this.state.displayLimit}
+                  convertUnits={convertUnits}
                 />
               </div>
               <div className="col-sm-12 col-md-12 col-lg-6">
@@ -152,6 +249,8 @@ class Location extends Component {
                   chartLabel={'Pressure'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
+                  limitDisplay={this.state.displayLimit}
+                  convertUnits={convertUnits}
                 />
               </div>
             </div>
