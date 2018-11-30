@@ -11,8 +11,6 @@ try:
     import mongo_api 
 except ImportError:
     print("Unable to import modules")
-    import email_error
-    email_error.sendEmail("test")
     exit()
 
 def degrees_to_cardinal(d):
