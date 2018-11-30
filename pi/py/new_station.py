@@ -9,7 +9,7 @@ import time
 from uuid import getnode as get_mac
 from colorama import init
 from termcolor import colored
-
+from Adafruit_BME280 import *
 
 init()
 
@@ -89,7 +89,9 @@ except:
     print(colored("Please ensure that the sensor wires are connected to the correct GPIO pins", 'red'))
     input("Unable to continue - Press Enter to exit...")
     exit()
+time.sleep(1)
 print('Sensor set up complete. We will now set up your device so you can begin pushing weather data to SkyPi HQ')
+time.sleep(1)
 input("Press Enter to continue...")
 print(colored('___________________________________________________ \n', 'magenta'))
 
