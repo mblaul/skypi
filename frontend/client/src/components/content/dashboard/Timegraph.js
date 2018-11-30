@@ -8,18 +8,23 @@ export default class Timegraph extends Component {
     const readingType = this.props.chartLabel;
     const readingsToDisplay = this.props.limitDisplay;
     let weather2Logs = [];
-    for (let j = 0; j < readingsToDisplay; j++) 
-    {
-      weather2Logs[j] = parseFloat(UnitConversions(this.props.weatherLogs[j], this.props.convertUnits, readingType));
+    let weather2Dates = [];
+
+    for (let j = 0; j < readingsToDisplay; j++) {
+      weather2Logs[j] = parseFloat(
+        UnitConversions(
+          this.props.weatherLogs[j],
+          this.props.convertUnits,
+          readingType
+        )
+      );
+      weather2Dates[j] = moment(this.props.weatherDates[j]).format(
+        'MM-DD h:mm A'
+      );
     }
-    let weather2Dates = [];     
-    for (let j = 0; j < readingsToDisplay; j++) 
-    {
-      weather2Dates[j] = moment(this.props.weatherDates[j]).format("MM-DD h:mm A");
-    }
+
     const data = {
-      labels: weather2Dates
-      .reverse(),
+      labels: weather2Dates.reverse(),
       datasets: [
         {
           label: this.props.chartLabel,
@@ -38,8 +43,8 @@ export default class Timegraph extends Component {
         yAxes: [
           {
             ticks: {
-              suggestedMin: ((Math.min.apply(null, weather2Logs) - 5)),
-              suggestedMax: ((Math.max.apply(null, weather2Logs) + 5))
+              suggestedMin: Math.min.apply(null, weather2Logs) - 5,
+              suggestedMax: Math.max.apply(null, weather2Logs) + 5
             }
           }
         ]
@@ -58,4 +63,3 @@ export default class Timegraph extends Component {
     );
   }
 }
-

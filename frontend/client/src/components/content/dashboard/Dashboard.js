@@ -23,10 +23,8 @@ class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      startDate: '',
-      endDate: '',
       // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
-      displayLimit: 4
+      displayLimit: 1
     };
   }
 
@@ -52,12 +50,13 @@ class Dashboard extends Component {
   }
 
   render() {
-    let { preferences } = this.props.auth;
+    const { preferences } = this.props.auth;
     const { weatherLogs, loading } = this.props.weather;
-    const allDevices = this.props.devices;
+    const { devices } = this.props.devices;
+
     let myDevice;
     let dashboardContent;
-    if (weatherLogs === undefined || allDevices === undefined || loading) {
+    if (weatherLogs === undefined || devices === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
@@ -70,9 +69,9 @@ class Dashboard extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = preferences.units === 'metric' ? false : true;
 
-        for (let x = 0; x < allDevices.devices.length; x++) {
-          if (allDevices.devices[x].name === weatherLogs[0].source) {
-            myDevice = allDevices.devices[x];
+        for (let x = 0; x < devices.devices.length; x++) {
+          if (devices.devices[x].name === weatherLogs[0].source) {
+            myDevice = devices.devices[x];
           }
         }
 

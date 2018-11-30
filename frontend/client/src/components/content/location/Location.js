@@ -25,7 +25,7 @@ class Location extends Component {
     super();
     this.state = {
       // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
-      displayLimit: 4
+      displayLimit: 1
     };
   }
 
@@ -72,7 +72,7 @@ class Location extends Component {
               //console.log(this);
               result[formattedDate] = {
                 date: formattedDate,
-                temperature: [obj.temperature],
+                temperature: [obj.temperature]
                 // wind: result[formattedDate].wind.push(obj.wind),
                 // humidity: result[formattedDate].humidity.push(obj.humidity),
                 // pressure: result[formattedDate].pressure.push(obj.pressure),

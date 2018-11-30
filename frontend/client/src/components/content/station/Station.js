@@ -23,7 +23,7 @@ class Station extends Component {
       startDate: '',
       endDate: '',
       // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
-      displayLimit: 4
+      displayLimit: 1
     };
   }
 
@@ -50,16 +50,17 @@ class Station extends Component {
 
   render() {
     const { weatherLogs, loading } = this.props.weather;
-    const allDevices = this.props.devices;
+    const { devices } = this.props.devices;
+
     let myDevice;
     let stationContent;
     // Check to see if values have fully loaded for weather data
-    if (weatherLogs === undefined || loading) {
+    if (weatherLogs === undefined || devices === [] || loading) {
       //If it hasn't loaded display spinner
       stationContent = <Spinner />;
     } else {
       //If it has loaded, ensure weatherLogs' length isn't zero then display data
-      if (weatherLogs.length > 0) {
+      if (weatherLogs.length > 0 && devices.length > 0) {
         const quickInfo = weatherLogs[0];
         const weatherDates = weatherLogs.map(logs => logs.date);
         const weatherHumidity = weatherLogs.map(logs => logs.humidity);
@@ -68,9 +69,9 @@ class Station extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = true;
 
-        for (let x = 0; x < allDevices.devices.length; x++) {
-          if (allDevices.devices[x].name === weatherLogs[0].source) {
-            myDevice = allDevices.devices[x];
+        for (let x = 0; x < devices.length; x++) {
+          if (devices[x].name === weatherLogs[0].source) {
+            myDevice = devices[x];
           }
         }
 
@@ -202,13 +203,10 @@ class Station extends Component {
         stationContent = (
           <div className="mx-auto">
             <p className="lead alert alert-warning">
-              You need to favorite a device!
+              Ruh roh, stations/weather logs are not loading!
               <br />
-              Please follow the link below to find a favorite.
+              Please refresh.
             </p>
-            <Link to="/stations" className="btn btn-lg btn-info">
-              Device List
-            </Link>
           </div>
         );
       }

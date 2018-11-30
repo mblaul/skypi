@@ -16,7 +16,7 @@ class Map extends Component {
 
   render() {
     const { devices } = this.props;
-
+    console.log(devices);
     let center;
     let mapContent;
     if (devices.length > 0) {
@@ -41,8 +41,6 @@ class Map extends Component {
           </GoogleMapReact>
         </div>
       );
-    } else {
-      center = null;
     }
 
     return (
@@ -54,7 +52,7 @@ class Map extends Component {
 }
 
 Map.propTypes = {
-  devices: PropTypes.object.isRequired
+  devices: PropTypes.array.isRequired
 };
 
 export default Map;
