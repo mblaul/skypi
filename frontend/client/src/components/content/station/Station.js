@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -20,8 +19,6 @@ class Station extends Component {
     super();
 
     this.state = {
-      startDate: '',
-      endDate: '',
       // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
       displayLimit: 1
     };

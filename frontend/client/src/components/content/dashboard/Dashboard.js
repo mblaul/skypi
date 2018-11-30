@@ -60,7 +60,7 @@ class Dashboard extends Component {
       dashboardContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
-      if (weatherLogs.length > 0) {
+      if (weatherLogs.length > 0 && devices.length > 0) {
         const quickInfo = weatherLogs[0];
         const weatherDates = weatherLogs.map(logs => logs.date);
         const weatherHumidity = weatherLogs.map(logs => logs.humidity);
@@ -69,9 +69,9 @@ class Dashboard extends Component {
         const weatherWind = weatherLogs.map(logs => logs.wind);
         const convertUnits = preferences.units === 'metric' ? false : true;
 
-        for (let x = 0; x < devices.devices.length; x++) {
-          if (devices.devices[x].name === weatherLogs[0].source) {
-            myDevice = devices.devices[x];
+        for (let x = 0; x < devices.length; x++) {
+          if (devices[x].name === weatherLogs[0].source) {
+            myDevice = devices[x];
           }
         }
 
