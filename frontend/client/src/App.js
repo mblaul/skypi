@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
+// import App style sheets
+import './css/bootstrap/css/bootstrap.min.css';
+import './css/fontawesome-free/css/all.min.css';
+import './css/landing-page.min.css';
+import './css/simple-line-icons/css/simple-line-icons.css';
+
+// Import Redux functionality
 import store from './store';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';

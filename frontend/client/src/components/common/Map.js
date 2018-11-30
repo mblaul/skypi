@@ -16,7 +16,7 @@ class Map extends Component {
 
   render() {
     const { devices } = this.props;
-    console.log(devices);
+
     let center;
     let mapContent;
     if (devices.length > 0) {
@@ -31,11 +31,12 @@ class Map extends Component {
             defaultCenter={center}
             defaultZoom={this.props.zoom}
           >
-            {devices.map(device => (
+            {devices.map((device, key) => (
               <MapMarker
                 lat={device.lastWeatherLog.latitude}
                 lng={device.lastWeatherLog.longitude}
                 text={device.name}
+                key={key}
               />
             ))}
           </GoogleMapReact>
