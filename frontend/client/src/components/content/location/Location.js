@@ -51,6 +51,13 @@ class Location extends Component {
     }
   }
 
+  convertToMultidimensional(combinedReadings, primarySource){
+    var deviceList = [primarySource];
+    var placeHolder = 0;
+    for( var i = 0; i < (combinedReadings.length); i++) {
+
+    }
+  }
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let locationContent;
@@ -64,32 +71,124 @@ class Location extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
-        let aggData = _.values(
-          _.reduce(
-            weatherLogs,
-            (result, obj) => {
-              const formattedDate = moment(obj.date).format('MM/DD/YYYY');
-              //console.log(this);
-              result[formattedDate] = {
-                date: formattedDate,
-                temperature: [obj.temperature]
-                // wind: result[formattedDate].wind.push(obj.wind),
-                // humidity: result[formattedDate].humidity.push(obj.humidity),
-                // pressure: result[formattedDate].pressure.push(obj.pressure),
-                // precipitation: result[formattedDate].precipitation.push(
-                //   obj.precipitation
-                //)
-              };
-              return result;
-            },
-            {}
-          )
-        );
-        const weatherDates = weatherLogs.map(logs => logs.date);
-        const weatherHumidity = weatherLogs.map(logs => logs.humidity);
-        const weatherPressure = weatherLogs.map(logs => logs.pressure);
-        const weatherTemperature = weatherLogs.map(logs => logs.temperature);
-        const weatherWind = weatherLogs.map(logs => logs.wind);
+        var weatherTemperature = [];
+        var weatherWind = [];
+        var weatherHumidity = [];
+        var weatherPressure = [];
+        var weatherDates = [];
+//Use the function below for every array of values for Timegraph
+        for (var i=1; i<weatherLogs.length; i++){
+          var elementValue = 0;
+          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
+          if (i === (weatherLogs.length - 1)){
+            var secondDate = weatherLogs[0];
+          } else {
+            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
+          }
+          if (firstDate === secondDate){
+            var cntr = 2;
+            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
+              cntr++;
+            }
+            elementValue = moment(weatherLogs[i].date).format('MM-DD h:mm A');
+            i = i + cntr;
+          } else {
+            elementValue = moment(weatherLogs[i].date).format('MM-DD h:mm A');
+          }
+          weatherDates.push(elementValue);
+        }
+        for (var i=1; i<weatherLogs.length; i++){
+          let elementValue = 0;
+          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
+          if (i === (weatherLogs.length - 1)){
+            var secondDate = weatherLogs[0];
+          } else {
+            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
+          }
+          if (firstDate === secondDate){
+            var cntr = 2;
+            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
+              cntr++;
+            }
+            for (var j = i; j<(i+cntr);j++){
+              elementValue = elementValue + weatherLogs[j].temperature;
+            }
+            elementValue = elementValue / (cntr - 1);
+            i = i + cntr;
+          } else {
+            elementValue = weatherLogs[i].temperature;
+          }
+          weatherTemperature.push(elementValue);
+        }
+        for (var i=1; i<weatherLogs.length; i++){
+          let elementValue = 0;
+          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
+          if (i === (weatherLogs.length - 1)){
+            var secondDate = weatherLogs[0];
+          } else {
+            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
+          }
+          if (firstDate === secondDate){
+            var cntr = 2;
+            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
+              cntr++;
+            }
+            for (var j = i; j<(i+cntr);j++){
+              elementValue = elementValue + weatherLogs[j].wind;
+            }
+            elementValue = elementValue / (cntr - 1);
+            i = i + cntr;
+          } else {
+            elementValue = weatherLogs[i].wind;
+          }
+          weatherWind.push(elementValue);
+        }
+        for (var i=1; i<weatherLogs.length; i++){
+          let elementValue = 0;
+          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
+          if (i === (weatherLogs.length - 1)){
+            var secondDate = weatherLogs[0];
+          } else {
+            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
+          }
+          if (firstDate === secondDate){
+            var cntr = 2;
+            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
+              cntr++;
+            }
+            for (var j = i; j<(i+cntr);j++){
+              elementValue = elementValue + weatherLogs[j].humidity;
+            }
+            elementValue = elementValue / (cntr - 1);
+            i = i + cntr;
+          } else {
+            elementValue = weatherLogs[i].humidity;
+          }
+          weatherHumidity.push(elementValue);
+        }
+        for (var i=1; i<weatherLogs.length; i++){
+          let elementValue = 0;
+          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
+          if (i === (weatherLogs.length - 1)){
+            var secondDate = weatherLogs[0];
+          } else {
+            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
+          }
+          if (firstDate === secondDate){
+            var cntr = 2;
+            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
+              cntr++;
+            }
+            for (var j = i; j<(i+cntr);j++){
+              elementValue = elementValue + weatherLogs[j].pressure;
+            }
+            elementValue = elementValue / (cntr - 1);
+            i = i + cntr;
+          } else {
+            elementValue = weatherLogs[i].pressure;
+          }
+          weatherPressure.push(elementValue);
+        }
 
         locationContent = (
           <div>
