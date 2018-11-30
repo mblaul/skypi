@@ -56,6 +56,7 @@ class Dashboard extends Component {
 
     let myDevice;
     let dashboardContent;
+
     if (weatherLogs === undefined || devices === undefined || loading) {
       dashboardContent = <Spinner />;
     } else {

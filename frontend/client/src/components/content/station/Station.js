@@ -46,6 +46,7 @@ class Station extends Component {
   }
 
   render() {
+    const { preferences } = this.props.auth;
     const { weatherLogs, loading } = this.props.weather;
     const { devices } = this.props.devices;
 
@@ -64,7 +65,7 @@ class Station extends Component {
         const weatherPressure = weatherLogs.map(logs => logs.pressure);
         const weatherTemperature = weatherLogs.map(logs => logs.temperature);
         const weatherWind = weatherLogs.map(logs => logs.wind);
-        const convertUnits = true;
+        const convertUnits = preferences.units === 'metric' ? false : true;
 
         for (let x = 0; x < devices.length; x++) {
           if (devices[x].name === weatherLogs[0].source) {
