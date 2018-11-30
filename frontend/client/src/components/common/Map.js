@@ -25,7 +25,7 @@ class Map extends Component {
         lng: Math.floor(devices[0].lastWeatherLog.longitude * 10000) / 10000
       };
       mapContent = (
-        <div style={{ height: '60vh', width: '100%' }}>
+        <div style={{ height: '25vh', width: '100%' }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: API_KEY }}
             defaultCenter={center}
@@ -45,7 +45,7 @@ class Map extends Component {
     }
 
     return (
-      <div className="my-5">
+      <div className="mt-1 mb-4">
         {devices.length > 0 ? mapContent : <Spinner />}
       </div>
     );

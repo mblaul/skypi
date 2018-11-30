@@ -234,7 +234,7 @@ class Location extends Component {
       }
     }
 
-    return <div className="container mt-2">{locationContent}</div>;
+    return <div className="container mt-3">{locationContent}</div>;
   }
 }
 

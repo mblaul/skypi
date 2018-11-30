@@ -13,6 +13,7 @@ import Map from '../../common/Map';
 import Quickview from '../dashboard/Quickview';
 import Timegraph from '../dashboard/Timegraph';
 import UnitConversions from '../dashboard/UnitConversions';
+import weatherIcons from '../dashboard/weatherIcons';
 
 class Station extends Component {
   constructor() {
@@ -75,15 +76,23 @@ class Station extends Component {
 
         stationContent = (
           <div>
-            <div className="row my-4">
-              <div className="text-center mx-auto">
-                <div className="strong display-2">{quickInfo.source}</div>
-                <div className="text-muted mb-3">
-                  Last Updated:{' '}
-                  <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
-                </div>
-              </div>
+            <div className="display-4">
+              {quickInfo.source}
+              <img
+                className="my-0 py-0 h-50"
+                src={weatherIcons(quickInfo.description)}
+                alt={quickInfo.description}
+              />
             </div>
+            <div className="lead text-muted">
+              {quickInfo.city}, {quickInfo.state}
+            </div>
+            <Map devices={[myDevice]} />
+            <div className="text-muted mb-3">
+              Last Updated:{' '}
+              <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
+            </div>
+
             <div className="row mb-3">
               <Quickview
                 Type={'Temperature'}
@@ -193,7 +202,6 @@ class Station extends Component {
                 />
               </div>
             </div>
-            <Map devices={[myDevice]} />
           </div>
         );
       } else {
