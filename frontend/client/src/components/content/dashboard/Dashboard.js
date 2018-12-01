@@ -86,6 +86,10 @@ class Dashboard extends Component {
                 alt={quickInfo.description}
               />
             </div>
+            <div className="lead text-muted">
+              {quickInfo.city}, {quickInfo.state}
+            </div>
+            <Map devices={[myDevice]} />
             <div className="text-muted mb-3">
               Last Updated:{' '}
               <Moment format="YYYY/MM/DD h:mm A">{quickInfo.date}</Moment>
@@ -200,8 +204,6 @@ class Dashboard extends Component {
                 />
               </div>
             </div>
-            <hr />
-            <Map devices={[myDevice]} />
             <hr />
           </div>
         );
