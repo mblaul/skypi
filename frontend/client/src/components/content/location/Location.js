@@ -100,14 +100,50 @@ class Location extends Component {
         weatherDataByDate = _.values(weatherDataByDate);
 
         for (let i = 0; i < weatherDataByDate.length; i++) {
-          console.log(weatherDataByDate[i]);
+          let avgTemp = _.round(
+            _.sum(weatherDataByDate[i].temperature) /
+              weatherDataByDate[i].temperature.length,
+            2
+          );
+          let avgWind = _.round(
+            _.sum(weatherDataByDate[i].wind) / weatherDataByDate[i].wind.length,
+            2
+          );
+          let avgHumidity = _.round(
+            _.sum(weatherDataByDate[i].humidity) /
+              weatherDataByDate[i].humidity.length,
+            2
+          );
+          let avgPressure = _.round(
+            _.sum(weatherDataByDate[i].pressure) /
+              weatherDataByDate[i].pressure.length,
+            2
+          );
+
+          weatherDataByDate[i] = {
+            temperature: avgTemp,
+            wind: avgWind,
+            humidity: avgHumidity,
+            pressure: avgPressure,
+            date: weatherDataByDate[i].date
+          };
         }
 
-        var weatherTemperature = [];
-        var weatherWind = [];
-        var weatherHumidity = [];
-        var weatherPressure = [];
-        var weatherDates = [];
+        const weatherTemperature = weatherDataByDate.map(
+          weatherData => weatherData.temperature
+        );
+        const weatherWind = weatherDataByDate.map(
+          weatherData => weatherData.wind
+        );
+        const weatherHumidity = weatherDataByDate.map(
+          weatherData => weatherData.humidity
+        );
+        const weatherPressure = weatherDataByDate.map(
+          weatherData => weatherData.pressure
+        );
+        const weatherDates = weatherDataByDate.map(
+          weatherData => weatherData.date
+        );
 
         locationContent = (
           <div>
