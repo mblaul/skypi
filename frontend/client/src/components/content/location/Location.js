@@ -24,7 +24,7 @@ class Location extends Component {
     super();
     this.state = {
       // displayLimit State is a state of Dashboard.js, created in an attempt to control data points shown by Timegraph.js component
-      displayLimit: 1
+      displayLimit: 4
     };
   }
 
@@ -48,11 +48,6 @@ class Location extends Component {
     }
   }
 
-  convertToMultidimensional(combinedReadings, primarySource) {
-    var deviceList = [primarySource];
-    var placeHolder = 0;
-    for (var i = 0; i < combinedReadings.length; i++) {}
-  }
   render() {
     const { weatherLogs, loading } = this.props.weather;
     let locationContent;
@@ -191,12 +186,13 @@ class Location extends Component {
                 Reading={Number(quickInfo.precipitation) * 100 + '%'}
               />
             </div>
-            <div className="row mb-2">
+            {/* Div below is the container for Time range selector buttons */}
+            <div className="row text-center mb-2">
               <div className="col-sm-12 col-md-12 col-lg-3">
                 <button
                   onClick={() => this.displayedReadingRange(2)}
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary my-1"
                 >
                   Past 2 Hours
                 </button>
@@ -205,7 +201,7 @@ class Location extends Component {
                 <button
                   onClick={() => this.displayedReadingRange(6)}
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary my-1"
                 >
                   Past 6 Hours
                 </button>
@@ -214,7 +210,7 @@ class Location extends Component {
                 <button
                   onClick={() => this.displayedReadingRange(12)}
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary my-1"
                 >
                   Past 12 Hours
                 </button>
@@ -223,7 +219,7 @@ class Location extends Component {
                 <button
                   onClick={() => this.displayedReadingRange(24)}
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-secondary my-1"
                 >
                   Past 24 Hours
                 </button>
