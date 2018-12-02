@@ -9,7 +9,6 @@ import queryString from 'query-string';
 
 //Import functions
 import { getLocationWeatherData } from '../../../actions/weatherActions';
-import { getUserPreferences } from '../../../actions/authActions';
 
 // Import common components
 import Spinner from '../../common/Spinner';
@@ -40,8 +39,6 @@ class Location extends Component {
       this.props.history.push('/login');
     }
     const locationData = queryString.parse(this.props.location.search);
-    //Get the user's preferences on unit conversions
-    this.props.getUserPreferences();
     this.props.getLocationWeatherData(locationData);
   }
 
@@ -51,12 +48,10 @@ class Location extends Component {
     }
   }
 
-  convertToMultidimensional(combinedReadings, primarySource){
+  convertToMultidimensional(combinedReadings, primarySource) {
     var deviceList = [primarySource];
     var placeHolder = 0;
-    for( var i = 0; i < (combinedReadings.length); i++) {
-
-    }
+    for (var i = 0; i < combinedReadings.length; i++) {}
   }
   render() {
     const { weatherLogs, loading } = this.props.weather;
@@ -71,124 +66,48 @@ class Location extends Component {
       // Check to see if values have fully loaded for weather data
       if (weatherLogs.length > 0) {
         const quickInfo = weatherLogs[0];
+
+        let weatherDataByDate = [];
+        let truncatedDate;
+
+        for (let i = 0; i < weatherLogs.length; i++) {
+          truncatedDate = moment(weatherLogs[i].date).format(
+            'YYYY-MM-DD HH:mm'
+          );
+
+          if (!weatherDataByDate[truncatedDate]) {
+            weatherDataByDate[truncatedDate] = {
+              temperature: [],
+              wind: [],
+              humidity: [],
+              pressure: [],
+              date: truncatedDate
+            };
+          }
+
+          weatherDataByDate[truncatedDate].temperature.unshift(
+            weatherLogs[i].temperature
+          );
+          weatherDataByDate[truncatedDate].wind.unshift(weatherLogs[i].wind);
+          weatherDataByDate[truncatedDate].humidity.unshift(
+            weatherLogs[i].humidity
+          );
+          weatherDataByDate[truncatedDate].pressure.unshift(
+            weatherLogs[i].pressure
+          );
+        }
+
+        weatherDataByDate = _.values(weatherDataByDate);
+
+        for (let i = 0; i < weatherDataByDate.length; i++) {
+          console.log(weatherDataByDate[i]);
+        }
+
         var weatherTemperature = [];
         var weatherWind = [];
         var weatherHumidity = [];
         var weatherPressure = [];
         var weatherDates = [];
-//Use the function below for every array of values for Timegraph
-        for (var i=1; i<weatherLogs.length; i++){
-          var elementValue = 0;
-          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
-          if (i === (weatherLogs.length - 1)){
-            var secondDate = weatherLogs[0];
-          } else {
-            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
-          }
-          if (firstDate === secondDate){
-            var cntr = 2;
-            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
-              cntr++;
-            }
-            elementValue = moment(weatherLogs[i].date).format('MM-DD h:mm A');
-            i = i + cntr;
-          } else {
-            elementValue = moment(weatherLogs[i].date).format('MM-DD h:mm A');
-          }
-          weatherDates.push(elementValue);
-        }
-        for (var i=1; i<weatherLogs.length; i++){
-          let elementValue = 0;
-          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
-          if (i === (weatherLogs.length - 1)){
-            var secondDate = weatherLogs[0];
-          } else {
-            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
-          }
-          if (firstDate === secondDate){
-            var cntr = 2;
-            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
-              cntr++;
-            }
-            for (var j = i; j<(i+cntr);j++){
-              elementValue = elementValue + weatherLogs[j].temperature;
-            }
-            elementValue = elementValue / (cntr - 1);
-            i = i + cntr;
-          } else {
-            elementValue = weatherLogs[i].temperature;
-          }
-          weatherTemperature.push(elementValue);
-        }
-        for (var i=1; i<weatherLogs.length; i++){
-          let elementValue = 0;
-          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
-          if (i === (weatherLogs.length - 1)){
-            var secondDate = weatherLogs[0];
-          } else {
-            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
-          }
-          if (firstDate === secondDate){
-            var cntr = 2;
-            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
-              cntr++;
-            }
-            for (var j = i; j<(i+cntr);j++){
-              elementValue = elementValue + weatherLogs[j].wind;
-            }
-            elementValue = elementValue / (cntr - 1);
-            i = i + cntr;
-          } else {
-            elementValue = weatherLogs[i].wind;
-          }
-          weatherWind.push(elementValue);
-        }
-        for (var i=1; i<weatherLogs.length; i++){
-          let elementValue = 0;
-          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
-          if (i === (weatherLogs.length - 1)){
-            var secondDate = weatherLogs[0];
-          } else {
-            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
-          }
-          if (firstDate === secondDate){
-            var cntr = 2;
-            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
-              cntr++;
-            }
-            for (var j = i; j<(i+cntr);j++){
-              elementValue = elementValue + weatherLogs[j].humidity;
-            }
-            elementValue = elementValue / (cntr - 1);
-            i = i + cntr;
-          } else {
-            elementValue = weatherLogs[i].humidity;
-          }
-          weatherHumidity.push(elementValue);
-        }
-        for (var i=1; i<weatherLogs.length; i++){
-          let elementValue = 0;
-          var firstDate = moment(weatherLogs[i].date).format('MM-DD-YYYY h:mm A');
-          if (i === (weatherLogs.length - 1)){
-            var secondDate = weatherLogs[0];
-          } else {
-            var secondDate = moment(weatherLogs[i+1].date).format('MM-DD-YYYY h:mm A');
-          }
-          if (firstDate === secondDate){
-            var cntr = 2;
-            while (weatherLogs[i].date === weatherLogs[i+cntr].date){
-              cntr++;
-            }
-            for (var j = i; j<(i+cntr);j++){
-              elementValue = elementValue + weatherLogs[j].pressure;
-            }
-            elementValue = elementValue / (cntr - 1);
-            i = i + cntr;
-          } else {
-            elementValue = weatherLogs[i].pressure;
-          }
-          weatherPressure.push(elementValue);
-        }
 
         locationContent = (
           <div>
@@ -338,7 +257,7 @@ class Location extends Component {
 }
 
 Location.propTypes = {
-  getFavoriteWeatherData: PropTypes.func.isRequired,
+  getLocationWeatherData: PropTypes.func.isRequired,
   weather: PropTypes.object.isRequired
 };
 
@@ -349,5 +268,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getLocationWeatherData, getUserPreferences }
+  { getLocationWeatherData }
 )(Location);
