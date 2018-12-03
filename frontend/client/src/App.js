@@ -5,8 +5,9 @@ import { Provider } from 'react-redux';
 // import App style sheets
 import './css/bootstrap/css/bootstrap.min.css';
 import './css/fontawesome-free/css/all.min.css';
-import './css/landing-page.min.css';
+//import './css/landing-page.min.css';
 import './css/simple-line-icons/css/simple-line-icons.css';
+import './css/palette.scss';
 
 // Import Redux functionality
 import store from './store';
