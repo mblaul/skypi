@@ -73,7 +73,7 @@ class Navbar extends Component {
       <nav className="navbar  navbar-expand-sm navbar-light bg-light static-top">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img alt="logo" src="./img/logo.png" />
+            <img alt="logo" src="./img/logo.png" style={{ height: '50px' }} />
           </Link>
           <button
             className="navbar-toggler"
