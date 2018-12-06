@@ -11,6 +11,11 @@ export default class Landing extends Component {
                 <div className="display-1 mb-3">
                   <strong className="header-title">SkyPi</strong>
                 </div>
+                <img
+                  className="mb-4"
+                  src="./img/logo.png"
+                  style={{ height: '400px' }}
+                />
                 <h2 className="header-subtitle mb-4">
                   Your source for reliable weather information.
                 </h2>

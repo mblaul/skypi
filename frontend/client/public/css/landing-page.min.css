@@ -16,12 +16,12 @@ h6 {
 }
 
 header.masthead {
-  height: 810px;
+  height: 100%;
   position: relative;
   background-color: #343a40;
   background: url(/img/bg-weather.jpeg) no-repeat center center;
   background-size: cover;
-  padding-top: 8rem;
+  padding-top: 2rem;
   padding-bottom: 8rem;
 }
 header.masthead .overlay {
