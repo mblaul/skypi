@@ -14,7 +14,7 @@ export default class Landing extends Component {
                 <img
                   className="mb-4"
                   src="./img/logo.png"
-                  style={{ height: '400px' }}
+                  style={{ height: '350px' }}
                 />
                 <h2 className="header-subtitle mb-4">
                   Your source for reliable weather information. Join now to view

@@ -24,13 +24,13 @@ class Verify extends Component {
 
   componentDidMount() {
     if (this.props.auth.user.roles.isVerified) {
-      this.props.history.push('/dashboard');
+      this.props.history.push('/getstarted');
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.user.roles.isVerified) {
-      this.props.history.push('/dashboard');
+      this.props.history.push('/getstarted');
     }
 
     if (nextProps.errors) {
