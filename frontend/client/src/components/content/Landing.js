@@ -17,7 +17,8 @@ export default class Landing extends Component {
                   style={{ height: '400px' }}
                 />
                 <h2 className="header-subtitle mb-4">
-                  Your source for reliable weather information.
+                  Your source for reliable weather information. Join now to view
+                  crowd-sourced weather data at the best price... Free!
                 </h2>
               </div>
               <div className="col-md-10 col-lg-8 col-xl-7 mx-auto">

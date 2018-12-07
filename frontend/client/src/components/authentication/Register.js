@@ -71,7 +71,9 @@ class Register extends Component {
               value={this.state.email}
               onChange={this.onChange}
               error={errors.email}
+              info="Your email must be valid to verify your account."
             />
+            <small id="passwordHelpBlock" class="form-text text-muted" />
             <TextFieldGroup
               placeholder="Password"
               name="password"
@@ -79,6 +81,8 @@ class Register extends Component {
               value={this.state.password}
               onChange={this.onChange}
               error={errors.password}
+              info="Your password must be 6-20 characters long, contain letters and
+              must not contain spaces, special characters, or emoji."
             />
             <TextFieldGroup
               placeholder="Confirm Password"
