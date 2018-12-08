@@ -14,6 +14,7 @@ export default class Landing extends Component {
                 <img
                   className="mb-4"
                   src="./img/logo.png"
+                  alt="logo"
                   style={{ height: '350px' }}
                 />
                 <h2 className="header-subtitle mb-4">
