@@ -8,7 +8,6 @@ import { setFavoriteDevice } from '../../../actions/authActions';
 import { getFavoriteWeatherData } from '../../../actions/weatherActions';
 
 // Import common components
-import Map from '../../common/Map';
 import Spinner from '../../common/Spinner';
 
 class Stations extends Component {

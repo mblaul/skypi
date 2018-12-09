@@ -53,8 +53,9 @@ class Station extends Component {
 
     let myDevice;
     let stationContent;
+    let displayLimit;
     // Check to see if values have fully loaded for weather data
-    if (weatherLogs === undefined || devices === [] || loading) {
+    if (weatherLogs === [] || devices === [] || loading) {
       //If it hasn't loaded display spinner
       stationContent = <Spinner />;
     } else {
@@ -73,6 +74,8 @@ class Station extends Component {
             myDevice = devices[x];
           }
         }
+
+        displayLimit = weatherLogs.length < 4 ? weatherLogs.length : 4;
 
         stationContent = (
           <div>
@@ -169,7 +172,7 @@ class Station extends Component {
                   chartLabel={'Temperature'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherTemperature}
-                  limitDisplay={this.state.displayLimit}
+                  limitDisplay={displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -178,7 +181,7 @@ class Station extends Component {
                   chartLabel={'Wind'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherWind}
-                  limitDisplay={this.state.displayLimit}
+                  limitDisplay={displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -189,7 +192,7 @@ class Station extends Component {
                   chartLabel={'Humidity'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherHumidity}
-                  limitDisplay={this.state.displayLimit}
+                  limitDisplay={displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>
@@ -198,7 +201,7 @@ class Station extends Component {
                   chartLabel={'Pressure'}
                   weatherDates={weatherDates}
                   weatherLogs={weatherPressure}
-                  limitDisplay={this.state.displayLimit}
+                  limitDisplay={displayLimit}
                   convertUnits={convertUnits}
                 />
               </div>

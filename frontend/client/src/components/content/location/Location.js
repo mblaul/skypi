@@ -55,7 +55,7 @@ class Location extends Component {
     let { preferences } = this.props.auth;
     //Declare a temp variable to control unit conversions
     const convertUnits = preferences.units === 'metric' ? false : true;
-    if (weatherLogs === undefined || loading) {
+    if (weatherLogs === [] || loading) {
       locationContent = <Spinner />;
     } else {
       // Check to see if values have fully loaded for weather data
