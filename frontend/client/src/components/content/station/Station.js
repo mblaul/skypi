@@ -75,7 +75,8 @@ class Station extends Component {
           }
         }
 
-        displayLimit = weatherLogs.length < 4 ? weatherLogs.length : 4;
+        displayLimit =
+          weatherLogs.length < 4 ? weatherLogs.length : this.state.displayLimit;
 
         stationContent = (
           <div>
