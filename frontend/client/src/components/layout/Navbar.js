@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 import LogoutModal from './LogoutModal';
+import Logo from '../../img/logo.png';
 
 class Navbar extends Component {
   render() {
@@ -73,7 +74,7 @@ class Navbar extends Component {
       <nav className="navbar  navbar-expand-sm navbar-light bg-light static-top">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img alt="logo" src="./img/logo.png" style={{ height: '50px' }} />
+            <img alt="logo" src={Logo} style={{ height: '50px' }} />
           </Link>
           <button
             className="navbar-toggler"
