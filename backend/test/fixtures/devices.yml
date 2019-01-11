@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  ipaddress: MyString
+  macaddress: MyString
 
 two:
   name: MyString
-  ipaddress: MyString
+  macaddress: MyString

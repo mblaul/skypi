@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+x = 1
+
+while x <= 5 
+  Device.create({
+    name: "device#{x}",
+    macaddress: "#{x}1:23:45:67"
+  })
+  x += 1
+end
