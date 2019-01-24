@@ -14,15 +14,7 @@ gem 'mysql2', '>= 0.3.18', '< 0.6.0'
 gem 'puma', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-# Use JWT for auth tokens
-gem 'jwt'
-# Use GraphQL for data awesomeness
-gem 'graphql'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
 
 
 group :development, :test do
@@ -39,3 +31,19 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :development do
+  gem 'faker', '~> 1.9.1'
+end
+
+gem 'devise', '~> 4.2.0'
+# Use JWT for auth tokens
+gem 'devise-jwt', '~> 0.5.8'
+# Use GraphQL for data awesomeness
+gem 'graphql'
+
+#GraphiQL on API only gem
+gem 'graphiql-rails', group: :development
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'

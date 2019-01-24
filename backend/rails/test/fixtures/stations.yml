@@ -3,13 +3,9 @@
 one:
   name: MyString
   mac_address: MyString
-  ip_address: MyString
-  latitude: 1.5
-  longitude: 1.5
+  user: one
 
 two:
   name: MyString
   mac_address: MyString
-  ip_address: MyString
-  latitude: 1.5
-  longitude: 1.5
+  user: two
