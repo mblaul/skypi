@@ -9,5 +9,18 @@ module Types
     def test_field
       "Hello World!"
     end
+
+    field :me, UserType, null: false,
+      description: "the current user"
+    def me
+      User.first
+    end
+
+    field :stations, [StationType], null: false,
+      description: "all of the stations"
+    def stations
+      Station.all
+    end
+
   end
 end
