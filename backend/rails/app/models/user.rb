@@ -6,6 +6,14 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: JWTBlacklist
 
-
+  def jwt_payload
+    { 
+      'id' => :id,
+      'first_name' => :first_name,
+      'last_name' => :last_name,
+      'email' => :email
+    }
+  end
+  
   has_many :stations
 end
