@@ -1,15 +1,22 @@
-class JsonWebToken
- class << self
-   def encode(payload, exp = 24.hours.from_now)
-     payload[:exp] = exp.to_i
-     JWT.encode(payload, Rails.application.secrets.secret_key_base)
-   end
+require 'jwt'
 
-   def decode(token)
-     body = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
-     HashWithIndifferentAccess.new body
-   rescue
-     nil
-   end
- end
+class JsonWebToken
+
+  ALGORITHM = 'HS256'
+
+  def self.issue(payload)
+    JWT.encode(payload, jwt_secret, ALGORITHM)
+  end
+  
+  def self.decode(token)
+    JWT.decode(
+      token,
+      jwt_secret,
+      true,
+      { algorithm: ALGORITHM }).first
+  end
+
+  def self.jwt_secret 
+    ENV["JWT_SECRET_KEY"]
+  end
 end

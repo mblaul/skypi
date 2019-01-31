@@ -1,23 +1,20 @@
 module Mutations
   class SignInUser < GraphQL::Schema::Mutation
-    null true
-
     argument :email, Types::AuthProviderEmailInput, required: false
 
-    field :token, String, null: true
     field :user, Types::UserType, null: true
-    
+    field :token, String, null: true
     def resolve(email: nil)
+      # basic validation
       return unless email
+      user = User.find_by_email(email[:email])
 
-      user = User.find_by email: email[:email]
-
-      return unless user
-      return unless user.authenticate_user!(email[:password])
-
-      token = user.jwt_payload
-
-      { user: user, token: token }
+      if user
+        if user.valid_password?(email[:password])
+          token = JsonWebToken.issue({user: user.id})
+          {user: user, token: token}
+        end
+      end
     end
   end
 end
