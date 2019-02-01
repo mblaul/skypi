@@ -2,8 +2,8 @@ module Mutations
   class SignInUser < GraphQL::Schema::Mutation
     argument :email, Types::AuthProviderEmailInput, required: false
 
-    field :user, Types::UserType, null: true
     field :token, String, null: true
+
     def resolve(email: nil)
       # basic validation
       return unless email
@@ -11,8 +11,12 @@ module Mutations
 
       if user
         if user.valid_password?(email[:password])
-          token = JsonWebToken.issue({user: user.id})
-          {user: user, token: token}
+          token = JsonWebToken.issue({
+            user: user.id,
+            issued_at: Time.now,
+            exires_at:  Time.now.advance({ days: 30 })
+          })
+          { token: token }
         end
       end
     end

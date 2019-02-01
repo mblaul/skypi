@@ -9,11 +9,13 @@ class JsonWebToken
   end
   
   def self.decode(token)
-    JWT.decode(
+     result = JWT.decode(
       token,
       jwt_secret,
       true,
       { algorithm: ALGORITHM }).first
+
+    User.find_by(id: result[:user])
   end
 
   def self.jwt_secret 

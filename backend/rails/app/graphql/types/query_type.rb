@@ -13,7 +13,10 @@ module Types
     field :me, UserType, null: false,
       description: "the current user"
     def me
-      User.first
+    if ctx[:current_user].blank?
+      raise GraphQL::ExecutionError.new("Authentication required")
+    end
+      User.find_by(ctx[:current_user][:user])
     end
 
     field :stations, [StationType], null: false,
