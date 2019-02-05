@@ -5,8 +5,6 @@ export const REGISTER_MUTATION = gql`
 		createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
 			id
 			email
-			first_name
-			last_name
 		}
 	}
 `;
