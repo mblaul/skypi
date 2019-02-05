@@ -4,6 +4,8 @@ import styled from 'styled-components';
 // Import layout components
 import NavBar from './nav/NavBar';
 
+import Register from './auth/Register';
+
 const AppStyles = styled.div`color: black;`;
 
 class App extends Component {
@@ -11,6 +13,7 @@ class App extends Component {
 		return (
 			<AppStyles>
 				<NavBar />
+				<Register />
 			</AppStyles>
 		);
 	}

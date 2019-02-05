@@ -13,10 +13,9 @@ Rails.application.routes.draw do
               }
 
   if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/api"
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
 
-  post "/api", to: "graphql#execute"
-
+  post "/graphql", to: "graphql#execute"
 
 end
