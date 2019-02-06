@@ -7,7 +7,7 @@ module Types
       "Hello World"
     end
 
-    field :create_user, mutation: Mutations::CreateUser
-    field :sign_in_user, mutation: Mutations::SignInUser
+    field :register_user, mutation: Mutations::RegisterUser
+    field :login_user, mutation: Mutations::LoginUser
   end
 end

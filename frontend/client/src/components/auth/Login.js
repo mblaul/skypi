@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
-import { REGISTER_USER_MUTATION } from '../../resolvers/mutations/authMutations';
+import { LOGIN_USER_MUTATION } from '../../resolvers/mutations/authMutations';
 import styled from 'styled-components';
 
 import Input from '../common/Input';
 
-const RegisterStyles = styled.div`
+const LoginStyles = styled.div`
 	width: 25vw;
 	margin: 0 auto;
 	display: grid;
@@ -37,7 +37,7 @@ const HeaderStyles = styled.div`
 	}
 `;
 
-class Register extends Component {
+class Login extends Component {
 	state = {
 		firstName: '',
 		lastName: '',
@@ -50,39 +50,26 @@ class Register extends Component {
 	};
 
 	render() {
-		const { firstName, lastName, email, password } = this.state;
+		const { email, password } = this.state;
 		return (
-			<Mutation mutation={REGISTER_USER_MUTATION} variables={this.state}>
-				{(registerUser, { error, loading }) => {
+			<Mutation mutation={LOGIN_USER_MUTATION} variables={this.state}>
+				{(loginUser, { data, error, loading }) => {
 					return (
-						<RegisterStyles>
+						<LoginStyles>
 							<form
 								method="post"
 								onSubmit={(e) => {
 									e.preventDefault();
-									registerUser();
+									loginUser().then((result) => {
+										const { token } = result.data.loginUser;
+										localStorage.setItem('token', token);
+									});
 								}}
 							>
 								<HeaderStyles>
-									<h2>Register</h2>
+									<h2>Login</h2>
 								</HeaderStyles>
 
-								<Input
-									label={'First Name'}
-									name={'firstName'}
-									value={firstName}
-									type={'text'}
-									placeHolder={'Mary'}
-									onChange={this.handleChange}
-								/>
-								<Input
-									label={'Last Name'}
-									name={'lastName'}
-									value={lastName}
-									type={'text'}
-									placeHolder={'Jane'}
-									onChange={this.handleChange}
-								/>
 								<Input
 									label={'Email'}
 									name={'email'}
@@ -99,9 +86,9 @@ class Register extends Component {
 									placeHolder={'Password'}
 									onChange={this.handleChange}
 								/>
-								<button type="submit">Register!</button>
+								<button type="submit">Login!</button>
 							</form>
-						</RegisterStyles>
+						</LoginStyles>
 					);
 				}}
 			</Mutation>
@@ -109,4 +96,4 @@ class Register extends Component {
 	}
 }
 
-export default Register;
+export default Login;
