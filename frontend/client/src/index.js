@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './static/css/reset.css';
 import './index.css';
 import AppContainer from './AppContainer';
 import * as serviceWorker from './serviceWorker';

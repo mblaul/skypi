@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { client } from './constants/apolloSettings';
 
+import { ThemeProvider } from 'styled-components';
+import { theme } from './constants/styledComponentsSettings';
+
 import App from './components/App';
 
 class AppContainer extends Component {
 	render() {
 		return (
 			<ApolloProvider client={client}>
-				<App />
+				<ThemeProvider theme={theme}>
+					<App />
+				</ThemeProvider>
 			</ApolloProvider>
 		);
 	}

@@ -3,18 +3,36 @@ import { Mutation } from 'react-apollo';
 import { REGISTER_MUTATION } from '../../resolvers/mutations/authMutations';
 import styled from 'styled-components';
 
+import Input from '../common/Input';
+
 const RegisterStyles = styled.div`
 	width: 50vw;
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(1fr);
 	grid-column-gap: 15px;
+	justify-items: center;
+	h2 {
+		font: ${(props) => props.theme.typography.header};
+		color: ${(props) => props.theme.colors.white};
+	}
 	label {
 		display: block;
 	}
 	input {
 		display: block;
+	}
+	font: ${(props) => props.theme.typography.main};
+`;
+
+const HeaderStyles = styled.div`
+	background-color: ${(props) => props.theme.colors.primary.main};
+	padding: ${(props) => props.theme.spacing.unit};
+	border-radius: 3px;
+	transform: skew(25deg, 0deg);
+	h2 {
+		text-align: center;
+		transform: skew(-25deg, 0deg);
 	}
 `;
 
@@ -44,29 +62,42 @@ class Register extends Component {
 									createUser();
 								}}
 							>
-								<h2>Register</h2>
-								<label htmlFor={firstName}>
-									First name
-									<input
-										type="text"
-										name="firstName"
-										value={firstName}
-										onChange={this.handleChange}
-									/>
-								</label>
-								<label htmlFor={lastName}>
-									Last name
-									<input type="text" name="lastName" value={lastName} onChange={this.handleChange} />
-								</label>
+								<HeaderStyles>
+									<h2>Register</h2>
+								</HeaderStyles>
 
-								<label htmlFor={email}>
-									Email
-									<input type="text" name="email" value={email} onChange={this.handleChange} />
-								</label>
-								<label htmlFor={password}>
-									Password
-									<input type="text" name="password" value={password} onChange={this.handleChange} />
-								</label>
+								<Input
+									label={'First Name'}
+									name={'firstName'}
+									value={firstName}
+									type={'text'}
+									placeHolder={'Mary'}
+									onChange={this.handleChange}
+								/>
+								<Input
+									label={'Last Name'}
+									name={'lastName'}
+									value={lastName}
+									type={'text'}
+									placeHolder={'Jane'}
+									onChange={this.handleChange}
+								/>
+								<Input
+									label={'Email'}
+									name={'email'}
+									value={email}
+									type={'text'}
+									placeHolder={'mary@jane.com'}
+									onChange={this.handleChange}
+								/>
+								<Input
+									label={'Password'}
+									name={'password'}
+									value={password}
+									type={'text'}
+									placeHolder={'Password'}
+									onChange={this.handleChange}
+								/>
 								<button type="submit">Register!</button>
 							</form>
 						</RegisterStyles>
