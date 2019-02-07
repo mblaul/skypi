@@ -1,12 +1,14 @@
 class GraphqlController < ApplicationController
+  
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+    current_user = get_current_user
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
     }
+    puts context
     result = SkypiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue => e
@@ -16,12 +18,11 @@ class GraphqlController < ApplicationController
 
   private
 
-  def current_user
-
+  def get_current_user
     return nil if request.headers['Authorization'].blank?
     token = request.headers['Authorization'].split(' ').last
     return nil if token.blank?
-    JsonWebToken.verify(token)
+    JsonWebToken.decode(token)
   end
 
   # Handle form data, JSON body, or a blank value
