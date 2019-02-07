@@ -15,6 +15,10 @@ const LoginStyles = styled.div`
 	h2 {
 		font: ${(props) => props.theme.typography.header};
 		color: ${(props) => props.theme.colors.white};
+		text-shadow: -1px -1px 0 ${(props) => props.theme.colors.primary.main},
+			1px -1px 0 ${(props) => props.theme.colors.primary.main},
+			-1px 1px 0 ${(props) => props.theme.colors.primary.main},
+			1px 1px 0 ${(props) => props.theme.colors.primary.main};
 	}
 	label {
 		display: block;
@@ -27,9 +31,10 @@ const LoginStyles = styled.div`
 
 const HeaderStyles = styled.div`
 	width: 100%;
-	background-color: ${(props) => props.theme.colors.primary.main};
+	background-color: ${(props) => props.theme.colors.primary.light};
 	padding: ${(props) => props.theme.spacing.unit};
 	border-radius: 3px;
+	border: 3px solid ${(props) => props.theme.colors.primary.main};
 	transform: skew(25deg, 0deg);
 	h2 {
 		text-align: center;
