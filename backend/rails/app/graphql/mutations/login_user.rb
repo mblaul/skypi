@@ -15,7 +15,7 @@ module Mutations
           token = JsonWebToken.issue({
             user: user.id,
             issued_at: Time.now,
-            exires_at:  Time.now.advance({ days: 30 })
+            expires_at:  Time.now.advance({ days: 30 })
           })
           { token: token }
         end
