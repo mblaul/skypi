@@ -13,13 +13,13 @@ const InputStyles = styled.input`
 	color: ${(props) => props.theme.colors.black};
 	width: 400px;
 	font: ${(props) => props.theme.typography.input};
-	padding-left: 0.4rem;
+	padding: 0.4rem;
 	outline: none;
-	border: none;
-	border-left: ${(props) => props.theme.colors.black} solid 3px;
+	border: ${(props) => props.theme.colors.black} solid 2px;
+	border-radius: 5px;
 	transition: border 0.25s ease;
 	:focus {
-		border-left: ${(props) => props.theme.colors.secondary} solid 10px;
+		border: ${(props) => props.theme.colors.secondary} solid 2px;
 	}
 	box-sizing: border-box;
 `;

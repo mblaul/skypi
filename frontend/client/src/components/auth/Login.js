@@ -4,6 +4,7 @@ import { LOGIN_USER_MUTATION } from '../../resolvers/mutations/authMutations';
 import styled from 'styled-components';
 
 import Input from '../common/Input';
+import Button from '../common/Button';
 
 const LoginStyles = styled.div`
 	width: 25vw;
@@ -91,7 +92,7 @@ class Login extends Component {
 									placeHolder={'Password'}
 									onChange={this.handleChange}
 								/>
-								<button type="submit">Login!</button>
+								<Button type={'submit'} label={'Log In'} />
 							</form>
 						</LoginStyles>
 					);

@@ -13,7 +13,7 @@ export const theme = {
 		},
 		secondary: `rgba(255, 166, 48, 1)`,
 		white: `rgba(255, 255, 255, 1)`,
-		black: `rgba(0, 0, 0, 1)`
+		black: `rgba(68, 68, 68, 0.9)`
 	},
 	spacing: {
 		unit: `1em`

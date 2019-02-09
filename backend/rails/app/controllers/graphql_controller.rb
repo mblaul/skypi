@@ -21,7 +21,6 @@ class GraphqlController < ApplicationController
     token = request.headers['Authorization'].split(' ').last
     return nil if token.blank?
     current_user = JsonWebToken.decode(token)
-    puts current_user
     return current_user
   end
 
