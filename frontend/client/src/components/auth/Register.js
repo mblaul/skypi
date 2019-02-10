@@ -4,6 +4,7 @@ import { REGISTER_USER_MUTATION } from '../../resolvers/mutations/authMutations'
 import styled from 'styled-components';
 
 import Input from '../common/Input';
+import Button from '../common/Button';
 
 const RegisterStyles = styled.div`
 	width: 25vw;
@@ -66,7 +67,6 @@ class Register extends Component {
 								<HeaderStyles>
 									<h2>Register</h2>
 								</HeaderStyles>
-
 								<Input
 									label={'First Name'}
 									name={'firstName'}
@@ -99,7 +99,7 @@ class Register extends Component {
 									placeHolder={'Password'}
 									onChange={this.handleChange}
 								/>
-								<button type="submit">Register!</button>
+								<Button type={'submit'} label={'Register!'} />{' '}
 							</form>
 						</RegisterStyles>
 					);
