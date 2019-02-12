@@ -9,6 +9,7 @@ import NavBar from './nav/NavBar';
 import Register from './auth/Register';
 import Login from './auth/Login';
 import Profile from './profile/Profile';
+import Home from './home/Home';
 
 const AppStyles = styled.div`
 	width: 100vw;
@@ -21,7 +22,7 @@ class App extends Component {
 			<BrowserRouter>
 				<AppStyles>
 					<NavBar />
-					<Route exact path="/" />
+					<Route exact path="/" component={Home} />
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
 					<Route path="/profile" component={Profile} />

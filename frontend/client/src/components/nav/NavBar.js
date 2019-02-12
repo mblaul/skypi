@@ -14,26 +14,30 @@ const NavBarStyles = styled.div`
 
 const NavLinkStyles = styled.div`
 	padding: 1rem;
-	margin: 0 10rem;
-	background-color: ${(props) => theme.colors.primary.dark};
+	margin: 0 auto;
+	min-width: 100px;
+	background-color: ${(props) => theme.colors.white};
 	font: ${(props) => theme.typography.label};
 	font-size: 20px;
-	text-shadow: 0px 0px 3px ${(props) => theme.colors.primary.dark};
-	color: ${(props) => theme.colors.white};
-	border-radius: 8px;
+	color: ${(props) => theme.colors.primary.dark};
+	border-radius: 4px;
 	border: 2px solid ${(props) => theme.colors.primary.dark};
+	:focus,
 	:hover {
-		background-color: ${(props) => theme.colors.primary.light};
+		background-color: ${(props) => theme.colors.primary.dark};
+		color: ${(props) => theme.colors.white};
+		box-shadow: 0px 0px 2px ${(props) => theme.colors.primary.light};
+		cursor: pointer;
 	}
 `;
 
 const NavBar = (props) => {
 	return (
 		<NavBarStyles>
-			<NavLinkStyles>Home</NavLinkStyles>
-			<NavLinkStyles>Locations</NavLinkStyles>
-			<NavLinkStyles>About</NavLinkStyles>
-			<NavLinkStyles>Contact</NavLinkStyles>
+			<NavLinkStyles tabIndex={0}>Home</NavLinkStyles>
+			<NavLinkStyles tabIndex={0}>Locations</NavLinkStyles>
+			<NavLinkStyles tabIndex={0}>About</NavLinkStyles>
+			<NavLinkStyles tabIndex={0}>Contact</NavLinkStyles>
 		</NavBarStyles>
 	);
 };

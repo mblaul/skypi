@@ -1,7 +1,7 @@
 export const theme = {
 	typography: {
 		main: `500 1.6em Lato`,
-		label: `400 1.4em Raleway`,
+		label: `600 1.4em Raleway`,
 		input: `500 1.4em Lato`,
 		header: `800 2em Lato`
 	},
