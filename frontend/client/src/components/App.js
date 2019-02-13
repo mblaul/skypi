@@ -25,6 +25,7 @@ class App extends Component {
 					<Route exact path="/" component={Home} />
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
+					<Route path="/home" component={Home} />
 					<Route path="/profile" component={Profile} />
 				</AppStyles>
 			</BrowserRouter>

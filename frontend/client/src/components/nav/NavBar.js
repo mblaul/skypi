@@ -22,6 +22,7 @@ const NavLinkStyles = styled.div`
 	color: ${(props) => theme.colors.primary.dark};
 	border-radius: 4px;
 	border: 2px solid ${(props) => theme.colors.primary.dark};
+	transition: background-color 0.1s ease-in;
 	:focus,
 	:hover {
 		background-color: ${(props) => theme.colors.primary.dark};
