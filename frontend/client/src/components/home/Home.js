@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../constants/styledComponentsSettings';
+import Map from '../common/Map';
 
 const HomeStyles = styled.div`
 	max-width: 100vw;
@@ -8,10 +9,12 @@ const HomeStyles = styled.div`
 	min-height: 45vh;
 	display: grid;
 	grid-template-columns: 30% auto;
-	.map {
-		padding-top: ${(props) => theme.spacing.unit};
-		padding-left: calc(${(props) => theme.spacing.unit} * 10);
-		border-left: 3px solid ${(props) => theme.colors.secondary};
+	.mvp-container {
+		padding: ${(props) => theme.spacing.unit};
+	}
+	.map-container {
+		padding: ${(props) => theme.spacing.unit};
+		border-left: 2px solid ${(props) => theme.colors.primary.dark};
 	}
 `;
 
@@ -19,8 +22,12 @@ class Home extends Component {
 	render() {
 		return (
 			<HomeStyles>
-				<div>Lorem</div>
-				<div className={'map'}>Stats</div>
+				<div className={'mvp-container'}>
+					<Map />
+				</div>
+				<div className={'map-container'}>
+					<Map />
+				</div>
 			</HomeStyles>
 		);
 	}

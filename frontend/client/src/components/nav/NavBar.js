@@ -4,10 +4,10 @@ import { theme } from '../../constants/styledComponentsSettings';
 
 const NavBarStyles = styled.div`
 	display: inline-grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: auto auto auto auto;
 	align-items: center;
 	text-align: center;
-	padding: 1vh 0 1vh 0;
+	padding: 1vh 0;
 	width: 100%;
 	font: ${(props) => theme.colors.primary.dark};
 `;
