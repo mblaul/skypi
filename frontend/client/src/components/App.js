@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import NavBar from './nav/NavBar';
 
 // Import content components
+import Landing from './landing/Landing';
 import Register from './auth/Register';
 import Login from './auth/Login';
 import Profile from './profile/Profile';
@@ -22,7 +23,7 @@ class App extends Component {
 			<BrowserRouter>
 				<AppStyles>
 					<NavBar />
-					<Route exact path="/" component={Home} />
+					<Route exact path="/" component={Landing} />
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
 					<Route path="/home" component={Home} />
