@@ -9,7 +9,8 @@ const LandingStyles = styled.div`
 	background-color: ${(props) => props.theme.colors.primary.main};
 	display: grid;
 	.centered {
-		margin: auto;
+		margin: auto auto;
+		text-align: center;
 	}
 `;
 
@@ -20,6 +21,10 @@ export default class Landing extends Component {
 		this.state = {
 			location: ''
 		};
+
+		this.handleChange = (e) => {
+			this.setState({ [e.target.name]: e.target.value });
+		};
 	}
 
 	render() {
@@ -29,7 +34,7 @@ export default class Landing extends Component {
 		return (
 			<LandingStyles>
 				<div className="centered">
-					<Label text={labelText} />
+					<Label text={labelText} style={{ color: 'white', fontSize: 24 }} />
 					<Input
 						name={'location'}
 						value={location}

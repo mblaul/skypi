@@ -9,8 +9,8 @@ const LabelStyles = styled.div`
 
 class Label extends Component {
 	render() {
-		const { text } = this.props;
-		return <LabelStyles>{text}</LabelStyles>;
+		const { text, style } = this.props;
+		return <LabelStyles style={{ ...style }}>{text}</LabelStyles>;
 	}
 }
 

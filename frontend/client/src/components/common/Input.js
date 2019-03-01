@@ -42,7 +42,7 @@ class Input extends Component {
 
 		return (
 			<Label htmlFor={name}>
-				<NameLabel>{label}</NameLabel>
+				{label && <NameLabel>{label}</NameLabel>}
 				<InputStyles
 					alt={alt || name}
 					autocomplete={autoComplete}
