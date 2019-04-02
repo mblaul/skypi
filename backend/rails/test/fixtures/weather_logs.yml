@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  station: one
+  latitude: 9.99
+  longitude: 9.99
+  temperature: 
+  pressure: 9.99
+
+two:
+  station: two
+  latitude: 9.99
+  longitude: 9.99
+  temperature: 
+  pressure: 9.99
