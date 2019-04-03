@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190129000000) do
+ActiveRecord::Schema.define(version: 20190402010138) do
 
   create_table "jwt_blacklist", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "jti", null: false
@@ -45,5 +45,18 @@ ActiveRecord::Schema.define(version: 20190129000000) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "weather_logs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "station_id"
+    t.decimal  "latitude",    precision: 10
+    t.decimal  "longitude",   precision: 10
+    t.decimal  "temperature", precision: 10
+    t.decimal  "humidity",    precision: 10
+    t.decimal  "pressure",    precision: 10
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["station_id"], name: "index_weather_logs_on_station_id", using: :btree
+  end
+
   add_foreign_key "stations", "users"
+  add_foreign_key "weather_logs", "stations"
 end

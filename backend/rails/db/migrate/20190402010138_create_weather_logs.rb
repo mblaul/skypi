@@ -4,7 +4,8 @@ class CreateWeatherLogs < ActiveRecord::Migration[5.0]
       t.references :station, foreign_key: true
       t.decimal :latitude
       t.decimal :longitude
-      t.decimalhumidity :temperature
+      t.decimal :temperature
+      t.decimal :humidity
       t.decimal :pressure
 
       t.timestamps
