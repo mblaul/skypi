@@ -13,6 +13,8 @@ module Types
     field :me, UserType, null: false,
       description: "the current user"
     def me
+
+      
     if context[:current_user].blank?
       raise GraphQL::ExecutionError.new("Authentication required")
     end

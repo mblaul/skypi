@@ -1,0 +1,16 @@
+{
+  "name": "bots",
+  "version": "0.1.0",
+  "description": "Bots to simulate pi registration and data pushing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mblaul",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.2.1"
+  }
+}

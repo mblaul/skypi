@@ -2,6 +2,10 @@
 ###########
 *.env
 
+#Packages#
+##########
+*/node_modules
+
 # Compiled source #
 ###################
 *.com
