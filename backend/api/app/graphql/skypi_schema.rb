@@ -1,4 +1,4 @@
-class ApiSchema < GraphQL::Schema
+class SkypiSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 end
