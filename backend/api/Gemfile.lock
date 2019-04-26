@@ -70,6 +70,11 @@ GEM
     graphql (1.9.4)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    jwt (1.5.6)
+    knock (2.1.1)
+      bcrypt (~> 3.1)
+      jwt (~> 1.5)
+      rails (>= 4.2)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -158,6 +163,7 @@ DEPENDENCIES
   byebug
   faker!
   graphql
+  knock (~> 2.1, >= 2.1.1)
   mysql2 (>= 0.4.4, < 0.6.0)
   puma (~> 3.11)
   rails (~> 5.2.3)
