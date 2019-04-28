@@ -2,17 +2,17 @@ module Mutations
   class SignIn < BaseMutation
     null true 
     
-    argument :fields, Types::SignInInputType, required: true
+    argument :auth, Types::SignInInputType, required: true
 
     field :user, Types::UserType, null: true
 
-    def resolve(fields: nil)
-      return unless fields
+    def resolve(auth: nil)
+      return unless auth
 
-      user = User.find_by email: fields[:email]
+      user = User.find_by email: auth[:email]
 
       return unless user
-      return unless user.authenticate(fields[:password])
+      return unless user.authenticate(auth[:password])
 
       { user: user }
       # return token here
