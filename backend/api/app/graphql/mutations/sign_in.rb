@@ -4,7 +4,7 @@ module Mutations
     
     argument :auth, Types::SignInInputType, required: true
 
-    field :user, Types::UserType, null: true
+    field :token, String, null: true
 
     def resolve(auth: nil)
       return unless auth
@@ -14,8 +14,9 @@ module Mutations
       return unless user
       return unless user.authenticate(auth[:password])
 
-      { user: user }
-      # return token here
+      token = Knock::AuthToken.new(payload: { sub: user.id }).token
+
+      { token: token }
     end
   end
 end
