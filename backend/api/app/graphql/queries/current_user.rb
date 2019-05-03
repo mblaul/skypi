@@ -1,12 +1,10 @@
 module Queries
   class CurrentUser < BaseQuery
     type Types::UserType, null: false
-    description "Query all SomeResources"
+    description "Query current user"
 
-    argument :token, String, required: true
-
-    def resolve(token:)
-      User.find(Knock::AuthToken.new(token: token).payload["sub"])
+    def resolve
+      User.find(context[:current_user])
     end
   end
 end
