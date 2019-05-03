@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_015608) do
+ActiveRecord::Schema.define(version: 2019_05_03_212638) do
 
   create_table "stations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -31,5 +31,24 @@ ActiveRecord::Schema.define(version: 2019_04_16_015608) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "weather_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "station_id"
+    t.decimal "temperature", precision: 10
+    t.decimal "humidity", precision: 10
+    t.decimal "pressure", precision: 10
+    t.decimal "latitude", precision: 10
+    t.decimal "longitude", precision: 10
+    t.string "wind_speed"
+    t.string "decimal"
+    t.string "wind_direction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["station_id"], name: "index_weather_logs_on_station_id"
+    t.index ["user_id"], name: "index_weather_logs_on_user_id"
+  end
+
   add_foreign_key "stations", "users"
+  add_foreign_key "weather_logs", "stations"
+  add_foreign_key "weather_logs", "users"
 end

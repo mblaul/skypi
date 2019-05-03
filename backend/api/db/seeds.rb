@@ -8,13 +8,13 @@
 
 require 'faker'
 
-# Create some users
+# Create  users
 users = User.create([
   { first_name: 'Matt', last_name: 'Smith', email: 'mattsmith@gmail.com', password: 'awesomepass123'},
   { first_name: 'Karen', last_name: 'Gillan', email: 'karengillan@gmail.com', password: 'awesomepass123'}
 ])
 
-
+# Create stations
 stations = Station.create([
   { name: 'Detroit_1', mac_address: Faker::Internet.mac_address, user_id: User.find_by(email: 'mattsmith@gmail.com').id },
   { name: 'Detroit_2', mac_address: Faker::Internet.mac_address, user_id: User.find_by(email: 'karengillan@gmail.com').id },
@@ -22,4 +22,5 @@ stations = Station.create([
   { name: 'Portland_1', mac_address: Faker::Internet.mac_address, user_id: User.find_by(email: 'karengillan@gmail.com').id }
 ])
 
-
+# Create weather logs
+# weather_logs = WeatherLog.create();
