@@ -4,7 +4,6 @@ module Mutations
     
     argument :auth, Types::SignUpInputType, required: true
 
-    field :user, Types::UserType, null: true
     field :token, String, null: true
 
     def resolve(auth: nil)
