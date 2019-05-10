@@ -7,5 +7,8 @@ module Types
     field :sign_in, mutation: Mutations::SignIn,
       description: "An endpoint to sign in and receive JWT token"
       
+    field :create_weather_log, mutation: Mutations::CreateWeatherLog,
+      description: "Create a weather log"
+
   end
 end
