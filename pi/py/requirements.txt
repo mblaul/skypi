@@ -28,4 +28,4 @@ six==1.11.0
 spidev==3.2
 ssh-import-id==5.6
 termcolor==1.1.0
-urllib3==1.23
+urllib3==1.26.5
